@@ -1,0 +1,45 @@
+{
+    "name": "compwright/servicetitan",
+    "description": "ServiceTitan v2 API client for PHP (generated with OpenAPI Generator)",
+    "keywords": [
+        "servicetitan",
+        "service-titan",
+        "openapitools",
+        "openapi-generator",
+        "openapi",
+        "php",
+        "sdk",
+        "rest",
+        "api"
+    ],
+    "homepage": "https://github.org/compwright/servicetitan",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathon Hill",
+            "homepage": "https://compwright.com"
+        },
+        {
+            "name": "OpenAPI Generator",
+            "homepage": "https://openapi-generator.tech"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^2.12"
+    },
+    "autoload": {
+        "psr-4": { "CompWright\\ServiceTitan\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "CompWright\\ServiceTitan\\Test\\" : "test/" }
+    }
+}

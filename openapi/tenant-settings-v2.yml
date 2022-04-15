@@ -1,0 +1,1364 @@
+openapi: 3.0.1
+info:
+  title: Settings
+  version: '1.0'
+servers:
+  - url: https://api-integration.servicetitan.io/settings/v2
+paths:
+  '/tenant/{tenant}/business-units':
+    get:
+      tags:
+        - BusinessUnits
+      summary: Gets a list of business units
+      description: Gets a list of business units
+      operationId: BusinessUnits_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: 'Values: [True, Any, False]'
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: externalDataApplicationGuid
+          in: query
+          description: "Format - guid. If this guid is provided, external data corresponding to\nthis application guid will be returned."
+          schema:
+            type: string
+            format: guid
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_TenantSettings.V2.BusinessUnitResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    active: true
+                    name: string
+                    officialName: string
+                    email: string
+                    currency: string
+                    phoneNumber: string
+                    invoiceHeader: string
+                    invoiceMessage: string
+                    defaultTaxRate: 0
+                    authorizationParagraph: string
+                    acknowledgementParagraph: string
+                    address:
+                      street: string
+                      unit: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    materialSku: string
+                    quickbooksClass: string
+                    accountCode: string
+                    franchiseId: string
+                    conceptCode: string
+                    corporateContractNumber: string
+                    tenant:
+                      id: 0
+                      name: string
+                      accountCode: string
+                      franchiseId: string
+                      conceptCode: string
+                      modifiedOn: string
+                    createdOn: string
+                    modifiedOn: string
+                    externalData:
+                      - key: string
+                        value: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/business-units/{id}':
+    get:
+      tags:
+        - BusinessUnits
+      summary: Gets a business unit by ID
+      description: Gets a business unit by ID
+      operationId: BusinessUnits_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: externalDataApplicationGuid
+          in: query
+          description: Format - guid.
+          schema:
+            type: string
+            format: guid
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantSettings.V2.BusinessUnitResponse'
+              example:
+                id: 0
+                active: true
+                name: string
+                officialName: string
+                email: string
+                currency: string
+                phoneNumber: string
+                invoiceHeader: string
+                invoiceMessage: string
+                defaultTaxRate: 0
+                authorizationParagraph: string
+                acknowledgementParagraph: string
+                address:
+                  street: string
+                  unit: string
+                  city: string
+                  state: string
+                  zip: string
+                  country: string
+                materialSku: string
+                quickbooksClass: string
+                accountCode: string
+                franchiseId: string
+                conceptCode: string
+                corporateContractNumber: string
+                tenant:
+                  id: 0
+                  name: string
+                  accountCode: string
+                  franchiseId: string
+                  conceptCode: string
+                  modifiedOn: string
+                createdOn: string
+                modifiedOn: string
+                externalData:
+                  - key: string
+                    value: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Business unit not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    patch:
+      tags:
+        - BusinessUnits
+      summary: Update an existing BusinessUnit
+      description: Update an existing BusinessUnit
+      operationId: BusinessUnits_Update
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. BusinessUnit Id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update BusinessUnit Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantSettings.V2.UpdateBusinessUnitRequest'
+            example:
+              externalData:
+                applicationGuid: string
+                externalData:
+                  - key: string
+                    value: string
+      responses:
+        '200':
+          description: Id of the updated BusinessUnit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResponse'
+              example:
+                id: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: The requested entity was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/employees':
+    get:
+      tags:
+        - Employees
+      summary: Gets a list of employees
+      description: Gets a list of employees
+      operationId: Employees_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: 'Values: [True, Any, False]'
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_TenantSettings.V2.EmployeeResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    role: Unspecified
+                    businessUnitId: 0
+                    createdOn: string
+                    modifiedOn: string
+                    email: string
+                    phoneNumber: string
+                    loginName: string
+                    customFields:
+                      - typeId: 0
+                        name: string
+                        value: string
+                    active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/employees/{id}':
+    get:
+      tags:
+        - Employees
+      summary: Gets a employee by ID
+      description: Gets a employee by ID
+      operationId: Employees_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantSettings.V2.EmployeeResponse'
+              example:
+                id: 0
+                name: string
+                role: Unspecified
+                businessUnitId: 0
+                createdOn: string
+                modifiedOn: string
+                email: string
+                phoneNumber: string
+                loginName: string
+                customFields:
+                  - typeId: 0
+                    name: string
+                    value: string
+                active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Employee not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/technicians':
+    get:
+      tags:
+        - Technicians
+      summary: Gets a list of technicians
+      description: Gets a list of technicians
+      operationId: Technicians_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: 'Values: [True, Any, False]'
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_TenantSettings.V2.TechnicianResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    businessUnitId: 0
+                    createdOn: string
+                    modifiedOn: string
+                    email: string
+                    phoneNumber: string
+                    loginName: string
+                    home:
+                      street: string
+                      unit: string
+                      country: string
+                      city: string
+                      state: string
+                      zip: string
+                      streetAddress: string
+                      latitude: 0
+                      longitude: 0
+                    dailyGoal: 0
+                    isManagedTech: true
+                    customFields:
+                      - typeId: 0
+                        name: string
+                        value: string
+                    active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/technicians/{id}':
+    get:
+      tags:
+        - Technicians
+      summary: Gets a technician by ID
+      description: Gets a technician by ID
+      operationId: Technicians_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantSettings.V2.TechnicianResponse'
+              example:
+                id: 0
+                name: string
+                businessUnitId: 0
+                createdOn: string
+                modifiedOn: string
+                email: string
+                phoneNumber: string
+                loginName: string
+                home:
+                  street: string
+                  unit: string
+                  country: string
+                  city: string
+                  state: string
+                  zip: string
+                  streetAddress: string
+                  latitude: 0
+                  longitude: 0
+                dailyGoal: 0
+                isManagedTech: true
+                customFields:
+                  - typeId: 0
+                    name: string
+                    value: string
+                active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Technician not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/tag-types':
+    get:
+      tags:
+        - TagTypes
+      summary: Gets a list of tag types
+      description: Gets a list of tag types
+      operationId: TagTypes_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: active
+          in: query
+          description: "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_TenantSettings.V2.TagTypeResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+components:
+  schemas:
+    PaginatedResponse_Of_TenantSettings.V2.BusinessUnitResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.BusinessUnitResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    TenantSettings.V2.BusinessUnitResponse:
+      required:
+        - id
+        - active
+        - name
+        - createdOn
+        - modifiedOn
+        - externalData
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        name:
+          type: string
+        officialName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        currency:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        invoiceHeader:
+          type: string
+          nullable: true
+        invoiceMessage:
+          type: string
+          nullable: true
+        defaultTaxRate:
+          type: number
+          format: decimal
+          nullable: true
+        authorizationParagraph:
+          type: string
+          nullable: true
+        acknowledgementParagraph:
+          type: string
+          nullable: true
+        address:
+          oneOf:
+            - $ref: '#/components/schemas/TenantSettings.V2.BusinessUnitAddressResponse'
+          nullable: true
+        materialSku:
+          type: string
+          nullable: true
+        quickbooksClass:
+          type: string
+          nullable: true
+        accountCode:
+          type: string
+          nullable: true
+        franchiseId:
+          type: string
+          nullable: true
+        conceptCode:
+          type: string
+          nullable: true
+        corporateContractNumber:
+          type: string
+          nullable: true
+        tenant:
+          oneOf:
+            - $ref: '#/components/schemas/TenantSettings.V2.BusinessUnitTenantResponse'
+          nullable: true
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        externalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.ExternalDataModel'
+          description: "Optional model that contains a list of external data items\nthat should be attached to this job.\nthat should be attached to this vendor."
+      additionalProperties: false
+    TenantSettings.V2.BusinessUnitAddressResponse:
+      type: object
+      properties:
+        street:
+          type: string
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        zip:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TenantSettings.V2.BusinessUnitTenantResponse:
+      required:
+        - id
+        - name
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        accountCode:
+          type: string
+          nullable: true
+        franchiseId:
+          type: string
+          nullable: true
+        conceptCode:
+          type: string
+          nullable: true
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    TenantSettings.V2.ExternalDataModel:
+      required:
+        - key
+        - value
+      type: object
+      properties:
+        key:
+          type: string
+          description: External data key
+        value:
+          type: string
+          description: External data value
+      additionalProperties: false
+    ApiErrorResponse:
+      required:
+        - type
+        - title
+        - status
+        - traceId
+        - errors
+        - data
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type
+        title:
+          type: string
+          description: 'A short, human-readable summary of the problem type'
+        status:
+          type: integer
+          description: The HTTP status code generated by server
+          format: int32
+        traceId:
+          type: string
+          description: Internal trace ID for advanced diagnostics
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: 'Provides more details about errors occurred, which can potentially be used for visual display'
+        data:
+          type: object
+          additionalProperties: { }
+          description: 'Provides additional data, intended for programmatical usage'
+      additionalProperties: false
+      description: 'Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807).'
+    ActiveQueryFilter:
+      enum:
+        - 'True'
+        - Any
+        - 'False'
+      type: string
+      description: ''
+      x-enumNames:
+        - 'True'
+        - Any
+        - 'False'
+    ModificationResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of created/updated object
+          format: int64
+      additionalProperties: false
+      description: 'Default response when creating object with a new ID, or updating object by specified ID.'
+    TenantSettings.V2.UpdateBusinessUnitRequest:
+      type: object
+      properties:
+        externalData:
+          oneOf:
+            - $ref: '#/components/schemas/TenantSettings.V2.ExternalDataUpdateRequest'
+          description: "Optional model that contains a list of external data items\nthat should be attached to this business unit."
+      additionalProperties: false
+    TenantSettings.V2.ExternalDataUpdateRequest:
+      required:
+        - applicationGuid
+        - externalData
+      type: object
+      properties:
+        applicationGuid:
+          type: string
+          description: "Items that are created with a specific guid, could be fetched/updated/removed\nonly when the same application guid is provided."
+          format: guid
+        externalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.ExternalDataModel'
+          description: "External data list. This list must include all of the external data for the business unit.\nIf business unit A has custom data with keys X and Y and this field only contains an item\nwith a key X, then custom data with a key Y on business unit A will be removed."
+      additionalProperties: false
+    PaginatedResponse_Of_TenantSettings.V2.EmployeeResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.EmployeeResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    TenantSettings.V2.EmployeeResponse:
+      required:
+        - id
+        - name
+        - role
+        - createdOn
+        - modifiedOn
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        role:
+          $ref: '#/components/schemas/TenantSettings.V2.EmployeeUserRole'
+        businessUnitId:
+          type: integer
+          format: int64
+          nullable: true
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        email:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        loginName:
+          type: string
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.EmployeeCustomFieldResponse'
+          nullable: true
+        active:
+          type: boolean
+      additionalProperties: false
+    TenantSettings.V2.EmployeeUserRole:
+      enum:
+        - Unspecified
+        - Technician
+        - Dispatch
+        - Accounting
+        - FieldManager
+        - DisplayUser
+        - DisplayUserWithBillingAccess
+        - SalesManager
+        - CSR
+        - GeneralOffice
+        - TechnicianHelper
+        - TechnicianMaintenance
+        - TechnicianInstaller
+        - Admin
+        - TechnicianService
+        - TechnicianSales
+        - Owner
+      type: string
+      description: ''
+      x-enumNames:
+        - Unspecified
+        - Technician
+        - Dispatch
+        - Accounting
+        - FieldManager
+        - DisplayUser
+        - DisplayUserWithBillingAccess
+        - SalesManager
+        - CSR
+        - GeneralOffice
+        - TechnicianHelper
+        - TechnicianMaintenance
+        - TechnicianInstaller
+        - Admin
+        - TechnicianService
+        - TechnicianSales
+        - Owner
+    TenantSettings.V2.EmployeeCustomFieldResponse:
+      required:
+        - typeId
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_TenantSettings.V2.TechnicianResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.TechnicianResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    TenantSettings.V2.TechnicianResponse:
+      required:
+        - id
+        - name
+        - createdOn
+        - modifiedOn
+        - dailyGoal
+        - isManagedTech
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        businessUnitId:
+          type: integer
+          format: int64
+          nullable: true
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        email:
+          type: string
+          nullable: true
+        phoneNumber:
+          type: string
+          nullable: true
+        loginName:
+          type: string
+          nullable: true
+        home:
+          oneOf:
+            - $ref: '#/components/schemas/TenantSettings.V2.TechnicianAddressResponse'
+          nullable: true
+        dailyGoal:
+          type: number
+          format: decimal
+        isManagedTech:
+          type: boolean
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.TechnicianCustomFieldResponse'
+          nullable: true
+        active:
+          type: boolean
+      additionalProperties: false
+    TenantSettings.V2.TechnicianAddressResponse:
+      type: object
+      properties:
+        street:
+          type: string
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        zip:
+          type: string
+          nullable: true
+        streetAddress:
+          type: string
+          nullable: true
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    TenantSettings.V2.TechnicianCustomFieldResponse:
+      required:
+        - typeId
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_TenantSettings.V2.TagTypeResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantSettings.V2.TagTypeResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    TenantSettings.V2.TagTypeResponse:
+      required:
+        - id
+        - name
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the tag type
+          format: int64
+        name:
+          type: string
+          description: Name of the tag type
+        active:
+          type: boolean
+          description: Whether the tag type is active
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: ST-App-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: servicetitanapplicationkey
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

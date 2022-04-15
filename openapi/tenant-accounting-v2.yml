@@ -1,0 +1,3115 @@
+openapi: 3.0.1
+info:
+  title: Accounting
+  version: '1.0'
+servers:
+  - url: https://api-integration.servicetitan.io/accounting/v2
+paths:
+  '/tenant/{tenant}/inventory-bills':
+    get:
+      tags:
+        - InventoryBills
+      summary: InventoryBills_GetList
+      operationId: InventoryBills_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: batchId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: batchNumber
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: billNumber
+          in: query
+          schema:
+            type: string
+        - name: businessUnitIds
+          in: query
+          schema:
+            type: string
+        - name: customField.Fields
+          in: query
+          description: 'Name, value'
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            nullable: true
+        - name: customField.Operator
+          in: query
+          description: "Can be \"or\" or \"null\" or \"and\"\\\nValues: [And, Or]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Accounting.V2.LogicalOperator'
+            nullable: true
+        - name: dateFrom
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: dateTo
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: jobNumber
+          in: query
+          schema:
+            type: string
+        - name: purchaseOrderNumber
+          in: query
+          schema:
+            type: string
+        - name: purchaseOrderTypes
+          in: query
+          schema:
+            type: string
+        - name: syncStatuses
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Accounting.V2.InventoryBillSyncStatus'
+        - name: minCost
+          in: query
+          description: Format - decimal.
+          schema:
+            type: number
+            format: decimal
+            nullable: true
+        - name: maxCost
+          in: query
+          description: Format - decimal.
+          schema:
+            type: number
+            format: decimal
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounting.V2.InventoryBillResponse'
+              example:
+                - id: 0
+                  purchaseOrderId: 0
+                  syncStatus: string
+                  referenceNumber: string
+                  vendorNumber: string
+                  summary: string
+                  billDate: string
+                  billAmount: string
+                  taxAmount: string
+                  shippingAmount: string
+                  createdBy: string
+                  createdOn: string
+                  termName: string
+                  dueDate: string
+                  shipToDescription: string
+                  batch:
+                    id: 0
+                    number: string
+                    name: string
+                  businessUnit:
+                    id: 0
+                    name: string
+                  vendor:
+                    id: 0
+                    name: string
+                  shipTo:
+                    street: string
+                    unit: string
+                    city: string
+                    state: string
+                    zip: string
+                    country: string
+                  items:
+                    - order: 0
+                      name: string
+                      description: string
+                      quantity: string
+                      cost: string
+                      inventoryLocation: string
+                      serialNumber: string
+                      generalLedgerAccount:
+                        name: string
+                        number: string
+                        type: string
+                        detailType: string
+                      costOfSaleAccount:
+                        name: string
+                        number: string
+                        type: string
+                        detailType: string
+                      assetAccount:
+                        name: string
+                        number: string
+                        type: string
+                        detailType: string
+                  customFields:
+                    - name: string
+                      value: string
+                  jobId: 0
+                  jobNumber: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/inventory-bills/custom-fields':
+    patch:
+      tags:
+        - InventoryBills
+      summary: InventoryBills_UpdateCustomFields
+      operationId: InventoryBills_UpdateCustomFields
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.CustomFieldUpdateRequest'
+            example:
+              operations:
+                - objectId: 0
+                  customFields:
+                    - name: string
+                      value: string
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices':
+    get:
+      tags:
+        - Invoices
+      summary: Gets a list of invoices
+      description: Gets a list of invoices
+      operationId: Invoices_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: statuses
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Accounting.V2.TransactionStatus'
+        - name: batchId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: batchNumber
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: customField.Fields
+          in: query
+          description: 'Name, value'
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            nullable: true
+        - name: customField.Operator
+          in: query
+          description: "Can be \"or\" or \"null\" or \"and\"\\\nValues: [And, Or]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Accounting.V2.LogicalOperator'
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: jobId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: jobNumber
+          in: query
+          schema:
+            type: string
+        - name: businessUnitId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: customerId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: invoicedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: invoicedOnBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: adjustmentToId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: number
+          in: query
+          schema:
+            type: string
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: totalGreater
+          in: query
+          description: Format - decimal.
+          schema:
+            type: number
+            format: decimal
+            nullable: true
+        - name: totalLess
+          in: query
+          description: Format - decimal.
+          schema:
+            type: number
+            format: decimal
+            nullable: true
+        - name: orderBy
+          in: query
+          schema:
+            type: string
+        - name: orderByDirection
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Accounting.V2.InvoiceResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    syncStatus: string
+                    summary: string
+                    referenceNumber: string
+                    invoiceDate: string
+                    dueDate: string
+                    subTotal: string
+                    salesTax: string
+                    salesTaxCode:
+                      id: 0
+                      name: string
+                      taxRate: 0
+                    total: string
+                    balance: string
+                    customer:
+                      id: 0
+                      name: string
+                    customerAddress:
+                      street: string
+                      unit: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    locationAddress:
+                      street: string
+                      unit: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    businessUnit:
+                      id: 0
+                      name: string
+                    termName: string
+                    createdBy: string
+                    batch:
+                      id: 0
+                      number: string
+                      name: string
+                    modifiedOn: string
+                    adjustmentToId: 0
+                    job:
+                      id: 0
+                      number: string
+                      type: string
+                    projectId: 0
+                    royalty:
+                      status: string
+                      date: string
+                      sentOn: string
+                      memo: string
+                    employeeInfo:
+                      id: 0
+                      name: string
+                      modifiedOn: string
+                    commissionEligibilityDate: string
+                    items:
+                      - id: 0
+                        description: string
+                        quantity: string
+                        cost: string
+                        totalCost: string
+                        inventoryLocation: string
+                        price: string
+                        type: Service
+                        skuName: string
+                        skuId: 0
+                        total: string
+                        inventory: true
+                        taxable: true
+                        generalLedgerAccount:
+                          name: string
+                          number: string
+                          type: string
+                          detailType: string
+                        costOfSaleAccount:
+                          name: string
+                          number: string
+                          type: string
+                          detailType: string
+                        assetAccount:
+                          name: string
+                          number: string
+                          type: string
+                          detailType: string
+                        membershipTypeId: 0
+                        itemGroup:
+                          rootId: 0
+                          name: string
+                        displayName: string
+                        soldHours: 0
+                        modifiedOn: string
+                        serviceDate: string
+                        order: 0
+                    customFields:
+                      - name: string
+                        value: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    post:
+      tags:
+        - Invoices
+      summary: create adjustment invoice
+      description: create adjustment invoice
+      operationId: Invoices_CreateAdjustmentInvoice
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.AdjustmentInvoiceCreateRequest'
+            example:
+              number: string
+              typeId: 0
+              invoicedOn: string
+              subtotal: 0
+              tax: 0
+              summary: string
+              royaltyStatus: { }
+              royaltyDate: string
+              royaltySentOn: string
+              royaltyMemo: string
+              exportId: string
+              items:
+                - skuId: 0
+                  skuName: string
+                  technicianId: 0
+                  description: string
+                  quantity: 0
+                  unitPrice: 0
+                  cost: 0
+                  isAddOn: true
+                  signature: string
+                  technicianAcknowledgementSignature: string
+                  installedOn: string
+                  inventoryWarehouseName: string
+                  skipUpdatingMembershipPrices: true
+                  itemGroupName: string
+                  itemGroupRootId: 0
+                  id: 0
+              payments:
+                - id: 0
+                  settlementStatus: { }
+                  settlementDate: string
+              adjustmentToId: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+              example: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices/custom-fields':
+    patch:
+      tags:
+        - Invoices
+      summary: Updates custom fields for specified invoices
+      description: Updates custom fields for specified invoices
+      operationId: Invoices_UpdateCustomFields
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.CustomFieldUpdateRequest'
+            example:
+              operations:
+                - objectId: 0
+                  customFields:
+                    - name: string
+                      value: string
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices/{id}':
+    patch:
+      tags:
+        - Invoices
+      summary: update invoice
+      description: update invoice
+      operationId: Invoices_UpdateInvoice
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.InvoiceUpdateRequest'
+            example:
+              number: string
+              typeId: 0
+              invoicedOn: string
+              subtotal: 0
+              tax: 0
+              summary: string
+              royaltyStatus: { }
+              royaltyDate: string
+              royaltySentOn: string
+              royaltyMemo: string
+              exportId: string
+              items:
+                - skuId: 0
+                  skuName: string
+                  technicianId: 0
+                  description: string
+                  quantity: 0
+                  unitPrice: 0
+                  cost: 0
+                  isAddOn: true
+                  signature: string
+                  technicianAcknowledgementSignature: string
+                  installedOn: string
+                  inventoryWarehouseName: string
+                  skipUpdatingMembershipPrices: true
+                  itemGroupName: string
+                  itemGroupRootId: 0
+                  id: 0
+              payments:
+                - id: 0
+                  settlementStatus: { }
+                  settlementDate: string
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices/{invoiceId}/items':
+    patch:
+      tags:
+        - Invoices
+      summary: update invoice items
+      description: update invoice items
+      operationId: Invoices_UpdateInvoiceItems
+      parameters:
+        - name: invoiceId
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.InvoiceItemUpdateRequest'
+            example:
+              skuId: 0
+              skuName: string
+              technicianId: 0
+              description: string
+              quantity: 0
+              unitPrice: 0
+              cost: 0
+              isAddOn: true
+              signature: string
+              technicianAcknowledgementSignature: string
+              installedOn: string
+              inventoryWarehouseName: string
+              skipUpdatingMembershipPrices: true
+              itemGroupName: string
+              itemGroupRootId: 0
+              id: 0
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices/{invoiceId}/items/{itemId}':
+    delete:
+      tags:
+        - Invoices
+      summary: delete invoice item
+      description: delete invoice item
+      operationId: Invoices_DeleteInvoiceItem
+      parameters:
+        - name: invoiceId
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: itemId
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/invoices/markasexported':
+    post:
+      tags:
+        - Invoices
+      summary: mark invoice as exported. Id = invoiceId
+      description: mark invoice as exported. Id = invoiceId
+      operationId: Invoices_MarkAsExported
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Accounting.V2.MarkInvoiceAsExportedUpdateRequest'
+            example:
+              - invoiceId: 0
+                externalId: string
+                externalMessage: string
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounting.V2.MarkInvoiceAsExportedUpdateResponse'
+              example:
+                - invoiceId: 0
+                  success: true
+                  errorMessage: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payments':
+    get:
+      tags:
+        - Payments
+      summary: Gets a paginated list of payments
+      description: Gets a paginated list of payments
+      operationId: Payments_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          schema:
+            type: string
+        - name: statuses
+          in: query
+          schema:
+            type: string
+        - name: paidOnAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: paidOnBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: businessUnitIds
+          in: query
+          schema:
+            type: string
+        - name: batchNumber
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: batchId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: transactionType
+          in: query
+          description: 'Values: [Undefined, JournalEntry, ReceivePayment]'
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Accounting.V2.PaymentTransactionType'
+            nullable: true
+        - name: customerId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: customField.Fields
+          in: query
+          description: 'Name, value'
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            nullable: true
+        - name: customField.Operator
+          in: query
+          description: "Can be \"or\" or \"null\" or \"and\"\\\nValues: [And, Or]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Accounting.V2.LogicalOperator'
+            nullable: true
+        - name: modifiedBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: modifiedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Accounting.V2.DetailedPaymentResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    syncStatus: string
+                    referenceNumber: string
+                    date: string
+                    type: string
+                    typeId: string
+                    total: string
+                    unappliedAmount: string
+                    memo: string
+                    customer:
+                      id: 0
+                      name: string
+                    batch:
+                      id: 0
+                      name: string
+                    createdBy: string
+                    generalLedgerAccount:
+                      name: string
+                      number: string
+                      type: string
+                      detailType: string
+                    appliedTo:
+                      - appliedTo: 0
+                        appliedAmount: string
+                        appliedOn: string
+                        appliedBy: string
+                    customFields:
+                      - name: string
+                        value: string
+                    authCode: string
+                    checkNumber: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    post:
+      tags:
+        - Payments
+      summary: Creates new payment
+      description: Creates new payment
+      operationId: Payments_Create
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.PaymentCreateRequest'
+            example:
+              typeId: 0
+              memo: string
+              paidOn: string
+              authCode: string
+              checkNumber: string
+              exportId: string
+              transactionStatus: { }
+              status: { }
+              splits:
+                - invoiceId: 0
+                  amount: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounting.V2.PaymentResponse'
+              example:
+                id: 0
+                typeId: 0
+                active: true
+                memo: string
+                paidOn: string
+                authCode: string
+                checkNumber: string
+                exportId: string
+                transactionStatus: { }
+                status: { }
+                splits:
+                  - invoiceId: 0
+                    amount: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payments/custom-fields':
+    patch:
+      tags:
+        - Payments
+      summary: Update custom fields for specified payments
+      description: Update custom fields for specified payments
+      operationId: Payments_UpdateCustomFields
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.CustomFieldUpdateRequest'
+            example:
+              operations:
+                - objectId: 0
+                  customFields:
+                    - name: string
+                      value: string
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payments/{id}':
+    patch:
+      tags:
+        - Payments
+      summary: Updates specified payment in "patch" mode
+      description: Updates specified payment in "patch" mode
+      operationId: Payments_Update
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.PaymentUpdateRequest'
+            example:
+              typeId: 0
+              active: true
+              memo: string
+              paidOn: string
+              authCode: string
+              checkNumber: string
+              exportId: string
+              transactionStatus: { }
+              status: Pending
+              splits:
+                - invoiceId: 0
+                  amount: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounting.V2.PaymentResponse'
+              example:
+                id: 0
+                typeId: 0
+                active: true
+                memo: string
+                paidOn: string
+                authCode: string
+                checkNumber: string
+                exportId: string
+                transactionStatus: { }
+                status: { }
+                splits:
+                  - invoiceId: 0
+                    amount: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payments/status':
+    post:
+      tags:
+        - Payments
+      summary: Updates payment status
+      description: Updates payment status
+      operationId: Payments_UpdateStatus
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accounting.V2.PaymentStatusBatchRequest'
+            example:
+              status: Pending
+              paymentIds:
+                - 0
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payment-terms/{customerId}':
+    get:
+      tags:
+        - PaymentTerms
+      summary: Gets customer’s default Payment Term
+      description: Gets customer’s default Payment Term
+      operationId: PaymentTerms_GetPaymentTermModel
+      parameters:
+        - name: customerId
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounting.V2.PaymentTermAPIModel'
+              example:
+                id: 0
+                name: string
+                dueDayType: NumberOfDays
+                dueDay: 0
+                isCustomerDefault: true
+                isVendorDefault: true
+                active: true
+                inUse: true
+                paymentTermPenaltyModel:
+                  id: 0
+                  penaltyApplyTo: { }
+                  penalty: 0
+                  penaltyType: { }
+                  maxPenaltyAmount: 0
+                  penaltyFrequency: { }
+                  serviceTaskId: 0
+                paymentTermDiscountModel:
+                  id: 0
+                  discountApplyTo: { }
+                  discount: 0
+                  discountType: { }
+                  account: string
+                  applyBy: { }
+                  applyByValue: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payment-types':
+    get:
+      tags:
+        - PaymentTypes
+      summary: Gets a list of payment types
+      description: Gets a list of payment types
+      operationId: PaymentTypes_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          description: Perform lookup by multiple IDs (maximum 50)
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Accounting.V2.PaymentTypeResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    modifiedOn: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payment-types/{id}':
+    get:
+      tags:
+        - PaymentTypes
+      summary: Gets payment type specified by ID
+      description: Gets payment type specified by ID
+      operationId: PaymentTypes_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounting.V2.PaymentTypeResponse'
+              example:
+                id: 0
+                name: string
+                modifiedOn: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/tax-zones':
+    get:
+      tags:
+        - TaxZones
+      summary: Get a list of tax zones and their rates.
+      description: "Gets a list of tax zones and their rates based on the supplied filter.\nIf no filter is supplied it returns all tax zones."
+      operationId: TaxZones_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: ids
+          in: query
+          description: Tax Zone Ids to pull tax zones for
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: "What kind of items should be returned (only active items will be returned by default)\\\nValues: [True, Any, False]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/ActiveQueryFilter'
+            nullable: true
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Accounting.V2.TaxZoneResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    color: 0
+                    isTaxRateSeparated: true
+                    isMultipleTaxZone: true
+                    rates:
+                      - id: 0
+                        taxName: string
+                        taxBaseType:
+                          - Subtotal
+                        taxRate: 0
+                        salesTaxItem: string
+                    createdOn: string
+                    active: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+components:
+  schemas:
+    Accounting.V2.InventoryBillResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        purchaseOrderId:
+          type: integer
+          format: int64
+          nullable: true
+        syncStatus:
+          type: string
+          nullable: true
+        referenceNumber:
+          type: string
+          nullable: true
+        vendorNumber:
+          type: string
+          nullable: true
+        summary:
+          type: string
+          nullable: true
+        billDate:
+          type: string
+          format: date-time
+          nullable: true
+        billAmount:
+          type: string
+          nullable: true
+        taxAmount:
+          type: string
+          nullable: true
+        shippingAmount:
+          type: string
+          nullable: true
+        createdBy:
+          type: string
+          nullable: true
+        createdOn:
+          type: string
+          format: date-time
+          nullable: true
+        termName:
+          type: string
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+        shipToDescription:
+          type: string
+          nullable: true
+        batch:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.BatchResponse'
+          nullable: true
+        businessUnit:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        vendor:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        shipTo:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.AddressResponse'
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.InventoryBillItemResponse'
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.CustomFieldResponse'
+          nullable: true
+        jobId:
+          type: integer
+          format: int64
+          nullable: true
+        jobNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.BatchResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.NamedFieldResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.AddressResponse:
+      type: object
+      properties:
+        street:
+          type: string
+          nullable: true
+        unit:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        zip:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.InventoryBillItemResponse:
+      required:
+        - order
+      type: object
+      properties:
+        order:
+          type: integer
+          format: int32
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        quantity:
+          type: string
+          nullable: true
+        cost:
+          type: string
+          nullable: true
+        inventoryLocation:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        generalLedgerAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        costOfSaleAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        assetAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.GLAccountResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        detailType:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.CustomFieldResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ApiErrorResponse:
+      required:
+        - type
+        - title
+        - status
+        - traceId
+        - errors
+        - data
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type
+        title:
+          type: string
+          description: 'A short, human-readable summary of the problem type'
+        status:
+          type: integer
+          description: The HTTP status code generated by server
+          format: int32
+        traceId:
+          type: string
+          description: Internal trace ID for advanced diagnostics
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: 'Provides more details about errors occurred, which can potentially be used for visual display'
+        data:
+          type: object
+          additionalProperties: { }
+          description: 'Provides additional data, intended for programmatical usage'
+      additionalProperties: false
+      description: 'Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807).'
+    Accounting.V2.LogicalOperator:
+      enum:
+        - And
+        - Or
+      type: string
+      description: ''
+      x-enumNames:
+        - And
+        - Or
+    Accounting.V2.InventoryBillSyncStatus:
+      enum:
+        - Pending
+        - Posted
+        - Exported
+        - PostedAndExported
+      type: string
+      description: ''
+      x-enumNames:
+        - Pending
+        - Posted
+        - Exported
+        - PostedAndExported
+    Accounting.V2.CustomFieldUpdateRequest:
+      required:
+        - operations
+      type: object
+      properties:
+        operations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.CustomFieldOperationRequest'
+      additionalProperties: false
+    Accounting.V2.CustomFieldOperationRequest:
+      required:
+        - objectId
+        - customFields
+      type: object
+      properties:
+        objectId:
+          type: integer
+          format: int64
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.CustomFieldPairRequest'
+      additionalProperties: false
+    Accounting.V2.CustomFieldPairRequest:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_Accounting.V2.InvoiceResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.InvoiceResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Accounting.V2.InvoiceResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        syncStatus:
+          type: string
+          nullable: true
+        summary:
+          type: string
+          nullable: true
+        referenceNumber:
+          type: string
+          nullable: true
+        invoiceDate:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          format: date-time
+          nullable: true
+        subTotal:
+          type: string
+          nullable: true
+        salesTax:
+          type: string
+          nullable: true
+        salesTaxCode:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.SalesTaxResponse'
+          nullable: true
+        total:
+          type: string
+          nullable: true
+        balance:
+          type: string
+          nullable: true
+        customer:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        customerAddress:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.AddressResponse'
+          nullable: true
+        locationAddress:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.AddressResponse'
+          nullable: true
+        businessUnit:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        termName:
+          type: string
+          nullable: true
+        createdBy:
+          type: string
+          nullable: true
+        batch:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.BatchResponse'
+          nullable: true
+        modifiedOn:
+          type: string
+          format: date-time
+          nullable: true
+        adjustmentToId:
+          type: integer
+          format: int64
+          nullable: true
+        job:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.JobResponse'
+          nullable: true
+        projectId:
+          type: integer
+          format: int64
+          nullable: true
+        royalty:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.RoyaltyResponse'
+          nullable: true
+        employeeInfo:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.EmployeeInfoResponse'
+          nullable: true
+        commissionEligibilityDate:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.InvoiceItemResponse'
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.CustomFieldResponse'
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.SalesTaxResponse:
+      required:
+        - id
+        - taxRate
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        taxRate:
+          type: number
+          format: decimal
+      additionalProperties: false
+    Accounting.V2.JobResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.RoyaltyResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        sentOn:
+          type: string
+          format: date-time
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.EmployeeInfoResponse:
+      required:
+        - id
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Accounting.V2.InvoiceItemResponse:
+      required:
+        - id
+        - type
+        - skuId
+        - inventory
+        - taxable
+        - membershipTypeId
+        - modifiedOn
+        - order
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+          nullable: true
+        quantity:
+          type: string
+          nullable: true
+        cost:
+          type: string
+          nullable: true
+        totalCost:
+          type: string
+          nullable: true
+        inventoryLocation:
+          type: string
+          nullable: true
+        price:
+          type: string
+          nullable: true
+        type:
+          $ref: '#/components/schemas/Accounting.V2.InvoiceItemType'
+        skuName:
+          type: string
+          nullable: true
+        skuId:
+          type: integer
+          format: int64
+        total:
+          type: string
+          nullable: true
+        inventory:
+          type: boolean
+        taxable:
+          type: boolean
+        generalLedgerAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        costOfSaleAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        assetAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        membershipTypeId:
+          type: integer
+          format: int64
+        itemGroup:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.ItemGroupResponse'
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        soldHours:
+          type: number
+          format: decimal
+          nullable: true
+        modifiedOn:
+          type: string
+          format: date-time
+        serviceDate:
+          type: string
+          format: date-time
+          nullable: true
+        order:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Accounting.V2.InvoiceItemType:
+      enum:
+        - Service
+        - Material
+        - Equipment
+        - PriceModifier
+      type: string
+      description: Indicates a type's item
+      x-enumNames:
+        - Service
+        - Material
+        - Equipment
+        - PriceModifier
+    Accounting.V2.ItemGroupResponse:
+      required:
+        - rootId
+      type: object
+      properties:
+        rootId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.TransactionStatus:
+      enum:
+        - Pending
+        - Posted
+        - Exported
+      type: string
+      description: Indicates a transaction's status.
+      x-enumNames:
+        - Pending
+        - Posted
+        - Exported
+    Accounting.V2.AdjustmentInvoiceCreateRequest:
+      required:
+        - adjustmentToId
+      type: object
+      properties:
+        number:
+          type: string
+          nullable: true
+        typeId:
+          type: integer
+          format: int64
+          nullable: true
+        invoicedOn:
+          type: string
+          format: date-time
+          nullable: true
+        subtotal:
+          type: number
+          format: decimal
+          nullable: true
+        tax:
+          type: number
+          format: decimal
+          nullable: true
+        summary:
+          type: string
+          nullable: true
+        royaltyStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.RoyaltyStatus'
+          nullable: true
+        royaltyDate:
+          type: string
+          format: date-time
+          nullable: true
+        royaltySentOn:
+          type: string
+          format: date-time
+          nullable: true
+        royaltyMemo:
+          type: string
+          nullable: true
+        exportId:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.InvoiceItemUpdateRequest'
+          nullable: true
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentSettlementUpdateRequest'
+          nullable: true
+        adjustmentToId:
+          type: integer
+          format: int64
+      additionalProperties: false
+    Accounting.V2.RoyaltyStatus:
+      enum:
+        - Pending
+        - Sent
+        - Failed
+      type: string
+      description: Indicates royalty status of invoice
+      x-enumNames:
+        - Pending
+        - Sent
+        - Failed
+    Accounting.V2.InvoiceItemUpdateRequest:
+      required:
+        - description
+        - quantity
+      type: object
+      properties:
+        skuId:
+          type: integer
+          format: int64
+          nullable: true
+        skuName:
+          type: string
+          nullable: true
+        technicianId:
+          type: integer
+          format: int64
+          nullable: true
+        description:
+          type: string
+        quantity:
+          type: number
+          format: decimal
+        unitPrice:
+          type: number
+          format: decimal
+          nullable: true
+        cost:
+          type: number
+          format: decimal
+          nullable: true
+        isAddOn:
+          type: boolean
+          nullable: true
+        signature:
+          type: string
+          nullable: true
+        technicianAcknowledgementSignature:
+          type: string
+          nullable: true
+        installedOn:
+          type: string
+          format: date-time
+          nullable: true
+        inventoryWarehouseName:
+          type: string
+          nullable: true
+        skipUpdatingMembershipPrices:
+          type: boolean
+          nullable: true
+        itemGroupName:
+          type: string
+          nullable: true
+        itemGroupRootId:
+          type: integer
+          format: int64
+          nullable: true
+        id:
+          type: integer
+          format: int64
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.PaymentSettlementUpdateRequest:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        settlementStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.SettlementStatus'
+          nullable: true
+        settlementDate:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.SettlementStatus:
+      enum:
+        - NotSettled
+        - Settled
+      type: string
+      description: Indicates settlement status of payment
+      x-enumNames:
+        - NotSettled
+        - Settled
+    Accounting.V2.InvoiceUpdateRequest:
+      type: object
+      properties:
+        number:
+          type: string
+          nullable: true
+        typeId:
+          type: integer
+          format: int64
+          nullable: true
+        invoicedOn:
+          type: string
+          format: date-time
+          nullable: true
+        subtotal:
+          type: number
+          format: decimal
+          nullable: true
+        tax:
+          type: number
+          format: decimal
+          nullable: true
+        summary:
+          type: string
+          nullable: true
+        royaltyStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.RoyaltyStatus'
+          nullable: true
+        royaltyDate:
+          type: string
+          format: date-time
+          nullable: true
+        royaltySentOn:
+          type: string
+          format: date-time
+          nullable: true
+        royaltyMemo:
+          type: string
+          nullable: true
+        exportId:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.InvoiceItemUpdateRequest'
+          nullable: true
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentSettlementUpdateRequest'
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.MarkInvoiceAsExportedUpdateResponse:
+      required:
+        - invoiceId
+        - success
+      type: object
+      properties:
+        invoiceId:
+          type: integer
+          format: int64
+        success:
+          type: boolean
+        errorMessage:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.MarkInvoiceAsExportedUpdateRequest:
+      required:
+        - invoiceId
+      type: object
+      properties:
+        invoiceId:
+          type: integer
+          format: int64
+        externalId:
+          type: string
+          nullable: true
+        externalMessage:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_Accounting.V2.DetailedPaymentResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.DetailedPaymentResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Accounting.V2.DetailedPaymentResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        syncStatus:
+          type: string
+          nullable: true
+        referenceNumber:
+          type: string
+          nullable: true
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        typeId:
+          type: string
+          nullable: true
+        total:
+          type: string
+          nullable: true
+        unappliedAmount:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+        customer:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        batch:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.NamedFieldResponse'
+          nullable: true
+        createdBy:
+          type: string
+          nullable: true
+        generalLedgerAccount:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.GLAccountResponse'
+          nullable: true
+        appliedTo:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentAppliedResponse'
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.CustomFieldModel'
+          nullable: true
+        authCode:
+          type: string
+          nullable: true
+        checkNumber:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.PaymentAppliedResponse:
+      required:
+        - appliedTo
+      type: object
+      properties:
+        appliedTo:
+          type: integer
+          format: int64
+        appliedAmount:
+          type: string
+          nullable: true
+        appliedOn:
+          type: string
+          format: date-time
+          nullable: true
+        appliedBy:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Accounting.CustomFieldModel:
+      required:
+        - name
+        - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+    Accounting.V2.PaymentTransactionType:
+      enum:
+        - Undefined
+        - JournalEntry
+        - ReceivePayment
+      type: string
+      description: ''
+      x-enumNames:
+        - Undefined
+        - JournalEntry
+        - ReceivePayment
+    Accounting.V2.PaymentResponse:
+      required:
+        - id
+        - typeId
+        - splits
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        typeId:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+        paidOn:
+          type: string
+          format: date-time
+          nullable: true
+        authCode:
+          type: string
+          nullable: true
+        checkNumber:
+          type: string
+          nullable: true
+        exportId:
+          type: string
+          description: Gets or sets the identifier when exported.
+          nullable: true
+        transactionStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.TransactionProcessingStatus'
+          nullable: true
+        status:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentStatus'
+          nullable: true
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentSplitApiModel'
+      additionalProperties: false
+    Accounting.V2.TransactionProcessingStatus:
+      enum:
+        - Success
+        - Fail
+        - Pending
+      type: string
+      description: Indicates a transaction's status.
+      x-enumNames:
+        - Success
+        - Fail
+        - Pending
+    Accounting.V2.PaymentStatus:
+      enum:
+        - Pending
+        - Posted
+        - Exported
+      type: string
+      description: Indicates a payment's status.
+      x-enumNames:
+        - Pending
+        - Posted
+        - Exported
+    Accounting.V2.PaymentSplitApiModel:
+      type: object
+      properties:
+        invoiceId:
+          type: integer
+          format: int64
+          nullable: true
+        amount:
+          type: number
+          format: decimal
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.PaymentCreateRequest:
+      required:
+        - typeId
+        - splits
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        memo:
+          type: string
+          nullable: true
+        paidOn:
+          type: string
+          format: date-time
+          nullable: true
+        authCode:
+          type: string
+          nullable: true
+        checkNumber:
+          type: string
+          nullable: true
+        exportId:
+          type: string
+          description: Gets or sets the identifier when exported.
+          nullable: true
+        transactionStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.TransactionProcessingStatus'
+          nullable: true
+        status:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentStatus'
+          nullable: true
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentSplitApiModel'
+      additionalProperties: false
+    Accounting.V2.PaymentUpdateRequest:
+      required:
+        - typeId
+        - splits
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        memo:
+          type: string
+        paidOn:
+          type: string
+          format: date-time
+        authCode:
+          type: string
+        checkNumber:
+          type: string
+        exportId:
+          type: string
+          description: Gets or sets the identifier when exported.
+        transactionStatus:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.TransactionProcessingStatus'
+          nullable: true
+        status:
+          $ref: '#/components/schemas/Accounting.V2.PaymentStatus'
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentSplitApiModel'
+      additionalProperties: false
+    Accounting.V2.PaymentStatusBatchRequest:
+      required:
+        - status
+        - paymentIds
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Accounting.V2.PaymentStatus'
+        paymentIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+      additionalProperties: false
+    Accounting.V2.PaymentTermAPIModel:
+      required:
+        - dueDayType
+        - isCustomerDefault
+        - isVendorDefault
+        - active
+        - paymentTermPenaltyModel
+        - paymentTermDiscountModel
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        dueDayType:
+          $ref: '#/components/schemas/Accounting.V2.PaymentTermDueDayType'
+        dueDay:
+          type: integer
+          format: int32
+          nullable: true
+        isCustomerDefault:
+          type: boolean
+        isVendorDefault:
+          type: boolean
+        active:
+          type: boolean
+        inUse:
+          type: boolean
+          nullable: true
+        paymentTermPenaltyModel:
+          $ref: '#/components/schemas/Accounting.V2.PaymentTermPenaltyAPIModel'
+        paymentTermDiscountModel:
+          $ref: '#/components/schemas/Accounting.V2.PaymentTermDiscountAPIModel'
+      additionalProperties: false
+    Accounting.V2.PaymentTermDueDayType:
+      enum:
+        - NumberOfDays
+        - CertainDayOfCurrentMonth
+        - CertainDayOfFollowingMonth
+      type: string
+      description: ''
+      x-enumNames:
+        - NumberOfDays
+        - CertainDayOfCurrentMonth
+        - CertainDayOfFollowingMonth
+    Accounting.V2.PaymentTermPenaltyAPIModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+        penaltyApplyTo:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentTermApplyTo'
+          nullable: true
+        penalty:
+          type: number
+          format: decimal
+          nullable: true
+        penaltyType:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentTermValueType'
+          nullable: true
+        maxPenaltyAmount:
+          type: number
+          format: decimal
+          nullable: true
+        penaltyFrequency:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentTermPenaltyFrequency'
+          nullable: true
+        serviceTaskId:
+          type: integer
+          format: int64
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.PaymentTermApplyTo:
+      enum:
+        - ApplyToTotalAmount
+        - ApplyToSubtotalAmount
+        - ApplyToRemainingBalance
+      type: string
+      description: ''
+      x-enumNames:
+        - ApplyToTotalAmount
+        - ApplyToSubtotalAmount
+        - ApplyToRemainingBalance
+    Accounting.V2.PaymentTermValueType:
+      enum:
+        - Fixed
+        - Percent
+      type: string
+      description: ''
+      x-enumNames:
+        - Fixed
+        - Percent
+    Accounting.V2.PaymentTermPenaltyFrequency:
+      enum:
+        - CertainDayOfMonth
+        - Weekly
+        - Biweekly
+        - Monthly
+      type: string
+      description: ''
+      x-enumNames:
+        - CertainDayOfMonth
+        - Weekly
+        - Biweekly
+        - Monthly
+    Accounting.V2.PaymentTermDiscountAPIModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+        discountApplyTo:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentTermApplyTo'
+          nullable: true
+        discount:
+          type: number
+          format: decimal
+          nullable: true
+        discountType:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.PaymentTermValueType'
+          nullable: true
+        account:
+          type: string
+          nullable: true
+        applyBy:
+          oneOf:
+            - $ref: '#/components/schemas/Accounting.V2.DiscountAppliedBy'
+          nullable: true
+        applyByValue:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.DiscountAppliedBy:
+      enum:
+        - NumberOfDays
+        - DayOfMonth
+        - DayOfFollowingMonth
+      type: string
+      description: ''
+      x-enumNames:
+        - NumberOfDays
+        - DayOfMonth
+        - DayOfFollowingMonth
+    PaginatedResponse_Of_Accounting.V2.PaymentTypeResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.PaymentTypeResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Accounting.V2.PaymentTypeResponse:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    ActiveQueryFilter:
+      enum:
+        - 'True'
+        - Any
+        - 'False'
+      type: string
+      description: ''
+      x-enumNames:
+        - 'True'
+        - Any
+        - 'False'
+    PaginatedResponse_Of_Accounting.V2.TaxZoneResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.TaxZoneResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Accounting.V2.TaxZoneResponse:
+      required:
+        - id
+        - isTaxRateSeparated
+        - isMultipleTaxZone
+        - rates
+        - createdOn
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Tax Zone Id
+          format: int64
+        name:
+          type: string
+          description: Tax Zone Name
+          nullable: true
+        color:
+          type: integer
+          description: Tax Zone Color
+          format: int32
+          nullable: true
+        isTaxRateSeparated:
+          type: boolean
+          description: Tax Zone has separate material and labor taxes
+        isMultipleTaxZone:
+          type: boolean
+          description: Tax Zone has multiple rates
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.TaxRateResponse'
+          description: Tax Zone rates
+        createdOn:
+          type: string
+          description: Date which the Tax Zone was created
+          format: date-time
+        active:
+          type: boolean
+          description: Tax zone is active
+      additionalProperties: false
+    Accounting.V2.TaxRateResponse:
+      required:
+        - taxBaseType
+        - taxRate
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Tax Rate Id
+          format: int64
+          nullable: true
+        taxName:
+          type: string
+          description: Tax Rate Name
+          nullable: true
+        taxBaseType:
+          type: array
+          items:
+            $ref: '#/components/schemas/Accounting.V2.TaxBaseTypeNames'
+          description: 'Indicates how the tax rate is applied (Subtotal, Labor, Material)'
+        taxRate:
+          type: number
+          description: Tax rate as a fractional/decimal value
+          format: decimal
+        salesTaxItem:
+          type: string
+          description: The Quickbooks item that relates to this tax rate
+          nullable: true
+      additionalProperties: false
+    Accounting.V2.TaxBaseTypeNames:
+      enum:
+        - Subtotal
+        - Labor
+        - Material
+      type: string
+      description: Indicates the types of tax applied for a given rate
+      x-enumNames:
+        - Subtotal
+        - Labor
+        - Material
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: ST-App-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: servicetitanapplicationkey
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

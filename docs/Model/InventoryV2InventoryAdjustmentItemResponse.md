@@ -1,0 +1,14 @@
+# # InventoryV2InventoryAdjustmentItemResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **int** | Item Id |
+**sku_id** | **int** | Sku Id |
+**name** | **string** | Item name |
+**code** | **string** | Item code |
+**description** | **string** | Item description |
+**quantity** | **float** | Adjustment quantity |
+
+[[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

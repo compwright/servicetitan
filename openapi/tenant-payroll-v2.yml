@@ -1,0 +1,2015 @@
+openapi: 3.0.1
+info:
+  title: Payroll
+  version: '1.0'
+servers:
+  - url: https://api-integration.servicetitan.io/payroll/v2
+paths:
+  '/tenant/{tenant}/gross-pay-items':
+    post:
+      tags:
+        - GrossPayItems
+      summary: Creates new gross pay item
+      description: Creates new gross pay item
+      operationId: GrossPayItems_Create
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: The gross pay item model to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payroll.V2.GrossPayItems.GrossPayItemCreateRequest'
+            example:
+              payrollId: 0
+              amount: 0
+              activityCodeId: 0
+              date: string
+              invoiceId: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResponse'
+              example:
+                id: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    get:
+      tags:
+        - GrossPayItems
+      summary: Gets a list of gross pay items
+      description: Gets a list of gross pay items
+      operationId: GrossPayItems_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: employeeType
+          in: query
+          description: "The type of employee\\\nValues: [Technician, Employee]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+            nullable: true
+        - name: employeeId
+          in: query
+          description: Format - int64. The Employee ID
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: payrollIds
+          in: query
+          description: The payroll ID
+          schema:
+            type: string
+        - name: dateOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: dateOnOrBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.GrossPayItems.GrossPayItemResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    employeeId: 0
+                    employeeType: { }
+                    businessUnitName: string
+                    payrollId: 0
+                    date: string
+                    activity: string
+                    activityCodeId: 0
+                    activityCode: string
+                    amount: 0
+                    amountAdjustment: 0
+                    payoutBusinessUnitName: string
+                    grossPayItemType: { }
+                    startedOn: string
+                    endedOn: string
+                    paidDurationHours: 0
+                    paidTimeType: { }
+                    jobId: 0
+                    jobNumber: string
+                    jobTypeName: string
+                    projectNumber: string
+                    projectId: 0
+                    invoiceId: 0
+                    invoiceNumber: string
+                    invoiceItemId: 0
+                    customerId: 0
+                    customerName: string
+                    locationId: 0
+                    locationName: string
+                    locationAddress: string
+                    locationZip: string
+                    zoneName: string
+                    taxZoneName: string
+                    laborTypeId: 0
+                    laborTypeCode: string
+                    isPrevailingWageJob: true
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/gross-pay-items/{id}':
+    put:
+      tags:
+        - GrossPayItems
+      summary: Update specified gross pay item
+      description: Update specified gross pay item
+      operationId: GrossPayItems_Update
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. The gross pay item ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: The gross pay item model to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payroll.V2.GrossPayItems.GrossPayItemUpdateRequest'
+            example:
+              payrollId: 0
+              amount: 0
+              activityCodeId: 0
+              date: string
+              invoiceId: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResponse'
+              example:
+                id: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    delete:
+      tags:
+        - GrossPayItems
+      summary: Delete specified gross pay item
+      description: Delete specified gross pay item
+      operationId: GrossPayItems_Delete
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. The gross pay item ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/jobs/{job}/splits':
+    get:
+      tags:
+        - JobSplits
+      summary: Gets a list of job splits
+      description: Gets a list of job splits
+      operationId: JobSplits_GetList
+      parameters:
+        - name: job
+          in: path
+          description: Format - int64. The job ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payroll.V2.JobSplits.JobSplitResponse'
+              example:
+                - jobId: 0
+                  technicianId: 0
+                  split: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Unknown job ID was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/activity-codes':
+    get:
+      tags:
+        - ActivityCodes
+      summary: Gets a list of payroll activity codes
+      description: Gets a list of payroll activity codes
+      operationId: ActivityCodes_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.PayrollActivityCodes.PayrollActivityCodeResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    name: string
+                    code: string
+                    earningCategory: { }
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/activity-codes/{id}':
+    get:
+      tags:
+        - ActivityCodes
+      summary: Gets payroll activity code specified by ID
+      description: Gets payroll activity code specified by ID
+      operationId: ActivityCodes_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. ID of the payroll activity code
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payroll.V2.PayrollActivityCodes.PayrollActivityCodeResponse'
+              example:
+                id: 0
+                name: string
+                code: string
+                earningCategory: { }
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Payroll activity code was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payroll-adjustments':
+    post:
+      tags:
+        - PayrollAdjustments
+      summary: Creates new payroll adjustment
+      description: Creates new payroll adjustment
+      operationId: PayrollAdjustments_Create
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: The payroll adjustment model to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payroll.V2.PayrollAdjustments.PayrollAdjustmentCreateRequest'
+            example:
+              employeeType: { }
+              employeeId: 0
+              postedOn: string
+              amount: 0
+              memo: string
+              activityCodeId: 0
+              hours: 0
+              rate: 0
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationResponse'
+              example:
+                id: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+    get:
+      tags:
+        - PayrollAdjustments
+      summary: Gets a list of payroll adjustments
+      description: Gets a list of payroll adjustments
+      operationId: PayrollAdjustments_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: employeeIds
+          in: query
+          description: The comma separated list of employee IDs
+          schema:
+            type: string
+        - name: postedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: postedOnOrBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    employeeType: { }
+                    employeeId: 0
+                    postedOn: string
+                    amount: 0
+                    memo: string
+                    activityCodeId: 0
+                    hours: 0
+                    rate: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payroll-adjustments/{id}':
+    get:
+      tags:
+        - PayrollAdjustments
+      summary: Gets payroll adjustment specified by ID
+      description: Gets payroll adjustment specified by ID
+      operationId: PayrollAdjustments_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. The ID of payroll adjustment
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: employeeType
+          in: query
+          description: "The employee type\\\nValues: [Technician, Employee]"
+          schema:
+            $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse'
+              example:
+                id: 0
+                employeeType: { }
+                employeeId: 0
+                postedOn: string
+                amount: 0
+                memo: string
+                activityCodeId: 0
+                hours: 0
+                rate: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Payroll adjustment was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/payrolls':
+    get:
+      tags:
+        - Payrolls
+      summary: Gets a list of payrolls
+      description: Gets a list of payrolls
+      operationId: Payrolls_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: employeeType
+          in: query
+          description: "The type of employee\\\nValues: [Technician, Employee]"
+          schema:
+            type: string
+            oneOf:
+              - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+            nullable: true
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: startedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: endedOnOrBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.Payrolls.PayrollResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    startedOn: string
+                    endedOn: string
+                    employeeId: 0
+                    employeeType: { }
+                    status: { }
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/technicians/{technician}/payrolls':
+    get:
+      tags:
+        - Payrolls
+      summary: Gets a list of technician payrolls
+      description: Gets a list of technician payrolls
+      operationId: Payrolls_GetTechnicianPayrolls
+      parameters:
+        - name: technician
+          in: path
+          description: Format - int64. The technician ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: startedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: endedOnOrBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.Payrolls.PayrollResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    startedOn: string
+                    endedOn: string
+                    employeeId: 0
+                    employeeType: { }
+                    status: { }
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/employees/{employee}/payrolls':
+    get:
+      tags:
+        - Payrolls
+      summary: "Gets a list of employee payrolls\n            "
+      description: "Gets a list of employee payrolls\n            "
+      operationId: Payrolls_GetEmployeePayrolls
+      parameters:
+        - name: employee
+          in: path
+          description: Format - int64. The employee ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+        - name: startedOnOrAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: endedOnOrBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.Payrolls.PayrollResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    startedOn: string
+                    endedOn: string
+                    employeeId: 0
+                    employeeType: { }
+                    status: { }
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '409':
+          description: Some conflict occurred while executing the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/timesheet-codes':
+    get:
+      tags:
+        - TimesheetCodes
+      summary: Gets a list of timesheet codes
+      description: Gets a list of timesheet codes
+      operationId: TimesheetCodes_GetList
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: 'Format - int32. The logical number of page to return, starting from 1'
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32. How many records to return (50 by default)
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: includeTotal
+          in: query
+          description: Whether total count should be returned
+          schema:
+            type: boolean
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse_Of_Payroll.V2.TimesheetCodes.TimesheetCodeResponse'
+              example:
+                page: 0
+                pageSize: 0
+                hasMore: true
+                totalCount: 0
+                data:
+                  - id: 0
+                    code: string
+                    description: string
+                    type: { }
+                    applicableEmployeeType: { }
+                    rateInfo:
+                      hourlyRate: { }
+                      customHourlyRate: 0
+                      rateMultiplier: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/timesheet-codes/{id}':
+    get:
+      tags:
+        - TimesheetCodes
+      summary: Gets timesheet code specified by ID
+      description: Gets timesheet code specified by ID
+      operationId: TimesheetCodes_Get
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64. The timesheet code ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payroll.V2.TimesheetCodes.TimesheetCodeResponse'
+              example:
+                id: 0
+                code: string
+                description: string
+                type: { }
+                applicableEmployeeType: { }
+                rateInfo:
+                  hourlyRate: { }
+                  customHourlyRate: 0
+                  rateMultiplier: 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+        '404':
+          description: Timesheet code was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/jobs/{job}/timesheets':
+    get:
+      tags:
+        - Timesheets
+      summary: Gets a list of job timesheets
+      description: Gets a list of job timesheets
+      operationId: Timesheets_GetJobTimesheets
+      parameters:
+        - name: job
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: technicianId
+          in: query
+          description: Format - int64. The technician ID
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: startedOn
+          in: query
+          description: 'Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)'
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: endedOn
+          in: query
+          description: 'Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)'
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payroll.V2.Timesheets.JobTimesheetResponse'
+              example:
+                - id: 0
+                  jobId: 0
+                  appointmentId: 0
+                  technicianId: 0
+                  dispatchedOn: string
+                  arrivedOn: string
+                  canceledOn: string
+                  doneOn: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+components:
+  schemas:
+    ModificationResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of created/updated object
+          format: int64
+      additionalProperties: false
+      description: 'Default response when creating object with a new ID, or updating object by specified ID.'
+    ApiErrorResponse:
+      required:
+        - type
+        - title
+        - status
+        - traceId
+        - errors
+        - data
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type
+        title:
+          type: string
+          description: 'A short, human-readable summary of the problem type'
+        status:
+          type: integer
+          description: The HTTP status code generated by server
+          format: int32
+        traceId:
+          type: string
+          description: Internal trace ID for advanced diagnostics
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: 'Provides more details about errors occurred, which can potentially be used for visual display'
+        data:
+          type: object
+          additionalProperties: { }
+          description: 'Provides additional data, intended for programmatical usage'
+      additionalProperties: false
+      description: 'Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807).'
+    Payroll.V2.GrossPayItems.GrossPayItemCreateRequest:
+      required:
+        - payrollId
+        - amount
+        - activityCodeId
+        - date
+      type: object
+      properties:
+        payrollId:
+          type: integer
+          description: The payroll ID
+          format: int64
+        amount:
+          type: number
+          description: Amount of the gross pay item
+          format: decimal
+        activityCodeId:
+          type: integer
+          description: The ID of the activity code
+          format: int64
+        date:
+          type: string
+          description: Date of the gross pay item
+          format: date-time
+        invoiceId:
+          type: integer
+          description: The invoice ID
+          format: int64
+          nullable: true
+      additionalProperties: false
+    Payroll.V2.GrossPayItems.GrossPayItemUpdateRequest:
+      required:
+        - payrollId
+        - amount
+        - activityCodeId
+        - date
+      type: object
+      properties:
+        payrollId:
+          type: integer
+          description: The payroll ID
+          format: int64
+        amount:
+          type: number
+          description: Amount of the gross pay item
+          format: decimal
+        activityCodeId:
+          type: integer
+          description: The ID of the activity code
+          format: int64
+        date:
+          type: string
+          description: Date of the gross pay item
+          format: date-time
+        invoiceId:
+          type: integer
+          description: The invoice ID
+          format: int64
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_Payroll.V2.GrossPayItems.GrossPayItemResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payroll.V2.GrossPayItems.GrossPayItemResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Payroll.V2.GrossPayItems.GrossPayItemResponse:
+      required:
+        - payrollId
+        - date
+        - amount
+        - grossPayItemType
+        - jobId
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The gross pay item ID
+          format: int64
+          nullable: true
+        employeeId:
+          type: integer
+          description: The employee/technician ID
+          format: int64
+          nullable: true
+        employeeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+          description: The employee type
+          nullable: true
+        businessUnitName:
+          type: string
+          description: The business unit name
+          nullable: true
+        payrollId:
+          type: integer
+          description: The payroll ID
+          format: int64
+        date:
+          type: string
+          description: The date (UTC) of the gross pay item
+          format: date-time
+        activity:
+          type: string
+          description: The activity
+          nullable: true
+        activityCodeId:
+          type: integer
+          description: The payroll activity code ID
+          format: int64
+          nullable: true
+        activityCode:
+          type: string
+          description: The payroll activity code name
+          nullable: true
+        amount:
+          type: number
+          description: The amount
+          format: decimal
+        amountAdjustment:
+          type: number
+          description: The amount adjustment
+          format: decimal
+          nullable: true
+        payoutBusinessUnitName:
+          type: string
+          description: The payout business unit name
+          nullable: true
+        grossPayItemType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.GrossPayItemType'
+          description: Type of the gross pay item
+        startedOn:
+          type: string
+          description: The start time (UTC)
+          format: date-time
+          nullable: true
+        endedOn:
+          type: string
+          description: The end time (UTC)
+          format: date-time
+          nullable: true
+        paidDurationHours:
+          type: number
+          description: The paid duration in hours
+          format: decimal
+          nullable: true
+        paidTimeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.PaidTimeType'
+          description: Type of the paid time
+          nullable: true
+        jobId:
+          type: integer
+          description: The job ID
+          format: int64
+        jobNumber:
+          type: string
+          description: The job number
+          nullable: true
+        jobTypeName:
+          type: string
+          description: Name of the job type
+          nullable: true
+        projectNumber:
+          type: string
+          description: The project number
+          nullable: true
+        projectId:
+          type: integer
+          description: The project ID
+          format: int64
+          nullable: true
+        invoiceId:
+          type: integer
+          description: The invoice ID
+          format: int64
+          nullable: true
+        invoiceNumber:
+          type: string
+          description: The invoice number
+          nullable: true
+        invoiceItemId:
+          type: integer
+          description: The invoice item ID
+          format: int64
+          nullable: true
+        customerId:
+          type: integer
+          description: The customer ID
+          format: int64
+          nullable: true
+        customerName:
+          type: string
+          description: The customer name
+          nullable: true
+        locationId:
+          type: integer
+          description: The location ID
+          format: int64
+          nullable: true
+        locationName:
+          type: string
+          description: The location name
+          nullable: true
+        locationAddress:
+          type: string
+          description: The location address
+          nullable: true
+        locationZip:
+          type: string
+          description: The location zip
+          nullable: true
+        zoneName:
+          type: string
+          description: The zone name
+          nullable: true
+        taxZoneName:
+          type: string
+          description: The tax zone name
+          nullable: true
+        laborTypeId:
+          type: integer
+          description: ID of the labor type
+          format: int64
+          nullable: true
+        laborTypeCode:
+          type: string
+          description: Code of the labor type
+          nullable: true
+        isPrevailingWageJob:
+          type: boolean
+          description: Defines whether it's a prevailing wage job
+          nullable: true
+      additionalProperties: false
+    Payroll.V2.EmployeeType:
+      enum:
+        - Technician
+        - Employee
+      type: string
+      description: ''
+      x-enumNames:
+        - Technician
+        - Employee
+    Payroll.V2.GrossPayItemType:
+      enum:
+        - InvoiceRelatedBonus
+        - TimesheetTime
+        - CustomBonus
+        - Salary
+      type: string
+      description: ''
+      x-enumNames:
+        - InvoiceRelatedBonus
+        - TimesheetTime
+        - CustomBonus
+        - Salary
+    Payroll.V2.PaidTimeType:
+      enum:
+        - Regular
+        - Overtime
+        - DoubleOvertime
+        - PaidTimeOff
+      type: string
+      description: ''
+      x-enumNames:
+        - Regular
+        - Overtime
+        - DoubleOvertime
+        - PaidTimeOff
+    Payroll.V2.JobSplits.JobSplitResponse:
+      required:
+        - jobId
+        - technicianId
+        - split
+      type: object
+      properties:
+        jobId:
+          type: integer
+          description: Job ID
+          format: int64
+        technicianId:
+          type: integer
+          description: Technician ID
+          format: int64
+        split:
+          type: number
+          description: The split
+          format: decimal
+      additionalProperties: false
+    PaginatedResponse_Of_Payroll.V2.PayrollActivityCodes.PayrollActivityCodeResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payroll.V2.PayrollActivityCodes.PayrollActivityCodeResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Payroll.V2.PayrollActivityCodes.PayrollActivityCodeResponse:
+      required:
+        - id
+        - name
+        - code
+        - earningCategory
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the payroll activity code
+          format: int64
+        name:
+          type: string
+          description: Name of the payroll activity code
+        code:
+          type: string
+          description: Code of the payroll activity code
+        earningCategory:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.PayrollEarningCategory'
+          description: Earning category of the payroll activity code
+      additionalProperties: false
+    Payroll.V2.PayrollEarningCategory:
+      enum:
+        - Timesheet
+        - Commission
+      type: string
+      description: ''
+      x-enumNames:
+        - Timesheet
+        - Commission
+    Payroll.V2.PayrollAdjustments.PayrollAdjustmentCreateRequest:
+      required:
+        - employeeType
+        - employeeId
+        - postedOn
+      type: object
+      properties:
+        employeeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+          description: The employee type
+        employeeId:
+          type: integer
+          description: ID of the employee
+          format: int64
+        postedOn:
+          type: string
+          description: The posted on date/time (in UTC)
+          format: date-time
+        amount:
+          type: number
+          description: The payroll adjustment amount
+          format: decimal
+          nullable: true
+        memo:
+          type: string
+          description: Memo of the payroll adjustment
+          nullable: true
+        activityCodeId:
+          type: integer
+          description: ID of the payroll adjustment activity code
+          format: int64
+          nullable: true
+        hours:
+          type: number
+          description: Hours of the payroll adjustment
+          format: decimal
+          nullable: true
+        rate:
+          type: number
+          description: Rate of the payroll adjustment
+          format: decimal
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Payroll.V2.PayrollAdjustments.PayrollAdjustmentResponse:
+      required:
+        - id
+        - employeeType
+        - employeeId
+        - postedOn
+        - amount
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the payroll adjustment
+          format: int64
+        employeeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+          description: Employee type of the payroll adjustment
+        employeeId:
+          type: integer
+          description: Employee ID of the payroll adjustment
+          format: int64
+        postedOn:
+          type: string
+          description: Posted date/time (UTC) of the payroll adjustment
+          format: date-time
+        amount:
+          type: number
+          description: Amount of the payroll adjustment
+          format: decimal
+        memo:
+          type: string
+          description: Memo of the payroll adjustment
+          nullable: true
+        activityCodeId:
+          type: integer
+          description: Activity code ID of the payroll adjustment
+          format: int64
+          nullable: true
+        hours:
+          type: number
+          description: Hours of the payroll adjustment
+          format: decimal
+          nullable: true
+        rate:
+          type: number
+          description: Rate of the payroll adjustment
+          format: decimal
+          nullable: true
+      additionalProperties: false
+    PaginatedResponse_Of_Payroll.V2.Payrolls.PayrollResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payroll.V2.Payrolls.PayrollResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Payroll.V2.Payrolls.PayrollResponse:
+      required:
+        - id
+        - startedOn
+        - endedOn
+        - employeeId
+        - employeeType
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the payroll
+          format: int64
+        startedOn:
+          type: string
+          description: Started on date (UTC) of the payroll
+          format: date-time
+        endedOn:
+          type: string
+          description: Ended on date (UTC) of the payroll
+          format: date-time
+        employeeId:
+          type: integer
+          description: Employee ID of the payroll
+          format: int64
+        employeeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.EmployeeType'
+          description: Employee type of the payroll
+        status:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.PayrollStatus'
+          description: Status of the payroll
+      additionalProperties: false
+    Payroll.V2.PayrollStatus:
+      enum:
+        - Pending
+        - Expired
+        - Approved
+        - Paid
+      type: string
+      description: ''
+      x-enumNames:
+        - Pending
+        - Expired
+        - Approved
+        - Paid
+    PaginatedResponse_Of_Payroll.V2.TimesheetCodes.TimesheetCodeResponse:
+      required:
+        - page
+        - pageSize
+        - hasMore
+        - data
+      type: object
+      properties:
+        page:
+          type: integer
+          description: From which page this output has started
+          format: int32
+        pageSize:
+          type: integer
+          description: Page size for this query (i.e. how many records were requested to return)
+          format: int32
+        hasMore:
+          type: boolean
+          description: True if there are more records in the query than returned in this result
+        totalCount:
+          type: integer
+          description: Total count of records for this query (can optionally be populated)
+          format: int32
+          nullable: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payroll.V2.TimesheetCodes.TimesheetCodeResponse'
+          description: 'The collection of result items, will never have more than PageSize items'
+      additionalProperties: false
+      description: Represents paginated API response.
+    Payroll.V2.TimesheetCodes.TimesheetCodeResponse:
+      required:
+        - id
+        - code
+        - type
+        - applicableEmployeeType
+        - rateInfo
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the timesheet code
+          format: int64
+        code:
+          type: string
+          description: Code of the timesheet code
+        description:
+          type: string
+          description: Description of the timesheet code
+          nullable: true
+        type:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.TimesheetCodeType'
+          description: Type of the timesheet code
+        applicableEmployeeType:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.TimesheetCodeEmployeeType'
+          description: Application employee type of the timesheet code
+        rateInfo:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.TimesheetCodes.TimesheetCodeRateInfoResponse'
+          description: Rate info of the timesheet code
+      additionalProperties: false
+    Payroll.V2.TimesheetCodeType:
+      enum:
+        - Unpaid
+        - Paid
+        - ClockInOut
+        - PaidTimeOff
+      type: string
+      description: ''
+      x-enumNames:
+        - Unpaid
+        - Paid
+        - ClockInOut
+        - PaidTimeOff
+    Payroll.V2.TimesheetCodeEmployeeType:
+      enum:
+        - Technician
+        - Employee
+        - All
+      type: string
+      description: ''
+      x-enumNames:
+        - Technician
+        - Employee
+        - All
+    Payroll.V2.TimesheetCodes.TimesheetCodeRateInfoResponse:
+      required:
+        - hourlyRate
+        - rateMultiplier
+      type: object
+      properties:
+        hourlyRate:
+          oneOf:
+            - $ref: '#/components/schemas/Payroll.V2.TimesheetHourlyRateType'
+          description: The hourly rate
+        customHourlyRate:
+          type: number
+          description: The custom hourly rate
+          format: decimal
+          nullable: true
+        rateMultiplier:
+          type: number
+          description: The rate multiplier
+          format: decimal
+      additionalProperties: false
+    Payroll.V2.TimesheetHourlyRateType:
+      enum:
+        - EmployeeHourlyRate
+        - CustomHourlyRate
+      type: string
+      description: ''
+      x-enumNames:
+        - EmployeeHourlyRate
+        - CustomHourlyRate
+    Payroll.V2.Timesheets.JobTimesheetResponse:
+      required:
+        - id
+        - jobId
+        - appointmentId
+        - technicianId
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The timesheet ID
+          format: int64
+        jobId:
+          type: integer
+          description: The job ID
+          format: int64
+        appointmentId:
+          type: integer
+          description: The appointment ID
+          format: int64
+        technicianId:
+          type: integer
+          description: The technician ID
+          format: int64
+        dispatchedOn:
+          type: string
+          description: the dispatch date/time (in UTC)
+          format: date-time
+          nullable: true
+        arrivedOn:
+          type: string
+          description: The arrive date/time (in UTC)
+          format: date-time
+          nullable: true
+        canceledOn:
+          type: string
+          description: The cancel date/time (in UTC)
+          format: date-time
+          nullable: true
+        doneOn:
+          type: string
+          description: The done date/time (in UTC)
+          format: date-time
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: ST-App-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: servicetitanapplicationkey
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

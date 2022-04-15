@@ -1,0 +1,1425 @@
+openapi: 3.0.1
+info:
+  title: Telecom
+  version: '1.0'
+servers:
+  - url: https://api-integration.servicetitan.io/telecom/v2
+paths:
+  '/tenant/{tenant}/calls/{id}':
+    get:
+      tags:
+        - Calls
+      summary: Calls_GetDetails
+      operationId: Calls_GetDetails
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module.Telecom.Shared.DetailedBundleCallModel'
+              example:
+                id: 0
+                jobNumber: string
+                projectId: 0
+                businessUnit:
+                  id: 0
+                  active: true
+                  name: string
+                  officialName: string
+                  email: string
+                  currency: string
+                  phoneNumber: string
+                  invoiceHeader: string
+                  invoiceMessage: string
+                  defaultTaxRate: 0
+                  authorizationParagraph: string
+                  acknowledgementParagraph: string
+                  address:
+                    street: string
+                    unit: string
+                    city: string
+                    state: string
+                    zip: string
+                    country: string
+                  materialSku: string
+                  quickbooksClass: string
+                  accountCode: string
+                  franchiseId: string
+                  conceptCode: string
+                  corporateContractNumber: string
+                  tenant:
+                    id: 0
+                    name: string
+                    quickbooksClass: string
+                    accountCode: string
+                    franchiseId: string
+                    conceptCode: string
+                    modifiedOn: string
+                  modifiedOn: string
+                type:
+                  id: 0
+                  name: string
+                  modifiedOn: string
+                leadCall:
+                  id: 0
+                  receivedOn: string
+                  duration: string
+                  from: string
+                  to: string
+                  direction: Inbound
+                  callType: { }
+                  reason:
+                    id: 0
+                    name: string
+                    lead: true
+                    active: true
+                  recordingUrl: string
+                  voiceMailUrl: string
+                  createdBy:
+                    id: 0
+                    name: string
+                  customer:
+                    id: 0
+                    active: true
+                    name: string
+                    email: string
+                    balance: 0
+                    doNotMail: true
+                    address:
+                      street: string
+                      unit: string
+                      country: string
+                      city: string
+                      state: string
+                      zip: string
+                      streetAddress: string
+                      latitude: 0
+                      longitude: 0
+                    importId: string
+                    doNotService: true
+                    type: Residential
+                    contacts:
+                      - id: 0
+                        type: string
+                        value: string
+                        memo: string
+                        active: true
+                        modifiedOn: string
+                    mergedToId: 0
+                    modifiedOn: string
+                    memberships:
+                      - id: 0
+                        active: true
+                        type:
+                          id: 0
+                          active: true
+                          name: string
+                        status: string
+                        from: string
+                        to: string
+                        locationId: 0
+                    hasActiveMembership: true
+                    customFields:
+                      - typeId: 0
+                        name: string
+                        value: string
+                    createdOn: string
+                    createdBy: 0
+                    phoneSettings:
+                      - phoneNumber: string
+                        doNotText: true
+                  campaign:
+                    id: 0
+                    name: string
+                    modifiedOn: string
+                    active: true
+                    category:
+                      id: 0
+                      name: string
+                      active: true
+                  modifiedOn: string
+                  agent:
+                    id: 0
+                    name: string
+                    externalId: 0
+    put:
+      tags:
+        - Calls
+      summary: Calls_Update
+      operationId: Calls_Update
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module.Telecom.Shared.CallInUpdateModelV2'
+            example:
+              callId: 0
+              callType: { }
+              excuseMemo: string
+              campaignId: 0
+              jobId: 0
+              agentId: 0
+              reason:
+                name: string
+                lead: true
+              customer:
+                id: 0
+                name: string
+                address:
+                  street: string
+                  unit: string
+                  country: string
+                  city: string
+                  state: string
+                  zip: string
+                  latitude: 0
+                  longitude: 0
+                contacts:
+                  - id: 0
+                    type: string
+                    value: string
+                    memo: string
+              location:
+                id: 0
+                name: string
+                address:
+                  street: string
+                  unit: string
+                  country: string
+                  city: string
+                  state: string
+                  zip: string
+                  latitude: 0
+                  longitude: 0
+                contacts:
+                  - id: 0
+                    type: string
+                    value: string
+                    memo: string
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module.Telecom.Shared.DetailedCallModel'
+              example:
+                id: 0
+                receivedOn: string
+                duration: string
+                from: string
+                to: string
+                direction: Inbound
+                callType: { }
+                reason:
+                  id: 0
+                  name: string
+                  lead: true
+                  active: true
+                recordingUrl: string
+                voiceMailUrl: string
+                createdBy:
+                  id: 0
+                  name: string
+                customer:
+                  id: 0
+                  active: true
+                  name: string
+                  email: string
+                  balance: 0
+                  doNotMail: true
+                  address:
+                    street: string
+                    unit: string
+                    country: string
+                    city: string
+                    state: string
+                    zip: string
+                    streetAddress: string
+                    latitude: 0
+                    longitude: 0
+                  importId: string
+                  doNotService: true
+                  type: Residential
+                  contacts:
+                    - id: 0
+                      type: string
+                      value: string
+                      memo: string
+                      active: true
+                      modifiedOn: string
+                  mergedToId: 0
+                  modifiedOn: string
+                  memberships:
+                    - id: 0
+                      active: true
+                      type:
+                        id: 0
+                        active: true
+                        name: string
+                      status: string
+                      from: string
+                      to: string
+                      locationId: 0
+                  hasActiveMembership: true
+                  customFields:
+                    - typeId: 0
+                      name: string
+                      value: string
+                  createdOn: string
+                  createdBy: 0
+                  phoneSettings:
+                    - phoneNumber: string
+                      doNotText: true
+                campaign:
+                  id: 0
+                  name: string
+                  modifiedOn: string
+                  active: true
+                  category:
+                    id: 0
+                    name: string
+                    active: true
+                modifiedOn: string
+                agent:
+                  id: 0
+                  name: string
+                  externalId: 0
+  '/tenant/{tenant}/calls':
+    get:
+      tags:
+        - Calls
+      summary: Calls_GetCalls
+      operationId: Calls_GetCalls
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+        - name: modifiedAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: minDuration
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: phoneNumberCalled
+          in: query
+          schema:
+            type: string
+        - name: campaignId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: agentId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: agentName
+          in: query
+          schema:
+            type: string
+        - name: agentIsExternal
+          in: query
+          schema:
+            type: boolean
+            nullable: true
+        - name: agentExternalId
+          in: query
+          description: Format - int64.
+          schema:
+            type: integer
+            format: int64
+            nullable: true
+        - name: orderBy
+          in: query
+          schema:
+            type: string
+        - name: orderByDirection
+          in: query
+          schema:
+            type: string
+        - name: activeOnly
+          in: query
+          schema:
+            type: boolean
+        - name: createdAfter
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: createdBefore
+          in: query
+          description: Format - date-time (as date-time in RFC3339).
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: ids
+          in: query
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+        - name: page
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: pageSize
+          in: query
+          description: Format - int32.
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionResult_Of_Module.Telecom.Shared.BundleCallModel'
+              example:
+                data:
+                  - id: 0
+                    jobNumber: string
+                    projectId: 0
+                    businessUnit:
+                      id: 0
+                      active: true
+                      name: string
+                      officialName: string
+                      email: string
+                      currency: string
+                      phoneNumber: string
+                      invoiceHeader: string
+                      invoiceMessage: string
+                      defaultTaxRate: 0
+                      authorizationParagraph: string
+                      acknowledgementParagraph: string
+                      address:
+                        street: string
+                        unit: string
+                        city: string
+                        state: string
+                        zip: string
+                        country: string
+                      materialSku: string
+                      quickbooksClass: string
+                      accountCode: string
+                      franchiseId: string
+                      conceptCode: string
+                      corporateContractNumber: string
+                      tenant:
+                        id: 0
+                        name: string
+                        quickbooksClass: string
+                        accountCode: string
+                        franchiseId: string
+                        conceptCode: string
+                        modifiedOn: string
+                      modifiedOn: string
+                    type:
+                      id: 0
+                      name: string
+                      modifiedOn: string
+                    leadCall:
+                      id: 0
+                      receivedOn: string
+                      duration: string
+                      from: string
+                      to: string
+                      direction: Inbound
+                      callType: { }
+                      reason:
+                        id: 0
+                        name: string
+                        lead: true
+                        active: true
+                      recordingUrl: string
+                      voiceMailUrl: string
+                      createdBy:
+                        id: 0
+                        name: string
+                      customer:
+                        id: 0
+                        active: true
+                        name: string
+                        email: string
+                        balance: 0
+                        doNotMail: true
+                        address:
+                          street: string
+                          unit: string
+                          country: string
+                          city: string
+                          state: string
+                          zip: string
+                          streetAddress: string
+                          latitude: 0
+                          longitude: 0
+                        importId: string
+                        doNotService: true
+                        type: Residential
+                        contacts:
+                          - id: 0
+                            type: string
+                            value: string
+                            memo: string
+                            active: true
+                            modifiedOn: string
+                        mergedToId: 0
+                        modifiedOn: string
+                        memberships:
+                          - id: 0
+                            active: true
+                            type:
+                              id: 0
+                              active: true
+                              name: string
+                            status: string
+                            from: string
+                            to: string
+                            locationId: 0
+                        hasActiveMembership: true
+                        customFields:
+                          - typeId: 0
+                            name: string
+                            value: string
+                        createdOn: string
+                        createdBy: 0
+                        phoneSettings:
+                          - phoneNumber: string
+                            doNotText: true
+                      campaign:
+                        id: 0
+                        name: string
+                        modifiedOn: string
+                        active: true
+                        category:
+                          id: 0
+                          name: string
+                          active: true
+                      modifiedOn: string
+                      agent:
+                        id: 0
+                        name: string
+                        externalId: 0
+                page: 0
+                pageSize: 0
+                totalCount: 0
+                hasMore: true
+  '/tenant/{tenant}/calls/{id}/recording':
+    get:
+      tags:
+        - Calls
+      summary: Calls_GetRecording
+      operationId: Calls_GetRecording
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                default:
+                  value: 
+  '/tenant/{tenant}/calls/{id}/voicemail':
+    get:
+      tags:
+        - Calls
+      summary: Calls_GetVoiceMail
+      operationId: Calls_GetVoiceMail
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                default:
+                  value: 
+components:
+  schemas:
+    Module.Telecom.Shared.DetailedBundleCallModel:
+      required:
+        - id
+        - jobNumber
+        - projectId
+        - businessUnit
+        - type
+        - leadCall
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        jobNumber:
+          type: string
+        projectId:
+          type: integer
+          format: int64
+        businessUnit:
+          $ref: '#/components/schemas/Module.Admin.Shared.BusinessUnitModel'
+        type:
+          $ref: '#/components/schemas/JobTypeModel'
+        leadCall:
+          $ref: '#/components/schemas/Module.Telecom.Shared.DetailedCallModel'
+      additionalProperties: false
+    Module.Admin.Shared.BusinessUnitModel:
+      required:
+        - id
+        - name
+        - active
+        - officialName
+        - email
+        - currency
+        - phoneNumber
+        - invoiceHeader
+        - invoiceMessage
+        - defaultTaxRate
+        - authorizationParagraph
+        - acknowledgementParagraph
+        - address
+        - materialSku
+        - quickbooksClass
+        - accountCode
+        - franchiseId
+        - conceptCode
+        - corporateContractNumber
+        - tenant
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        name:
+          minLength: 1
+          type: string
+        officialName:
+          type: string
+        email:
+          type: string
+        currency:
+          type: string
+        phoneNumber:
+          type: string
+        invoiceHeader:
+          type: string
+        invoiceMessage:
+          type: string
+        defaultTaxRate:
+          type: number
+          format: decimal
+        authorizationParagraph:
+          type: string
+        acknowledgementParagraph:
+          type: string
+        address:
+          $ref: '#/components/schemas/Module.Admin.Shared.BusinessUnitAddressModel'
+        materialSku:
+          type: string
+        quickbooksClass:
+          type: string
+        accountCode:
+          type: string
+        franchiseId:
+          type: string
+        conceptCode:
+          type: string
+        corporateContractNumber:
+          type: string
+        tenant:
+          $ref: '#/components/schemas/Module.Admin.Shared.BusinessUnitTenantModel'
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Module.Admin.Shared.BusinessUnitAddressModel:
+      required:
+        - street
+        - unit
+        - city
+        - state
+        - zip
+        - country
+      type: object
+      properties:
+        street:
+          type: string
+        unit:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+      additionalProperties: false
+    Module.Admin.Shared.BusinessUnitTenantModel:
+      required:
+        - id
+        - name
+        - quickbooksClass
+        - accountCode
+        - franchiseId
+        - conceptCode
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        quickbooksClass:
+          type: string
+        accountCode:
+          type: string
+        franchiseId:
+          type: string
+        conceptCode:
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    JobTypeModel:
+      required:
+        - id
+        - name
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          minLength: 1
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Module.Telecom.Shared.DetailedCallModel:
+      required:
+        - id
+        - receivedOn
+        - duration
+        - from
+        - to
+        - direction
+        - reason
+        - recordingUrl
+        - voiceMailUrl
+        - createdBy
+        - customer
+        - campaign
+        - modifiedOn
+        - agent
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        receivedOn:
+          type: string
+          format: date-time
+        duration:
+          type: string
+          format: time-span
+        from:
+          type: string
+        to:
+          type: string
+        direction:
+          $ref: '#/components/schemas/CallDirection'
+        callType:
+          oneOf:
+            - $ref: '#/components/schemas/CallType'
+          nullable: true
+        reason:
+          $ref: '#/components/schemas/Module.Telecom.Shared.CallReasonModel'
+        recordingUrl:
+          type: string
+        voiceMailUrl:
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/Services.NamedModel'
+        customer:
+          $ref: '#/components/schemas/Crm.Contracts.Customers.CustomerModel'
+        campaign:
+          $ref: '#/components/schemas/Marketing.Core.CampaignModel'
+        modifiedOn:
+          type: string
+          format: date-time
+        agent:
+          $ref: '#/components/schemas/Module.Telecom.Shared.CallAgentModel'
+      additionalProperties: false
+    CallDirection:
+      enum:
+        - Inbound
+        - Outbound
+      type: string
+      description: ''
+      x-enumNames:
+        - Inbound
+        - Outbound
+    CallType:
+      enum:
+        - Abandoned
+        - Unbooked
+        - Excused
+        - Booked
+        - NotLead
+      type: string
+      description: ''
+      x-enumNames:
+        - Abandoned
+        - Unbooked
+        - Excused
+        - Booked
+        - NotLead
+    Module.Telecom.Shared.CallReasonModel:
+      required:
+        - id
+        - name
+        - lead
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        lead:
+          type: boolean
+        active:
+          type: boolean
+      additionalProperties: false
+    Services.NamedModel:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      additionalProperties: false
+    Crm.Contracts.Customers.CustomerModel:
+      required:
+        - id
+        - name
+        - address
+        - active
+        - email
+        - doNotMail
+        - importId
+        - doNotService
+        - type
+        - contacts
+        - modifiedOn
+        - memberships
+        - customFields
+        - createdOn
+        - phoneSettings
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        name:
+          minLength: 1
+          type: string
+        email:
+          type: string
+        balance:
+          type: number
+          format: decimal
+          nullable: true
+        doNotMail:
+          type: boolean
+        address:
+          $ref: '#/components/schemas/AddressOutput'
+        importId:
+          type: string
+        doNotService:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/Crm.Customers.CustomerType'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contacts.Contracts.ContactOutputModel'
+        mergedToId:
+          type: integer
+          format: int64
+          nullable: true
+        modifiedOn:
+          type: string
+          format: date-time
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Memberships.MembershipModel'
+        hasActiveMembership:
+          type: boolean
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldApiModel'
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          type: integer
+          format: int64
+          nullable: true
+        phoneSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Crm.Contracts.Customers.CustomerPhoneModel'
+      additionalProperties: false
+    AddressOutput:
+      required:
+        - street
+        - unit
+        - country
+        - city
+        - state
+        - zip
+        - streetAddress
+      type: object
+      properties:
+        street:
+          type: string
+        unit:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        streetAddress:
+          type: string
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    Crm.Customers.CustomerType:
+      enum:
+        - Residential
+        - Commercial
+      type: string
+      description: ''
+      x-enumNames:
+        - Residential
+        - Commercial
+    Contacts.Contracts.ContactOutputModel:
+      required:
+        - type
+        - value
+        - memo
+        - active
+        - modifiedOn
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+        type:
+          type: string
+        value:
+          type: string
+        memo:
+          type: string
+        active:
+          type: boolean
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Memberships.MembershipModel:
+      required:
+        - id
+        - active
+        - type
+        - status
+        - locationId
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/Memberships.MembershipTypeModel'
+        status:
+          type: string
+        from:
+          type: string
+          format: date-time
+          nullable: true
+        to:
+          type: string
+          format: date-time
+          nullable: true
+        locationId:
+          type: integer
+          format: int64
+      additionalProperties: false
+    Memberships.MembershipTypeModel:
+      required:
+        - id
+        - active
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        active:
+          type: boolean
+        name:
+          type: string
+      additionalProperties: false
+    CustomFieldApiModel:
+      required:
+        - typeId
+        - name
+        - value
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        value:
+          type: string
+      additionalProperties: false
+    Crm.Contracts.Customers.CustomerPhoneModel:
+      required:
+        - phoneNumber
+        - doNotText
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        doNotText:
+          type: boolean
+      additionalProperties: false
+    Marketing.Core.CampaignModel:
+      required:
+        - id
+        - name
+        - modifiedOn
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          minLength: 1
+          type: string
+        modifiedOn:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+        category:
+          oneOf:
+            - $ref: '#/components/schemas/Marketing.Core.CampaignCategoryModel'
+          nullable: true
+      additionalProperties: false
+    Marketing.Core.CampaignCategoryModel:
+      required:
+        - id
+        - name
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          minLength: 1
+          type: string
+        active:
+          type: boolean
+      additionalProperties: false
+    Module.Telecom.Shared.CallAgentModel:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalId:
+          type: integer
+          format: int64
+          nullable: true
+      additionalProperties: false
+    CollectionResult_Of_Module.Telecom.Shared.BundleCallModel:
+      required:
+        - data
+        - page
+        - pageSize
+        - totalCount
+        - hasMore
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module.Telecom.Shared.BundleCallModel'
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalCount:
+          type: integer
+          format: int32
+        hasMore:
+          type: boolean
+      additionalProperties: false
+    Module.Telecom.Shared.BundleCallModel:
+      required:
+        - id
+        - jobNumber
+        - projectId
+        - businessUnit
+        - type
+        - leadCall
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        jobNumber:
+          type: string
+        projectId:
+          type: integer
+          format: int64
+        businessUnit:
+          $ref: '#/components/schemas/Module.Admin.Shared.BusinessUnitModel'
+        type:
+          $ref: '#/components/schemas/JobTypeModel'
+        leadCall:
+          $ref: '#/components/schemas/Module.Telecom.Shared.CallModel'
+      additionalProperties: false
+    Module.Telecom.Shared.CallModel:
+      required:
+        - id
+        - receivedOn
+        - duration
+        - from
+        - to
+        - direction
+        - reason
+        - recordingUrl
+        - voiceMailUrl
+        - createdBy
+        - customer
+        - campaign
+        - modifiedOn
+        - agent
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        receivedOn:
+          type: string
+          format: date-time
+        duration:
+          type: string
+          format: time-span
+        from:
+          type: string
+        to:
+          type: string
+        direction:
+          $ref: '#/components/schemas/CallDirection'
+        callType:
+          oneOf:
+            - $ref: '#/components/schemas/CallType'
+          nullable: true
+        reason:
+          $ref: '#/components/schemas/Module.Telecom.Shared.CallReasonModel'
+        recordingUrl:
+          type: string
+        voiceMailUrl:
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/Services.NamedModel'
+        customer:
+          $ref: '#/components/schemas/Crm.Contracts.Customers.CustomerModel'
+        campaign:
+          $ref: '#/components/schemas/Marketing.Core.CampaignModel'
+        modifiedOn:
+          type: string
+          format: date-time
+        agent:
+          $ref: '#/components/schemas/Module.Telecom.Shared.CallAgentModel'
+      additionalProperties: false
+    Module.Telecom.Shared.CallInUpdateModelV2:
+      required:
+        - excuseMemo
+        - reason
+        - customer
+        - location
+      type: object
+      properties:
+        callId:
+          type: integer
+          format: int64
+          nullable: true
+        callType:
+          oneOf:
+            - $ref: '#/components/schemas/CallType'
+          nullable: true
+        excuseMemo:
+          type: string
+        campaignId:
+          type: integer
+          format: int64
+          nullable: true
+        jobId:
+          type: integer
+          format: int64
+          nullable: true
+        agentId:
+          type: integer
+          format: int64
+          nullable: true
+        reason:
+          $ref: '#/components/schemas/Module.Telecom.Shared.ReasonInModel'
+        customer:
+          $ref: '#/components/schemas/CustomerInModel'
+        location:
+          $ref: '#/components/schemas/LocationInModel'
+      additionalProperties: false
+    Module.Telecom.Shared.ReasonInModel:
+      required:
+        - name
+        - lead
+      type: object
+      properties:
+        name:
+          type: string
+        lead:
+          type: boolean
+      additionalProperties: false
+    CustomerInModel:
+      required:
+        - id
+        - name
+        - address
+        - contacts
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressInput'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contacts.Contracts.ContactInputModel'
+      additionalProperties: false
+    AddressInput:
+      required:
+        - street
+        - unit
+        - country
+        - city
+        - state
+        - zip
+      type: object
+      properties:
+        street:
+          type: string
+        unit:
+          type: string
+        country:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+      additionalProperties: false
+    Contacts.Contracts.ContactInputModel:
+      required:
+        - type
+        - value
+        - memo
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+        type:
+          type: string
+        value:
+          type: string
+        memo:
+          type: string
+      additionalProperties: false
+    LocationInModel:
+      required:
+        - id
+        - name
+        - address
+        - contacts
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressInput'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contacts.Contracts.ContactInputModel'
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: ST-App-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: servicetitanapplicationkey
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

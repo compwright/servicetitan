@@ -1,0 +1,14 @@
+{
+    "packageName": "ServiceTitan v2 API client for PHP",
+    "generatorName": "php",
+    "invokerPackage": "CompWright\\ServiceTitan",
+    "gitHost": "github.org",
+    "gitUserId": "compwright",
+    "gitRepoId": "servicetitan",
+    "minimalUpdate": false,
+    "additionalProperties": {
+        "appDescription": "ServiceTitan v2 API client for PHP (generated with OpenAPI Generator)",
+        "infoUrl": "https://developer.servicetitan.io",
+        "infoEmail": "Jonathon Hill, CompWright Enterprises LLC (https://compwright.com)"
+    }
+}

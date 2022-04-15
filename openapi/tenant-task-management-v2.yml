@@ -1,0 +1,655 @@
+openapi: 3.0.1
+info:
+  title: Task Management
+  version: '1.0'
+servers:
+  - url: https://api-integration.servicetitan.io/taskmanagement/v2
+paths:
+  '/tenant/{tenant}/data':
+    get:
+      tags:
+        - ClientSideData
+      summary: ClientSideData_Get
+      operationId: ClientSideData_Get
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskManagement.V2.ClientSideDataResponse'
+              example:
+                employees:
+                  - id: 0
+                    name: string
+                    active: true
+                businessUnits:
+                  - name: string
+                    value: 0
+                taskPriorities:
+                  - name: string
+                taskResolutionTypes:
+                  - name: string
+                taskStatuses:
+                  - name: string
+                taskTypes:
+                  - id: 0
+                    name: string
+                    active: true
+                    excludedTaskResolutionIds:
+                      - 0
+                taskSources:
+                  - id: 0
+                    name: string
+                    active: true
+                taskResolutions:
+                  - id: 0
+                    name: string
+                    type: Custom
+                    active: true
+                    excludedTaskTypeIds:
+                      - 0
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/tasks':
+    post:
+      tags:
+        - Tasks
+      summary: Tasks_Create
+      operationId: Tasks_Create
+      parameters:
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskManagement.V2.TaskCreateRequest'
+            example:
+              reportedById: 0
+              assignedToId: 0
+              isClosed: true
+              name: string
+              businessUnitId: 0
+              employeeTaskTypeId: 0
+              employeeTaskSourceId: 0
+              employeeTaskResolutionId: 0
+              reportedDate: string
+              completeBy: string
+              involvedEmployeeIdList:
+                - 0
+              customerId: 0
+              jobId: 0
+              description: string
+              priority: Low
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskManagement.V2.TaskCreateResponse'
+              example:
+                reportedById: 0
+                assignedToId: 0
+                isClosed: true
+                name: string
+                businessUnitId: 0
+                employeeTaskTypeId: 0
+                employeeTaskSourceId: 0
+                employeeTaskResolutionId: 0
+                reportedDate: string
+                completeBy: string
+                involvedEmployeeIdList:
+                  - 0
+                customerId: 0
+                jobId: 0
+                description: string
+                priority: Low
+                id: 0
+                taskNumber: 0
+                customerName: string
+                jobNumber: string
+                refundIssued: 0
+                descriptionModifiedOn: string
+                descriptionModifiedBy: string
+                createdOn: string
+                modifiedOn: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+  '/tenant/{tenant}/tasks/{id}/subtasks':
+    post:
+      tags:
+        - Tasks
+      summary: Tasks_CreateSubtask
+      operationId: Tasks_CreateSubtask
+      parameters:
+        - name: id
+          in: path
+          description: Format - int64.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tenant
+          in: path
+          description: Tenant ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskManagement.V2.SubtaskCreateRequest'
+            example:
+              isClosed: true
+              name: string
+              assignedToId: 0
+              dueDateTime: string
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskManagement.V2.SubtaskCreateResponse'
+              example:
+                isClosed: true
+                name: string
+                assignedToId: 0
+                dueDateTime: string
+                parentTaskId: 0
+                subtaskNumber: string
+                isViewed: true
+                assignedDateTime: string
+                createdOn: string
+        '400':
+          description: 'The request cannot be processed, check validation errors or request format'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+              example:
+                type: string
+                title: string
+                status: 0
+                traceId: string
+                errors: { }
+                data: { }
+components:
+  schemas:
+    TaskManagement.V2.ClientSideDataResponse:
+      required:
+        - employees
+        - businessUnits
+        - taskPriorities
+        - taskResolutionTypes
+        - taskStatuses
+        - taskTypes
+        - taskSources
+        - taskResolutions
+      type: object
+      properties:
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideEmployeeResponse'
+        businessUnits:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideBusinessUnitResponse'
+        taskPriorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskPriorityResponse'
+        taskResolutionTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskResolutionTypeResponse'
+        taskStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskStatusResponse'
+        taskTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskTypeResponse'
+        taskSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskSourceResponse'
+        taskResolutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskManagement.V2.ClientSideTaskResolutionResponse'
+      additionalProperties: false
+    TaskManagement.V2.ClientSideEmployeeResponse:
+      required:
+        - id
+        - name
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        active:
+          type: boolean
+      additionalProperties: false
+    TaskManagement.V2.ClientSideBusinessUnitResponse:
+      required:
+        - name
+        - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+          format: int64
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskPriorityResponse:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskResolutionTypeResponse:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskStatusResponse:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskTypeResponse:
+      required:
+        - id
+        - name
+        - active
+        - excludedTaskResolutionIds
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        active:
+          type: boolean
+        excludedTaskResolutionIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskSourceResponse:
+      required:
+        - id
+        - name
+        - active
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        active:
+          type: boolean
+      additionalProperties: false
+    TaskManagement.V2.ClientSideTaskResolutionResponse:
+      required:
+        - id
+        - name
+        - type
+        - active
+        - excludedTaskTypeIds
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/TaskManagement.V2.TaskResolutionType'
+        active:
+          type: boolean
+        excludedTaskTypeIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+      additionalProperties: false
+    TaskManagement.V2.TaskResolutionType:
+      enum:
+        - Custom
+        - Refund
+      type: string
+      description: ''
+      x-enumNames:
+        - Custom
+        - Refund
+    ApiErrorResponse:
+      required:
+        - type
+        - title
+        - status
+        - traceId
+        - errors
+        - data
+      type: object
+      properties:
+        type:
+          type: string
+          description: A URI reference that identifies the problem type
+        title:
+          type: string
+          description: 'A short, human-readable summary of the problem type'
+        status:
+          type: integer
+          description: The HTTP status code generated by server
+          format: int32
+        traceId:
+          type: string
+          description: Internal trace ID for advanced diagnostics
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: 'Provides more details about errors occurred, which can potentially be used for visual display'
+        data:
+          type: object
+          additionalProperties: { }
+          description: 'Provides additional data, intended for programmatical usage'
+      additionalProperties: false
+      description: 'Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807).'
+    TaskManagement.V2.TaskCreateResponse:
+      required:
+        - reportedById
+        - assignedToId
+        - isClosed
+        - name
+        - businessUnitId
+        - employeeTaskTypeId
+        - employeeTaskSourceId
+        - reportedDate
+        - priority
+        - id
+        - taskNumber
+        - createdOn
+        - modifiedOn
+      type: object
+      properties:
+        reportedById:
+          type: integer
+          format: int64
+        assignedToId:
+          type: integer
+          format: int64
+        isClosed:
+          type: boolean
+        name:
+          type: string
+        businessUnitId:
+          type: integer
+          format: int64
+        employeeTaskTypeId:
+          type: integer
+          format: int64
+        employeeTaskSourceId:
+          type: integer
+          format: int64
+        employeeTaskResolutionId:
+          type: integer
+          format: int64
+          nullable: true
+        reportedDate:
+          type: string
+          format: date-time
+        completeBy:
+          type: string
+          format: date-time
+          nullable: true
+        involvedEmployeeIdList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          nullable: true
+        customerId:
+          type: integer
+          format: int64
+          nullable: true
+        jobId:
+          type: integer
+          format: int64
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        priority:
+          $ref: '#/components/schemas/TaskManagement.V2.TaskPriority'
+        id:
+          type: integer
+          format: int64
+        taskNumber:
+          type: integer
+          format: int64
+        customerName:
+          type: string
+          nullable: true
+        jobNumber:
+          type: string
+          nullable: true
+        refundIssued:
+          type: number
+          format: decimal
+          nullable: true
+        descriptionModifiedOn:
+          type: string
+          format: date-time
+          nullable: true
+        descriptionModifiedBy:
+          type: string
+          nullable: true
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    TaskManagement.V2.TaskPriority:
+      enum:
+        - Low
+        - Normal
+        - High
+        - Urgent
+      type: string
+      description: ''
+      x-enumNames:
+        - Low
+        - Normal
+        - High
+        - Urgent
+    TaskManagement.V2.TaskCreateRequest:
+      required:
+        - reportedById
+        - assignedToId
+        - isClosed
+        - name
+        - businessUnitId
+        - employeeTaskTypeId
+        - employeeTaskSourceId
+        - reportedDate
+        - priority
+      type: object
+      properties:
+        reportedById:
+          type: integer
+          format: int64
+        assignedToId:
+          type: integer
+          format: int64
+        isClosed:
+          type: boolean
+        name:
+          type: string
+        businessUnitId:
+          type: integer
+          format: int64
+        employeeTaskTypeId:
+          type: integer
+          format: int64
+        employeeTaskSourceId:
+          type: integer
+          format: int64
+        employeeTaskResolutionId:
+          type: integer
+          format: int64
+          nullable: true
+        reportedDate:
+          type: string
+          format: date-time
+        completeBy:
+          type: string
+          format: date-time
+          nullable: true
+        involvedEmployeeIdList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          nullable: true
+        customerId:
+          type: integer
+          format: int64
+          nullable: true
+        jobId:
+          type: integer
+          format: int64
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        priority:
+          $ref: '#/components/schemas/TaskManagement.V2.TaskPriority'
+      additionalProperties: false
+    TaskManagement.V2.SubtaskCreateResponse:
+      required:
+        - isClosed
+        - name
+        - assignedToId
+        - parentTaskId
+        - subtaskNumber
+        - isViewed
+        - assignedDateTime
+        - createdOn
+      type: object
+      properties:
+        isClosed:
+          type: boolean
+        name:
+          type: string
+        assignedToId:
+          type: integer
+          format: int64
+        dueDateTime:
+          type: string
+          format: date-time
+          nullable: true
+        parentTaskId:
+          type: integer
+          format: int64
+        subtaskNumber:
+          type: string
+        isViewed:
+          type: boolean
+        assignedDateTime:
+          type: string
+          format: date-time
+        createdOn:
+          type: string
+          format: date-time
+      additionalProperties: false
+    TaskManagement.V2.SubtaskCreateRequest:
+      required:
+        - isClosed
+        - name
+        - assignedToId
+      type: object
+      properties:
+        isClosed:
+          type: boolean
+        name:
+          type: string
+        assignedToId:
+          type: integer
+          format: int64
+        dueDateTime:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: ST-App-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: servicetitanapplicationkey
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]
