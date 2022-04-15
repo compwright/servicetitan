@@ -34,7 +34,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0 || ^9.0",
-        "friendsofphp/php-cs-fixer": "^2.12"
+        "friendsofphp/php-cs-fixer": "^2.12",
+        "compwright/oauth2-servicetitan": "^1.0",
+        "symfony/dotenv": "^5.4"
     },
     "autoload": {
         "psr-4": { "CompWright\\ServiceTitan\\" : "lib/" }
