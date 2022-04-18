@@ -39,9 +39,14 @@
         "symfony/dotenv": "^5.4"
     },
     "autoload": {
-        "psr-4": { "CompWright\\ServiceTitan\\" : "lib/" }
+        "psr-4": { "CompWright\\ServiceTitan\\" : "src/" }
     },
     "autoload-dev": {
         "psr-4": { "CompWright\\ServiceTitan\\Test\\" : "test/" }
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
     }
 }
