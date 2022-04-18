@@ -356,7 +356,7 @@ class AppointmentAssignmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointment-assignments/assign-technicians';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/appointment-assignments/assign-technicians';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -693,7 +693,7 @@ class AppointmentAssignmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointment-assignments';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/appointment-assignments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1065,7 +1065,7 @@ class AppointmentAssignmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointment-assignments/unassign-technicians';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/appointment-assignments/unassign-technicians';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

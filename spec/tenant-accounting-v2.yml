@@ -3,9 +3,9 @@ info:
   title: Accounting
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/accounting/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/inventory-bills':
+  '/accounting/v2/tenant/{tenant}/inventory-bills':
     get:
       tags:
         - InventoryBills
@@ -236,7 +236,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/inventory-bills/custom-fields':
+  '/accounting/v2/tenant/{tenant}/inventory-bills/custom-fields':
     patch:
       tags:
         - InventoryBills
@@ -276,7 +276,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices':
+  '/accounting/v2/tenant/{tenant}/invoices':
     get:
       tags:
         - Invoices
@@ -647,7 +647,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices/custom-fields':
+  '/accounting/v2/tenant/{tenant}/invoices/custom-fields':
     patch:
       tags:
         - Invoices
@@ -688,7 +688,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices/{id}':
+  '/accounting/v2/tenant/{tenant}/invoices/{id}':
     patch:
       tags:
         - Invoices
@@ -763,7 +763,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices/{invoiceId}/items':
+  '/accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items':
     patch:
       tags:
         - Invoices
@@ -822,7 +822,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices/{invoiceId}/items/{itemId}':
+  '/accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items/{itemId}':
     delete:
       tags:
         - Invoices
@@ -866,7 +866,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoices/markasexported':
+  '/accounting/v2/tenant/{tenant}/invoices/markasexported':
     post:
       tags:
         - Invoices
@@ -917,7 +917,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payments':
+  '/accounting/v2/tenant/{tenant}/payments':
     get:
       tags:
         - Payments
@@ -1170,7 +1170,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payments/custom-fields':
+  '/accounting/v2/tenant/{tenant}/payments/custom-fields':
     patch:
       tags:
         - Payments
@@ -1211,7 +1211,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payments/{id}':
+  '/accounting/v2/tenant/{tenant}/payments/{id}':
     patch:
       tags:
         - Payments
@@ -1284,7 +1284,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payments/status':
+  '/accounting/v2/tenant/{tenant}/payments/status':
     post:
       tags:
         - Payments
@@ -1323,7 +1323,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payment-terms/{customerId}':
+  '/accounting/v2/tenant/{tenant}/payment-terms/{customerId}':
     get:
       tags:
         - PaymentTerms
@@ -1389,7 +1389,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payment-types':
+  '/accounting/v2/tenant/{tenant}/payment-types':
     get:
       tags:
         - PaymentTypes
@@ -1479,7 +1479,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payment-types/{id}':
+  '/accounting/v2/tenant/{tenant}/payment-types/{id}':
     get:
       tags:
         - PaymentTypes
@@ -1524,7 +1524,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/tax-zones':
+  '/accounting/v2/tenant/{tenant}/tax-zones':
     get:
       tags:
         - TaxZones

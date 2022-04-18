@@ -80,13 +80,13 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/taskmanagement/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ClientSideDataApi* | [**clientSideDataGet**](docs/Api/ClientSideDataApi.md#clientsidedataget) | **GET** /tenant/{tenant}/data | ClientSideData_Get
-*TasksApi* | [**tasksCreate**](docs/Api/TasksApi.md#taskscreate) | **POST** /tenant/{tenant}/tasks | Tasks_Create
-*TasksApi* | [**tasksCreateSubtask**](docs/Api/TasksApi.md#taskscreatesubtask) | **POST** /tenant/{tenant}/tasks/{id}/subtasks | Tasks_CreateSubtask
+*ClientSideDataApi* | [**clientSideDataGet**](docs/Api/ClientSideDataApi.md#clientsidedataget) | **GET** /taskmanagement/v2/tenant/{tenant}/data | ClientSideData_Get
+*TasksApi* | [**tasksCreate**](docs/Api/TasksApi.md#taskscreate) | **POST** /taskmanagement/v2/tenant/{tenant}/tasks | Tasks_Create
+*TasksApi* | [**tasksCreateSubtask**](docs/Api/TasksApi.md#taskscreatesubtask) | **POST** /taskmanagement/v2/tenant/{tenant}/tasks/{id}/subtasks | Tasks_CreateSubtask
 
 ## Models
 

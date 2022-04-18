@@ -342,7 +342,7 @@ class PaymentTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payment-types/{id}';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payment-types/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -686,7 +686,7 @@ class PaymentTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payment-types';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payment-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

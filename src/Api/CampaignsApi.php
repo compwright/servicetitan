@@ -336,7 +336,7 @@ class CampaignsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/campaigns';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/campaigns';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -654,7 +654,7 @@ class CampaignsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/campaigns/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/campaigns/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -999,7 +999,7 @@ class CampaignsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/campaigns/{id}/costs';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/campaigns/{id}/costs';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1403,7 +1403,7 @@ class CampaignsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/campaigns';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/campaigns';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1808,7 +1808,7 @@ class CampaignsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/campaigns/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/campaigns/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

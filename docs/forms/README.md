@@ -82,11 +82,11 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/forms/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*JobsApi* | [**jobsCreateAttachment**](docs/Api/JobsApi.md#jobscreateattachment) | **POST** /tenant/{tenant}/jobs/{id}/attachments | Creates a Attachment on the specified Job
+*JobsApi* | [**jobsCreateAttachment**](docs/Api/JobsApi.md#jobscreateattachment) | **POST** /forms/v2/tenant/{tenant}/jobs/{id}/attachments | Creates a Attachment on the specified Job
 
 ## Models
 

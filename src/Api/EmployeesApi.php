@@ -362,7 +362,7 @@ class EmployeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/employees/{id}';
+        $resourcePath = '/settings/v2/tenant/{tenant}/employees/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -721,7 +721,7 @@ class EmployeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/employees';
+        $resourcePath = '/settings/v2/tenant/{tenant}/employees';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

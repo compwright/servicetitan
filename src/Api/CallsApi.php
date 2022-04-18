@@ -391,7 +391,7 @@ class CallsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/calls';
+        $resourcePath = '/telecom/v2/tenant/{tenant}/calls';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -859,7 +859,7 @@ class CallsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/calls/{id}';
+        $resourcePath = '/telecom/v2/tenant/{tenant}/calls/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1159,7 +1159,7 @@ class CallsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/calls/{id}/recording';
+        $resourcePath = '/telecom/v2/tenant/{tenant}/calls/{id}/recording';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1459,7 +1459,7 @@ class CallsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/calls/{id}/voicemail';
+        $resourcePath = '/telecom/v2/tenant/{tenant}/calls/{id}/voicemail';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1764,7 +1764,7 @@ class CallsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/calls/{id}';
+        $resourcePath = '/telecom/v2/tenant/{tenant}/calls/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

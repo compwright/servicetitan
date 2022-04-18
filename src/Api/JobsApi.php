@@ -298,7 +298,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/cancel';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/cancel';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -588,7 +588,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/complete';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/complete';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -908,7 +908,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1251,7 +1251,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/notes';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1602,7 +1602,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1933,7 +1933,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/cancel-reasons';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/cancel-reasons';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2276,7 +2276,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/history';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/history';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2730,7 +2730,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3396,7 +3396,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/notes';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3705,7 +3705,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/hold';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/hold';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3974,7 +3974,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}/remove-cancellation';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}/remove-cancellation';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4319,7 +4319,7 @@ class JobsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/jobs/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

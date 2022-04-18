@@ -362,7 +362,7 @@ class ProjectsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/projects/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/projects/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -781,7 +781,7 @@ class ProjectsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/projects';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/projects';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

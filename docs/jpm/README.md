@@ -81,38 +81,38 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/jpm/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AppointmentsApi* | [**appointmentsAdd**](docs/Api/AppointmentsApi.md#appointmentsadd) | **POST** /tenant/{tenant}/appointments | Adds a new appointment to an existing job
-*AppointmentsApi* | [**appointmentsDelete**](docs/Api/AppointmentsApi.md#appointmentsdelete) | **DELETE** /tenant/{tenant}/appointments/{id} | Deletes appointment with specified id.
-*AppointmentsApi* | [**appointmentsGet**](docs/Api/AppointmentsApi.md#appointmentsget) | **GET** /tenant/{tenant}/appointments/{id} | Gets appointment specified by ID
-*AppointmentsApi* | [**appointmentsGetList**](docs/Api/AppointmentsApi.md#appointmentsgetlist) | **GET** /tenant/{tenant}/appointments | Gets a list of appointments
-*AppointmentsApi* | [**appointmentsHold**](docs/Api/AppointmentsApi.md#appointmentshold) | **PUT** /tenant/{tenant}/appointments/{id}/hold | Puts the appointment on hold
-*AppointmentsApi* | [**appointmentsRemoveHold**](docs/Api/AppointmentsApi.md#appointmentsremovehold) | **DELETE** /tenant/{tenant}/appointments/{id}/hold | Removes hold from the appointment
-*AppointmentsApi* | [**appointmentsReschedule**](docs/Api/AppointmentsApi.md#appointmentsreschedule) | **PATCH** /tenant/{tenant}/appointments/{id}/reschedule | Reschedule job appointment
-*AppointmentsApi* | [**appointmentsUpdateSpecialInstructions**](docs/Api/AppointmentsApi.md#appointmentsupdatespecialinstructions) | **PUT** /tenant/{tenant}/appointments/{id}/special-instructions | Appointments_UpdateSpecialInstructions
-*JobCancelReasonsApi* | [**jobCancelReasonsGetList**](docs/Api/JobCancelReasonsApi.md#jobcancelreasonsgetlist) | **GET** /tenant/{tenant}/job-cancel-reasons | Gets a list of job cancel reasons
-*JobHoldReasonsApi* | [**jobHoldReasonsGet**](docs/Api/JobHoldReasonsApi.md#jobholdreasonsget) | **GET** /tenant/{tenant}/job-hold-reasons | Gets a list of job hold reasons
-*JobTypesApi* | [**jobTypesCreate**](docs/Api/JobTypesApi.md#jobtypescreate) | **POST** /tenant/{tenant}/job-types | Creates a job type
-*JobTypesApi* | [**jobTypesGet**](docs/Api/JobTypesApi.md#jobtypesget) | **GET** /tenant/{tenant}/job-types/{id} | Gets a job type by ID
-*JobTypesApi* | [**jobTypesGetList**](docs/Api/JobTypesApi.md#jobtypesgetlist) | **GET** /tenant/{tenant}/job-types | Gets a list of job types
-*JobTypesApi* | [**jobTypesUpdate**](docs/Api/JobTypesApi.md#jobtypesupdate) | **PATCH** /tenant/{tenant}/job-types/{id} | Creates a job type
-*JobsApi* | [**jobsCancel**](docs/Api/JobsApi.md#jobscancel) | **PUT** /tenant/{tenant}/jobs/{id}/cancel | Cancels a job
-*JobsApi* | [**jobsComplete**](docs/Api/JobsApi.md#jobscomplete) | **PUT** /tenant/{tenant}/jobs/{id}/complete | Completes a job
-*JobsApi* | [**jobsCreate**](docs/Api/JobsApi.md#jobscreate) | **POST** /tenant/{tenant}/jobs | Creates a job
-*JobsApi* | [**jobsCreateNote**](docs/Api/JobsApi.md#jobscreatenote) | **POST** /tenant/{tenant}/jobs/{id}/notes | Creates a note on the specified job
-*JobsApi* | [**jobsGet**](docs/Api/JobsApi.md#jobsget) | **GET** /tenant/{tenant}/jobs/{id} | Gets a job by ID
-*JobsApi* | [**jobsGetCancelReasons**](docs/Api/JobsApi.md#jobsgetcancelreasons) | **GET** /tenant/{tenant}/jobs/cancel-reasons | Gets a list of cancel reasons for specific jobs
-*JobsApi* | [**jobsGetHistory**](docs/Api/JobsApi.md#jobsgethistory) | **GET** /tenant/{tenant}/jobs/{id}/history | Gets a list of history entries for the specified job
-*JobsApi* | [**jobsGetList**](docs/Api/JobsApi.md#jobsgetlist) | **GET** /tenant/{tenant}/jobs | Gets a list of jobs
-*JobsApi* | [**jobsGetNotes**](docs/Api/JobsApi.md#jobsgetnotes) | **GET** /tenant/{tenant}/jobs/{id}/notes | Gets a list of notes on the specified job
-*JobsApi* | [**jobsHold**](docs/Api/JobsApi.md#jobshold) | **PUT** /tenant/{tenant}/jobs/{id}/hold | Puts a job on hold
-*JobsApi* | [**jobsRemoveCancellation**](docs/Api/JobsApi.md#jobsremovecancellation) | **PUT** /tenant/{tenant}/jobs/{id}/remove-cancellation | Removes cancellation from a job
-*JobsApi* | [**jobsUpdate**](docs/Api/JobsApi.md#jobsupdate) | **PATCH** /tenant/{tenant}/jobs/{id} | Updates a job
-*ProjectsApi* | [**projectsGet**](docs/Api/ProjectsApi.md#projectsget) | **GET** /tenant/{tenant}/projects/{id} | Gets a project by ID
-*ProjectsApi* | [**projectsGetList**](docs/Api/ProjectsApi.md#projectsgetlist) | **GET** /tenant/{tenant}/projects | Gets a list of projects
+*AppointmentsApi* | [**appointmentsAdd**](docs/Api/AppointmentsApi.md#appointmentsadd) | **POST** /jpm/v2/tenant/{tenant}/appointments | Adds a new appointment to an existing job
+*AppointmentsApi* | [**appointmentsDelete**](docs/Api/AppointmentsApi.md#appointmentsdelete) | **DELETE** /jpm/v2/tenant/{tenant}/appointments/{id} | Deletes appointment with specified id.
+*AppointmentsApi* | [**appointmentsGet**](docs/Api/AppointmentsApi.md#appointmentsget) | **GET** /jpm/v2/tenant/{tenant}/appointments/{id} | Gets appointment specified by ID
+*AppointmentsApi* | [**appointmentsGetList**](docs/Api/AppointmentsApi.md#appointmentsgetlist) | **GET** /jpm/v2/tenant/{tenant}/appointments | Gets a list of appointments
+*AppointmentsApi* | [**appointmentsHold**](docs/Api/AppointmentsApi.md#appointmentshold) | **PUT** /jpm/v2/tenant/{tenant}/appointments/{id}/hold | Puts the appointment on hold
+*AppointmentsApi* | [**appointmentsRemoveHold**](docs/Api/AppointmentsApi.md#appointmentsremovehold) | **DELETE** /jpm/v2/tenant/{tenant}/appointments/{id}/hold | Removes hold from the appointment
+*AppointmentsApi* | [**appointmentsReschedule**](docs/Api/AppointmentsApi.md#appointmentsreschedule) | **PATCH** /jpm/v2/tenant/{tenant}/appointments/{id}/reschedule | Reschedule job appointment
+*AppointmentsApi* | [**appointmentsUpdateSpecialInstructions**](docs/Api/AppointmentsApi.md#appointmentsupdatespecialinstructions) | **PUT** /jpm/v2/tenant/{tenant}/appointments/{id}/special-instructions | Appointments_UpdateSpecialInstructions
+*JobCancelReasonsApi* | [**jobCancelReasonsGetList**](docs/Api/JobCancelReasonsApi.md#jobcancelreasonsgetlist) | **GET** /jpm/v2/tenant/{tenant}/job-cancel-reasons | Gets a list of job cancel reasons
+*JobHoldReasonsApi* | [**jobHoldReasonsGet**](docs/Api/JobHoldReasonsApi.md#jobholdreasonsget) | **GET** /jpm/v2/tenant/{tenant}/job-hold-reasons | Gets a list of job hold reasons
+*JobTypesApi* | [**jobTypesCreate**](docs/Api/JobTypesApi.md#jobtypescreate) | **POST** /jpm/v2/tenant/{tenant}/job-types | Creates a job type
+*JobTypesApi* | [**jobTypesGet**](docs/Api/JobTypesApi.md#jobtypesget) | **GET** /jpm/v2/tenant/{tenant}/job-types/{id} | Gets a job type by ID
+*JobTypesApi* | [**jobTypesGetList**](docs/Api/JobTypesApi.md#jobtypesgetlist) | **GET** /jpm/v2/tenant/{tenant}/job-types | Gets a list of job types
+*JobTypesApi* | [**jobTypesUpdate**](docs/Api/JobTypesApi.md#jobtypesupdate) | **PATCH** /jpm/v2/tenant/{tenant}/job-types/{id} | Creates a job type
+*JobsApi* | [**jobsCancel**](docs/Api/JobsApi.md#jobscancel) | **PUT** /jpm/v2/tenant/{tenant}/jobs/{id}/cancel | Cancels a job
+*JobsApi* | [**jobsComplete**](docs/Api/JobsApi.md#jobscomplete) | **PUT** /jpm/v2/tenant/{tenant}/jobs/{id}/complete | Completes a job
+*JobsApi* | [**jobsCreate**](docs/Api/JobsApi.md#jobscreate) | **POST** /jpm/v2/tenant/{tenant}/jobs | Creates a job
+*JobsApi* | [**jobsCreateNote**](docs/Api/JobsApi.md#jobscreatenote) | **POST** /jpm/v2/tenant/{tenant}/jobs/{id}/notes | Creates a note on the specified job
+*JobsApi* | [**jobsGet**](docs/Api/JobsApi.md#jobsget) | **GET** /jpm/v2/tenant/{tenant}/jobs/{id} | Gets a job by ID
+*JobsApi* | [**jobsGetCancelReasons**](docs/Api/JobsApi.md#jobsgetcancelreasons) | **GET** /jpm/v2/tenant/{tenant}/jobs/cancel-reasons | Gets a list of cancel reasons for specific jobs
+*JobsApi* | [**jobsGetHistory**](docs/Api/JobsApi.md#jobsgethistory) | **GET** /jpm/v2/tenant/{tenant}/jobs/{id}/history | Gets a list of history entries for the specified job
+*JobsApi* | [**jobsGetList**](docs/Api/JobsApi.md#jobsgetlist) | **GET** /jpm/v2/tenant/{tenant}/jobs | Gets a list of jobs
+*JobsApi* | [**jobsGetNotes**](docs/Api/JobsApi.md#jobsgetnotes) | **GET** /jpm/v2/tenant/{tenant}/jobs/{id}/notes | Gets a list of notes on the specified job
+*JobsApi* | [**jobsHold**](docs/Api/JobsApi.md#jobshold) | **PUT** /jpm/v2/tenant/{tenant}/jobs/{id}/hold | Puts a job on hold
+*JobsApi* | [**jobsRemoveCancellation**](docs/Api/JobsApi.md#jobsremovecancellation) | **PUT** /jpm/v2/tenant/{tenant}/jobs/{id}/remove-cancellation | Removes cancellation from a job
+*JobsApi* | [**jobsUpdate**](docs/Api/JobsApi.md#jobsupdate) | **PATCH** /jpm/v2/tenant/{tenant}/jobs/{id} | Updates a job
+*ProjectsApi* | [**projectsGet**](docs/Api/ProjectsApi.md#projectsget) | **GET** /jpm/v2/tenant/{tenant}/projects/{id} | Gets a project by ID
+*ProjectsApi* | [**projectsGetList**](docs/Api/ProjectsApi.md#projectsgetlist) | **GET** /jpm/v2/tenant/{tenant}/projects | Gets a list of projects
 
 ## Models
 

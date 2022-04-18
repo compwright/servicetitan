@@ -362,7 +362,7 @@ class TimesheetCodesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/timesheet-codes/{id}';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/timesheet-codes/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -686,7 +686,7 @@ class TimesheetCodesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/timesheet-codes';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/timesheet-codes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

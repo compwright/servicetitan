@@ -362,7 +362,7 @@ class LocationRecurringServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-services/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -726,7 +726,7 @@ class LocationRecurringServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-services';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-services';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1184,7 +1184,7 @@ class LocationRecurringServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-services/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

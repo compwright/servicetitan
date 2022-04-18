@@ -287,7 +287,7 @@ class BulkTagsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tags';
+        $resourcePath = '/crm/v2/tenant/{tenant}/tags';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -550,7 +550,7 @@ class BulkTagsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tags';
+        $resourcePath = '/crm/v2/tenant/{tenant}/tags';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -356,7 +356,7 @@ class PayrollAdjustmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payroll-adjustments';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/payroll-adjustments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -699,7 +699,7 @@ class PayrollAdjustmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payroll-adjustments/{id}';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/payroll-adjustments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1049,7 +1049,7 @@ class PayrollAdjustmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payroll-adjustments';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/payroll-adjustments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

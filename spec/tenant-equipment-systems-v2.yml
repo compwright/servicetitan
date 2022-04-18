@@ -3,9 +3,9 @@ info:
   title: Equipment Systems
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/equipmentsystems/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/installed-equipment':
+  '/equipmentsystems/v2/tenant/{tenant}/installed-equipment':
     get:
       tags:
         - InstalledEquipment
@@ -192,7 +192,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/installed-equipment/{id}':
+  '/equipmentsystems/v2/tenant/{tenant}/installed-equipment/{id}':
     get:
       tags:
         - InstalledEquipment

@@ -336,7 +336,7 @@ class PricebookBulkApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/pricebook';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/pricebook';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -591,7 +591,7 @@ class PricebookBulkApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/pricebook';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/pricebook';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

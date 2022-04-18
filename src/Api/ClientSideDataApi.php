@@ -331,7 +331,7 @@ class ClientSideDataApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/data';
+        $resourcePath = '/taskmanagement/v2/tenant/{tenant}/data';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

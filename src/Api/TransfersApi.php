@@ -431,7 +431,7 @@ class TransfersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/transfers';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/transfers';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -900,7 +900,7 @@ class TransfersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/transfers/custom-fields';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/transfers/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

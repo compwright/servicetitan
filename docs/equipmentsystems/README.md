@@ -81,14 +81,14 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/equipmentsystems/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*InstalledEquipmentApi* | [**installedEquipmentCreate**](docs/Api/InstalledEquipmentApi.md#installedequipmentcreate) | **POST** /tenant/{tenant}/installed-equipment | InstalledEquipment_Create
-*InstalledEquipmentApi* | [**installedEquipmentGet**](docs/Api/InstalledEquipmentApi.md#installedequipmentget) | **GET** /tenant/{tenant}/installed-equipment/{id} | InstalledEquipment_Get
-*InstalledEquipmentApi* | [**installedEquipmentGetList**](docs/Api/InstalledEquipmentApi.md#installedequipmentgetlist) | **GET** /tenant/{tenant}/installed-equipment | InstalledEquipment_GetList
-*InstalledEquipmentApi* | [**installedEquipmentUpdate**](docs/Api/InstalledEquipmentApi.md#installedequipmentupdate) | **PATCH** /tenant/{tenant}/installed-equipment/{id} | InstalledEquipment_Update
+*InstalledEquipmentApi* | [**installedEquipmentCreate**](docs/Api/InstalledEquipmentApi.md#installedequipmentcreate) | **POST** /equipmentsystems/v2/tenant/{tenant}/installed-equipment | InstalledEquipment_Create
+*InstalledEquipmentApi* | [**installedEquipmentGet**](docs/Api/InstalledEquipmentApi.md#installedequipmentget) | **GET** /equipmentsystems/v2/tenant/{tenant}/installed-equipment/{id} | InstalledEquipment_Get
+*InstalledEquipmentApi* | [**installedEquipmentGetList**](docs/Api/InstalledEquipmentApi.md#installedequipmentgetlist) | **GET** /equipmentsystems/v2/tenant/{tenant}/installed-equipment | InstalledEquipment_GetList
+*InstalledEquipmentApi* | [**installedEquipmentUpdate**](docs/Api/InstalledEquipmentApi.md#installedequipmentupdate) | **PATCH** /equipmentsystems/v2/tenant/{tenant}/installed-equipment/{id} | InstalledEquipment_Update
 
 ## Models
 

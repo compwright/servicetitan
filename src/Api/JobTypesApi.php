@@ -336,7 +336,7 @@ class JobTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-types';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -679,7 +679,7 @@ class JobTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-types/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-types/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1064,7 +1064,7 @@ class JobTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-types';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1524,7 +1524,7 @@ class JobTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-types/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-types/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

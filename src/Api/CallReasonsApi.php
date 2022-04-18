@@ -351,7 +351,7 @@ class CallReasonsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/call-reasons';
+        $resourcePath = '/jbce/v2/tenant/{tenant}/call-reasons';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

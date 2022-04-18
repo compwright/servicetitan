@@ -81,37 +81,37 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/pricebook/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CategoriesApi* | [**categoriesCreate**](docs/Api/CategoriesApi.md#categoriescreate) | **POST** /tenant/{tenant}/categories | Post to add a new category to your pricebook
-*CategoriesApi* | [**categoriesDelete**](docs/Api/CategoriesApi.md#categoriesdelete) | **DELETE** /tenant/{tenant}/categories/{id} | Deletes an existing category from your pricebook
-*CategoriesApi* | [**categoriesGet**](docs/Api/CategoriesApi.md#categoriesget) | **GET** /tenant/{tenant}/categories/{id} | Gets category details
-*CategoriesApi* | [**categoriesGetList**](docs/Api/CategoriesApi.md#categoriesgetlist) | **GET** /tenant/{tenant}/categories | GET the categories in your pricebook
-*CategoriesApi* | [**categoriesUpdate**](docs/Api/CategoriesApi.md#categoriesupdate) | **PATCH** /tenant/{tenant}/categories/{id} | Edits an existing category in your pricebook
-*DiscountAndFeesApi* | [**discountAndFeesCreate**](docs/Api/DiscountAndFeesApi.md#discountandfeescreate) | **POST** /tenant/{tenant}/discounts-and-fees | Post to add a new discount or fee to your pricebook
-*DiscountAndFeesApi* | [**discountAndFeesDelete**](docs/Api/DiscountAndFeesApi.md#discountandfeesdelete) | **DELETE** /tenant/{tenant}/discounts-and-fees/{id} | Deletes a discount or fee from your pricebook
-*DiscountAndFeesApi* | [**discountAndFeesGet**](docs/Api/DiscountAndFeesApi.md#discountandfeesget) | **GET** /tenant/{tenant}/discounts-and-fees/{id} | Get details if a discount or fees in the pricebook.
-*DiscountAndFeesApi* | [**discountAndFeesGetList**](docs/Api/DiscountAndFeesApi.md#discountandfeesgetlist) | **GET** /tenant/{tenant}/discounts-and-fees | Get data on all of the discounts or fees in the pricebook.
-*DiscountAndFeesApi* | [**discountAndFeesUpdate**](docs/Api/DiscountAndFeesApi.md#discountandfeesupdate) | **PATCH** /tenant/{tenant}/discounts-and-fees/{id} | Edit an existing item in your pricebook
-*EquipmentApi* | [**equipmentCreate**](docs/Api/EquipmentApi.md#equipmentcreate) | **POST** /tenant/{tenant}/equipment | Post to add a new equipment to your pricebook
-*EquipmentApi* | [**equipmentDelete**](docs/Api/EquipmentApi.md#equipmentdelete) | **DELETE** /tenant/{tenant}/equipment/{id} | Deletes an equipment from your pricebook
-*EquipmentApi* | [**equipmentGet**](docs/Api/EquipmentApi.md#equipmentget) | **GET** /tenant/{tenant}/equipment/{id} | Get details a equipment in the pricebook.
-*EquipmentApi* | [**equipmentGetList**](docs/Api/EquipmentApi.md#equipmentgetlist) | **GET** /tenant/{tenant}/equipment | Get data on all of the equipment in the pricebook.
-*EquipmentApi* | [**equipmentUpdate**](docs/Api/EquipmentApi.md#equipmentupdate) | **PATCH** /tenant/{tenant}/equipment/{id} | Edit an existing item in your pricebook
-*MaterialsApi* | [**materialsCreate**](docs/Api/MaterialsApi.md#materialscreate) | **POST** /tenant/{tenant}/materials | Add a new Materials to your pricebook
-*MaterialsApi* | [**materialsDelete**](docs/Api/MaterialsApi.md#materialsdelete) | **DELETE** /tenant/{tenant}/materials/{id} | Deletes a material from your pricebook
-*MaterialsApi* | [**materialsGet**](docs/Api/MaterialsApi.md#materialsget) | **GET** /tenant/{tenant}/materials/{id} | Get details on a material in the pricebook.
-*MaterialsApi* | [**materialsGetList**](docs/Api/MaterialsApi.md#materialsgetlist) | **GET** /tenant/{tenant}/materials | Get details on materials in the pricebook.
-*MaterialsApi* | [**materialsUpdate**](docs/Api/MaterialsApi.md#materialsupdate) | **PATCH** /tenant/{tenant}/materials/{id} | Edit an existing item in your pricebook
-*PricebookBulkApi* | [**pricebookBulkCreate**](docs/Api/PricebookBulkApi.md#pricebookbulkcreate) | **POST** /tenant/{tenant}/pricebook | PricebookBulk_Create
-*PricebookBulkApi* | [**pricebookBulkUpdate**](docs/Api/PricebookBulkApi.md#pricebookbulkupdate) | **PATCH** /tenant/{tenant}/pricebook | PricebookBulk_Update
-*ServicesApi* | [**servicesCreate**](docs/Api/ServicesApi.md#servicescreate) | **POST** /tenant/{tenant}/services | Post to add a new service to your pricebook
-*ServicesApi* | [**servicesDelete**](docs/Api/ServicesApi.md#servicesdelete) | **DELETE** /tenant/{tenant}/services/{id} | Deletes a service from your pricebook
-*ServicesApi* | [**servicesGet**](docs/Api/ServicesApi.md#servicesget) | **GET** /tenant/{tenant}/services/{id} | Get details a service in the pricebook.
-*ServicesApi* | [**servicesGetList**](docs/Api/ServicesApi.md#servicesgetlist) | **GET** /tenant/{tenant}/services | Get data on all of the services in the pricebook.
-*ServicesApi* | [**servicesUpdate**](docs/Api/ServicesApi.md#servicesupdate) | **PATCH** /tenant/{tenant}/services/{id} | Edit an existing item in your pricebook
+*CategoriesApi* | [**categoriesCreate**](docs/Api/CategoriesApi.md#categoriescreate) | **POST** /pricebook/v2/tenant/{tenant}/categories | Post to add a new category to your pricebook
+*CategoriesApi* | [**categoriesDelete**](docs/Api/CategoriesApi.md#categoriesdelete) | **DELETE** /pricebook/v2/tenant/{tenant}/categories/{id} | Deletes an existing category from your pricebook
+*CategoriesApi* | [**categoriesGet**](docs/Api/CategoriesApi.md#categoriesget) | **GET** /pricebook/v2/tenant/{tenant}/categories/{id} | Gets category details
+*CategoriesApi* | [**categoriesGetList**](docs/Api/CategoriesApi.md#categoriesgetlist) | **GET** /pricebook/v2/tenant/{tenant}/categories | GET the categories in your pricebook
+*CategoriesApi* | [**categoriesUpdate**](docs/Api/CategoriesApi.md#categoriesupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/categories/{id} | Edits an existing category in your pricebook
+*DiscountAndFeesApi* | [**discountAndFeesCreate**](docs/Api/DiscountAndFeesApi.md#discountandfeescreate) | **POST** /pricebook/v2/tenant/{tenant}/discounts-and-fees | Post to add a new discount or fee to your pricebook
+*DiscountAndFeesApi* | [**discountAndFeesDelete**](docs/Api/DiscountAndFeesApi.md#discountandfeesdelete) | **DELETE** /pricebook/v2/tenant/{tenant}/discounts-and-fees/{id} | Deletes a discount or fee from your pricebook
+*DiscountAndFeesApi* | [**discountAndFeesGet**](docs/Api/DiscountAndFeesApi.md#discountandfeesget) | **GET** /pricebook/v2/tenant/{tenant}/discounts-and-fees/{id} | Get details if a discount or fees in the pricebook.
+*DiscountAndFeesApi* | [**discountAndFeesGetList**](docs/Api/DiscountAndFeesApi.md#discountandfeesgetlist) | **GET** /pricebook/v2/tenant/{tenant}/discounts-and-fees | Get data on all of the discounts or fees in the pricebook.
+*DiscountAndFeesApi* | [**discountAndFeesUpdate**](docs/Api/DiscountAndFeesApi.md#discountandfeesupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/discounts-and-fees/{id} | Edit an existing item in your pricebook
+*EquipmentApi* | [**equipmentCreate**](docs/Api/EquipmentApi.md#equipmentcreate) | **POST** /pricebook/v2/tenant/{tenant}/equipment | Post to add a new equipment to your pricebook
+*EquipmentApi* | [**equipmentDelete**](docs/Api/EquipmentApi.md#equipmentdelete) | **DELETE** /pricebook/v2/tenant/{tenant}/equipment/{id} | Deletes an equipment from your pricebook
+*EquipmentApi* | [**equipmentGet**](docs/Api/EquipmentApi.md#equipmentget) | **GET** /pricebook/v2/tenant/{tenant}/equipment/{id} | Get details a equipment in the pricebook.
+*EquipmentApi* | [**equipmentGetList**](docs/Api/EquipmentApi.md#equipmentgetlist) | **GET** /pricebook/v2/tenant/{tenant}/equipment | Get data on all of the equipment in the pricebook.
+*EquipmentApi* | [**equipmentUpdate**](docs/Api/EquipmentApi.md#equipmentupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/equipment/{id} | Edit an existing item in your pricebook
+*MaterialsApi* | [**materialsCreate**](docs/Api/MaterialsApi.md#materialscreate) | **POST** /pricebook/v2/tenant/{tenant}/materials | Add a new Materials to your pricebook
+*MaterialsApi* | [**materialsDelete**](docs/Api/MaterialsApi.md#materialsdelete) | **DELETE** /pricebook/v2/tenant/{tenant}/materials/{id} | Deletes a material from your pricebook
+*MaterialsApi* | [**materialsGet**](docs/Api/MaterialsApi.md#materialsget) | **GET** /pricebook/v2/tenant/{tenant}/materials/{id} | Get details on a material in the pricebook.
+*MaterialsApi* | [**materialsGetList**](docs/Api/MaterialsApi.md#materialsgetlist) | **GET** /pricebook/v2/tenant/{tenant}/materials | Get details on materials in the pricebook.
+*MaterialsApi* | [**materialsUpdate**](docs/Api/MaterialsApi.md#materialsupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/materials/{id} | Edit an existing item in your pricebook
+*PricebookBulkApi* | [**pricebookBulkCreate**](docs/Api/PricebookBulkApi.md#pricebookbulkcreate) | **POST** /pricebook/v2/tenant/{tenant}/pricebook | PricebookBulk_Create
+*PricebookBulkApi* | [**pricebookBulkUpdate**](docs/Api/PricebookBulkApi.md#pricebookbulkupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/pricebook | PricebookBulk_Update
+*ServicesApi* | [**servicesCreate**](docs/Api/ServicesApi.md#servicescreate) | **POST** /pricebook/v2/tenant/{tenant}/services | Post to add a new service to your pricebook
+*ServicesApi* | [**servicesDelete**](docs/Api/ServicesApi.md#servicesdelete) | **DELETE** /pricebook/v2/tenant/{tenant}/services/{id} | Deletes a service from your pricebook
+*ServicesApi* | [**servicesGet**](docs/Api/ServicesApi.md#servicesget) | **GET** /pricebook/v2/tenant/{tenant}/services/{id} | Get details a service in the pricebook.
+*ServicesApi* | [**servicesGetList**](docs/Api/ServicesApi.md#servicesgetlist) | **GET** /pricebook/v2/tenant/{tenant}/services | Get data on all of the services in the pricebook.
+*ServicesApi* | [**servicesUpdate**](docs/Api/ServicesApi.md#servicesupdate) | **PATCH** /pricebook/v2/tenant/{tenant}/services/{id} | Edit an existing item in your pricebook
 
 ## Models
 

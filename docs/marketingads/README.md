@@ -80,11 +80,11 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/marketingads/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*WebBookingAttributionsApi* | [**webBookingAttributionsCreate**](docs/Api/WebBookingAttributionsApi.md#webbookingattributionscreate) | **POST** /tenant/{tenant}/web-booking-attributions | Attributes a web booking to a web session.
+*WebBookingAttributionsApi* | [**webBookingAttributionsCreate**](docs/Api/WebBookingAttributionsApi.md#webbookingattributionscreate) | **POST** /marketingads/v2/tenant/{tenant}/web-booking-attributions | Attributes a web booking to a web session.
 
 ## Models
 

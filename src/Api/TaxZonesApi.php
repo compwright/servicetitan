@@ -356,7 +356,7 @@ class TaxZonesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tax-zones';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/tax-zones';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

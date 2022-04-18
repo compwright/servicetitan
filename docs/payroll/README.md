@@ -81,26 +81,26 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/payroll/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ActivityCodesApi* | [**activityCodesGet**](docs/Api/ActivityCodesApi.md#activitycodesget) | **GET** /tenant/{tenant}/activity-codes/{id} | Gets payroll activity code specified by ID
-*ActivityCodesApi* | [**activityCodesGetList**](docs/Api/ActivityCodesApi.md#activitycodesgetlist) | **GET** /tenant/{tenant}/activity-codes | Gets a list of payroll activity codes
-*GrossPayItemsApi* | [**grossPayItemsCreate**](docs/Api/GrossPayItemsApi.md#grosspayitemscreate) | **POST** /tenant/{tenant}/gross-pay-items | Creates new gross pay item
-*GrossPayItemsApi* | [**grossPayItemsDelete**](docs/Api/GrossPayItemsApi.md#grosspayitemsdelete) | **DELETE** /tenant/{tenant}/gross-pay-items/{id} | Delete specified gross pay item
-*GrossPayItemsApi* | [**grossPayItemsGetList**](docs/Api/GrossPayItemsApi.md#grosspayitemsgetlist) | **GET** /tenant/{tenant}/gross-pay-items | Gets a list of gross pay items
-*GrossPayItemsApi* | [**grossPayItemsUpdate**](docs/Api/GrossPayItemsApi.md#grosspayitemsupdate) | **PUT** /tenant/{tenant}/gross-pay-items/{id} | Update specified gross pay item
-*JobSplitsApi* | [**jobSplitsGetList**](docs/Api/JobSplitsApi.md#jobsplitsgetlist) | **GET** /tenant/{tenant}/jobs/{job}/splits | Gets a list of job splits
-*PayrollAdjustmentsApi* | [**payrollAdjustmentsCreate**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentscreate) | **POST** /tenant/{tenant}/payroll-adjustments | Creates new payroll adjustment
-*PayrollAdjustmentsApi* | [**payrollAdjustmentsGet**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentsget) | **GET** /tenant/{tenant}/payroll-adjustments/{id} | Gets payroll adjustment specified by ID
-*PayrollAdjustmentsApi* | [**payrollAdjustmentsGetList**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentsgetlist) | **GET** /tenant/{tenant}/payroll-adjustments | Gets a list of payroll adjustments
-*PayrollsApi* | [**payrollsGetEmployeePayrolls**](docs/Api/PayrollsApi.md#payrollsgetemployeepayrolls) | **GET** /tenant/{tenant}/employees/{employee}/payrolls | Gets a list of employee payrolls
-*PayrollsApi* | [**payrollsGetList**](docs/Api/PayrollsApi.md#payrollsgetlist) | **GET** /tenant/{tenant}/payrolls | Gets a list of payrolls
-*PayrollsApi* | [**payrollsGetTechnicianPayrolls**](docs/Api/PayrollsApi.md#payrollsgettechnicianpayrolls) | **GET** /tenant/{tenant}/technicians/{technician}/payrolls | Gets a list of technician payrolls
-*TimesheetCodesApi* | [**timesheetCodesGet**](docs/Api/TimesheetCodesApi.md#timesheetcodesget) | **GET** /tenant/{tenant}/timesheet-codes/{id} | Gets timesheet code specified by ID
-*TimesheetCodesApi* | [**timesheetCodesGetList**](docs/Api/TimesheetCodesApi.md#timesheetcodesgetlist) | **GET** /tenant/{tenant}/timesheet-codes | Gets a list of timesheet codes
-*TimesheetsApi* | [**timesheetsGetJobTimesheets**](docs/Api/TimesheetsApi.md#timesheetsgetjobtimesheets) | **GET** /tenant/{tenant}/jobs/{job}/timesheets | Gets a list of job timesheets
+*ActivityCodesApi* | [**activityCodesGet**](docs/Api/ActivityCodesApi.md#activitycodesget) | **GET** /payroll/v2/tenant/{tenant}/activity-codes/{id} | Gets payroll activity code specified by ID
+*ActivityCodesApi* | [**activityCodesGetList**](docs/Api/ActivityCodesApi.md#activitycodesgetlist) | **GET** /payroll/v2/tenant/{tenant}/activity-codes | Gets a list of payroll activity codes
+*GrossPayItemsApi* | [**grossPayItemsCreate**](docs/Api/GrossPayItemsApi.md#grosspayitemscreate) | **POST** /payroll/v2/tenant/{tenant}/gross-pay-items | Creates new gross pay item
+*GrossPayItemsApi* | [**grossPayItemsDelete**](docs/Api/GrossPayItemsApi.md#grosspayitemsdelete) | **DELETE** /payroll/v2/tenant/{tenant}/gross-pay-items/{id} | Delete specified gross pay item
+*GrossPayItemsApi* | [**grossPayItemsGetList**](docs/Api/GrossPayItemsApi.md#grosspayitemsgetlist) | **GET** /payroll/v2/tenant/{tenant}/gross-pay-items | Gets a list of gross pay items
+*GrossPayItemsApi* | [**grossPayItemsUpdate**](docs/Api/GrossPayItemsApi.md#grosspayitemsupdate) | **PUT** /payroll/v2/tenant/{tenant}/gross-pay-items/{id} | Update specified gross pay item
+*JobSplitsApi* | [**jobSplitsGetList**](docs/Api/JobSplitsApi.md#jobsplitsgetlist) | **GET** /payroll/v2/tenant/{tenant}/jobs/{job}/splits | Gets a list of job splits
+*PayrollAdjustmentsApi* | [**payrollAdjustmentsCreate**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentscreate) | **POST** /payroll/v2/tenant/{tenant}/payroll-adjustments | Creates new payroll adjustment
+*PayrollAdjustmentsApi* | [**payrollAdjustmentsGet**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentsget) | **GET** /payroll/v2/tenant/{tenant}/payroll-adjustments/{id} | Gets payroll adjustment specified by ID
+*PayrollAdjustmentsApi* | [**payrollAdjustmentsGetList**](docs/Api/PayrollAdjustmentsApi.md#payrolladjustmentsgetlist) | **GET** /payroll/v2/tenant/{tenant}/payroll-adjustments | Gets a list of payroll adjustments
+*PayrollsApi* | [**payrollsGetEmployeePayrolls**](docs/Api/PayrollsApi.md#payrollsgetemployeepayrolls) | **GET** /payroll/v2/tenant/{tenant}/employees/{employee}/payrolls | Gets a list of employee payrolls
+*PayrollsApi* | [**payrollsGetList**](docs/Api/PayrollsApi.md#payrollsgetlist) | **GET** /payroll/v2/tenant/{tenant}/payrolls | Gets a list of payrolls
+*PayrollsApi* | [**payrollsGetTechnicianPayrolls**](docs/Api/PayrollsApi.md#payrollsgettechnicianpayrolls) | **GET** /payroll/v2/tenant/{tenant}/technicians/{technician}/payrolls | Gets a list of technician payrolls
+*TimesheetCodesApi* | [**timesheetCodesGet**](docs/Api/TimesheetCodesApi.md#timesheetcodesget) | **GET** /payroll/v2/tenant/{tenant}/timesheet-codes/{id} | Gets timesheet code specified by ID
+*TimesheetCodesApi* | [**timesheetCodesGetList**](docs/Api/TimesheetCodesApi.md#timesheetcodesgetlist) | **GET** /payroll/v2/tenant/{tenant}/timesheet-codes | Gets a list of timesheet codes
+*TimesheetsApi* | [**timesheetsGetJobTimesheets**](docs/Api/TimesheetsApi.md#timesheetsgetjobtimesheets) | **GET** /payroll/v2/tenant/{tenant}/jobs/{job}/timesheets | Gets a list of job timesheets
 
 ## Models
 

@@ -82,53 +82,53 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/crm/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BookingsApi* | [**bookingsCreate**](docs/Api/BookingsApi.md#bookingscreate) | **POST** /tenant/{tenant}/booking-provider/{booking_provider}/bookings | Creates a booking for a booking provider
-*BookingsApi* | [**bookingsCreateContact**](docs/Api/BookingsApi.md#bookingscreatecontact) | **POST** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts | Creates a contact on the specified booking for a booking provider
-*BookingsApi* | [**bookingsDeleteContact**](docs/Api/BookingsApi.md#bookingsdeletecontact) | **DELETE** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId} | Removes a contact from a booking for a booking provider
-*BookingsApi* | [**bookingsGet**](docs/Api/BookingsApi.md#bookingsget) | **GET** /tenant/{tenant}/bookings/{id} | Gets a booking by ID
-*BookingsApi* | [**bookingsGetContactList**](docs/Api/BookingsApi.md#bookingsgetcontactlist) | **GET** /tenant/{tenant}/bookings/{id}/contacts | Get a list of contacts for a booking
-*BookingsApi* | [**bookingsGetContactList2**](docs/Api/BookingsApi.md#bookingsgetcontactlist2) | **GET** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts | Get a list of contacts for a booking for a booking provider
-*BookingsApi* | [**bookingsGetForProvider**](docs/Api/BookingsApi.md#bookingsgetforprovider) | **GET** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id} | Gets a booking by ID for a booking provider
-*BookingsApi* | [**bookingsGetList**](docs/Api/BookingsApi.md#bookingsgetlist) | **GET** /tenant/{tenant}/bookings | Gets a list of bookings
-*BookingsApi* | [**bookingsGetList2**](docs/Api/BookingsApi.md#bookingsgetlist2) | **GET** /tenant/{tenant}/booking-provider/{booking_provider}/bookings | Gets a list of bookings for a booking provider
-*BookingsApi* | [**bookingsUpdate**](docs/Api/BookingsApi.md#bookingsupdate) | **PATCH** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id} | Updates a booking for a booking provider
-*BookingsApi* | [**bookingsUpdateBookingContact**](docs/Api/BookingsApi.md#bookingsupdatebookingcontact) | **PATCH** /tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId} | Updates a single booking contact for a booking provider
-*BulkTagsApi* | [**bulkTagsAddTags**](docs/Api/BulkTagsApi.md#bulktagsaddtags) | **PUT** /tenant/{tenant}/tags | Add multiple tags to more than 1 customer
-*BulkTagsApi* | [**bulkTagsRemoveTags**](docs/Api/BulkTagsApi.md#bulktagsremovetags) | **DELETE** /tenant/{tenant}/tags | Remove multiple tags to more than 1 customer
-*CustomersApi* | [**customersCreate**](docs/Api/CustomersApi.md#customerscreate) | **POST** /tenant/{tenant}/customers | Creates a New Customer
-*CustomersApi* | [**customersCreateContact**](docs/Api/CustomersApi.md#customerscreatecontact) | **POST** /tenant/{tenant}/customers/{id}/contacts | Creates a contact on the customer
-*CustomersApi* | [**customersCreateNote**](docs/Api/CustomersApi.md#customerscreatenote) | **POST** /tenant/{tenant}/customers/{id}/notes | Creates a New Note
-*CustomersApi* | [**customersDeleteContact**](docs/Api/CustomersApi.md#customersdeletecontact) | **DELETE** /tenant/{tenant}/customers/{id}/contacts/{contactId} | Removes a contact from a customer
-*CustomersApi* | [**customersGet**](docs/Api/CustomersApi.md#customersget) | **GET** /tenant/{tenant}/customers/{id} | Gets a Customer specified by ID
-*CustomersApi* | [**customersGetContactsList**](docs/Api/CustomersApi.md#customersgetcontactslist) | **GET** /tenant/{tenant}/customers/{id}/contacts | Gets a list of contacts for the specified customer
-*CustomersApi* | [**customersGetList**](docs/Api/CustomersApi.md#customersgetlist) | **GET** /tenant/{tenant}/customers | Gets a list of Customers
-*CustomersApi* | [**customersGetModifiedContactsList**](docs/Api/CustomersApi.md#customersgetmodifiedcontactslist) | **GET** /tenant/{tenant}/customers/contacts | Gets a list of contacts and customers for a specific modified-on date range. Either modifiedOn or modifiedOnOrAfter parameter must be specified
-*CustomersApi* | [**customersGetNotes**](docs/Api/CustomersApi.md#customersgetnotes) | **GET** /tenant/{tenant}/customers/{id}/notes | Gets a list of notes for a customer
-*CustomersApi* | [**customersUpdate**](docs/Api/CustomersApi.md#customersupdate) | **PATCH** /tenant/{tenant}/customers/{id} | Update a customer
-*CustomersApi* | [**customersUpdateContact**](docs/Api/CustomersApi.md#customersupdatecontact) | **PATCH** /tenant/{tenant}/customers/{id}/contacts/{contactId} | Updates a contact on the customer
-*LeadsApi* | [**leadsCreate**](docs/Api/LeadsApi.md#leadscreate) | **POST** /tenant/{tenant}/leads | Creates a lead
-*LeadsApi* | [**leadsCreateFollowUp**](docs/Api/LeadsApi.md#leadscreatefollowup) | **POST** /tenant/{tenant}/leads/{id}/follow-up | Leads_CreateFollowUp
-*LeadsApi* | [**leadsCreateNote**](docs/Api/LeadsApi.md#leadscreatenote) | **POST** /tenant/{tenant}/leads/{id}/notes | Creates a note on the specified lead
-*LeadsApi* | [**leadsDismiss**](docs/Api/LeadsApi.md#leadsdismiss) | **POST** /tenant/{tenant}/leads/{id}/dismiss | Dismisses a lead specified by ID
-*LeadsApi* | [**leadsGet**](docs/Api/LeadsApi.md#leadsget) | **GET** /tenant/{tenant}/leads/{id} | Gets a lead specified by ID
-*LeadsApi* | [**leadsGetList**](docs/Api/LeadsApi.md#leadsgetlist) | **GET** /tenant/{tenant}/leads | Gets a list of leads
-*LeadsApi* | [**leadsGetNotes**](docs/Api/LeadsApi.md#leadsgetnotes) | **GET** /tenant/{tenant}/leads/{id}/notes | Gets notes for a lead
-*LeadsApi* | [**leadsUpdate**](docs/Api/LeadsApi.md#leadsupdate) | **PATCH** /tenant/{tenant}/leads/{id} | Updates a lead
-*LocationsApi* | [**locationsCreate**](docs/Api/LocationsApi.md#locationscreate) | **POST** /tenant/{tenant}/locations | Creates a new location
-*LocationsApi* | [**locationsCreateContact**](docs/Api/LocationsApi.md#locationscreatecontact) | **POST** /tenant/{tenant}/locations/{id}/contacts | Creates a contact on the location
-*LocationsApi* | [**locationsCreateNote**](docs/Api/LocationsApi.md#locationscreatenote) | **POST** /tenant/{tenant}/locations/{id}/notes | Creates a note on the specified location
-*LocationsApi* | [**locationsDeleteContact**](docs/Api/LocationsApi.md#locationsdeletecontact) | **DELETE** /tenant/{tenant}/locations/{id}/contacts/{contactId} | Removes a contact from a location
-*LocationsApi* | [**locationsGet**](docs/Api/LocationsApi.md#locationsget) | **GET** /tenant/{tenant}/locations/{id} | Gets a location specified by ID
-*LocationsApi* | [**locationsGetContactsList**](docs/Api/LocationsApi.md#locationsgetcontactslist) | **GET** /tenant/{tenant}/locations/{id}/contacts | Gets a list of contacts for the specified location
-*LocationsApi* | [**locationsGetList**](docs/Api/LocationsApi.md#locationsgetlist) | **GET** /tenant/{tenant}/locations | Gets a list of locations
-*LocationsApi* | [**locationsGetLocationNotes**](docs/Api/LocationsApi.md#locationsgetlocationnotes) | **GET** /tenant/{tenant}/locations/{id}/notes | Gets a list of notes on the specified location
-*LocationsApi* | [**locationsGetLocationsContactsList**](docs/Api/LocationsApi.md#locationsgetlocationscontactslist) | **GET** /tenant/{tenant}/locations/contacts | Gets a list of contacts for locations. Either modifiedOn or modifiedOnOrAfter parameter must be specified
-*LocationsApi* | [**locationsUpdate**](docs/Api/LocationsApi.md#locationsupdate) | **PATCH** /tenant/{tenant}/locations/{id} | Updates a location
-*LocationsApi* | [**locationsUpdateContact**](docs/Api/LocationsApi.md#locationsupdatecontact) | **PATCH** /tenant/{tenant}/locations/{id}/contacts/{contactId} | Updates a contact on the location
+*BookingsApi* | [**bookingsCreate**](docs/Api/BookingsApi.md#bookingscreate) | **POST** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings | Creates a booking for a booking provider
+*BookingsApi* | [**bookingsCreateContact**](docs/Api/BookingsApi.md#bookingscreatecontact) | **POST** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts | Creates a contact on the specified booking for a booking provider
+*BookingsApi* | [**bookingsDeleteContact**](docs/Api/BookingsApi.md#bookingsdeletecontact) | **DELETE** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId} | Removes a contact from a booking for a booking provider
+*BookingsApi* | [**bookingsGet**](docs/Api/BookingsApi.md#bookingsget) | **GET** /crm/v2/tenant/{tenant}/bookings/{id} | Gets a booking by ID
+*BookingsApi* | [**bookingsGetContactList**](docs/Api/BookingsApi.md#bookingsgetcontactlist) | **GET** /crm/v2/tenant/{tenant}/bookings/{id}/contacts | Get a list of contacts for a booking
+*BookingsApi* | [**bookingsGetContactList2**](docs/Api/BookingsApi.md#bookingsgetcontactlist2) | **GET** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts | Get a list of contacts for a booking for a booking provider
+*BookingsApi* | [**bookingsGetForProvider**](docs/Api/BookingsApi.md#bookingsgetforprovider) | **GET** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id} | Gets a booking by ID for a booking provider
+*BookingsApi* | [**bookingsGetList**](docs/Api/BookingsApi.md#bookingsgetlist) | **GET** /crm/v2/tenant/{tenant}/bookings | Gets a list of bookings
+*BookingsApi* | [**bookingsGetList2**](docs/Api/BookingsApi.md#bookingsgetlist2) | **GET** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings | Gets a list of bookings for a booking provider
+*BookingsApi* | [**bookingsUpdate**](docs/Api/BookingsApi.md#bookingsupdate) | **PATCH** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id} | Updates a booking for a booking provider
+*BookingsApi* | [**bookingsUpdateBookingContact**](docs/Api/BookingsApi.md#bookingsupdatebookingcontact) | **PATCH** /crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId} | Updates a single booking contact for a booking provider
+*BulkTagsApi* | [**bulkTagsAddTags**](docs/Api/BulkTagsApi.md#bulktagsaddtags) | **PUT** /crm/v2/tenant/{tenant}/tags | Add multiple tags to more than 1 customer
+*BulkTagsApi* | [**bulkTagsRemoveTags**](docs/Api/BulkTagsApi.md#bulktagsremovetags) | **DELETE** /crm/v2/tenant/{tenant}/tags | Remove multiple tags to more than 1 customer
+*CustomersApi* | [**customersCreate**](docs/Api/CustomersApi.md#customerscreate) | **POST** /crm/v2/tenant/{tenant}/customers | Creates a New Customer
+*CustomersApi* | [**customersCreateContact**](docs/Api/CustomersApi.md#customerscreatecontact) | **POST** /crm/v2/tenant/{tenant}/customers/{id}/contacts | Creates a contact on the customer
+*CustomersApi* | [**customersCreateNote**](docs/Api/CustomersApi.md#customerscreatenote) | **POST** /crm/v2/tenant/{tenant}/customers/{id}/notes | Creates a New Note
+*CustomersApi* | [**customersDeleteContact**](docs/Api/CustomersApi.md#customersdeletecontact) | **DELETE** /crm/v2/tenant/{tenant}/customers/{id}/contacts/{contactId} | Removes a contact from a customer
+*CustomersApi* | [**customersGet**](docs/Api/CustomersApi.md#customersget) | **GET** /crm/v2/tenant/{tenant}/customers/{id} | Gets a Customer specified by ID
+*CustomersApi* | [**customersGetContactsList**](docs/Api/CustomersApi.md#customersgetcontactslist) | **GET** /crm/v2/tenant/{tenant}/customers/{id}/contacts | Gets a list of contacts for the specified customer
+*CustomersApi* | [**customersGetList**](docs/Api/CustomersApi.md#customersgetlist) | **GET** /crm/v2/tenant/{tenant}/customers | Gets a list of Customers
+*CustomersApi* | [**customersGetModifiedContactsList**](docs/Api/CustomersApi.md#customersgetmodifiedcontactslist) | **GET** /crm/v2/tenant/{tenant}/customers/contacts | Gets a list of contacts and customers for a specific modified-on date range. Either modifiedOn or modifiedOnOrAfter parameter must be specified
+*CustomersApi* | [**customersGetNotes**](docs/Api/CustomersApi.md#customersgetnotes) | **GET** /crm/v2/tenant/{tenant}/customers/{id}/notes | Gets a list of notes for a customer
+*CustomersApi* | [**customersUpdate**](docs/Api/CustomersApi.md#customersupdate) | **PATCH** /crm/v2/tenant/{tenant}/customers/{id} | Update a customer
+*CustomersApi* | [**customersUpdateContact**](docs/Api/CustomersApi.md#customersupdatecontact) | **PATCH** /crm/v2/tenant/{tenant}/customers/{id}/contacts/{contactId} | Updates a contact on the customer
+*LeadsApi* | [**leadsCreate**](docs/Api/LeadsApi.md#leadscreate) | **POST** /crm/v2/tenant/{tenant}/leads | Creates a lead
+*LeadsApi* | [**leadsCreateFollowUp**](docs/Api/LeadsApi.md#leadscreatefollowup) | **POST** /crm/v2/tenant/{tenant}/leads/{id}/follow-up | Leads_CreateFollowUp
+*LeadsApi* | [**leadsCreateNote**](docs/Api/LeadsApi.md#leadscreatenote) | **POST** /crm/v2/tenant/{tenant}/leads/{id}/notes | Creates a note on the specified lead
+*LeadsApi* | [**leadsDismiss**](docs/Api/LeadsApi.md#leadsdismiss) | **POST** /crm/v2/tenant/{tenant}/leads/{id}/dismiss | Dismisses a lead specified by ID
+*LeadsApi* | [**leadsGet**](docs/Api/LeadsApi.md#leadsget) | **GET** /crm/v2/tenant/{tenant}/leads/{id} | Gets a lead specified by ID
+*LeadsApi* | [**leadsGetList**](docs/Api/LeadsApi.md#leadsgetlist) | **GET** /crm/v2/tenant/{tenant}/leads | Gets a list of leads
+*LeadsApi* | [**leadsGetNotes**](docs/Api/LeadsApi.md#leadsgetnotes) | **GET** /crm/v2/tenant/{tenant}/leads/{id}/notes | Gets notes for a lead
+*LeadsApi* | [**leadsUpdate**](docs/Api/LeadsApi.md#leadsupdate) | **PATCH** /crm/v2/tenant/{tenant}/leads/{id} | Updates a lead
+*LocationsApi* | [**locationsCreate**](docs/Api/LocationsApi.md#locationscreate) | **POST** /crm/v2/tenant/{tenant}/locations | Creates a new location
+*LocationsApi* | [**locationsCreateContact**](docs/Api/LocationsApi.md#locationscreatecontact) | **POST** /crm/v2/tenant/{tenant}/locations/{id}/contacts | Creates a contact on the location
+*LocationsApi* | [**locationsCreateNote**](docs/Api/LocationsApi.md#locationscreatenote) | **POST** /crm/v2/tenant/{tenant}/locations/{id}/notes | Creates a note on the specified location
+*LocationsApi* | [**locationsDeleteContact**](docs/Api/LocationsApi.md#locationsdeletecontact) | **DELETE** /crm/v2/tenant/{tenant}/locations/{id}/contacts/{contactId} | Removes a contact from a location
+*LocationsApi* | [**locationsGet**](docs/Api/LocationsApi.md#locationsget) | **GET** /crm/v2/tenant/{tenant}/locations/{id} | Gets a location specified by ID
+*LocationsApi* | [**locationsGetContactsList**](docs/Api/LocationsApi.md#locationsgetcontactslist) | **GET** /crm/v2/tenant/{tenant}/locations/{id}/contacts | Gets a list of contacts for the specified location
+*LocationsApi* | [**locationsGetList**](docs/Api/LocationsApi.md#locationsgetlist) | **GET** /crm/v2/tenant/{tenant}/locations | Gets a list of locations
+*LocationsApi* | [**locationsGetLocationNotes**](docs/Api/LocationsApi.md#locationsgetlocationnotes) | **GET** /crm/v2/tenant/{tenant}/locations/{id}/notes | Gets a list of notes on the specified location
+*LocationsApi* | [**locationsGetLocationsContactsList**](docs/Api/LocationsApi.md#locationsgetlocationscontactslist) | **GET** /crm/v2/tenant/{tenant}/locations/contacts | Gets a list of contacts for locations. Either modifiedOn or modifiedOnOrAfter parameter must be specified
+*LocationsApi* | [**locationsUpdate**](docs/Api/LocationsApi.md#locationsupdate) | **PATCH** /crm/v2/tenant/{tenant}/locations/{id} | Updates a location
+*LocationsApi* | [**locationsUpdateContact**](docs/Api/LocationsApi.md#locationsupdatecontact) | **PATCH** /crm/v2/tenant/{tenant}/locations/{id}/contacts/{contactId} | Updates a contact on the location
 
 ## Models
 

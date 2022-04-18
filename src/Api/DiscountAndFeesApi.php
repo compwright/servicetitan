@@ -336,7 +336,7 @@ class DiscountAndFeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/discounts-and-fees';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/discounts-and-fees';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -605,7 +605,7 @@ class DiscountAndFeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/discounts-and-fees/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/discounts-and-fees/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -950,7 +950,7 @@ class DiscountAndFeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/discounts-and-fees/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/discounts-and-fees/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1325,7 +1325,7 @@ class DiscountAndFeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/discounts-and-fees';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/discounts-and-fees';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1783,7 +1783,7 @@ class DiscountAndFeesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/discounts-and-fees/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/discounts-and-fees/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

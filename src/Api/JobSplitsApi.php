@@ -362,7 +362,7 @@ class JobSplitsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{job}/splits';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/jobs/{job}/splits';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

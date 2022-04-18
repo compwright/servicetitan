@@ -441,7 +441,7 @@ class InventoryBillsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/inventory-bills';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/inventory-bills';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -932,7 +932,7 @@ class InventoryBillsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/inventory-bills/custom-fields';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/inventory-bills/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

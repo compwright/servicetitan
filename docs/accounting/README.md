@@ -102,28 +102,28 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/accounting/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*InventoryBillsApi* | [**inventoryBillsGetList**](docs/Api/InventoryBillsApi.md#inventorybillsgetlist) | **GET** /tenant/{tenant}/inventory-bills | InventoryBills_GetList
-*InventoryBillsApi* | [**inventoryBillsUpdateCustomFields**](docs/Api/InventoryBillsApi.md#inventorybillsupdatecustomfields) | **PATCH** /tenant/{tenant}/inventory-bills/custom-fields | InventoryBills_UpdateCustomFields
-*InvoicesApi* | [**invoicesCreateAdjustmentInvoice**](docs/Api/InvoicesApi.md#invoicescreateadjustmentinvoice) | **POST** /tenant/{tenant}/invoices | create adjustment invoice
-*InvoicesApi* | [**invoicesDeleteInvoiceItem**](docs/Api/InvoicesApi.md#invoicesdeleteinvoiceitem) | **DELETE** /tenant/{tenant}/invoices/{invoiceId}/items/{itemId} | delete invoice item
-*InvoicesApi* | [**invoicesGetList**](docs/Api/InvoicesApi.md#invoicesgetlist) | **GET** /tenant/{tenant}/invoices | Gets a list of invoices
-*InvoicesApi* | [**invoicesMarkAsExported**](docs/Api/InvoicesApi.md#invoicesmarkasexported) | **POST** /tenant/{tenant}/invoices/markasexported | mark invoice as exported. Id &#x3D; invoiceId
-*InvoicesApi* | [**invoicesUpdateCustomFields**](docs/Api/InvoicesApi.md#invoicesupdatecustomfields) | **PATCH** /tenant/{tenant}/invoices/custom-fields | Updates custom fields for specified invoices
-*InvoicesApi* | [**invoicesUpdateInvoice**](docs/Api/InvoicesApi.md#invoicesupdateinvoice) | **PATCH** /tenant/{tenant}/invoices/{id} | update invoice
-*InvoicesApi* | [**invoicesUpdateInvoiceItems**](docs/Api/InvoicesApi.md#invoicesupdateinvoiceitems) | **PATCH** /tenant/{tenant}/invoices/{invoiceId}/items | update invoice items
-*PaymentTermsApi* | [**paymentTermsGetPaymentTermModel**](docs/Api/PaymentTermsApi.md#paymenttermsgetpaymenttermmodel) | **GET** /tenant/{tenant}/payment-terms/{customerId} | Gets customer’s default Payment Term
-*PaymentTypesApi* | [**paymentTypesGet**](docs/Api/PaymentTypesApi.md#paymenttypesget) | **GET** /tenant/{tenant}/payment-types/{id} | Gets payment type specified by ID
-*PaymentTypesApi* | [**paymentTypesGetList**](docs/Api/PaymentTypesApi.md#paymenttypesgetlist) | **GET** /tenant/{tenant}/payment-types | Gets a list of payment types
-*PaymentsApi* | [**paymentsCreate**](docs/Api/PaymentsApi.md#paymentscreate) | **POST** /tenant/{tenant}/payments | Creates new payment
-*PaymentsApi* | [**paymentsGetList**](docs/Api/PaymentsApi.md#paymentsgetlist) | **GET** /tenant/{tenant}/payments | Gets a paginated list of payments
-*PaymentsApi* | [**paymentsUpdate**](docs/Api/PaymentsApi.md#paymentsupdate) | **PATCH** /tenant/{tenant}/payments/{id} | Updates specified payment in \&quot;patch\&quot; mode
-*PaymentsApi* | [**paymentsUpdateCustomFields**](docs/Api/PaymentsApi.md#paymentsupdatecustomfields) | **PATCH** /tenant/{tenant}/payments/custom-fields | Update custom fields for specified payments
-*PaymentsApi* | [**paymentsUpdateStatus**](docs/Api/PaymentsApi.md#paymentsupdatestatus) | **POST** /tenant/{tenant}/payments/status | Updates payment status
-*TaxZonesApi* | [**taxZonesGetList**](docs/Api/TaxZonesApi.md#taxzonesgetlist) | **GET** /tenant/{tenant}/tax-zones | Get a list of tax zones and their rates.
+*InventoryBillsApi* | [**inventoryBillsGetList**](docs/Api/InventoryBillsApi.md#inventorybillsgetlist) | **GET** /accounting/v2/tenant/{tenant}/inventory-bills | InventoryBills_GetList
+*InventoryBillsApi* | [**inventoryBillsUpdateCustomFields**](docs/Api/InventoryBillsApi.md#inventorybillsupdatecustomfields) | **PATCH** /accounting/v2/tenant/{tenant}/inventory-bills/custom-fields | InventoryBills_UpdateCustomFields
+*InvoicesApi* | [**invoicesCreateAdjustmentInvoice**](docs/Api/InvoicesApi.md#invoicescreateadjustmentinvoice) | **POST** /accounting/v2/tenant/{tenant}/invoices | create adjustment invoice
+*InvoicesApi* | [**invoicesDeleteInvoiceItem**](docs/Api/InvoicesApi.md#invoicesdeleteinvoiceitem) | **DELETE** /accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items/{itemId} | delete invoice item
+*InvoicesApi* | [**invoicesGetList**](docs/Api/InvoicesApi.md#invoicesgetlist) | **GET** /accounting/v2/tenant/{tenant}/invoices | Gets a list of invoices
+*InvoicesApi* | [**invoicesMarkAsExported**](docs/Api/InvoicesApi.md#invoicesmarkasexported) | **POST** /accounting/v2/tenant/{tenant}/invoices/markasexported | mark invoice as exported. Id &#x3D; invoiceId
+*InvoicesApi* | [**invoicesUpdateCustomFields**](docs/Api/InvoicesApi.md#invoicesupdatecustomfields) | **PATCH** /accounting/v2/tenant/{tenant}/invoices/custom-fields | Updates custom fields for specified invoices
+*InvoicesApi* | [**invoicesUpdateInvoice**](docs/Api/InvoicesApi.md#invoicesupdateinvoice) | **PATCH** /accounting/v2/tenant/{tenant}/invoices/{id} | update invoice
+*InvoicesApi* | [**invoicesUpdateInvoiceItems**](docs/Api/InvoicesApi.md#invoicesupdateinvoiceitems) | **PATCH** /accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items | update invoice items
+*PaymentTermsApi* | [**paymentTermsGetPaymentTermModel**](docs/Api/PaymentTermsApi.md#paymenttermsgetpaymenttermmodel) | **GET** /accounting/v2/tenant/{tenant}/payment-terms/{customerId} | Gets customer’s default Payment Term
+*PaymentTypesApi* | [**paymentTypesGet**](docs/Api/PaymentTypesApi.md#paymenttypesget) | **GET** /accounting/v2/tenant/{tenant}/payment-types/{id} | Gets payment type specified by ID
+*PaymentTypesApi* | [**paymentTypesGetList**](docs/Api/PaymentTypesApi.md#paymenttypesgetlist) | **GET** /accounting/v2/tenant/{tenant}/payment-types | Gets a list of payment types
+*PaymentsApi* | [**paymentsCreate**](docs/Api/PaymentsApi.md#paymentscreate) | **POST** /accounting/v2/tenant/{tenant}/payments | Creates new payment
+*PaymentsApi* | [**paymentsGetList**](docs/Api/PaymentsApi.md#paymentsgetlist) | **GET** /accounting/v2/tenant/{tenant}/payments | Gets a paginated list of payments
+*PaymentsApi* | [**paymentsUpdate**](docs/Api/PaymentsApi.md#paymentsupdate) | **PATCH** /accounting/v2/tenant/{tenant}/payments/{id} | Updates specified payment in \&quot;patch\&quot; mode
+*PaymentsApi* | [**paymentsUpdateCustomFields**](docs/Api/PaymentsApi.md#paymentsupdatecustomfields) | **PATCH** /accounting/v2/tenant/{tenant}/payments/custom-fields | Update custom fields for specified payments
+*PaymentsApi* | [**paymentsUpdateStatus**](docs/Api/PaymentsApi.md#paymentsupdatestatus) | **POST** /accounting/v2/tenant/{tenant}/payments/status | Updates payment status
+*TaxZonesApi* | [**taxZonesGetList**](docs/Api/TaxZonesApi.md#taxzonesgetlist) | **GET** /accounting/v2/tenant/{tenant}/tax-zones | Get a list of tax zones and their rates.
 
 ## Models
 

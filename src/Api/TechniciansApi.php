@@ -362,7 +362,7 @@ class TechniciansApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/technicians/{id}';
+        $resourcePath = '/settings/v2/tenant/{tenant}/technicians/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -721,7 +721,7 @@ class TechniciansApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/technicians';
+        $resourcePath = '/settings/v2/tenant/{tenant}/technicians';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

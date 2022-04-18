@@ -367,7 +367,7 @@ class BusinessUnitsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/business-units/{id}';
+        $resourcePath = '/settings/v2/tenant/{tenant}/business-units/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -742,7 +742,7 @@ class BusinessUnitsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/business-units';
+        $resourcePath = '/settings/v2/tenant/{tenant}/business-units';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1200,7 +1200,7 @@ class BusinessUnitsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/business-units/{id}';
+        $resourcePath = '/settings/v2/tenant/{tenant}/business-units/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

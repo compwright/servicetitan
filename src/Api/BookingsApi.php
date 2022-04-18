@@ -347,7 +347,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -709,7 +709,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1016,7 +1016,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1372,7 +1372,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/bookings/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/bookings/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1727,7 +1727,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/bookings/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/bookings/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2126,7 +2126,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2518,7 +2518,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2885,7 +2885,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/bookings';
+        $resourcePath = '/crm/v2/tenant/{tenant}/bookings';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3357,7 +3357,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3843,7 +3843,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4244,7 +4244,7 @@ class BookingsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

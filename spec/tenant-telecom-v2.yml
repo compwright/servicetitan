@@ -3,9 +3,9 @@ info:
   title: Telecom
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/telecom/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/calls/{id}':
+  '/telecom/v2/tenant/{tenant}/calls/{id}':
     get:
       tags:
         - Calls
@@ -314,7 +314,7 @@ paths:
                   id: 0
                   name: string
                   externalId: 0
-  '/tenant/{tenant}/calls':
+  '/telecom/v2/tenant/{tenant}/calls':
     get:
       tags:
         - Calls
@@ -559,7 +559,7 @@ paths:
                 pageSize: 0
                 totalCount: 0
                 hasMore: true
-  '/tenant/{tenant}/calls/{id}/recording':
+  '/telecom/v2/tenant/{tenant}/calls/{id}/recording':
     get:
       tags:
         - Calls
@@ -590,7 +590,7 @@ paths:
               examples:
                 default:
                   value: 
-  '/tenant/{tenant}/calls/{id}/voicemail':
+  '/telecom/v2/tenant/{tenant}/calls/{id}/voicemail':
     get:
       tags:
         - Calls

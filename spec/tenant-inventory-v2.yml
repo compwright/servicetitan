@@ -3,9 +3,9 @@ info:
   title: Inventory
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/inventory/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/adjustments':
+  '/inventory/v2/tenant/{tenant}/adjustments':
     get:
       tags:
         - Adjustments
@@ -198,7 +198,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/adjustments/custom-fields':
+  '/inventory/v2/tenant/{tenant}/adjustments/custom-fields':
     patch:
       tags:
         - Adjustments
@@ -239,7 +239,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/purchase-orders':
+  '/inventory/v2/tenant/{tenant}/purchase-orders':
     post:
       tags:
         - PurchaseOrders
@@ -512,7 +512,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/purchase-orders/{id}':
+  '/inventory/v2/tenant/{tenant}/purchase-orders/{id}':
     get:
       tags:
         - PurchaseOrders
@@ -709,7 +709,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/purchase-order-types':
+  '/inventory/v2/tenant/{tenant}/purchase-order-types':
     get:
       tags:
         - PurchaseOrderTypes
@@ -779,7 +779,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/receipts':
+  '/inventory/v2/tenant/{tenant}/receipts':
     get:
       tags:
         - Receipts
@@ -1015,7 +1015,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/receipts/custom-fields':
+  '/inventory/v2/tenant/{tenant}/receipts/custom-fields':
     patch:
       tags:
         - Receipts
@@ -1056,7 +1056,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/returns':
+  '/inventory/v2/tenant/{tenant}/returns':
     get:
       tags:
         - Returns
@@ -1284,7 +1284,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/returns/custom-fields':
+  '/inventory/v2/tenant/{tenant}/returns/custom-fields':
     patch:
       tags:
         - Returns
@@ -1325,7 +1325,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/transfers':
+  '/inventory/v2/tenant/{tenant}/transfers':
     get:
       tags:
         - Transfers
@@ -1517,7 +1517,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/transfers/custom-fields':
+  '/inventory/v2/tenant/{tenant}/transfers/custom-fields':
     patch:
       tags:
         - Transfers
@@ -1558,7 +1558,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/trucks':
+  '/inventory/v2/tenant/{tenant}/trucks':
     get:
       tags:
         - Trucks
@@ -1625,7 +1625,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/vendors':
+  '/inventory/v2/tenant/{tenant}/vendors':
     post:
       tags:
         - Vendors
@@ -1826,7 +1826,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/vendors/{id}':
+  '/inventory/v2/tenant/{tenant}/vendors/{id}':
     get:
       tags:
         - Vendors
@@ -2009,7 +2009,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/warehouses':
+  '/inventory/v2/tenant/{tenant}/warehouses':
     get:
       tags:
         - Warehouses

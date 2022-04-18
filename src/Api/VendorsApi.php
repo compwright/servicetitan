@@ -336,7 +336,7 @@ class VendorsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/vendors';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/vendors';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -679,7 +679,7 @@ class VendorsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/vendors/{id}';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/vendors/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1044,7 +1044,7 @@ class VendorsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/vendors';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/vendors';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1480,7 +1480,7 @@ class VendorsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/vendors/{id}';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/vendors/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -336,7 +336,7 @@ class InstalledEquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/installed-equipment';
+        $resourcePath = '/equipmentsystems/v2/tenant/{tenant}/installed-equipment';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -674,7 +674,7 @@ class InstalledEquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/installed-equipment/{id}';
+        $resourcePath = '/equipmentsystems/v2/tenant/{tenant}/installed-equipment/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1033,7 +1033,7 @@ class InstalledEquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/installed-equipment';
+        $resourcePath = '/equipmentsystems/v2/tenant/{tenant}/installed-equipment';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1480,7 +1480,7 @@ class InstalledEquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/installed-equipment/{id}';
+        $resourcePath = '/equipmentsystems/v2/tenant/{tenant}/installed-equipment/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

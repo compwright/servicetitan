@@ -336,7 +336,7 @@ class PurchaseOrdersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/purchase-orders';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/purchase-orders';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -674,7 +674,7 @@ class PurchaseOrdersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/purchase-orders/{id}';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/purchase-orders/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1068,7 +1068,7 @@ class PurchaseOrdersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/purchase-orders';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/purchase-orders';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1592,7 +1592,7 @@ class PurchaseOrdersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/purchase-orders/{id}';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/purchase-orders/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

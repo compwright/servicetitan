@@ -3,9 +3,9 @@ info:
   title: Settings
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/settings/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/business-units':
+  '/settings/v2/tenant/{tenant}/business-units':
     get:
       tags:
         - BusinessUnits
@@ -152,7 +152,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/business-units/{id}':
+  '/settings/v2/tenant/{tenant}/business-units/{id}':
     get:
       tags:
         - BusinessUnits
@@ -318,7 +318,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/employees':
+  '/settings/v2/tenant/{tenant}/employees':
     get:
       tags:
         - Employees
@@ -435,7 +435,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/employees/{id}':
+  '/settings/v2/tenant/{tenant}/employees/{id}':
     get:
       tags:
         - Employees
@@ -504,7 +504,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/technicians':
+  '/settings/v2/tenant/{tenant}/technicians':
     get:
       tags:
         - Technicians
@@ -632,7 +632,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/technicians/{id}':
+  '/settings/v2/tenant/{tenant}/technicians/{id}':
     get:
       tags:
         - Technicians
@@ -712,7 +712,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/tag-types':
+  '/settings/v2/tenant/{tenant}/tag-types':
     get:
       tags:
         - TagTypes

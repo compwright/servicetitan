@@ -336,7 +336,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -699,7 +699,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1050,7 +1050,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1346,7 +1346,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1694,7 +1694,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2069,7 +2069,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2511,7 +2511,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3077,7 +3077,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3479,7 +3479,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3857,7 +3857,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4239,7 +4239,7 @@ class CustomersApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/customers/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/customers/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

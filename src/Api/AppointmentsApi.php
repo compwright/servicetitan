@@ -356,7 +356,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -633,7 +633,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -973,7 +973,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1362,7 +1362,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1814,7 +1814,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}/hold';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}/hold';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2099,7 +2099,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}/hold';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}/hold';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2464,7 +2464,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}/reschedule';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}/reschedule';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2835,7 +2835,7 @@ class AppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/appointments/{id}/special-instructions';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/appointments/{id}/special-instructions';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -96,15 +96,15 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/telecom/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CallsApi* | [**callsGetCalls**](docs/Api/CallsApi.md#callsgetcalls) | **GET** /tenant/{tenant}/calls | Calls_GetCalls
-*CallsApi* | [**callsGetDetails**](docs/Api/CallsApi.md#callsgetdetails) | **GET** /tenant/{tenant}/calls/{id} | Calls_GetDetails
-*CallsApi* | [**callsGetRecording**](docs/Api/CallsApi.md#callsgetrecording) | **GET** /tenant/{tenant}/calls/{id}/recording | Calls_GetRecording
-*CallsApi* | [**callsGetVoiceMail**](docs/Api/CallsApi.md#callsgetvoicemail) | **GET** /tenant/{tenant}/calls/{id}/voicemail | Calls_GetVoiceMail
-*CallsApi* | [**callsUpdate**](docs/Api/CallsApi.md#callsupdate) | **PUT** /tenant/{tenant}/calls/{id} | Calls_Update
+*CallsApi* | [**callsGetCalls**](docs/Api/CallsApi.md#callsgetcalls) | **GET** /telecom/v2/tenant/{tenant}/calls | Calls_GetCalls
+*CallsApi* | [**callsGetDetails**](docs/Api/CallsApi.md#callsgetdetails) | **GET** /telecom/v2/tenant/{tenant}/calls/{id} | Calls_GetDetails
+*CallsApi* | [**callsGetRecording**](docs/Api/CallsApi.md#callsgetrecording) | **GET** /telecom/v2/tenant/{tenant}/calls/{id}/recording | Calls_GetRecording
+*CallsApi* | [**callsGetVoiceMail**](docs/Api/CallsApi.md#callsgetvoicemail) | **GET** /telecom/v2/tenant/{tenant}/calls/{id}/voicemail | Calls_GetVoiceMail
+*CallsApi* | [**callsUpdate**](docs/Api/CallsApi.md#callsupdate) | **PUT** /telecom/v2/tenant/{tenant}/calls/{id} | Calls_Update
 
 ## Models
 

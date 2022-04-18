@@ -81,31 +81,31 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/memberships/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CustomerMembershipsApi* | [**customerMembershipsCreate**](docs/Api/CustomerMembershipsApi.md#customermembershipscreate) | **POST** /tenant/{tenant}/memberships/sale | Creates membership sale invoice
-*CustomerMembershipsApi* | [**customerMembershipsGet**](docs/Api/CustomerMembershipsApi.md#customermembershipsget) | **GET** /tenant/{tenant}/memberships/{id} | Gets customer membership specified by ID
-*CustomerMembershipsApi* | [**customerMembershipsGetList**](docs/Api/CustomerMembershipsApi.md#customermembershipsgetlist) | **GET** /tenant/{tenant}/memberships | Gets a list of customer memberships
-*CustomerMembershipsApi* | [**customerMembershipsUpdate**](docs/Api/CustomerMembershipsApi.md#customermembershipsupdate) | **PATCH** /tenant/{tenant}/memberships/{id} | Updates specified customer membership in \&quot;patch\&quot; mode
-*InvoiceTemplatesApi* | [**invoiceTemplatesCreate**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatescreate) | **POST** /tenant/{tenant}/invoice-templates | Creates new invoice template
-*InvoiceTemplatesApi* | [**invoiceTemplatesGet**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesget) | **GET** /tenant/{tenant}/invoice-templates/{id} | Gets invoice template specified by ID
-*InvoiceTemplatesApi* | [**invoiceTemplatesGetList**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesgetlist) | **GET** /tenant/{tenant}/invoice-templates | Gets a list of invoice templates by given IDs
-*InvoiceTemplatesApi* | [**invoiceTemplatesUpdate**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesupdate) | **PATCH** /tenant/{tenant}/invoice-templates/{id} | Updates specified invoice template in \&quot;patch\&quot; mode
-*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsGetList**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsgetlist) | **GET** /tenant/{tenant}/recurring-service-events | Gets a list of recurring service events
-*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsMarkComplete**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsmarkcomplete) | **POST** /tenant/{tenant}/recurring-service-events/{id}/mark-complete | Marks the specified recurring service event as complete
-*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsMarkIncomplete**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsmarkincomplete) | **POST** /tenant/{tenant}/recurring-service-events/{id}/mark-incomplete | Marks the specified recurring service event as incomplete
-*LocationRecurringServicesApi* | [**locationRecurringServicesGet**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesget) | **GET** /tenant/{tenant}/recurring-services/{id} | Gets recurring service specified by ID
-*LocationRecurringServicesApi* | [**locationRecurringServicesGetList**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesgetlist) | **GET** /tenant/{tenant}/recurring-services | Gets a list of recurring services
-*LocationRecurringServicesApi* | [**locationRecurringServicesUpdate**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesupdate) | **PATCH** /tenant/{tenant}/recurring-services/{id} | Updates specified recurring service in \&quot;patch\&quot; mode
-*MembershipTypesApi* | [**membershipTypesGet**](docs/Api/MembershipTypesApi.md#membershiptypesget) | **GET** /tenant/{tenant}/membership-types/{id} | Gets membership type specified by ID
-*MembershipTypesApi* | [**membershipTypesGetDiscountsList**](docs/Api/MembershipTypesApi.md#membershiptypesgetdiscountslist) | **GET** /tenant/{tenant}/membership-types/{id}/discounts | Gets discounts for the given membership type
-*MembershipTypesApi* | [**membershipTypesGetDurationBillingList**](docs/Api/MembershipTypesApi.md#membershiptypesgetdurationbillinglist) | **GET** /tenant/{tenant}/membership-types/{id}/duration-billing-items | Gets duration/billing options for the given membership type
-*MembershipTypesApi* | [**membershipTypesGetList**](docs/Api/MembershipTypesApi.md#membershiptypesgetlist) | **GET** /tenant/{tenant}/membership-types | Gets a list of membership types
-*MembershipTypesApi* | [**membershipTypesGetRecurringServiceItems**](docs/Api/MembershipTypesApi.md#membershiptypesgetrecurringserviceitems) | **GET** /tenant/{tenant}/membership-types/{id}/recurring-service-items | Gets recurring services for the given membership type
-*RecurringServiceTypesApi* | [**recurringServiceTypesGet**](docs/Api/RecurringServiceTypesApi.md#recurringservicetypesget) | **GET** /tenant/{tenant}/recurring-service-types/{id} | Gets recurring service type specified by ID
-*RecurringServiceTypesApi* | [**recurringServiceTypesGetList**](docs/Api/RecurringServiceTypesApi.md#recurringservicetypesgetlist) | **GET** /tenant/{tenant}/recurring-service-types | Gets a list of recurring service types
+*CustomerMembershipsApi* | [**customerMembershipsCreate**](docs/Api/CustomerMembershipsApi.md#customermembershipscreate) | **POST** /memberships/v2/tenant/{tenant}/memberships/sale | Creates membership sale invoice
+*CustomerMembershipsApi* | [**customerMembershipsGet**](docs/Api/CustomerMembershipsApi.md#customermembershipsget) | **GET** /memberships/v2/tenant/{tenant}/memberships/{id} | Gets customer membership specified by ID
+*CustomerMembershipsApi* | [**customerMembershipsGetList**](docs/Api/CustomerMembershipsApi.md#customermembershipsgetlist) | **GET** /memberships/v2/tenant/{tenant}/memberships | Gets a list of customer memberships
+*CustomerMembershipsApi* | [**customerMembershipsUpdate**](docs/Api/CustomerMembershipsApi.md#customermembershipsupdate) | **PATCH** /memberships/v2/tenant/{tenant}/memberships/{id} | Updates specified customer membership in \&quot;patch\&quot; mode
+*InvoiceTemplatesApi* | [**invoiceTemplatesCreate**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatescreate) | **POST** /memberships/v2/tenant/{tenant}/invoice-templates | Creates new invoice template
+*InvoiceTemplatesApi* | [**invoiceTemplatesGet**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesget) | **GET** /memberships/v2/tenant/{tenant}/invoice-templates/{id} | Gets invoice template specified by ID
+*InvoiceTemplatesApi* | [**invoiceTemplatesGetList**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesgetlist) | **GET** /memberships/v2/tenant/{tenant}/invoice-templates | Gets a list of invoice templates by given IDs
+*InvoiceTemplatesApi* | [**invoiceTemplatesUpdate**](docs/Api/InvoiceTemplatesApi.md#invoicetemplatesupdate) | **PATCH** /memberships/v2/tenant/{tenant}/invoice-templates/{id} | Updates specified invoice template in \&quot;patch\&quot; mode
+*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsGetList**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsgetlist) | **GET** /memberships/v2/tenant/{tenant}/recurring-service-events | Gets a list of recurring service events
+*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsMarkComplete**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsmarkcomplete) | **POST** /memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-complete | Marks the specified recurring service event as complete
+*LocationRecurringServiceEventsApi* | [**locationRecurringServiceEventsMarkIncomplete**](docs/Api/LocationRecurringServiceEventsApi.md#locationrecurringserviceeventsmarkincomplete) | **POST** /memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete | Marks the specified recurring service event as incomplete
+*LocationRecurringServicesApi* | [**locationRecurringServicesGet**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesget) | **GET** /memberships/v2/tenant/{tenant}/recurring-services/{id} | Gets recurring service specified by ID
+*LocationRecurringServicesApi* | [**locationRecurringServicesGetList**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesgetlist) | **GET** /memberships/v2/tenant/{tenant}/recurring-services | Gets a list of recurring services
+*LocationRecurringServicesApi* | [**locationRecurringServicesUpdate**](docs/Api/LocationRecurringServicesApi.md#locationrecurringservicesupdate) | **PATCH** /memberships/v2/tenant/{tenant}/recurring-services/{id} | Updates specified recurring service in \&quot;patch\&quot; mode
+*MembershipTypesApi* | [**membershipTypesGet**](docs/Api/MembershipTypesApi.md#membershiptypesget) | **GET** /memberships/v2/tenant/{tenant}/membership-types/{id} | Gets membership type specified by ID
+*MembershipTypesApi* | [**membershipTypesGetDiscountsList**](docs/Api/MembershipTypesApi.md#membershiptypesgetdiscountslist) | **GET** /memberships/v2/tenant/{tenant}/membership-types/{id}/discounts | Gets discounts for the given membership type
+*MembershipTypesApi* | [**membershipTypesGetDurationBillingList**](docs/Api/MembershipTypesApi.md#membershiptypesgetdurationbillinglist) | **GET** /memberships/v2/tenant/{tenant}/membership-types/{id}/duration-billing-items | Gets duration/billing options for the given membership type
+*MembershipTypesApi* | [**membershipTypesGetList**](docs/Api/MembershipTypesApi.md#membershiptypesgetlist) | **GET** /memberships/v2/tenant/{tenant}/membership-types | Gets a list of membership types
+*MembershipTypesApi* | [**membershipTypesGetRecurringServiceItems**](docs/Api/MembershipTypesApi.md#membershiptypesgetrecurringserviceitems) | **GET** /memberships/v2/tenant/{tenant}/membership-types/{id}/recurring-service-items | Gets recurring services for the given membership type
+*RecurringServiceTypesApi* | [**recurringServiceTypesGet**](docs/Api/RecurringServiceTypesApi.md#recurringservicetypesget) | **GET** /memberships/v2/tenant/{tenant}/recurring-service-types/{id} | Gets recurring service type specified by ID
+*RecurringServiceTypesApi* | [**recurringServiceTypesGetList**](docs/Api/RecurringServiceTypesApi.md#recurringservicetypesgetlist) | **GET** /memberships/v2/tenant/{tenant}/recurring-service-types | Gets a list of recurring service types
 
 ## Models
 

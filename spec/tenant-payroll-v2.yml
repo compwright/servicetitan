@@ -3,9 +3,9 @@ info:
   title: Payroll
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/payroll/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/gross-pay-items':
+  '/payroll/v2/tenant/{tenant}/gross-pay-items':
     post:
       tags:
         - GrossPayItems
@@ -195,7 +195,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/gross-pay-items/{id}':
+  '/payroll/v2/tenant/{tenant}/gross-pay-items/{id}':
     put:
       tags:
         - GrossPayItems
@@ -299,7 +299,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{job}/splits':
+  '/payroll/v2/tenant/{tenant}/jobs/{job}/splits':
     get:
       tags:
         - JobSplits
@@ -359,7 +359,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/activity-codes':
+  '/payroll/v2/tenant/{tenant}/activity-codes':
     get:
       tags:
         - ActivityCodes
@@ -423,7 +423,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/activity-codes/{id}':
+  '/payroll/v2/tenant/{tenant}/activity-codes/{id}':
     get:
       tags:
         - ActivityCodes
@@ -482,7 +482,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payroll-adjustments':
+  '/payroll/v2/tenant/{tenant}/payroll-adjustments':
     post:
       tags:
         - PayrollAdjustments
@@ -633,7 +633,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payroll-adjustments/{id}':
+  '/payroll/v2/tenant/{tenant}/payroll-adjustments/{id}':
     get:
       tags:
         - PayrollAdjustments
@@ -702,7 +702,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/payrolls':
+  '/payroll/v2/tenant/{tenant}/payrolls':
     get:
       tags:
         - Payrolls
@@ -803,7 +803,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/technicians/{technician}/payrolls':
+  '/payroll/v2/tenant/{tenant}/technicians/{technician}/payrolls':
     get:
       tags:
         - Payrolls
@@ -903,7 +903,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/employees/{employee}/payrolls':
+  '/payroll/v2/tenant/{tenant}/employees/{employee}/payrolls':
     get:
       tags:
         - Payrolls
@@ -1003,7 +1003,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/timesheet-codes':
+  '/payroll/v2/tenant/{tenant}/timesheet-codes':
     get:
       tags:
         - TimesheetCodes
@@ -1072,7 +1072,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/timesheet-codes/{id}':
+  '/payroll/v2/tenant/{tenant}/timesheet-codes/{id}':
     get:
       tags:
         - TimesheetCodes
@@ -1136,7 +1136,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{job}/timesheets':
+  '/payroll/v2/tenant/{tenant}/jobs/{job}/timesheets':
     get:
       tags:
         - Timesheets

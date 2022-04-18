@@ -3,9 +3,9 @@ info:
   title: Memberships
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/memberships/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/memberships':
+  '/memberships/v2/tenant/{tenant}/memberships':
     get:
       tags:
         - CustomerMemberships
@@ -170,7 +170,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/memberships/{id}':
+  '/memberships/v2/tenant/{tenant}/memberships/{id}':
     get:
       tags:
         - CustomerMemberships
@@ -340,7 +340,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/memberships/sale':
+  '/memberships/v2/tenant/{tenant}/memberships/sale':
     post:
       tags:
         - CustomerMemberships
@@ -390,7 +390,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoice-templates':
+  '/memberships/v2/tenant/{tenant}/invoice-templates':
     get:
       tags:
         - InvoiceTemplates
@@ -507,7 +507,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/invoice-templates/{id}':
+  '/memberships/v2/tenant/{tenant}/invoice-templates/{id}':
     get:
       tags:
         - InvoiceTemplates
@@ -657,7 +657,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-service-events':
+  '/memberships/v2/tenant/{tenant}/recurring-service-events':
     get:
       tags:
         - LocationRecurringServiceEvents
@@ -767,7 +767,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-service-events/{id}/mark-complete':
+  '/memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-complete':
     post:
       tags:
         - LocationRecurringServiceEvents
@@ -831,7 +831,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete':
+  '/memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete':
     post:
       tags:
         - LocationRecurringServiceEvents
@@ -895,7 +895,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-services':
+  '/memberships/v2/tenant/{tenant}/recurring-services':
     get:
       tags:
         - LocationRecurringServices
@@ -1043,7 +1043,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-services/{id}':
+  '/memberships/v2/tenant/{tenant}/recurring-services/{id}':
     get:
       tags:
         - LocationRecurringServices
@@ -1221,7 +1221,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/membership-types':
+  '/memberships/v2/tenant/{tenant}/membership-types':
     get:
       tags:
         - MembershipTypes
@@ -1351,7 +1351,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/membership-types/{id}':
+  '/memberships/v2/tenant/{tenant}/membership-types/{id}':
     get:
       tags:
         - MembershipTypes
@@ -1420,7 +1420,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/membership-types/{id}/recurring-service-items':
+  '/memberships/v2/tenant/{tenant}/membership-types/{id}/recurring-service-items':
     get:
       tags:
         - MembershipTypes
@@ -1486,7 +1486,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/membership-types/{id}/discounts':
+  '/memberships/v2/tenant/{tenant}/membership-types/{id}/discounts':
     get:
       tags:
         - MembershipTypes
@@ -1548,7 +1548,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/membership-types/{id}/duration-billing-items':
+  '/memberships/v2/tenant/{tenant}/membership-types/{id}/duration-billing-items':
     get:
       tags:
         - MembershipTypes
@@ -1623,7 +1623,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-service-types':
+  '/memberships/v2/tenant/{tenant}/recurring-service-types':
     get:
       tags:
         - RecurringServiceTypes
@@ -1738,7 +1738,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/recurring-service-types/{id}':
+  '/memberships/v2/tenant/{tenant}/recurring-service-types/{id}':
     get:
       tags:
         - RecurringServiceTypes

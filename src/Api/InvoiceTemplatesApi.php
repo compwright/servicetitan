@@ -336,7 +336,7 @@ class InvoiceTemplatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoice-templates';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/invoice-templates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -674,7 +674,7 @@ class InvoiceTemplatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoice-templates/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/invoice-templates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -994,7 +994,7 @@ class InvoiceTemplatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoice-templates';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/invoice-templates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1342,7 +1342,7 @@ class InvoiceTemplatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoice-templates/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/invoice-templates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

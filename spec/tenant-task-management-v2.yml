@@ -3,9 +3,9 @@ info:
   title: Task Management
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/taskmanagement/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/data':
+  '/taskmanagement/v2/tenant/{tenant}/data':
     get:
       tags:
         - ClientSideData
@@ -69,7 +69,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/tasks':
+  '/taskmanagement/v2/tenant/{tenant}/tasks':
     post:
       tags:
         - Tasks
@@ -150,7 +150,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/tasks/{id}/subtasks':
+  '/taskmanagement/v2/tenant/{tenant}/tasks/{id}/subtasks':
     post:
       tags:
         - Tasks

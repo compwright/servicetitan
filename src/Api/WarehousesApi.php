@@ -346,7 +346,7 @@ class WarehousesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/warehouses';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/warehouses';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -431,7 +431,7 @@ class AdjustmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/adjustments';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/adjustments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -900,7 +900,7 @@ class AdjustmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/adjustments/custom-fields';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/adjustments/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

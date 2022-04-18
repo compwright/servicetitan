@@ -336,7 +336,7 @@ class EquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/equipment';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/equipment';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -605,7 +605,7 @@ class EquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/equipment/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/equipment/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -950,7 +950,7 @@ class EquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/equipment/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/equipment/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1325,7 +1325,7 @@ class EquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/equipment';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/equipment';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1783,7 +1783,7 @@ class EquipmentApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/equipment/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/equipment/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -387,7 +387,7 @@ class PayrollsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/employees/{employee}/payrolls';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/employees/{employee}/payrolls';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -801,7 +801,7 @@ class PayrollsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payrolls';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/payrolls';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1224,7 +1224,7 @@ class PayrollsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/technicians/{technician}/payrolls';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/technicians/{technician}/payrolls';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

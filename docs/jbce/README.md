@@ -84,11 +84,11 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/jbce/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CallReasonsApi* | [**callReasonsGet**](docs/Api/CallReasonsApi.md#callreasonsget) | **GET** /tenant/{tenant}/call-reasons | Gets a list of call reasons
+*CallReasonsApi* | [**callReasonsGet**](docs/Api/CallReasonsApi.md#callreasonsget) | **GET** /jbce/v2/tenant/{tenant}/call-reasons | Gets a list of call reasons
 
 ## Models
 

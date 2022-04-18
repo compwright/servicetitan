@@ -3,9 +3,9 @@ info:
   title: Dispatch
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/dispatch/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings':
+  '/dispatch/v2/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings':
     post:
       tags:
         - Gps
@@ -72,7 +72,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/capacity':
+  '/dispatch/v2/tenant/{tenant}/capacity':
     post:
       tags:
         - Capacity
@@ -131,7 +131,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/non-job-appointments/{id}':
+  '/dispatch/v2/tenant/{tenant}/non-job-appointments/{id}':
     get:
       tags:
         - NonJobAppointments
@@ -269,7 +269,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/non-job-appointments':
+  '/dispatch/v2/tenant/{tenant}/non-job-appointments':
     get:
       tags:
         - NonJobAppointments
@@ -459,7 +459,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/technician-shifts':
+  '/dispatch/v2/tenant/{tenant}/technician-shifts':
     get:
       tags:
         - TechnicianShifts
@@ -566,7 +566,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/technician-shifts/{id}':
+  '/dispatch/v2/tenant/{tenant}/technician-shifts/{id}':
     get:
       tags:
         - TechnicianShifts
@@ -629,7 +629,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/zones':
+  '/dispatch/v2/tenant/{tenant}/zones':
     get:
       tags:
         - Zone
@@ -708,7 +708,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/zones/{id}':
+  '/dispatch/v2/tenant/{tenant}/zones/{id}':
     get:
       tags:
         - Zone
@@ -782,7 +782,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointment-assignments':
+  '/dispatch/v2/tenant/{tenant}/appointment-assignments':
     get:
       tags:
         - AppointmentAssignments
@@ -868,7 +868,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointment-assignments/assign-technicians':
+  '/dispatch/v2/tenant/{tenant}/appointment-assignments/assign-technicians':
     post:
       tags:
         - AppointmentAssignments
@@ -936,7 +936,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointment-assignments/unassign-technicians':
+  '/dispatch/v2/tenant/{tenant}/appointment-assignments/unassign-technicians':
     post:
       tags:
         - AppointmentAssignments

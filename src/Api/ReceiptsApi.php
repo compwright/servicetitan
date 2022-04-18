@@ -441,7 +441,7 @@ class ReceiptsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/receipts';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/receipts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -932,7 +932,7 @@ class ReceiptsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/receipts/custom-fields';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/receipts/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -81,23 +81,23 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/dispatch/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AppointmentAssignmentsApi* | [**appointmentAssignmentsAssignTechnicians**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsassigntechnicians) | **POST** /tenant/{tenant}/appointment-assignments/assign-technicians | Assigns the list of technicians to the appointment
-*AppointmentAssignmentsApi* | [**appointmentAssignmentsGetList**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsgetlist) | **GET** /tenant/{tenant}/appointment-assignments | Gets a list of appointment assignments
-*AppointmentAssignmentsApi* | [**appointmentAssignmentsUnassignTechnicians**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsunassigntechnicians) | **POST** /tenant/{tenant}/appointment-assignments/unassign-technicians | Unassigns the list of technicians from the appointment
-*CapacityApi* | [**capacityGetList**](docs/Api/CapacityApi.md#capacitygetlist) | **POST** /tenant/{tenant}/capacity | Capacity_GetList
-*GpsApi* | [**gpsCreate**](docs/Api/GpsApi.md#gpscreate) | **POST** /tenant/{tenant}/gps-provider/{gps_provider}/gps-pings | Creates new gps ping.
-*NonJobAppointmentsApi* | [**nonJobAppointmentsCreate**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentscreate) | **POST** /tenant/{tenant}/non-job-appointments | Create a new non-job appointment
-*NonJobAppointmentsApi* | [**nonJobAppointmentsGet**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsget) | **GET** /tenant/{tenant}/non-job-appointments/{id} | NonJobAppointments_Get
-*NonJobAppointmentsApi* | [**nonJobAppointmentsGetList**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsgetlist) | **GET** /tenant/{tenant}/non-job-appointments | Gets a list of non-job appointments
-*NonJobAppointmentsApi* | [**nonJobAppointmentsUpdate**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsupdate) | **PUT** /tenant/{tenant}/non-job-appointments/{id} | Update an existed non-job appointment
-*TechnicianShiftsApi* | [**technicianShiftsGet**](docs/Api/TechnicianShiftsApi.md#technicianshiftsget) | **GET** /tenant/{tenant}/technician-shifts/{id} | Gets a specific technician shift
-*TechnicianShiftsApi* | [**technicianShiftsGetList**](docs/Api/TechnicianShiftsApi.md#technicianshiftsgetlist) | **GET** /tenant/{tenant}/technician-shifts | Gets a list of technician shifts
-*ZoneApi* | [**zoneGet**](docs/Api/ZoneApi.md#zoneget) | **GET** /tenant/{tenant}/zones/{id} | Gets a specific zone
-*ZoneApi* | [**zoneGetList**](docs/Api/ZoneApi.md#zonegetlist) | **GET** /tenant/{tenant}/zones | Gets a list of zones
+*AppointmentAssignmentsApi* | [**appointmentAssignmentsAssignTechnicians**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsassigntechnicians) | **POST** /dispatch/v2/tenant/{tenant}/appointment-assignments/assign-technicians | Assigns the list of technicians to the appointment
+*AppointmentAssignmentsApi* | [**appointmentAssignmentsGetList**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsgetlist) | **GET** /dispatch/v2/tenant/{tenant}/appointment-assignments | Gets a list of appointment assignments
+*AppointmentAssignmentsApi* | [**appointmentAssignmentsUnassignTechnicians**](docs/Api/AppointmentAssignmentsApi.md#appointmentassignmentsunassigntechnicians) | **POST** /dispatch/v2/tenant/{tenant}/appointment-assignments/unassign-technicians | Unassigns the list of technicians from the appointment
+*CapacityApi* | [**capacityGetList**](docs/Api/CapacityApi.md#capacitygetlist) | **POST** /dispatch/v2/tenant/{tenant}/capacity | Capacity_GetList
+*GpsApi* | [**gpsCreate**](docs/Api/GpsApi.md#gpscreate) | **POST** /dispatch/v2/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings | Creates new gps ping.
+*NonJobAppointmentsApi* | [**nonJobAppointmentsCreate**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentscreate) | **POST** /dispatch/v2/tenant/{tenant}/non-job-appointments | Create a new non-job appointment
+*NonJobAppointmentsApi* | [**nonJobAppointmentsGet**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsget) | **GET** /dispatch/v2/tenant/{tenant}/non-job-appointments/{id} | NonJobAppointments_Get
+*NonJobAppointmentsApi* | [**nonJobAppointmentsGetList**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsgetlist) | **GET** /dispatch/v2/tenant/{tenant}/non-job-appointments | Gets a list of non-job appointments
+*NonJobAppointmentsApi* | [**nonJobAppointmentsUpdate**](docs/Api/NonJobAppointmentsApi.md#nonjobappointmentsupdate) | **PUT** /dispatch/v2/tenant/{tenant}/non-job-appointments/{id} | Update an existed non-job appointment
+*TechnicianShiftsApi* | [**technicianShiftsGet**](docs/Api/TechnicianShiftsApi.md#technicianshiftsget) | **GET** /dispatch/v2/tenant/{tenant}/technician-shifts/{id} | Gets a specific technician shift
+*TechnicianShiftsApi* | [**technicianShiftsGetList**](docs/Api/TechnicianShiftsApi.md#technicianshiftsgetlist) | **GET** /dispatch/v2/tenant/{tenant}/technician-shifts | Gets a list of technician shifts
+*ZoneApi* | [**zoneGet**](docs/Api/ZoneApi.md#zoneget) | **GET** /dispatch/v2/tenant/{tenant}/zones/{id} | Gets a specific zone
+*ZoneApi* | [**zoneGetList**](docs/Api/ZoneApi.md#zonegetlist) | **GET** /dispatch/v2/tenant/{tenant}/zones | Gets a list of zones
 
 ## Models
 

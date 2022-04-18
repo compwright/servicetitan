@@ -81,22 +81,22 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/marketing/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CampaignCategoriesApi* | [**campaignCategoriesCreate**](docs/Api/CampaignCategoriesApi.md#campaigncategoriescreate) | **POST** /tenant/{tenant}/categories | Creates new campaign category
-*CampaignCategoriesApi* | [**campaignCategoriesGet**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesget) | **GET** /tenant/{tenant}/categories/{id} | Gets campaign category specified by ID
-*CampaignCategoriesApi* | [**campaignCategoriesGetList**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesgetlist) | **GET** /tenant/{tenant}/categories | Gets a paginated list of campaign categories
-*CampaignCategoriesApi* | [**campaignCategoriesUpdate**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesupdate) | **PATCH** /tenant/{tenant}/categories/{id} | Updates specified campaign category in \&quot;patch\&quot; mode
-*CampaignCostsApi* | [**campaignCostsCreate**](docs/Api/CampaignCostsApi.md#campaigncostscreate) | **POST** /tenant/{tenant}/costs | Creates new campaign cost
-*CampaignCostsApi* | [**campaignCostsGet**](docs/Api/CampaignCostsApi.md#campaigncostsget) | **GET** /tenant/{tenant}/costs/{id} | Gets campaign cost specified by ID
-*CampaignCostsApi* | [**campaignCostsUpdate**](docs/Api/CampaignCostsApi.md#campaigncostsupdate) | **PATCH** /tenant/{tenant}/costs/{id} | Updates specified campaign cost in \&quot;patch\&quot; mode
-*CampaignsApi* | [**campaignsCreate**](docs/Api/CampaignsApi.md#campaignscreate) | **POST** /tenant/{tenant}/campaigns | Creates new campaign
-*CampaignsApi* | [**campaignsGet**](docs/Api/CampaignsApi.md#campaignsget) | **GET** /tenant/{tenant}/campaigns/{id} | Gets campaign specified by ID
-*CampaignsApi* | [**campaignsGetCosts**](docs/Api/CampaignsApi.md#campaignsgetcosts) | **GET** /tenant/{tenant}/campaigns/{id}/costs | Gets a paginated list of campaign costs
-*CampaignsApi* | [**campaignsGetList**](docs/Api/CampaignsApi.md#campaignsgetlist) | **GET** /tenant/{tenant}/campaigns | Gets a paginated list of campaigns
-*CampaignsApi* | [**campaignsUpdate**](docs/Api/CampaignsApi.md#campaignsupdate) | **PATCH** /tenant/{tenant}/campaigns/{id} | Updates specified campaign in \&quot;patch\&quot; mode
+*CampaignCategoriesApi* | [**campaignCategoriesCreate**](docs/Api/CampaignCategoriesApi.md#campaigncategoriescreate) | **POST** /marketing/v2/tenant/{tenant}/categories | Creates new campaign category
+*CampaignCategoriesApi* | [**campaignCategoriesGet**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesget) | **GET** /marketing/v2/tenant/{tenant}/categories/{id} | Gets campaign category specified by ID
+*CampaignCategoriesApi* | [**campaignCategoriesGetList**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesgetlist) | **GET** /marketing/v2/tenant/{tenant}/categories | Gets a paginated list of campaign categories
+*CampaignCategoriesApi* | [**campaignCategoriesUpdate**](docs/Api/CampaignCategoriesApi.md#campaigncategoriesupdate) | **PATCH** /marketing/v2/tenant/{tenant}/categories/{id} | Updates specified campaign category in \&quot;patch\&quot; mode
+*CampaignCostsApi* | [**campaignCostsCreate**](docs/Api/CampaignCostsApi.md#campaigncostscreate) | **POST** /marketing/v2/tenant/{tenant}/costs | Creates new campaign cost
+*CampaignCostsApi* | [**campaignCostsGet**](docs/Api/CampaignCostsApi.md#campaigncostsget) | **GET** /marketing/v2/tenant/{tenant}/costs/{id} | Gets campaign cost specified by ID
+*CampaignCostsApi* | [**campaignCostsUpdate**](docs/Api/CampaignCostsApi.md#campaigncostsupdate) | **PATCH** /marketing/v2/tenant/{tenant}/costs/{id} | Updates specified campaign cost in \&quot;patch\&quot; mode
+*CampaignsApi* | [**campaignsCreate**](docs/Api/CampaignsApi.md#campaignscreate) | **POST** /marketing/v2/tenant/{tenant}/campaigns | Creates new campaign
+*CampaignsApi* | [**campaignsGet**](docs/Api/CampaignsApi.md#campaignsget) | **GET** /marketing/v2/tenant/{tenant}/campaigns/{id} | Gets campaign specified by ID
+*CampaignsApi* | [**campaignsGetCosts**](docs/Api/CampaignsApi.md#campaignsgetcosts) | **GET** /marketing/v2/tenant/{tenant}/campaigns/{id}/costs | Gets a paginated list of campaign costs
+*CampaignsApi* | [**campaignsGetList**](docs/Api/CampaignsApi.md#campaignsgetlist) | **GET** /marketing/v2/tenant/{tenant}/campaigns | Gets a paginated list of campaigns
+*CampaignsApi* | [**campaignsUpdate**](docs/Api/CampaignsApi.md#campaignsupdate) | **PATCH** /marketing/v2/tenant/{tenant}/campaigns/{id} | Updates specified campaign in \&quot;patch\&quot; mode
 
 ## Models
 

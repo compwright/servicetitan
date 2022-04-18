@@ -347,7 +347,7 @@ class GpsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/gps-provider/{gps_provider}/gps-pings';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -342,7 +342,7 @@ class PaymentTermsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payment-terms/{customerId}';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payment-terms/{customerId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

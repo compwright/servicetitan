@@ -3,9 +3,9 @@ info:
   title: CRM
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/crm/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/bookings/{id}':
+  '/crm/v2/tenant/{tenant}/bookings/{id}':
     get:
       tags:
         - Bookings
@@ -88,7 +88,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/bookings':
+  '/crm/v2/tenant/{tenant}/bookings':
     get:
       tags:
         - Bookings
@@ -219,7 +219,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/bookings/{id}/contacts':
+  '/crm/v2/tenant/{tenant}/bookings/{id}/contacts':
     get:
       tags:
         - Bookings
@@ -304,7 +304,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}':
+  '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}':
     get:
       tags:
         - Bookings
@@ -522,7 +522,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/booking-provider/{booking_provider}/bookings':
+  '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings':
     get:
       tags:
         - Bookings
@@ -760,7 +760,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts':
+  '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts':
     post:
       tags:
         - Bookings
@@ -927,7 +927,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}':
+  '/crm/v2/tenant/{tenant}/booking-provider/{booking_provider}/bookings/{id}/contacts/{contactId}':
     patch:
       tags:
         - Bookings
@@ -1084,7 +1084,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/tags':
+  '/crm/v2/tenant/{tenant}/tags':
     put:
       tags:
         - BulkTags
@@ -1189,7 +1189,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers/{id}':
+  '/crm/v2/tenant/{tenant}/customers/{id}':
     get:
       tags:
         - Customers
@@ -1369,7 +1369,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers':
+  '/crm/v2/tenant/{tenant}/customers':
     get:
       tags:
         - Customers
@@ -1688,7 +1688,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers/{id}/notes':
+  '/crm/v2/tenant/{tenant}/customers/{id}/notes':
     get:
       tags:
         - Customers
@@ -1841,7 +1841,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers/{id}/contacts':
+  '/crm/v2/tenant/{tenant}/customers/{id}/contacts':
     get:
       tags:
         - Customers
@@ -2025,7 +2025,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers/{id}/contacts/{contactId}':
+  '/crm/v2/tenant/{tenant}/customers/{id}/contacts/{contactId}':
     delete:
       tags:
         - Customers
@@ -2186,7 +2186,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/customers/contacts':
+  '/crm/v2/tenant/{tenant}/customers/contacts':
     get:
       tags:
         - Customers
@@ -2282,7 +2282,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/leads/{id}':
+  '/crm/v2/tenant/{tenant}/leads/{id}':
     get:
       tags:
         - Leads
@@ -2420,7 +2420,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/leads':
+  '/crm/v2/tenant/{tenant}/leads':
     get:
       tags:
         - Leads
@@ -2664,7 +2664,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/leads/{id}/follow-up':
+  '/crm/v2/tenant/{tenant}/leads/{id}/follow-up':
     post:
       tags:
         - Leads
@@ -2718,7 +2718,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/leads/{id}/notes':
+  '/crm/v2/tenant/{tenant}/leads/{id}/notes':
     get:
       tags:
         - Leads
@@ -2870,7 +2870,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/leads/{id}/dismiss':
+  '/crm/v2/tenant/{tenant}/leads/{id}/dismiss':
     post:
       tags:
         - Leads
@@ -2927,7 +2927,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations/{id}':
+  '/crm/v2/tenant/{tenant}/locations/{id}':
     get:
       tags:
         - Locations
@@ -3115,7 +3115,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations':
+  '/crm/v2/tenant/{tenant}/locations':
     post:
       tags:
         - Locations
@@ -3397,7 +3397,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations/{id}/notes':
+  '/crm/v2/tenant/{tenant}/locations/{id}/notes':
     get:
       tags:
         - Locations
@@ -3550,7 +3550,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations/{id}/contacts':
+  '/crm/v2/tenant/{tenant}/locations/{id}/contacts':
     get:
       tags:
         - Locations
@@ -3735,7 +3735,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations/contacts':
+  '/crm/v2/tenant/{tenant}/locations/contacts':
     get:
       tags:
         - Locations
@@ -3818,7 +3818,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/locations/{id}/contacts/{contactId}':
+  '/crm/v2/tenant/{tenant}/locations/{id}/contacts/{contactId}':
     delete:
       tags:
         - Locations

@@ -351,7 +351,7 @@ class TagTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tag-types';
+        $resourcePath = '/settings/v2/tenant/{tenant}/tag-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

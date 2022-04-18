@@ -336,7 +336,7 @@ class ServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/services';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/services';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -605,7 +605,7 @@ class ServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/services/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -950,7 +950,7 @@ class ServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/services/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1325,7 +1325,7 @@ class ServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/services';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/services';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1783,7 +1783,7 @@ class ServicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/services/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

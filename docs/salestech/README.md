@@ -81,20 +81,20 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/sales/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EstimatesApi* | [**estimatesCreate**](docs/Api/EstimatesApi.md#estimatescreate) | **POST** /tenant/{tenant}/estimates | Estimates_Create
-*EstimatesApi* | [**estimatesDeleteItem**](docs/Api/EstimatesApi.md#estimatesdeleteitem) | **DELETE** /tenant/{tenant}/estimates/{id}/items/{itemId} | Estimates_DeleteItem
-*EstimatesApi* | [**estimatesDismiss**](docs/Api/EstimatesApi.md#estimatesdismiss) | **PUT** /tenant/{tenant}/estimates/{id}/dismiss | Estimates_Dismiss
-*EstimatesApi* | [**estimatesGet**](docs/Api/EstimatesApi.md#estimatesget) | **GET** /tenant/{tenant}/estimates/{id} | Estimates_Get
-*EstimatesApi* | [**estimatesGetItems**](docs/Api/EstimatesApi.md#estimatesgetitems) | **GET** /tenant/{tenant}/estimates/items | Estimates_GetItems
-*EstimatesApi* | [**estimatesGetList**](docs/Api/EstimatesApi.md#estimatesgetlist) | **GET** /tenant/{tenant}/estimates | Estimates_GetList
-*EstimatesApi* | [**estimatesPutItem**](docs/Api/EstimatesApi.md#estimatesputitem) | **PUT** /tenant/{tenant}/estimates/{id}/items | Estimates_PutItem
-*EstimatesApi* | [**estimatesSell**](docs/Api/EstimatesApi.md#estimatessell) | **PUT** /tenant/{tenant}/estimates/{id}/sell | Estimates_Sell
-*EstimatesApi* | [**estimatesUnsell**](docs/Api/EstimatesApi.md#estimatesunsell) | **PUT** /tenant/{tenant}/estimates/{id}/unsell | Estimates_Unsell
-*EstimatesApi* | [**estimatesUpdate**](docs/Api/EstimatesApi.md#estimatesupdate) | **PUT** /tenant/{tenant}/estimates/{id} | Estimates_Update
+*EstimatesApi* | [**estimatesCreate**](docs/Api/EstimatesApi.md#estimatescreate) | **POST** /sales/v2/tenant/{tenant}/estimates | Estimates_Create
+*EstimatesApi* | [**estimatesDeleteItem**](docs/Api/EstimatesApi.md#estimatesdeleteitem) | **DELETE** /sales/v2/tenant/{tenant}/estimates/{id}/items/{itemId} | Estimates_DeleteItem
+*EstimatesApi* | [**estimatesDismiss**](docs/Api/EstimatesApi.md#estimatesdismiss) | **PUT** /sales/v2/tenant/{tenant}/estimates/{id}/dismiss | Estimates_Dismiss
+*EstimatesApi* | [**estimatesGet**](docs/Api/EstimatesApi.md#estimatesget) | **GET** /sales/v2/tenant/{tenant}/estimates/{id} | Estimates_Get
+*EstimatesApi* | [**estimatesGetItems**](docs/Api/EstimatesApi.md#estimatesgetitems) | **GET** /sales/v2/tenant/{tenant}/estimates/items | Estimates_GetItems
+*EstimatesApi* | [**estimatesGetList**](docs/Api/EstimatesApi.md#estimatesgetlist) | **GET** /sales/v2/tenant/{tenant}/estimates | Estimates_GetList
+*EstimatesApi* | [**estimatesPutItem**](docs/Api/EstimatesApi.md#estimatesputitem) | **PUT** /sales/v2/tenant/{tenant}/estimates/{id}/items | Estimates_PutItem
+*EstimatesApi* | [**estimatesSell**](docs/Api/EstimatesApi.md#estimatessell) | **PUT** /sales/v2/tenant/{tenant}/estimates/{id}/sell | Estimates_Sell
+*EstimatesApi* | [**estimatesUnsell**](docs/Api/EstimatesApi.md#estimatesunsell) | **PUT** /sales/v2/tenant/{tenant}/estimates/{id}/unsell | Estimates_Unsell
+*EstimatesApi* | [**estimatesUpdate**](docs/Api/EstimatesApi.md#estimatesupdate) | **PUT** /sales/v2/tenant/{tenant}/estimates/{id} | Estimates_Update
 
 ## Models
 

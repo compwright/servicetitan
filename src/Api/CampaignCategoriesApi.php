@@ -336,7 +336,7 @@ class CampaignCategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/categories';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -654,7 +654,7 @@ class CampaignCategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/categories/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -978,7 +978,7 @@ class CampaignCategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/categories';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1328,7 +1328,7 @@ class CampaignCategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/categories/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

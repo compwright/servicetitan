@@ -356,7 +356,7 @@ class GrossPayItemsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/gross-pay-items';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/gross-pay-items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -617,7 +617,7 @@ class GrossPayItemsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/gross-pay-items/{id}';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/gross-pay-items/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -966,7 +966,7 @@ class GrossPayItemsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/gross-pay-items';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/gross-pay-items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1391,7 +1391,7 @@ class GrossPayItemsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/gross-pay-items/{id}';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/gross-pay-items/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

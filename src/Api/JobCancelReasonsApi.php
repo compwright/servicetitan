@@ -351,7 +351,7 @@ class JobCancelReasonsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-cancel-reasons';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-cancel-reasons';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

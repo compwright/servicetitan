@@ -362,7 +362,7 @@ class ActivityCodesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/activity-codes/{id}';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/activity-codes/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -686,7 +686,7 @@ class ActivityCodesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/activity-codes';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/activity-codes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

@@ -336,7 +336,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -659,7 +659,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}/follow-up';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}/follow-up';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1010,7 +1010,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1292,7 +1292,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}/dismiss';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}/dismiss';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1638,7 +1638,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2042,7 +2042,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2598,7 +2598,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2956,7 +2956,7 @@ class LeadsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/leads/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/leads/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

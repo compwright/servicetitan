@@ -376,7 +376,7 @@ class LocationRecurringServiceEventsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-service-events';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-service-events';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -812,7 +812,7 @@ class LocationRecurringServiceEventsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-service-events/{id}/mark-complete';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-complete';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1163,7 +1163,7 @@ class LocationRecurringServiceEventsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-service-events/{id}/mark-incomplete';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

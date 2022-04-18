@@ -3,9 +3,9 @@ info:
   title: Marketing
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/marketing/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/categories':
+  '/marketing/v2/tenant/{tenant}/categories':
     get:
       tags:
         - CampaignCategories
@@ -111,7 +111,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/categories/{id}':
+  '/marketing/v2/tenant/{tenant}/categories/{id}':
     get:
       tags:
         - CampaignCategories
@@ -207,7 +207,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/costs/{id}':
+  '/marketing/v2/tenant/{tenant}/costs/{id}':
     get:
       tags:
         - CampaignCosts
@@ -302,7 +302,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/costs':
+  '/marketing/v2/tenant/{tenant}/costs':
     post:
       tags:
         - CampaignCosts
@@ -351,7 +351,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/campaigns':
+  '/marketing/v2/tenant/{tenant}/campaigns':
     get:
       tags:
         - Campaigns
@@ -504,7 +504,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/campaigns/{id}':
+  '/marketing/v2/tenant/{tenant}/campaigns/{id}':
     get:
       tags:
         - Campaigns
@@ -614,7 +614,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/campaigns/{id}/costs':
+  '/marketing/v2/tenant/{tenant}/campaigns/{id}/costs':
     get:
       tags:
         - Campaigns

@@ -362,7 +362,7 @@ class TechnicianShiftsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/technician-shifts/{id}';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/technician-shifts/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -716,7 +716,7 @@ class TechnicianShiftsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/technician-shifts';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/technician-shifts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

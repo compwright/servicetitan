@@ -279,7 +279,7 @@ class WebBookingAttributionsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/web-booking-attributions';
+        $resourcePath = '/marketingads/v2/tenant/{tenant}/web-booking-attributions';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

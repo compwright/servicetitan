@@ -336,7 +336,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -608,7 +608,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices/{invoiceId}/items/{itemId}';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items/{itemId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1050,7 +1050,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1631,7 +1631,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices/markasexported';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices/markasexported';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1886,7 +1886,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices/custom-fields';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2152,7 +2152,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices/{id}';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2426,7 +2426,7 @@ class InvoicesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/invoices/{invoiceId}/items';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/invoices/{invoiceId}/items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

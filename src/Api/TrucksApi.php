@@ -346,7 +346,7 @@ class TrucksApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/trucks';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/trucks';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

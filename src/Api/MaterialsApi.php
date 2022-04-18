@@ -336,7 +336,7 @@ class MaterialsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/materials';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/materials';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -605,7 +605,7 @@ class MaterialsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/materials/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/materials/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -950,7 +950,7 @@ class MaterialsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/materials/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/materials/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1325,7 +1325,7 @@ class MaterialsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/materials';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/materials';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1783,7 +1783,7 @@ class MaterialsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/materials/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/materials/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

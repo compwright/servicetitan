@@ -336,7 +336,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -608,7 +608,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}/items/{itemId}';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}/items/{itemId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -879,7 +879,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}/dismiss';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}/dismiss';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1199,7 +1199,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1548,7 +1548,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/items';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2042,7 +2042,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2590,7 +2590,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}/items';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}/items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2921,7 +2921,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}/sell';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}/sell';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3190,7 +3190,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}/unsell';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}/unsell';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3515,7 +3515,7 @@ class EstimatesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/estimates/{id}';
+        $resourcePath = '/sales/v2/tenant/{tenant}/estimates/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

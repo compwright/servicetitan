@@ -336,7 +336,7 @@ class NonJobAppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/non-job-appointments';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/non-job-appointments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -654,7 +654,7 @@ class NonJobAppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/non-job-appointments/{id}';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/non-job-appointments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1018,7 +1018,7 @@ class NonJobAppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/non-job-appointments';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/non-job-appointments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1476,7 +1476,7 @@ class NonJobAppointmentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/non-job-appointments/{id}';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/non-job-appointments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

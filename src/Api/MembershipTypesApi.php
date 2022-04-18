@@ -362,7 +362,7 @@ class MembershipTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/membership-types/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/membership-types/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -702,7 +702,7 @@ class MembershipTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/membership-types/{id}/discounts';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/membership-types/{id}/discounts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1047,7 +1047,7 @@ class MembershipTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/membership-types/{id}/duration-billing-items';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/membership-types/{id}/duration-billing-items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1422,7 +1422,7 @@ class MembershipTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/membership-types';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/membership-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1875,7 +1875,7 @@ class MembershipTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/membership-types/{id}/recurring-service-items';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/membership-types/{id}/recurring-service-items';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

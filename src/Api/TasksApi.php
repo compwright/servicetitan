@@ -336,7 +336,7 @@ class TasksApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tasks';
+        $resourcePath = '/taskmanagement/v2/tenant/{tenant}/tasks';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -659,7 +659,7 @@ class TasksApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/tasks/{id}/subtasks';
+        $resourcePath = '/taskmanagement/v2/tenant/{tenant}/tasks/{id}/subtasks';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

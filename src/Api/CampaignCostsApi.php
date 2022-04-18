@@ -336,7 +336,7 @@ class CampaignCostsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/costs';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/costs';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -654,7 +654,7 @@ class CampaignCostsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/costs/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/costs/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -979,7 +979,7 @@ class CampaignCostsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/costs/{id}';
+        $resourcePath = '/marketing/v2/tenant/{tenant}/costs/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

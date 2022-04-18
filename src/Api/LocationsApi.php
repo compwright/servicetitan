@@ -356,7 +356,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -719,7 +719,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1070,7 +1070,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1366,7 +1366,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1714,7 +1714,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2089,7 +2089,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2531,7 +2531,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3098,7 +3098,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/notes';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/notes';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3465,7 +3465,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/contacts';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/contacts';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3877,7 +3877,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -4259,7 +4259,7 @@ class LocationsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/locations/{id}/contacts/{contactId}';
+        $resourcePath = '/crm/v2/tenant/{tenant}/locations/{id}/contacts/{contactId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

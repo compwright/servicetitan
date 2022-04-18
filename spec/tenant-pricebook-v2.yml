@@ -3,9 +3,9 @@ info:
   title: Pricebook
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/pricebook/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/categories':
+  '/pricebook/v2/tenant/{tenant}/categories':
     get:
       tags:
         - Categories
@@ -124,7 +124,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pricebook.V2.CategoryResponse'
-  '/tenant/{tenant}/categories/{id}':
+  '/pricebook/v2/tenant/{tenant}/categories/{id}':
     get:
       tags:
         - Categories
@@ -299,7 +299,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/discounts-and-fees':
+  '/pricebook/v2/tenant/{tenant}/discounts-and-fees':
     get:
       tags:
         - DiscountAndFees
@@ -533,7 +533,7 @@ paths:
                 externalData:
                   - key: string
                     value: string
-  '/tenant/{tenant}/discounts-and-fees/{id}':
+  '/pricebook/v2/tenant/{tenant}/discounts-and-fees/{id}':
     get:
       tags:
         - DiscountAndFees
@@ -785,7 +785,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/equipment':
+  '/pricebook/v2/tenant/{tenant}/equipment':
     get:
       tags:
         - Equipment
@@ -1170,7 +1170,7 @@ paths:
                 externalData:
                   - key: string
                     value: string
-  '/tenant/{tenant}/equipment/{id}':
+  '/pricebook/v2/tenant/{tenant}/equipment/{id}':
     get:
       tags:
         - Equipment
@@ -1573,7 +1573,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/materials':
+  '/pricebook/v2/tenant/{tenant}/materials':
     get:
       tags:
         - Materials
@@ -1910,7 +1910,7 @@ paths:
                 externalData:
                   - key: string
                     value: string
-  '/tenant/{tenant}/materials/{id}':
+  '/pricebook/v2/tenant/{tenant}/materials/{id}':
     get:
       tags:
         - Materials
@@ -2265,7 +2265,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/pricebook':
+  '/pricebook/v2/tenant/{tenant}/pricebook':
     post:
       tags:
         - PricebookBulk
@@ -2754,7 +2754,7 @@ paths:
                 data: { }
         '200':
           description: The request has succeeded
-  '/tenant/{tenant}/services':
+  '/pricebook/v2/tenant/{tenant}/services':
     get:
       tags:
         - Services
@@ -3032,7 +3032,7 @@ paths:
                 externalData:
                   - key: string
                     value: string
-  '/tenant/{tenant}/services/{id}':
+  '/pricebook/v2/tenant/{tenant}/services/{id}':
     get:
       tags:
         - Services

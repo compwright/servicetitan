@@ -3,9 +3,9 @@ info:
   title: Job Planning and Management
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/jpm/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/appointments/{id}':
+  '/jpm/v2/tenant/{tenant}/appointments/{id}':
     get:
       tags:
         - Appointments
@@ -133,7 +133,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointments':
+  '/jpm/v2/tenant/{tenant}/appointments':
     get:
       tags:
         - Appointments
@@ -362,7 +362,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointments/{id}/reschedule':
+  '/jpm/v2/tenant/{tenant}/appointments/{id}/reschedule':
     patch:
       tags:
         - Appointments
@@ -451,7 +451,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointments/{id}/hold':
+  '/jpm/v2/tenant/{tenant}/appointments/{id}/hold':
     put:
       tags:
         - Appointments
@@ -584,7 +584,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/appointments/{id}/special-instructions':
+  '/jpm/v2/tenant/{tenant}/appointments/{id}/special-instructions':
     put:
       tags:
         - Appointments
@@ -669,7 +669,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/job-cancel-reasons':
+  '/jpm/v2/tenant/{tenant}/job-cancel-reasons':
     get:
       tags:
         - JobCancelReasons
@@ -740,7 +740,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/job-hold-reasons':
+  '/jpm/v2/tenant/{tenant}/job-hold-reasons':
     get:
       tags:
         - JobHoldReasons
@@ -811,7 +811,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}':
     get:
       tags:
         - Jobs
@@ -1023,7 +1023,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs':
+  '/jpm/v2/tenant/{tenant}/jobs':
     post:
       tags:
         - Jobs
@@ -1391,7 +1391,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/cancel':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/cancel':
     put:
       tags:
         - Jobs
@@ -1449,7 +1449,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/remove-cancellation':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/remove-cancellation':
     put:
       tags:
         - Jobs
@@ -1486,7 +1486,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/hold':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/hold':
     put:
       tags:
         - Jobs
@@ -1544,7 +1544,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/complete':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/complete':
     put:
       tags:
         - Jobs
@@ -1614,7 +1614,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/notes':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/notes':
     get:
       tags:
         - Jobs
@@ -1766,7 +1766,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/cancel-reasons':
+  '/jpm/v2/tenant/{tenant}/jobs/cancel-reasons':
     get:
       tags:
         - Jobs
@@ -1816,7 +1816,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/jobs/{id}/history':
+  '/jpm/v2/tenant/{tenant}/jobs/{id}/history':
     get:
       tags:
         - Jobs
@@ -1877,7 +1877,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/job-types':
+  '/jpm/v2/tenant/{tenant}/job-types':
     get:
       tags:
         - JobTypes
@@ -2058,7 +2058,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/job-types/{id}':
+  '/jpm/v2/tenant/{tenant}/job-types/{id}':
     get:
       tags:
         - JobTypes
@@ -2185,7 +2185,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/projects/{id}':
+  '/jpm/v2/tenant/{tenant}/projects/{id}':
     get:
       tags:
         - Projects
@@ -2255,7 +2255,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/projects':
+  '/jpm/v2/tenant/{tenant}/projects':
     get:
       tags:
         - Projects

@@ -82,18 +82,18 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/settings/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*BusinessUnitsApi* | [**businessUnitsGet**](docs/Api/BusinessUnitsApi.md#businessunitsget) | **GET** /tenant/{tenant}/business-units/{id} | Gets a business unit by ID
-*BusinessUnitsApi* | [**businessUnitsGetList**](docs/Api/BusinessUnitsApi.md#businessunitsgetlist) | **GET** /tenant/{tenant}/business-units | Gets a list of business units
-*BusinessUnitsApi* | [**businessUnitsUpdate**](docs/Api/BusinessUnitsApi.md#businessunitsupdate) | **PATCH** /tenant/{tenant}/business-units/{id} | Update an existing BusinessUnit
-*EmployeesApi* | [**employeesGet**](docs/Api/EmployeesApi.md#employeesget) | **GET** /tenant/{tenant}/employees/{id} | Gets a employee by ID
-*EmployeesApi* | [**employeesGetList**](docs/Api/EmployeesApi.md#employeesgetlist) | **GET** /tenant/{tenant}/employees | Gets a list of employees
-*TagTypesApi* | [**tagTypesGetList**](docs/Api/TagTypesApi.md#tagtypesgetlist) | **GET** /tenant/{tenant}/tag-types | Gets a list of tag types
-*TechniciansApi* | [**techniciansGet**](docs/Api/TechniciansApi.md#techniciansget) | **GET** /tenant/{tenant}/technicians/{id} | Gets a technician by ID
-*TechniciansApi* | [**techniciansGetList**](docs/Api/TechniciansApi.md#techniciansgetlist) | **GET** /tenant/{tenant}/technicians | Gets a list of technicians
+*BusinessUnitsApi* | [**businessUnitsGet**](docs/Api/BusinessUnitsApi.md#businessunitsget) | **GET** /settings/v2/tenant/{tenant}/business-units/{id} | Gets a business unit by ID
+*BusinessUnitsApi* | [**businessUnitsGetList**](docs/Api/BusinessUnitsApi.md#businessunitsgetlist) | **GET** /settings/v2/tenant/{tenant}/business-units | Gets a list of business units
+*BusinessUnitsApi* | [**businessUnitsUpdate**](docs/Api/BusinessUnitsApi.md#businessunitsupdate) | **PATCH** /settings/v2/tenant/{tenant}/business-units/{id} | Update an existing BusinessUnit
+*EmployeesApi* | [**employeesGet**](docs/Api/EmployeesApi.md#employeesget) | **GET** /settings/v2/tenant/{tenant}/employees/{id} | Gets a employee by ID
+*EmployeesApi* | [**employeesGetList**](docs/Api/EmployeesApi.md#employeesgetlist) | **GET** /settings/v2/tenant/{tenant}/employees | Gets a list of employees
+*TagTypesApi* | [**tagTypesGetList**](docs/Api/TagTypesApi.md#tagtypesgetlist) | **GET** /settings/v2/tenant/{tenant}/tag-types | Gets a list of tag types
+*TechniciansApi* | [**techniciansGet**](docs/Api/TechniciansApi.md#techniciansget) | **GET** /settings/v2/tenant/{tenant}/technicians/{id} | Gets a technician by ID
+*TechniciansApi* | [**techniciansGetList**](docs/Api/TechniciansApi.md#techniciansgetlist) | **GET** /settings/v2/tenant/{tenant}/technicians | Gets a list of technicians
 
 ## Models
 

@@ -336,7 +336,7 @@ class CustomerMembershipsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/memberships/sale';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/memberships/sale';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -674,7 +674,7 @@ class CustomerMembershipsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/memberships/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/memberships/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1048,7 +1048,7 @@ class CustomerMembershipsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/memberships';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/memberships';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1528,7 +1528,7 @@ class CustomerMembershipsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/memberships/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/memberships/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

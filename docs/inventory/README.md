@@ -100,29 +100,29 @@ try {
 
 ## API Endpoints
 
-All URIs are relative to *https://api-integration.servicetitan.io/inventory/v2*
+All URIs are relative to *https://api-integration.servicetitan.io*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AdjustmentsApi* | [**adjustmentsGet**](docs/Api/AdjustmentsApi.md#adjustmentsget) | **GET** /tenant/{tenant}/adjustments | Get a list of inventory adjustments
-*AdjustmentsApi* | [**adjustmentsUpdateCustomFields**](docs/Api/AdjustmentsApi.md#adjustmentsupdatecustomfields) | **PATCH** /tenant/{tenant}/adjustments/custom-fields | Update custom fields on adjustments
-*PurchaseOrderTypesApi* | [**purchaseOrderTypesGetList**](docs/Api/PurchaseOrderTypesApi.md#purchaseordertypesgetlist) | **GET** /tenant/{tenant}/purchase-order-types | Get a list of purchase order types
-*PurchaseOrdersApi* | [**purchaseOrdersCreate**](docs/Api/PurchaseOrdersApi.md#purchaseorderscreate) | **POST** /tenant/{tenant}/purchase-orders | Create a new purchase order
-*PurchaseOrdersApi* | [**purchaseOrdersGetById**](docs/Api/PurchaseOrdersApi.md#purchaseordersgetbyid) | **GET** /tenant/{tenant}/purchase-orders/{id} | Get purchase order by Id
-*PurchaseOrdersApi* | [**purchaseOrdersGetList**](docs/Api/PurchaseOrdersApi.md#purchaseordersgetlist) | **GET** /tenant/{tenant}/purchase-orders | Get a list of purchase orders
-*PurchaseOrdersApi* | [**purchaseOrdersUpdate**](docs/Api/PurchaseOrdersApi.md#purchaseordersupdate) | **PATCH** /tenant/{tenant}/purchase-orders/{id} | Update an existing purchase order
-*ReceiptsApi* | [**receiptsGet**](docs/Api/ReceiptsApi.md#receiptsget) | **GET** /tenant/{tenant}/receipts | Get a list of receipts
-*ReceiptsApi* | [**receiptsUpdateCustomFields**](docs/Api/ReceiptsApi.md#receiptsupdatecustomfields) | **PATCH** /tenant/{tenant}/receipts/custom-fields | Update custom fields on receipts
-*ReturnsApi* | [**returnsGet**](docs/Api/ReturnsApi.md#returnsget) | **GET** /tenant/{tenant}/returns | Get a list of returns
-*ReturnsApi* | [**returnsUpdateCustomFields**](docs/Api/ReturnsApi.md#returnsupdatecustomfields) | **PATCH** /tenant/{tenant}/returns/custom-fields | Update custom fields on returns
-*TransfersApi* | [**transfersGet**](docs/Api/TransfersApi.md#transfersget) | **GET** /tenant/{tenant}/transfers | Get a list of transfers
-*TransfersApi* | [**transfersUpdateCustomFields**](docs/Api/TransfersApi.md#transfersupdatecustomfields) | **PATCH** /tenant/{tenant}/transfers/custom-fields | Update custom fields on transfers
-*TrucksApi* | [**trucksGetList**](docs/Api/TrucksApi.md#trucksgetlist) | **GET** /tenant/{tenant}/trucks | Get a list of trucks
-*VendorsApi* | [**vendorsCreate**](docs/Api/VendorsApi.md#vendorscreate) | **POST** /tenant/{tenant}/vendors | Create a new vendor
-*VendorsApi* | [**vendorsGetById**](docs/Api/VendorsApi.md#vendorsgetbyid) | **GET** /tenant/{tenant}/vendors/{id} | Get vendor by Id
-*VendorsApi* | [**vendorsGetList**](docs/Api/VendorsApi.md#vendorsgetlist) | **GET** /tenant/{tenant}/vendors | Get a list of vendors
-*VendorsApi* | [**vendorsUpdate**](docs/Api/VendorsApi.md#vendorsupdate) | **PATCH** /tenant/{tenant}/vendors/{id} | Update an existing vendor
-*WarehousesApi* | [**warehousesGetList**](docs/Api/WarehousesApi.md#warehousesgetlist) | **GET** /tenant/{tenant}/warehouses | Get a list of warehouses
+*AdjustmentsApi* | [**adjustmentsGet**](docs/Api/AdjustmentsApi.md#adjustmentsget) | **GET** /inventory/v2/tenant/{tenant}/adjustments | Get a list of inventory adjustments
+*AdjustmentsApi* | [**adjustmentsUpdateCustomFields**](docs/Api/AdjustmentsApi.md#adjustmentsupdatecustomfields) | **PATCH** /inventory/v2/tenant/{tenant}/adjustments/custom-fields | Update custom fields on adjustments
+*PurchaseOrderTypesApi* | [**purchaseOrderTypesGetList**](docs/Api/PurchaseOrderTypesApi.md#purchaseordertypesgetlist) | **GET** /inventory/v2/tenant/{tenant}/purchase-order-types | Get a list of purchase order types
+*PurchaseOrdersApi* | [**purchaseOrdersCreate**](docs/Api/PurchaseOrdersApi.md#purchaseorderscreate) | **POST** /inventory/v2/tenant/{tenant}/purchase-orders | Create a new purchase order
+*PurchaseOrdersApi* | [**purchaseOrdersGetById**](docs/Api/PurchaseOrdersApi.md#purchaseordersgetbyid) | **GET** /inventory/v2/tenant/{tenant}/purchase-orders/{id} | Get purchase order by Id
+*PurchaseOrdersApi* | [**purchaseOrdersGetList**](docs/Api/PurchaseOrdersApi.md#purchaseordersgetlist) | **GET** /inventory/v2/tenant/{tenant}/purchase-orders | Get a list of purchase orders
+*PurchaseOrdersApi* | [**purchaseOrdersUpdate**](docs/Api/PurchaseOrdersApi.md#purchaseordersupdate) | **PATCH** /inventory/v2/tenant/{tenant}/purchase-orders/{id} | Update an existing purchase order
+*ReceiptsApi* | [**receiptsGet**](docs/Api/ReceiptsApi.md#receiptsget) | **GET** /inventory/v2/tenant/{tenant}/receipts | Get a list of receipts
+*ReceiptsApi* | [**receiptsUpdateCustomFields**](docs/Api/ReceiptsApi.md#receiptsupdatecustomfields) | **PATCH** /inventory/v2/tenant/{tenant}/receipts/custom-fields | Update custom fields on receipts
+*ReturnsApi* | [**returnsGet**](docs/Api/ReturnsApi.md#returnsget) | **GET** /inventory/v2/tenant/{tenant}/returns | Get a list of returns
+*ReturnsApi* | [**returnsUpdateCustomFields**](docs/Api/ReturnsApi.md#returnsupdatecustomfields) | **PATCH** /inventory/v2/tenant/{tenant}/returns/custom-fields | Update custom fields on returns
+*TransfersApi* | [**transfersGet**](docs/Api/TransfersApi.md#transfersget) | **GET** /inventory/v2/tenant/{tenant}/transfers | Get a list of transfers
+*TransfersApi* | [**transfersUpdateCustomFields**](docs/Api/TransfersApi.md#transfersupdatecustomfields) | **PATCH** /inventory/v2/tenant/{tenant}/transfers/custom-fields | Update custom fields on transfers
+*TrucksApi* | [**trucksGetList**](docs/Api/TrucksApi.md#trucksgetlist) | **GET** /inventory/v2/tenant/{tenant}/trucks | Get a list of trucks
+*VendorsApi* | [**vendorsCreate**](docs/Api/VendorsApi.md#vendorscreate) | **POST** /inventory/v2/tenant/{tenant}/vendors | Create a new vendor
+*VendorsApi* | [**vendorsGetById**](docs/Api/VendorsApi.md#vendorsgetbyid) | **GET** /inventory/v2/tenant/{tenant}/vendors/{id} | Get vendor by Id
+*VendorsApi* | [**vendorsGetList**](docs/Api/VendorsApi.md#vendorsgetlist) | **GET** /inventory/v2/tenant/{tenant}/vendors | Get a list of vendors
+*VendorsApi* | [**vendorsUpdate**](docs/Api/VendorsApi.md#vendorsupdate) | **PATCH** /inventory/v2/tenant/{tenant}/vendors/{id} | Update an existing vendor
+*WarehousesApi* | [**warehousesGetList**](docs/Api/WarehousesApi.md#warehousesgetlist) | **GET** /inventory/v2/tenant/{tenant}/warehouses | Get a list of warehouses
 
 ## Models
 

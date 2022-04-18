@@ -336,7 +336,7 @@ class PaymentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payments';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -733,7 +733,7 @@ class PaymentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payments';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payments';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1248,7 +1248,7 @@ class PaymentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payments/{id}';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payments/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1511,7 +1511,7 @@ class PaymentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payments/custom-fields';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payments/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1766,7 +1766,7 @@ class PaymentsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/payments/status';
+        $resourcePath = '/accounting/v2/tenant/{tenant}/payments/status';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

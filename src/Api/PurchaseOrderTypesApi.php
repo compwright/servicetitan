@@ -346,7 +346,7 @@ class PurchaseOrderTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/purchase-order-types';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/purchase-order-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

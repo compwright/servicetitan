@@ -336,7 +336,7 @@ class CapacityApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/capacity';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/capacity';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

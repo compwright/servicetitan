@@ -441,7 +441,7 @@ class ReturnsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/returns';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/returns';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -932,7 +932,7 @@ class ReturnsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/returns/custom-fields';
+        $resourcePath = '/inventory/v2/tenant/{tenant}/returns/custom-fields';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

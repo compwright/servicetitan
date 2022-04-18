@@ -362,7 +362,7 @@ class ZoneApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/zones/{id}';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/zones/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -686,7 +686,7 @@ class ZoneApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/zones';
+        $resourcePath = '/dispatch/v2/tenant/{tenant}/zones';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

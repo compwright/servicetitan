@@ -357,7 +357,7 @@ class TimesheetsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/jobs/{job}/timesheets';
+        $resourcePath = '/payroll/v2/tenant/{tenant}/jobs/{job}/timesheets';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

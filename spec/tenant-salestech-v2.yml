@@ -3,9 +3,9 @@ info:
   title: Sales & Estimates
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/sales/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/estimates/{id}':
+  '/sales/v2/tenant/{tenant}/estimates/{id}':
     get:
       tags:
         - Estimates
@@ -180,7 +180,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates':
+  '/sales/v2/tenant/{tenant}/estimates':
     get:
       tags:
         - Estimates
@@ -478,7 +478,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/items':
+  '/sales/v2/tenant/{tenant}/estimates/items':
     get:
       tags:
         - Estimates
@@ -587,7 +587,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/{id}/sell':
+  '/sales/v2/tenant/{tenant}/estimates/{id}/sell':
     put:
       tags:
         - Estimates
@@ -670,7 +670,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/{id}/unsell':
+  '/sales/v2/tenant/{tenant}/estimates/{id}/unsell':
     put:
       tags:
         - Estimates
@@ -706,7 +706,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/{id}/dismiss':
+  '/sales/v2/tenant/{tenant}/estimates/{id}/dismiss':
     put:
       tags:
         - Estimates
@@ -742,7 +742,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/{id}/items':
+  '/sales/v2/tenant/{tenant}/estimates/{id}/items':
     put:
       tags:
         - Estimates
@@ -819,7 +819,7 @@ paths:
                 traceId: string
                 errors: { }
                 data: { }
-  '/tenant/{tenant}/estimates/{id}/items/{itemId}':
+  '/sales/v2/tenant/{tenant}/estimates/{id}/items/{itemId}':
     delete:
       tags:
         - Estimates

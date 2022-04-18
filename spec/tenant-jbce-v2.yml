@@ -3,9 +3,9 @@ info:
   title: Job Booking
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io/jbce/v2
+  - url: https://api-integration.servicetitan.io
 paths:
-  '/tenant/{tenant}/call-reasons':
+  '/jbce/v2/tenant/{tenant}/call-reasons':
     get:
       tags:
         - CallReasons

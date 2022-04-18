@@ -362,7 +362,7 @@ class RecurringServiceTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-service-types/{id}';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-service-types/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -711,7 +711,7 @@ class RecurringServiceTypesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/recurring-service-types';
+        $resourcePath = '/memberships/v2/tenant/{tenant}/recurring-service-types';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

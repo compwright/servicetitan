@@ -336,7 +336,7 @@ class CategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/categories';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -605,7 +605,7 @@ class CategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/categories/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -945,7 +945,7 @@ class CategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/categories/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1279,7 +1279,7 @@ class CategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/categories';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1671,7 +1671,7 @@ class CategoriesApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/categories/{id}';
+        $resourcePath = '/pricebook/v2/tenant/{tenant}/categories/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

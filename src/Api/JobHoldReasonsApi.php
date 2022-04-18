@@ -351,7 +351,7 @@ class JobHoldReasonsApi
             );
         }
 
-        $resourcePath = '/tenant/{tenant}/job-hold-reasons';
+        $resourcePath = '/jpm/v2/tenant/{tenant}/job-hold-reasons';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
