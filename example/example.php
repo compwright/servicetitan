@@ -31,7 +31,9 @@ $httpClient = new GuzzleHttp([
     ]
 ]);
 
-$config = (new Configuration())->setApiKey('ST-App-Key', $appKey);
+$config = (new Configuration())
+    ->setApiKey('ST-App-Key', $appKey)
+    ->setHost('https://api-integration.servicetitan.io');
 
 $client = new CustomersApi($httpClient, $config);
 
