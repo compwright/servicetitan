@@ -3,7 +3,7 @@ info:
   title: Accounting
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/accounting/v2/tenant/{tenant}/inventory-bills':
     get:

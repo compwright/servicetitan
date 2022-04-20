@@ -59,7 +59,7 @@ class TaskManagementClient extends \CompWright\ServiceTitan\Runtime\Client\Clien
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api-integration.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);

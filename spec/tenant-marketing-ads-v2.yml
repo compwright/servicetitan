@@ -3,7 +3,7 @@ info:
   title: Marketing Ads
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/marketingads/v2/tenant/{tenant}/web-booking-attributions':
     post:

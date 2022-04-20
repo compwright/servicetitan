@@ -3,7 +3,7 @@ info:
   title: Job Planning and Management
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/jpm/v2/tenant/{tenant}/appointments/{id}':
     get:

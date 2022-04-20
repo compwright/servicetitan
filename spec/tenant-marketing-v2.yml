@@ -3,7 +3,7 @@ info:
   title: Marketing
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/marketing/v2/tenant/{tenant}/categories':
     get:

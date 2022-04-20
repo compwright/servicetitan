@@ -3,7 +3,7 @@ info:
   title: Settings
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/settings/v2/tenant/{tenant}/business-units':
     get:

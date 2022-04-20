@@ -3,7 +3,7 @@ info:
   title: Inventory
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/inventory/v2/tenant/{tenant}/adjustments':
     get:

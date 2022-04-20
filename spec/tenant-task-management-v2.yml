@@ -3,7 +3,7 @@ info:
   title: Task Management
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/taskmanagement/v2/tenant/{tenant}/data':
     get:

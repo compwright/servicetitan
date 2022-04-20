@@ -3,7 +3,7 @@ info:
   title: Forms
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/forms/v2/tenant/{tenant}/jobs/{id}/attachments':
     post:

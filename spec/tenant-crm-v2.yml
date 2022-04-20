@@ -3,7 +3,7 @@ info:
   title: CRM
   version: '1.0'
 servers:
-  - url: https://api-integration.servicetitan.io
+  - url: https://api.servicetitan.io
 paths:
   '/crm/v2/tenant/{tenant}/bookings/{id}':
     get:
