@@ -31,7 +31,8 @@ $urlFactory = Psr17FactoryDiscovery::findUrlFactory();
 
 $plugins = [
     new AddHostPlugin(
-        $urlFactory->createUri('https://api-integration.servicetitan.io')
+        $urlFactory->createUri('https://api-integration.servicetitan.io'),
+        ['replace' => true]
     ),
     new AuthenticationRegistry([
         new AppKeyAuthentication($appKey),
@@ -42,5 +43,6 @@ $plugins = [
 $crmClient = CrmClient::create(null, $plugins);
 
 $response = $crmClient->customersGetList($tenantId, [], CrmClient::FETCH_RESPONSE);
+$data = json_decode($response->getBody()->getContents());
 
-var_dump($response->getBody());
+print_r($data);
