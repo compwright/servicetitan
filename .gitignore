@@ -14,5 +14,6 @@ composer.phar
 # PHPUnit cache
 .phpunit.result.cache
 
-# Secrets
+# Other
+.DS_Store
 .env
