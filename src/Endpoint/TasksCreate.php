@@ -67,6 +67,6 @@ class TasksCreate extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint i
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

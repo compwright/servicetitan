@@ -69,6 +69,6 @@ class NonJobAppointmentsCreate extends \CompWright\ServiceTitan\Runtime\Client\B
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

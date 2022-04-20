@@ -30,13 +30,11 @@ file_put_contents(
     )
 );
 
-foreach (['Authentication', 'Runtime'] as $dir) {
-    if (!file_exists("src/$dir")) {
-        rename("build/$dir", "src/$dir");
-    }
+if (!file_exists("src/Runtime")) {
+    rename("build/Runtime", "src/Runtime");
 }
 
-foreach (['Endpoint', 'Exception', 'Model', 'Normalizer'] as $dir) {
+foreach (['Authentication', 'Endpoint', 'Exception', 'Model', 'Normalizer'] as $dir) {
     if (!file_exists("src/$dir/")) {
         mkdir("src/$dir");
     }

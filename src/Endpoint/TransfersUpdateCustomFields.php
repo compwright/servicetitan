@@ -69,6 +69,6 @@ class TransfersUpdateCustomFields extends \CompWright\ServiceTitan\Runtime\Clien
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

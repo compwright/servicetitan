@@ -76,6 +76,6 @@ class JobsHold extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

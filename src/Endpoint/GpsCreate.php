@@ -72,6 +72,6 @@ class GpsCreate extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

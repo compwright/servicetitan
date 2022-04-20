@@ -78,6 +78,6 @@ class AppointmentsUpdateSpecialInstructions extends \CompWright\ServiceTitan\Run
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

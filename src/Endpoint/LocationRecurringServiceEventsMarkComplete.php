@@ -76,6 +76,6 @@ class LocationRecurringServiceEventsMarkComplete extends \CompWright\ServiceTita
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

@@ -71,6 +71,6 @@ class EmployeesGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

@@ -88,6 +88,6 @@ class LocationsGetLocationsContactsList extends \CompWright\ServiceTitan\Runtime
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

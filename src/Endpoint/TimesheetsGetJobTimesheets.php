@@ -87,6 +87,6 @@ class TimesheetsGetJobTimesheets extends \CompWright\ServiceTitan\Runtime\Client
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

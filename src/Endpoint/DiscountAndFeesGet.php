@@ -88,6 +88,6 @@ class DiscountAndFeesGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEnd
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

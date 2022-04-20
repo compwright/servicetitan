@@ -71,6 +71,6 @@ class MembershipTypesGetDiscountsList extends \CompWright\ServiceTitan\Runtime\C
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

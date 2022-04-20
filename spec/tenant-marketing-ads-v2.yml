@@ -163,14 +163,13 @@ components:
       additionalProperties: false
       description: "Data from the web session used by the attribution system to determine the marketing campaign that\nled the user to this particular web session."
   securitySchemes:
-    apiKeyHeader:
+    appKey:
       type: apiKey
       name: ST-App-Key
       in: header
-    apiKeyQuery:
-      type: apiKey
-      name: servicetitanapplicationkey
-      in: query
+    bearerToken:
+      type: http
+      scheme: bearer
 security:
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+  - appKey: [ ]
+  - bearerToken: [ ]

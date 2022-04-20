@@ -69,6 +69,6 @@ class WebBookingAttributionsCreate extends \CompWright\ServiceTitan\Runtime\Clie
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

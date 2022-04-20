@@ -95,6 +95,6 @@ class PayrollsGetTechnicianPayrolls extends \CompWright\ServiceTitan\Runtime\Cli
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

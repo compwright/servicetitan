@@ -3433,14 +3433,13 @@ components:
           nullable: true
       additionalProperties: false
   securitySchemes:
-    apiKeyHeader:
+    appKey:
       type: apiKey
       name: ST-App-Key
       in: header
-    apiKeyQuery:
-      type: apiKey
-      name: servicetitanapplicationkey
-      in: query
+    bearerToken:
+      type: http
+      scheme: bearer
 security:
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+  - appKey: [ ]
+  - bearerToken: [ ]

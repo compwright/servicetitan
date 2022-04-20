@@ -107,14 +107,13 @@ components:
       additionalProperties: false
       description: 'Detailed error response, following RFC 7807 recommendations (https://tools.ietf.org/html/rfc7807).'
   securitySchemes:
-    apiKeyHeader:
+    appKey:
       type: apiKey
       name: ST-App-Key
       in: header
-    apiKeyQuery:
-      type: apiKey
-      name: servicetitanapplicationkey
-      in: query
+    bearerToken:
+      type: http
+      scheme: bearer
 security:
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+  - appKey: [ ]
+  - bearerToken: [ ]

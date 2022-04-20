@@ -10,24 +10,25 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan\Authentication;
 
-class ApiKeyHeaderAuthentication implements \Jane\Component\OpenApiRuntime\Client\AuthenticationPlugin
+class BearerTokenAuthentication implements \Jane\Component\OpenApiRuntime\Client\AuthenticationPlugin
 {
-    private $apiKey;
+    private $token;
 
-    public function __construct(string $apiKey)
+    public function __construct(string $token)
     {
-        $this->{'apiKey'} = $apiKey;
+        $this->{'token'} = $token;
     }
 
     public function authentication(\Psr\Http\Message\RequestInterface $request): \Psr\Http\Message\RequestInterface
     {
-        $request = $request->withHeader('ST-App-Key', $this->{'apiKey'});
+        $header = sprintf('Bearer %s', $this->{'token'});
+        $request = $request->withHeader('Authorization', $header);
 
         return $request;
     }
 
     public function getScope(): string
     {
-        return 'apiKeyHeader';
+        return 'bearerToken';
     }
 }

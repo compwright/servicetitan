@@ -1,10 +1,12 @@
 <?php
 
 use Compwright\OAuth2_Servicetitan\SandboxProvider;
+use CompWright\ServiceTitan\Authentication\AppKeyAuthentication;
+use CompWright\ServiceTitan\Authentication\BearerTokenAuthentication;
 use CompWright\ServiceTitan\CrmClient;
 use Http\Client\Common\Plugin\AddHostPlugin;
-use Http\Client\Common\Plugin\HeaderSetPlugin;
 use Http\Discovery\Psr17FactoryDiscovery;
+use Jane\Component\OpenApiRuntime\Client\Plugin\AuthenticationRegistry;
 use Symfony\Component\Dotenv\Dotenv;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
@@ -28,21 +30,17 @@ $token = $oauth->getAccessToken('client_credentials');
 $urlFactory = Psr17FactoryDiscovery::findUrlFactory();
 
 $plugins = [
-    new HeaderSetPlugin([
-        'ST-App-Key' => $appKey,
-        'Authorization' => 'Bearer ' . $token->getToken()
-    ]),
     new AddHostPlugin(
         $urlFactory->createUri('https://api-integration.servicetitan.io')
-    )
+    ),
+    new AuthenticationRegistry([
+        new AppKeyAuthentication($appKey),
+        new BearerTokenAuthentication($token->getToken())
+    ]),
 ];
 
 $crmClient = CrmClient::create(null, $plugins);
 
-$customers = $crmClient->customersGetList($tenantId);
+$response = $crmClient->customersGetList($tenantId, [], CrmClient::FETCH_RESPONSE);
 
-if ($customers) {
-    var_dump($customers->getData());
-} else {
-    var_dump($customers);
-}
+var_dump($response->getBody());

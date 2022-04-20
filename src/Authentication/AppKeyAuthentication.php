@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan\Authentication;
 
-class ApiKeyQueryAuthentication implements \Jane\Component\OpenApiRuntime\Client\AuthenticationPlugin
+class AppKeyAuthentication implements \Jane\Component\OpenApiRuntime\Client\AuthenticationPlugin
 {
     private $apiKey;
 
@@ -21,20 +21,13 @@ class ApiKeyQueryAuthentication implements \Jane\Component\OpenApiRuntime\Client
 
     public function authentication(\Psr\Http\Message\RequestInterface $request): \Psr\Http\Message\RequestInterface
     {
-        $uri = $request->getUri();
-        $query = $uri->getQuery();
-        $params = [];
-        parse_str($query, $params);
-        $params = array_merge($params, ['servicetitanapplicationkey' => $this->{'apiKey'}]);
-        $query = http_build_query($params, null, '&');
-        $uri = $uri->withQuery($query);
-        $request = $request->withUri($uri);
+        $request = $request->withHeader('ST-App-Key', $this->{'apiKey'});
 
         return $request;
     }
 
     public function getScope(): string
     {
-        return 'apiKeyQuery';
+        return 'appKey';
     }
 }

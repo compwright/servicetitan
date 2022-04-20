@@ -69,6 +69,6 @@ class JobsCreate extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint im
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

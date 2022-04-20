@@ -118,6 +118,6 @@ class AdjustmentsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoin
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

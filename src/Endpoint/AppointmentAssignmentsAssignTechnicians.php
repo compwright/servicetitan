@@ -73,6 +73,6 @@ class AppointmentAssignmentsAssignTechnicians extends \CompWright\ServiceTitan\R
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

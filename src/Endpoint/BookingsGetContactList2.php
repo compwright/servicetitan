@@ -94,6 +94,6 @@ class BookingsGetContactList2 extends \CompWright\ServiceTitan\Runtime\Client\Ba
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

@@ -71,6 +71,6 @@ class InvoiceTemplatesGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEn
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

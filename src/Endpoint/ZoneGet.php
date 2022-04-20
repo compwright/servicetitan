@@ -71,6 +71,6 @@ class ZoneGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint imple
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

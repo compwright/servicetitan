@@ -100,6 +100,6 @@ class MembershipTypesGetList extends \CompWright\ServiceTitan\Runtime\Client\Bas
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

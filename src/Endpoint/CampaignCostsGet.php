@@ -67,6 +67,6 @@ class CampaignCostsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpo
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

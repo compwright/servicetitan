@@ -87,6 +87,6 @@ class JobHoldReasonsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }

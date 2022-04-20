@@ -76,6 +76,6 @@ class PurchaseOrdersUpdate extends \CompWright\ServiceTitan\Runtime\Client\BaseE
 
     public function getAuthenticationScopes(): array
     {
-        return ['apiKeyHeader', 'apiKeyQuery'];
+        return ['appKey', 'bearerToken'];
     }
 }
