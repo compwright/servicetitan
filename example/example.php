@@ -1,9 +1,10 @@
 <?php
 
 use Compwright\OAuth2_Servicetitan\SandboxProvider;
-use CompWright\ServiceTitan\Api\CustomersApi;
-use CompWright\ServiceTitan\Configuration;
-use GuzzleHttp\Client as GuzzleHttp;
+use CompWright\ServiceTitan\CrmClient;
+use Http\Client\Common\Plugin\AddHostPlugin;
+use Http\Client\Common\Plugin\HeaderSetPlugin;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Symfony\Component\Dotenv\Dotenv;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
@@ -24,18 +25,24 @@ $oauth = new SandboxProvider([
 
 $token = $oauth->getAccessToken('client_credentials');
 
-$httpClient = new GuzzleHttp([
-    'headers' => [
-        'Authorization' => 'Bearer ' . $token->getToken(),
+$urlFactory = Psr17FactoryDiscovery::findUrlFactory();
+
+$plugins = [
+    new HeaderSetPlugin([
         'ST-App-Key' => $appKey,
-    ]
-]);
+        'Authorization' => 'Bearer ' . $token->getToken()
+    ]),
+    new AddHostPlugin(
+        $urlFactory->createUri('https://api-integration.servicetitan.io')
+    )
+];
 
-$config = (new Configuration())
-    ->setApiKey('ST-App-Key', $appKey)
-    ->setHost('https://api-integration.servicetitan.io');
+$crmClient = CrmClient::create(null, $plugins);
 
-$client = new CustomersApi($httpClient, $config);
+$customers = $crmClient->customersGetList($tenantId);
 
-$customers = $client->customersGetList($tenantId);
-print_r($customers);
+if ($customers) {
+    var_dump($customers->getData());
+} else {
+    var_dump($customers);
+}
