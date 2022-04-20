@@ -9,7 +9,10 @@ composer.phar
 
 # php-cs-fixer cache
 .php_cs.cache
+*.cache
 
 # PHPUnit cache
 .phpunit.result.cache
+
+# Secrets
 .env

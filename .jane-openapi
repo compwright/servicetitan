@@ -1,0 +1,10 @@
+<?php
+
+$target = getenv('TARGET');
+
+return [
+    'openapi-file' => __DIR__ . '/spec/tenant-' . $target . '-v2.yml',
+    'namespace' => 'CompWright\ServiceTitan',
+    'directory' => __DIR__ . '/build',
+    'use-fixer' => true,
+];

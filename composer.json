@@ -1,11 +1,9 @@
 {
     "name": "compwright/servicetitan",
-    "description": "ServiceTitan v2 API client for PHP (generated with OpenAPI Generator)",
+    "description": "ServiceTitan v2 API client for PHP",
     "keywords": [
         "servicetitan",
         "service-titan",
-        "openapitools",
-        "openapi-generator",
         "openapi",
         "php",
         "sdk",
@@ -18,31 +16,20 @@
         {
             "name": "Jonathon Hill",
             "homepage": "https://compwright.com"
-        },
-        {
-            "name": "OpenAPI Generator",
-            "homepage": "https://openapi-generator.tech"
         }
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-mbstring": "*",
-        "guzzlehttp/guzzle": "^7.3",
-        "guzzlehttp/psr7": "^1.7 || ^2.0"
+        "jane-php/open-api-runtime": "^7.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0 || ^9.0",
-        "friendsofphp/php-cs-fixer": "^2.12",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "compwright/oauth2-servicetitan": "^1.0",
-        "symfony/dotenv": "^5.4"
+        "symfony/dotenv": "^5.4",
+        "jane-php/open-api-3": "^7.2",
+        "jawira/case-converter": "^3.4"
     },
     "autoload": {
         "psr-4": { "CompWright\\ServiceTitan\\" : "src/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "CompWright\\ServiceTitan\\Test\\" : "test/" }
     },
     "scripts": {
         "test": [
