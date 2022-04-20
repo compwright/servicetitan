@@ -19,6 +19,8 @@
         }
     ],
     "require": {
+        "php": "^7.2 || ^8.0",
+        "ext-json": "*",
         "jane-php/open-api-runtime": "^7.2"
     },
     "require-dev": {
@@ -28,12 +30,10 @@
         "jane-php/open-api-3": "^7.2",
         "jawira/case-converter": "^3.4"
     },
+    "suggest": {
+        "compwright/oauth2-servicetitan": "ServiceTitan OAuth 2.0 Client Provider for The PHP League OAuth2-Client"
+    },
     "autoload": {
         "psr-4": { "CompWright\\ServiceTitan\\" : "src/" }
-    },
-    "scripts": {
-        "test": [
-            "phpunit"
-        ]
     }
 }
