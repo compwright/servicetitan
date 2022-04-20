@@ -16,68 +16,9 @@ Install via Composer:
 composer require compwright/servicetitan
 ```
 
-## Getting Started
+## Usage
 
-```php
-<?php
-
-use Compwright\OAuth2_Servicetitan\SandboxProvider;
-use CompWright\ServiceTitan\CrmClient;
-use Http\Client\Common\Plugin\AddHostPlugin;
-use Http\Client\Common\Plugin\HeaderSetPlugin;
-use Http\Discovery\Psr17FactoryDiscovery;
-use Symfony\Component\Dotenv\Dotenv;
-
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$urlFactory = Psr17FactoryDiscovery::findUrlFactory();
-
-$plugins = [
-    new HeaderSetPlugin([
-        'ST-App-Key' => $appKey,
-        'Authorization' => 'Bearer ' . $oauthToken
-    ]),
-    new AddHostPlugin(
-        $urlFactory->createUri('https://api-integration.servicetitan.io')
-    )
-];
-
-$crmClient = CrmClient::create(null, $plugins);
-
-$booking_provider = 56; // int | Format - int64.
-
-$tenant = 56; // int | Tenant ID
-
-$request = [
-    "source" => "string",
-    "name" => "string",
-    "address" => [
-        "street" => "string",
-        "unit" => "string",
-        "city" => "string",
-        "state" => "string",
-        "zip" => "string",
-        "country" => "string"
-    ],
-    "contacts" => [
-        ["type" => "Phone", "value" => "string", "memo" => "string"]
-    ],
-    "customerType" => "string",
-    "start" => "string",
-    "summary" => "string",
-    "campaignId" => 0,
-    "businessUnitId" => 0,
-    "jobTypeId" => 0,
-    "priority" => [],
-    "isFirstTimeClient" => true,
-    "uploadedImages" => ["string"],
-    "isSendConfirmationEmail" => true,
-    "externalId" => "string",
-];
-
-$result = $crmClient->bookingsCreate($tenant, $booking_provider, $request);
-print_r($result);
-```
+See [example.php](example/example.php)
 
 ## Tests
 
