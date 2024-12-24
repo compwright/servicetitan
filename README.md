@@ -16,15 +16,6 @@ composer require compwright/servicetitan
 
 See [example.php](example/example.php)
 
-## Tests
-
-To run the tests, use:
-
-```bash
-composer install
-composer run test
-```
-
 ## Author
 
 Jonathon Hill, CompWright Enterprises LLC (https://compwright.com)
