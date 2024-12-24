@@ -1,12 +1,9 @@
 <?php
 
+namespace CompWright\ServiceTitan;
+
 use Compwright\OAuth2_Servicetitan\SandboxProvider;
-use CompWright\ServiceTitan\Authentication\AppKeyAuthentication;
-use CompWright\ServiceTitan\Authentication\BearerTokenAuthentication;
-use CompWright\ServiceTitan\CrmClient;
-use Http\Client\Common\Plugin\AddHostPlugin;
-use Http\Discovery\Psr17FactoryDiscovery;
-use Jane\Component\OpenApiRuntime\Client\Plugin\AuthenticationRegistry;
+use GuzzleHttp\Client;
 use Symfony\Component\Dotenv\Dotenv;
 
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
@@ -25,24 +22,16 @@ $oauth = new SandboxProvider([
     'redirectUri' => '',
 ]);
 
-$token = $oauth->getAccessToken('client_credentials');
+$customersApi = new Api\CustomersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new Client(),
+    Configuration::getDefaultConfiguration()->setAccessToken(
+        $oauth->getAccessToken('client_credentials')->getToken()
+    )
+);
 
-$urlFactory = Psr17FactoryDiscovery::findUrlFactory();
-
-$plugins = [
-    new AddHostPlugin(
-        $urlFactory->createUri('https://api-integration.servicetitan.io'),
-        ['replace' => true]
-    ),
-    new AuthenticationRegistry([
-        new AppKeyAuthentication($appKey),
-        new BearerTokenAuthentication($token->getToken())
-    ]),
-];
-
-$crmClient = CrmClient::create(null, $plugins);
-
-$response = $crmClient->customersGetList($tenantId, [], CrmClient::FETCH_RESPONSE);
-$data = json_decode($response->getBody()->getContents());
+$response = $customersApi->customersGetList($tenantId);
+$data = $response->getData();
 
 print_r($data);

@@ -6,5 +6,4 @@ MODULES := $(SOURCES:spec/tenant-%-v2.yml=%)
 all: ${MODULES}
 
 %:
-	@php build.php $@
-	@rm -Rf build
+	npx @openapitools/openapi-generator-cli generate -i spec/tenant-$@-v2.yml -g php -c openapi-config.yml

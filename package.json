@@ -1,0 +1,25 @@
+{
+  "name": "servicetitan",
+  "version": "1.0.0",
+  "description": "ServiceTitan v2 API client for PHP",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compwright/servicetitan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/compwright/servicetitan/issues"
+  },
+  "homepage": "https://github.com/compwright/servicetitan#readme",
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.15.3"
+  }
+}

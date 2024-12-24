@@ -1,0 +1,7 @@
+composerPackageName: compwright/servicetitan
+invokerPackage: CompWright\ServiceTitan
+library: guzzle
+licenseName: MIT
+developerOrganization: Jonathon Hill
+developerOrganizationUrl: https://compwright.com
+artifactUrl: https://github.org/compwright/servicetitan
