@@ -19,15 +19,15 @@ class EstimatesGetItems extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $estimateId format - int64
-     *     @var string $ids
-     *     @var string $active Values: [True, Any, False]
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     * }
+     * @var int    $estimateId format - int64
+     * @var string $ids
+     * @var string $active Values: [True, Any, False]
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -61,32 +61,32 @@ class EstimatesGetItems extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
         $optionsResolver->setDefined(['estimateId', 'ids', 'active', 'createdBefore', 'createdOnOrAfter', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('estimateId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('estimateId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEstimatesV2EstimateItemResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\EstimatesGetItemsBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEstimatesV2EstimateItemResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfEstimatesV2EstimateItemResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfEstimatesV2EstimateItemResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\EstimatesGetItemsBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\EstimatesGetItemsBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

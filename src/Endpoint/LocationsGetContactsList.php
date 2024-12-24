@@ -23,10 +23,10 @@ class LocationsGetContactsList extends \CompWright\ServiceTitan\Runtime\Client\B
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -61,35 +61,35 @@ class LocationsGetContactsList extends \CompWright\ServiceTitan\Runtime\Client\B
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationContactResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListNotFoundException
      * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListConflictException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationContactResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfCrmV2LocationContactResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationContactResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListConflictException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationsGetContactsListConflictException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

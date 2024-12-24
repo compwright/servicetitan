@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class PayrollClient extends Runtime\Client\Client
 {
     /**
      * Gets a list of gross pay items.
@@ -18,42 +18,42 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $employeeType The type of employee\
-     *     @var int $employeeId Format - int64. The Employee ID
-     *     @var string $payrollIds The payroll ID
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)
-     *     @var string $dateOnOrBefore Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $employeeType The type of employee\
+     *             Values: [Technician, Employee]
+     * @var int    $employeeId Format - int64. The Employee ID
+     * @var string $payrollIds The payroll ID
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)
+     * @var string $dateOnOrBefore Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsGetListBadRequestException
+     * @return Model\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\GrossPayItemsGetListBadRequestException
      */
     public function grossPayItemsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\GrossPayItemsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\GrossPayItemsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new gross pay item.
      *
-     * @param int                                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemCreateRequest|null $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsCreateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsCreateConflictException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\GrossPayItemsCreateBadRequestException
+     * @throws Exception\GrossPayItemsCreateConflictException
      */
     public function grossPayItemsCreate(int $tenant, ?Model\PayrollV2GrossPayItemsGrossPayItemCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\GrossPayItemsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\GrossPayItemsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -63,31 +63,30 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsDeleteBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\GrossPayItemsDeleteBadRequestException
      */
     public function grossPayItemsDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\GrossPayItemsDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\GrossPayItemsDelete($id, $tenant), $fetch);
     }
 
     /**
      * Update specified gross pay item.
      *
-     * @param int                                                                                 $id          Format - int64. The gross pay item ID
-     * @param int                                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest|null $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. The gross pay item ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsUpdateConflictException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\GrossPayItemsUpdateBadRequestException
+     * @throws Exception\GrossPayItemsUpdateConflictException
      */
     public function grossPayItemsUpdate(int $id, int $tenant, ?Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\GrossPayItemsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\GrossPayItemsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -97,14 +96,14 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\JobSplitsGetListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\JobSplitsGetListConflictException
+     * @return Model\PayrollV2JobSplitsJobSplitResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2JobSplitsJobSplitResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\JobSplitsGetListBadRequestException
+     * @throws Exception\JobSplitsGetListConflictException
      */
     public function jobSplitsGetList(int $job, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\JobSplitsGetList($job, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\JobSplitsGetList($job, $tenant), $fetch);
     }
 
     /**
@@ -113,20 +112,20 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ActivityCodesGetListBadRequestException
+     * @return Model\PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ActivityCodesGetListBadRequestException
      */
     public function activityCodesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ActivityCodesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ActivityCodesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -136,14 +135,14 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ActivityCodesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\ActivityCodesGetNotFoundException
+     * @return Model\PayrollV2PayrollActivityCodesPayrollActivityCodeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2PayrollActivityCodesPayrollActivityCodeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ActivityCodesGetBadRequestException
+     * @throws Exception\ActivityCodesGetNotFoundException
      */
     public function activityCodesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ActivityCodesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\ActivityCodesGet($id, $tenant), $fetch);
     }
 
     /**
@@ -152,40 +151,39 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $employeeIds The comma separated list of employee IDs
-     *     @var string $postedOnOrAfter Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or after certain date/time (in UTC)
-     *     @var string $postedOnOrBefore Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $employeeIds The comma separated list of employee IDs
+     * @var string $postedOnOrAfter Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or after certain date/time (in UTC)
+     * @var string $postedOnOrBefore Format - date-time (as date-time in RFC3339). Return payroll adjustments posted on or before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetListBadRequestException
+     * @return Model\PaginatedResponseOfPayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollAdjustmentsGetListBadRequestException
      */
     public function payrollAdjustmentsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollAdjustmentsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollAdjustmentsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new payroll adjustment.
      *
-     * @param int                                                                                           $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentCreateRequest|null $requestBody
-     * @param string                                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsCreateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsCreateConflictException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollAdjustmentsCreateBadRequestException
+     * @throws Exception\PayrollAdjustmentsCreateConflictException
      */
     public function payrollAdjustmentsCreate(int $tenant, ?Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollAdjustmentsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollAdjustmentsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -195,20 +193,20 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $employeeType The employee type\
-    Values: [Technician, Employee]
-     * }
+     * @var string $employeeType The employee type\
+     *             Values: [Technician, Employee]
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetNotFoundException
+     * @return Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollAdjustmentsGetBadRequestException
+     * @throws Exception\PayrollAdjustmentsGetNotFoundException
      */
     public function payrollAdjustmentsGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollAdjustmentsGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollAdjustmentsGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -217,24 +215,25 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $employeeType The type of employee\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
-     *     @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
-     * }
+     * @var string $employeeType The type of employee\
+     *             Values: [Technician, Employee]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+     * @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetListConflictException
+     * @return Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollsGetListBadRequestException
+     * @throws Exception\PayrollsGetListConflictException
      */
     public function payrollsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -244,23 +243,23 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
-     *     @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+     * @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetTechnicianPayrollsBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetTechnicianPayrollsConflictException
+     * @return Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollsGetTechnicianPayrollsBadRequestException
+     * @throws Exception\PayrollsGetTechnicianPayrollsConflictException
      */
     public function payrollsGetTechnicianPayrolls(int $technician, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollsGetTechnicianPayrolls($technician, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollsGetTechnicianPayrolls($technician, $tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -270,23 +269,23 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
-     *     @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+     * @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsConflictException
+     * @return Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PayrollsGetEmployeePayrollsBadRequestException
+     * @throws Exception\PayrollsGetEmployeePayrollsConflictException
      */
     public function payrollsGetEmployeePayrolls(int $employee, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PayrollsGetEmployeePayrolls($employee, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PayrollsGetEmployeePayrolls($employee, $tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -295,20 +294,20 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TimesheetCodesGetListBadRequestException
+     * @return Model\PaginatedResponseOfPayrollV2TimesheetCodesTimesheetCodeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2TimesheetCodesTimesheetCodeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TimesheetCodesGetListBadRequestException
      */
     public function timesheetCodesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TimesheetCodesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TimesheetCodesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -318,14 +317,14 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TimesheetCodesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\TimesheetCodesGetNotFoundException
+     * @return Model\PayrollV2TimesheetCodesTimesheetCodeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2TimesheetCodesTimesheetCodeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TimesheetCodesGetBadRequestException
+     * @throws Exception\TimesheetCodesGetNotFoundException
      */
     public function timesheetCodesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TimesheetCodesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\TimesheetCodesGet($id, $tenant), $fetch);
     }
 
     /**
@@ -335,20 +334,20 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $technicianId Format - int64. The technician ID
-     *     @var string $startedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)
-     *     @var string $endedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)
-     * }
+     * @var int    $technicianId Format - int64. The technician ID
+     * @var string $startedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)
+     * @var string $endedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TimesheetsGetJobTimesheetsBadRequestException
+     * @return Model\PayrollV2TimesheetsJobTimesheetResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TimesheetsGetJobTimesheetsBadRequestException
      */
     public function timesheetsGetJobTimesheets(int $job, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TimesheetsGetJobTimesheets($job, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TimesheetsGetJobTimesheets($job, $tenant, $queryParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -356,7 +355,7 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -365,7 +364,7 @@ class PayrollClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

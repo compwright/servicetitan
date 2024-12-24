@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingV2CreateCampaignCostRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $campaignId;
@@ -36,6 +45,7 @@ class MarketingV2CreateCampaignCostRequest
 
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -48,6 +58,7 @@ class MarketingV2CreateCampaignCostRequest
 
     public function setYear(int $year): self
     {
+        $this->initialized['year'] = true;
         $this->year = $year;
 
         return $this;
@@ -60,6 +71,7 @@ class MarketingV2CreateCampaignCostRequest
 
     public function setMonth(int $month): self
     {
+        $this->initialized['month'] = true;
         $this->month = $month;
 
         return $this;
@@ -72,6 +84,7 @@ class MarketingV2CreateCampaignCostRequest
 
     public function setDailyCost(float $dailyCost): self
     {
+        $this->initialized['dailyCost'] = true;
         $this->dailyCost = $dailyCost;
 
         return $this;

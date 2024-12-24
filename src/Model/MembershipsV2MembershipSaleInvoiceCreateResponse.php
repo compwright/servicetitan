@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipSaleInvoiceCreateResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of sale invoice created.
      *
      * @var int
@@ -38,6 +47,7 @@ class MembershipsV2MembershipSaleInvoiceCreateResponse
      */
     public function setInvoiceId(int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;
@@ -56,6 +66,7 @@ class MembershipsV2MembershipSaleInvoiceCreateResponse
      */
     public function setCustomerMembershipId(int $customerMembershipId): self
     {
+        $this->initialized['customerMembershipId'] = true;
         $this->customerMembershipId = $customerMembershipId;
 
         return $this;

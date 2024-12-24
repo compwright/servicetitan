@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AppointmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Appointment ID.
      *
      * @var int
@@ -56,8 +65,6 @@ class CrmV2AppointmentResponse
     protected $arrivalWindowEnd;
     /**
      * Appointment's status.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -92,6 +99,7 @@ class CrmV2AppointmentResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -110,6 +118,7 @@ class CrmV2AppointmentResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -128,6 +137,7 @@ class CrmV2AppointmentResponse
      */
     public function setAppointmentNumber(?string $appointmentNumber): self
     {
+        $this->initialized['appointmentNumber'] = true;
         $this->appointmentNumber = $appointmentNumber;
 
         return $this;
@@ -146,6 +156,7 @@ class CrmV2AppointmentResponse
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -164,6 +175,7 @@ class CrmV2AppointmentResponse
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;
@@ -182,6 +194,7 @@ class CrmV2AppointmentResponse
      */
     public function setArrivalWindowStart(?\DateTime $arrivalWindowStart): self
     {
+        $this->initialized['arrivalWindowStart'] = true;
         $this->arrivalWindowStart = $arrivalWindowStart;
 
         return $this;
@@ -200,6 +213,7 @@ class CrmV2AppointmentResponse
      */
     public function setArrivalWindowEnd(?\DateTime $arrivalWindowEnd): self
     {
+        $this->initialized['arrivalWindowEnd'] = true;
         $this->arrivalWindowEnd = $arrivalWindowEnd;
 
         return $this;
@@ -207,8 +221,6 @@ class CrmV2AppointmentResponse
 
     /**
      * Appointment's status.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -217,11 +229,10 @@ class CrmV2AppointmentResponse
 
     /**
      * Appointment's status.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -240,6 +251,7 @@ class CrmV2AppointmentResponse
      */
     public function setSpecialInstructions(?string $specialInstructions): self
     {
+        $this->initialized['specialInstructions'] = true;
         $this->specialInstructions = $specialInstructions;
 
         return $this;
@@ -258,6 +270,7 @@ class CrmV2AppointmentResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -276,6 +289,7 @@ class CrmV2AppointmentResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ContactsContractsContactOutputModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -44,6 +53,7 @@ class ContactsContractsContactOutputModel
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class ContactsContractsContactOutputModel
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -68,6 +79,7 @@ class ContactsContractsContactOutputModel
 
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -80,6 +92,7 @@ class ContactsContractsContactOutputModel
 
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -92,6 +105,7 @@ class ContactsContractsContactOutputModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -104,6 +118,7 @@ class ContactsContractsContactOutputModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

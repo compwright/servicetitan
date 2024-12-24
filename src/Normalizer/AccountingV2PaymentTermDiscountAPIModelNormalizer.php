@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,107 +21,217 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2PaymentTermDiscountAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2PaymentTermDiscountAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermDiscountAPIModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermDiscountAPIModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel();
+            if (\array_key_exists('discount', $data) && \is_int($data['discount'])) {
+                $data['discount'] = (float) $data['discount'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] !== null) {
+                $object->setDiscountApplyTo($data['discountApplyTo']);
+            } elseif (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] === null) {
+                $object->setDiscountApplyTo(null);
+            }
+            if (\array_key_exists('discount', $data) && $data['discount'] !== null) {
+                $object->setDiscount($data['discount']);
+            } elseif (\array_key_exists('discount', $data) && $data['discount'] === null) {
+                $object->setDiscount(null);
+            }
+            if (\array_key_exists('discountType', $data) && $data['discountType'] !== null) {
+                $object->setDiscountType($data['discountType']);
+            } elseif (\array_key_exists('discountType', $data) && $data['discountType'] === null) {
+                $object->setDiscountType(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('applyBy', $data) && $data['applyBy'] !== null) {
+                $object->setApplyBy($data['applyBy']);
+            } elseif (\array_key_exists('applyBy', $data) && $data['applyBy'] === null) {
+                $object->setApplyBy(null);
+            }
+            if (\array_key_exists('applyByValue', $data) && $data['applyByValue'] !== null) {
+                $object->setApplyByValue($data['applyByValue']);
+            } elseif (\array_key_exists('applyByValue', $data) && $data['applyByValue'] === null) {
+                $object->setApplyByValue(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] !== null) {
-            $object->setDiscountApplyTo($data['discountApplyTo']);
-        } elseif (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] === null) {
-            $object->setDiscountApplyTo(null);
-        }
-        if (\array_key_exists('discount', $data) && $data['discount'] !== null) {
-            $object->setDiscount($data['discount']);
-        } elseif (\array_key_exists('discount', $data) && $data['discount'] === null) {
-            $object->setDiscount(null);
-        }
-        if (\array_key_exists('discountType', $data) && $data['discountType'] !== null) {
-            $object->setDiscountType($data['discountType']);
-        } elseif (\array_key_exists('discountType', $data) && $data['discountType'] === null) {
-            $object->setDiscountType(null);
-        }
-        if (\array_key_exists('account', $data) && $data['account'] !== null) {
-            $object->setAccount($data['account']);
-        } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
-            $object->setAccount(null);
-        }
-        if (\array_key_exists('applyBy', $data) && $data['applyBy'] !== null) {
-            $object->setApplyBy($data['applyBy']);
-        } elseif (\array_key_exists('applyBy', $data) && $data['applyBy'] === null) {
-            $object->setApplyBy(null);
-        }
-        if (\array_key_exists('applyByValue', $data) && $data['applyByValue'] !== null) {
-            $object->setApplyByValue($data['applyByValue']);
-        } elseif (\array_key_exists('applyByValue', $data) && $data['applyByValue'] === null) {
-            $object->setApplyByValue(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('discountApplyTo') && null !== $object->getDiscountApplyTo()) {
+                $data['discountApplyTo'] = $object->getDiscountApplyTo();
+            }
+            if ($object->isInitialized('discount') && null !== $object->getDiscount()) {
+                $data['discount'] = $object->getDiscount();
+            }
+            if ($object->isInitialized('discountType') && null !== $object->getDiscountType()) {
+                $data['discountType'] = $object->getDiscountType();
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('applyBy') && null !== $object->getApplyBy()) {
+                $data['applyBy'] = $object->getApplyBy();
+            }
+            if ($object->isInitialized('applyByValue') && null !== $object->getApplyByValue()) {
+                $data['applyByValue'] = $object->getApplyByValue();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2PaymentTermDiscountAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
-        if (null !== $object->getDiscountApplyTo()) {
-            $data['discountApplyTo'] = $object->getDiscountApplyTo();
-        }
-        if (null !== $object->getDiscount()) {
-            $data['discount'] = $object->getDiscount();
-        }
-        if (null !== $object->getDiscountType()) {
-            $data['discountType'] = $object->getDiscountType();
-        }
-        if (null !== $object->getAccount()) {
-            $data['account'] = $object->getAccount();
-        }
-        if (null !== $object->getApplyBy()) {
-            $data['applyBy'] = $object->getApplyBy();
-        }
-        if (null !== $object->getApplyByValue()) {
-            $data['applyByValue'] = $object->getApplyByValue();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel();
+            if (\array_key_exists('discount', $data) && \is_int($data['discount'])) {
+                $data['discount'] = (float) $data['discount'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] !== null) {
+                $object->setDiscountApplyTo($data['discountApplyTo']);
+            } elseif (\array_key_exists('discountApplyTo', $data) && $data['discountApplyTo'] === null) {
+                $object->setDiscountApplyTo(null);
+            }
+            if (\array_key_exists('discount', $data) && $data['discount'] !== null) {
+                $object->setDiscount($data['discount']);
+            } elseif (\array_key_exists('discount', $data) && $data['discount'] === null) {
+                $object->setDiscount(null);
+            }
+            if (\array_key_exists('discountType', $data) && $data['discountType'] !== null) {
+                $object->setDiscountType($data['discountType']);
+            } elseif (\array_key_exists('discountType', $data) && $data['discountType'] === null) {
+                $object->setDiscountType(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('applyBy', $data) && $data['applyBy'] !== null) {
+                $object->setApplyBy($data['applyBy']);
+            } elseif (\array_key_exists('applyBy', $data) && $data['applyBy'] === null) {
+                $object->setApplyBy(null);
+            }
+            if (\array_key_exists('applyByValue', $data) && $data['applyByValue'] !== null) {
+                $object->setApplyByValue($data['applyByValue']);
+            } elseif (\array_key_exists('applyByValue', $data) && $data['applyByValue'] === null) {
+                $object->setApplyByValue(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('discountApplyTo') && null !== $object->getDiscountApplyTo()) {
+                $data['discountApplyTo'] = $object->getDiscountApplyTo();
+            }
+            if ($object->isInitialized('discount') && null !== $object->getDiscount()) {
+                $data['discount'] = $object->getDiscount();
+            }
+            if ($object->isInitialized('discountType') && null !== $object->getDiscountType()) {
+                $data['discountType'] = $object->getDiscountType();
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('applyBy') && null !== $object->getApplyBy()) {
+                $data['applyBy'] = $object->getApplyBy();
+            }
+            if ($object->isInitialized('applyByValue') && null !== $object->getApplyByValue()) {
+                $data['applyByValue'] = $object->getApplyByValue();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class => false];
+        }
     }
 }

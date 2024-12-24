@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EstimatesV2EstimateStatusModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $value;
@@ -28,6 +37,7 @@ class EstimatesV2EstimateStatusModel
 
     public function setValue(int $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -40,6 +50,7 @@ class EstimatesV2EstimateStatusModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

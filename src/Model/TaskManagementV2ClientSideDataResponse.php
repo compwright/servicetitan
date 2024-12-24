@@ -13,40 +13,49 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2ClientSideDataResponse
 {
     /**
-     * @var TaskManagementV2ClientSideEmployeeResponse[]
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var list<TaskManagementV2ClientSideEmployeeResponse>
      */
     protected $employees;
     /**
-     * @var TaskManagementV2ClientSideBusinessUnitResponse[]
+     * @var list<TaskManagementV2ClientSideBusinessUnitResponse>
      */
     protected $businessUnits;
     /**
-     * @var TaskManagementV2ClientSideTaskPriorityResponse[]
+     * @var list<TaskManagementV2ClientSideTaskPriorityResponse>
      */
     protected $taskPriorities;
     /**
-     * @var TaskManagementV2ClientSideTaskResolutionTypeResponse[]
+     * @var list<TaskManagementV2ClientSideTaskResolutionTypeResponse>
      */
     protected $taskResolutionTypes;
     /**
-     * @var TaskManagementV2ClientSideTaskStatusResponse[]
+     * @var list<TaskManagementV2ClientSideTaskStatusResponse>
      */
     protected $taskStatuses;
     /**
-     * @var TaskManagementV2ClientSideTaskTypeResponse[]
+     * @var list<TaskManagementV2ClientSideTaskTypeResponse>
      */
     protected $taskTypes;
     /**
-     * @var TaskManagementV2ClientSideTaskSourceResponse[]
+     * @var list<TaskManagementV2ClientSideTaskSourceResponse>
      */
     protected $taskSources;
     /**
-     * @var TaskManagementV2ClientSideTaskResolutionResponse[]
+     * @var list<TaskManagementV2ClientSideTaskResolutionResponse>
      */
     protected $taskResolutions;
 
     /**
-     * @return TaskManagementV2ClientSideEmployeeResponse[]
+     * @return list<TaskManagementV2ClientSideEmployeeResponse>
      */
     public function getEmployees(): array
     {
@@ -54,17 +63,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideEmployeeResponse[] $employees
+     * @param list<TaskManagementV2ClientSideEmployeeResponse> $employees
      */
     public function setEmployees(array $employees): self
     {
+        $this->initialized['employees'] = true;
         $this->employees = $employees;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideBusinessUnitResponse[]
+     * @return list<TaskManagementV2ClientSideBusinessUnitResponse>
      */
     public function getBusinessUnits(): array
     {
@@ -72,17 +82,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideBusinessUnitResponse[] $businessUnits
+     * @param list<TaskManagementV2ClientSideBusinessUnitResponse> $businessUnits
      */
     public function setBusinessUnits(array $businessUnits): self
     {
+        $this->initialized['businessUnits'] = true;
         $this->businessUnits = $businessUnits;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskPriorityResponse[]
+     * @return list<TaskManagementV2ClientSideTaskPriorityResponse>
      */
     public function getTaskPriorities(): array
     {
@@ -90,17 +101,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskPriorityResponse[] $taskPriorities
+     * @param list<TaskManagementV2ClientSideTaskPriorityResponse> $taskPriorities
      */
     public function setTaskPriorities(array $taskPriorities): self
     {
+        $this->initialized['taskPriorities'] = true;
         $this->taskPriorities = $taskPriorities;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskResolutionTypeResponse[]
+     * @return list<TaskManagementV2ClientSideTaskResolutionTypeResponse>
      */
     public function getTaskResolutionTypes(): array
     {
@@ -108,17 +120,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskResolutionTypeResponse[] $taskResolutionTypes
+     * @param list<TaskManagementV2ClientSideTaskResolutionTypeResponse> $taskResolutionTypes
      */
     public function setTaskResolutionTypes(array $taskResolutionTypes): self
     {
+        $this->initialized['taskResolutionTypes'] = true;
         $this->taskResolutionTypes = $taskResolutionTypes;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskStatusResponse[]
+     * @return list<TaskManagementV2ClientSideTaskStatusResponse>
      */
     public function getTaskStatuses(): array
     {
@@ -126,17 +139,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskStatusResponse[] $taskStatuses
+     * @param list<TaskManagementV2ClientSideTaskStatusResponse> $taskStatuses
      */
     public function setTaskStatuses(array $taskStatuses): self
     {
+        $this->initialized['taskStatuses'] = true;
         $this->taskStatuses = $taskStatuses;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskTypeResponse[]
+     * @return list<TaskManagementV2ClientSideTaskTypeResponse>
      */
     public function getTaskTypes(): array
     {
@@ -144,17 +158,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskTypeResponse[] $taskTypes
+     * @param list<TaskManagementV2ClientSideTaskTypeResponse> $taskTypes
      */
     public function setTaskTypes(array $taskTypes): self
     {
+        $this->initialized['taskTypes'] = true;
         $this->taskTypes = $taskTypes;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskSourceResponse[]
+     * @return list<TaskManagementV2ClientSideTaskSourceResponse>
      */
     public function getTaskSources(): array
     {
@@ -162,17 +177,18 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskSourceResponse[] $taskSources
+     * @param list<TaskManagementV2ClientSideTaskSourceResponse> $taskSources
      */
     public function setTaskSources(array $taskSources): self
     {
+        $this->initialized['taskSources'] = true;
         $this->taskSources = $taskSources;
 
         return $this;
     }
 
     /**
-     * @return TaskManagementV2ClientSideTaskResolutionResponse[]
+     * @return list<TaskManagementV2ClientSideTaskResolutionResponse>
      */
     public function getTaskResolutions(): array
     {
@@ -180,10 +196,11 @@ class TaskManagementV2ClientSideDataResponse
     }
 
     /**
-     * @param TaskManagementV2ClientSideTaskResolutionResponse[] $taskResolutions
+     * @param list<TaskManagementV2ClientSideTaskResolutionResponse> $taskResolutions
      */
     public function setTaskResolutions(array $taskResolutions): self
     {
+        $this->initialized['taskResolutions'] = true;
         $this->taskResolutions = $taskResolutions;
 
         return $this;

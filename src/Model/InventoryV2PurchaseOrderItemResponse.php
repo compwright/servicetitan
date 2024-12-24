@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2PurchaseOrderItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Item Id.
      *
      * @var int
@@ -81,7 +90,7 @@ class InventoryV2PurchaseOrderItemResponse
     /**
      * List of serial numbers.
      *
-     * @var InventoryV2SerialNumberResponse[]
+     * @var list<InventoryV2SerialNumberResponse>
      */
     protected $serialNumbers;
     /**
@@ -110,6 +119,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -128,6 +138,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -146,6 +157,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setSkuName(string $skuName): self
     {
+        $this->initialized['skuName'] = true;
         $this->skuName = $skuName;
 
         return $this;
@@ -164,6 +176,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setSkuCode(string $skuCode): self
     {
+        $this->initialized['skuCode'] = true;
         $this->skuCode = $skuCode;
 
         return $this;
@@ -182,6 +195,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setSkuType(string $skuType): self
     {
+        $this->initialized['skuType'] = true;
         $this->skuType = $skuType;
 
         return $this;
@@ -200,6 +214,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -218,6 +233,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setVendorPartNumber(string $vendorPartNumber): self
     {
+        $this->initialized['vendorPartNumber'] = true;
         $this->vendorPartNumber = $vendorPartNumber;
 
         return $this;
@@ -236,6 +252,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -254,6 +271,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setQuantityReceived(float $quantityReceived): self
     {
+        $this->initialized['quantityReceived'] = true;
         $this->quantityReceived = $quantityReceived;
 
         return $this;
@@ -272,6 +290,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -290,6 +309,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setTotal(float $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
 
         return $this;
@@ -298,7 +318,7 @@ class InventoryV2PurchaseOrderItemResponse
     /**
      * List of serial numbers.
      *
-     * @return InventoryV2SerialNumberResponse[]
+     * @return list<InventoryV2SerialNumberResponse>
      */
     public function getSerialNumbers(): array
     {
@@ -308,10 +328,11 @@ class InventoryV2PurchaseOrderItemResponse
     /**
      * List of serial numbers.
      *
-     * @param InventoryV2SerialNumberResponse[] $serialNumbers
+     * @param list<InventoryV2SerialNumberResponse> $serialNumbers
      */
     public function setSerialNumbers(array $serialNumbers): self
     {
+        $this->initialized['serialNumbers'] = true;
         $this->serialNumbers = $serialNumbers;
 
         return $this;
@@ -330,6 +351,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setStatus(string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -348,6 +370,7 @@ class InventoryV2PurchaseOrderItemResponse
      */
     public function setChargeable(bool $chargeable): self
     {
+        $this->initialized['chargeable'] = true;
         $this->chargeable = $chargeable;
 
         return $this;

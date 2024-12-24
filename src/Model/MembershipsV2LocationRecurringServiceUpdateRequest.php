@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2LocationRecurringServiceUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Recurring service name.
      *
      * @var string
@@ -32,8 +41,6 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     protected $recurringServiceTypeId;
     /**
      * The recurrence duration type.
-     *
-     * @var mixed
      */
     protected $durationType;
     /**
@@ -86,8 +93,6 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     protected $campaignId;
     /**
      * Recurring service priority.
-     *
-     * @var mixed
      */
     protected $priority;
     /**
@@ -98,12 +103,11 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     protected $jobSummary;
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly, etc.).
-     *
-     * @var mixed
      */
     protected $recurrenceType;
     /**
      * The recurrence interval for the given recurrence type.
+     * Can be 0 when RecurrenceType is Seasonal.
      *
      * @var int
      */
@@ -111,23 +115,24 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $recurrenceMonths;
     /**
-     * A list specifying which days of the week this recurring service recurs when.
+     * A list specifying which days of the week this recurring service recurs when
+     * RecurrenceType is Weekly.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $recurrenceDaysOfWeek;
     /**
-     * Enum value corresponding to which week of the month this recurring service recurs when.
-     *
-     * @var mixed
+     * Enum value corresponding to which week of the month this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceDayOfNthWeek.
      */
     protected $recurrenceWeek;
     /**
-     * Enum value corresponding to which day of the week this recurring service recurs when.
+     * Enum value corresponding to which day of the week this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.
      *
      * @var mixed|null
      */
@@ -158,6 +163,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -176,6 +182,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -194,6 +201,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setRecurringServiceTypeId(int $recurringServiceTypeId): self
     {
+        $this->initialized['recurringServiceTypeId'] = true;
         $this->recurringServiceTypeId = $recurringServiceTypeId;
 
         return $this;
@@ -201,8 +209,6 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence duration type.
-     *
-     * @return mixed
      */
     public function getDurationType()
     {
@@ -211,11 +217,10 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence duration type.
-     *
-     * @param mixed $durationType
      */
     public function setDurationType($durationType): self
     {
+        $this->initialized['durationType'] = true;
         $this->durationType = $durationType;
 
         return $this;
@@ -234,6 +239,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setDurationLength(int $durationLength): self
     {
+        $this->initialized['durationLength'] = true;
         $this->durationLength = $durationLength;
 
         return $this;
@@ -252,6 +258,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setFrom(\DateTime $from): self
     {
+        $this->initialized['from'] = true;
         $this->from = $from;
 
         return $this;
@@ -270,6 +277,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -288,6 +296,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setInvoiceTemplateId(?int $invoiceTemplateId): self
     {
+        $this->initialized['invoiceTemplateId'] = true;
         $this->invoiceTemplateId = $invoiceTemplateId;
 
         return $this;
@@ -306,6 +315,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setInvoiceTemplateForFollowingYearsId(?int $invoiceTemplateForFollowingYearsId): self
     {
+        $this->initialized['invoiceTemplateForFollowingYearsId'] = true;
         $this->invoiceTemplateForFollowingYearsId = $invoiceTemplateForFollowingYearsId;
 
         return $this;
@@ -324,6 +334,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -342,6 +353,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -360,6 +372,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -367,8 +380,6 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * Recurring service priority.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -377,11 +388,10 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * Recurring service priority.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -400,6 +410,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setJobSummary(string $jobSummary): self
     {
+        $this->initialized['jobSummary'] = true;
         $this->jobSummary = $jobSummary;
 
         return $this;
@@ -407,8 +418,6 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly, etc.).
-     *
-     * @return mixed
      */
     public function getRecurrenceType()
     {
@@ -417,11 +426,10 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly, etc.).
-     *
-     * @param mixed $recurrenceType
      */
     public function setRecurrenceType($recurrenceType): self
     {
+        $this->initialized['recurrenceType'] = true;
         $this->recurrenceType = $recurrenceType;
 
         return $this;
@@ -429,7 +437,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence interval for the given recurrence type.
-    Can be 0 when RecurrenceType is Seasonal.
+     * Can be 0 when RecurrenceType is Seasonal.
      */
     public function getRecurrenceInterval(): int
     {
@@ -438,10 +446,11 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
 
     /**
      * The recurrence interval for the given recurrence type.
-    Can be 0 when RecurrenceType is Seasonal.
+     * Can be 0 when RecurrenceType is Seasonal.
      */
     public function setRecurrenceInterval(int $recurrenceInterval): self
     {
+        $this->initialized['recurrenceInterval'] = true;
         $this->recurrenceInterval = $recurrenceInterval;
 
         return $this;
@@ -450,7 +459,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getRecurrenceMonths(): array
     {
@@ -460,19 +469,21 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @param string[] $recurrenceMonths
+     * @param list<string> $recurrenceMonths
      */
     public function setRecurrenceMonths(array $recurrenceMonths): self
     {
+        $this->initialized['recurrenceMonths'] = true;
         $this->recurrenceMonths = $recurrenceMonths;
 
         return $this;
     }
 
     /**
-     * A list specifying which days of the week this recurring service recurs when.
+     * A list specifying which days of the week this recurring service recurs when
+     * RecurrenceType is Weekly.
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getRecurrenceDaysOfWeek(): array
     {
@@ -480,21 +491,22 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     }
 
     /**
-     * A list specifying which days of the week this recurring service recurs when.
+     * A list specifying which days of the week this recurring service recurs when
+     * RecurrenceType is Weekly.
      *
-     * @param string[] $recurrenceDaysOfWeek
+     * @param list<string> $recurrenceDaysOfWeek
      */
     public function setRecurrenceDaysOfWeek(array $recurrenceDaysOfWeek): self
     {
+        $this->initialized['recurrenceDaysOfWeek'] = true;
         $this->recurrenceDaysOfWeek = $recurrenceDaysOfWeek;
 
         return $this;
     }
 
     /**
-     * Enum value corresponding to which week of the month this recurring service recurs when.
-     *
-     * @return mixed
+     * Enum value corresponding to which week of the month this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceDayOfNthWeek.
      */
     public function getRecurrenceWeek()
     {
@@ -502,21 +514,20 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     }
 
     /**
-     * Enum value corresponding to which week of the month this recurring service recurs when.
-     *
-     * @param mixed $recurrenceWeek
+     * Enum value corresponding to which week of the month this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceDayOfNthWeek.
      */
     public function setRecurrenceWeek($recurrenceWeek): self
     {
+        $this->initialized['recurrenceWeek'] = true;
         $this->recurrenceWeek = $recurrenceWeek;
 
         return $this;
     }
 
     /**
-     * Enum value corresponding to which day of the week this recurring service recurs when.
-     *
-     * @return mixed
+     * Enum value corresponding to which day of the week this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.
      */
     public function getRecurrenceDayOfNthWeek()
     {
@@ -524,12 +535,12 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
     }
 
     /**
-     * Enum value corresponding to which day of the week this recurring service recurs when.
-     *
-     * @param mixed $recurrenceDayOfNthWeek
+     * Enum value corresponding to which day of the week this recurring service recurs when
+     * RecurrenceType is NthWeekdayOfMonth. Used with RecurrenceWeek.
      */
     public function setRecurrenceDayOfNthWeek($recurrenceDayOfNthWeek): self
     {
+        $this->initialized['recurrenceDayOfNthWeek'] = true;
         $this->recurrenceDayOfNthWeek = $recurrenceDayOfNthWeek;
 
         return $this;
@@ -548,6 +559,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setJobStartTime(?string $jobStartTime): self
     {
+        $this->initialized['jobStartTime'] = true;
         $this->jobStartTime = $jobStartTime;
 
         return $this;
@@ -566,6 +578,7 @@ class MembershipsV2LocationRecurringServiceUpdateRequest
      */
     public function setEstimatedPayrollCost(?float $estimatedPayrollCost): self
     {
+        $this->initialized['estimatedPayrollCost'] = true;
         $this->estimatedPayrollCost = $estimatedPayrollCost;
 
         return $this;

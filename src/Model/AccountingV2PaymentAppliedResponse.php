@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentAppliedResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $appliedTo;
@@ -36,6 +45,7 @@ class AccountingV2PaymentAppliedResponse
 
     public function setAppliedTo(int $appliedTo): self
     {
+        $this->initialized['appliedTo'] = true;
         $this->appliedTo = $appliedTo;
 
         return $this;
@@ -48,6 +58,7 @@ class AccountingV2PaymentAppliedResponse
 
     public function setAppliedAmount(?string $appliedAmount): self
     {
+        $this->initialized['appliedAmount'] = true;
         $this->appliedAmount = $appliedAmount;
 
         return $this;
@@ -60,6 +71,7 @@ class AccountingV2PaymentAppliedResponse
 
     public function setAppliedOn(?\DateTime $appliedOn): self
     {
+        $this->initialized['appliedOn'] = true;
         $this->appliedOn = $appliedOn;
 
         return $this;
@@ -72,6 +84,7 @@ class AccountingV2PaymentAppliedResponse
 
     public function setAppliedBy(?string $appliedBy): self
     {
+        $this->initialized['appliedBy'] = true;
         $this->appliedBy = $appliedBy;
 
         return $this;

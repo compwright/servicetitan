@@ -21,29 +21,31 @@ class ReceiptsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint i
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $number Number filter
-     *     @var string $vendorInvoiceNumber Vendor invoice number filter
-     *     @var int $billId Format - int64. BillId filter
-     *     @var int $batchId Format - int64. BatchId filter
-     *     @var string $vendorIds Filter by a collection of vendors
-     *     @var string $businessUnitIds Filter by a collection of business units
-     *     @var string $inventoryLocationIds Filter by a collection of inventory locations
-     *     @var string $purchaseOrderIds Filter by a collection of purchase orders
-     *     @var string $syncStatuses Filter by a collection of sync statuses
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $receivedOnOrAfter Format - date-time (as date-time in RFC3339). Return receipts with received date on or after certain date/time
-     *     @var string $receivedBefore Format - date-time (as date-time in RFC3339). Return receipts with received date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $number Number filter
+     * @var string $vendorInvoiceNumber Vendor invoice number filter
+     * @var int    $billId Format - int64. BillId filter
+     * @var int    $batchId Format - int64. BatchId filter
+     * @var string $vendorIds Filter by a collection of vendors
+     * @var string $businessUnitIds Filter by a collection of business units
+     * @var string $inventoryLocationIds Filter by a collection of inventory locations
+     * @var string $purchaseOrderIds Filter by a collection of purchase orders
+     * @var string $syncStatuses Filter by a collection of sync statuses
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $receivedOnOrAfter Format - date-time (as date-time in RFC3339). Return receipts with received date on or after certain date/time
+     * @var string $receivedBefore Format - date-time (as date-time in RFC3339). Return receipts with received date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -77,46 +79,46 @@ class ReceiptsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['ids', 'active', 'number', 'vendorInvoiceNumber', 'billId', 'batchId', 'vendorIds', 'businessUnitIds', 'inventoryLocationIds', 'purchaseOrderIds', 'syncStatuses', 'customFields.Fields', 'customFields.Operator', 'receivedOnOrAfter', 'receivedBefore', 'createdOnOrAfter', 'createdBefore', 'modifiedOnOrAfter', 'modifiedBefore', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('number', ['string']);
-        $optionsResolver->setAllowedTypes('vendorInvoiceNumber', ['string']);
-        $optionsResolver->setAllowedTypes('billId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('batchId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('vendorIds', ['string']);
-        $optionsResolver->setAllowedTypes('businessUnitIds', ['string']);
-        $optionsResolver->setAllowedTypes('inventoryLocationIds', ['string']);
-        $optionsResolver->setAllowedTypes('purchaseOrderIds', ['string']);
-        $optionsResolver->setAllowedTypes('syncStatuses', ['string']);
-        $optionsResolver->setAllowedTypes('customFields.Fields', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customFields.Operator', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('receivedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('receivedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('number', ['string']);
+        $optionsResolver->addAllowedTypes('vendorInvoiceNumber', ['string']);
+        $optionsResolver->addAllowedTypes('billId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('batchId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('vendorIds', ['string']);
+        $optionsResolver->addAllowedTypes('businessUnitIds', ['string']);
+        $optionsResolver->addAllowedTypes('inventoryLocationIds', ['string']);
+        $optionsResolver->addAllowedTypes('purchaseOrderIds', ['string']);
+        $optionsResolver->addAllowedTypes('syncStatuses', ['string']);
+        $optionsResolver->addAllowedTypes('customFields.Fields', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customFields.Operator', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('receivedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('receivedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryReceiptResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\ReceiptsGetBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryReceiptResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfInventoryV2InventoryReceiptResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryReceiptResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\ReceiptsGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\ReceiptsGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

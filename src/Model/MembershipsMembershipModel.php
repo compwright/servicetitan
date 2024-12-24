@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsMembershipModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -48,6 +57,7 @@ class MembershipsMembershipModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -60,6 +70,7 @@ class MembershipsMembershipModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -72,6 +83,7 @@ class MembershipsMembershipModel
 
     public function setType(MembershipsMembershipTypeModel $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -84,6 +96,7 @@ class MembershipsMembershipModel
 
     public function setStatus(string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -96,6 +109,7 @@ class MembershipsMembershipModel
 
     public function setFrom(?\DateTime $from): self
     {
+        $this->initialized['from'] = true;
         $this->from = $from;
 
         return $this;
@@ -108,6 +122,7 @@ class MembershipsMembershipModel
 
     public function setTo(?\DateTime $to): self
     {
+        $this->initialized['to'] = true;
         $this->to = $to;
 
         return $this;
@@ -120,6 +135,7 @@ class MembershipsMembershipModel
 
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;

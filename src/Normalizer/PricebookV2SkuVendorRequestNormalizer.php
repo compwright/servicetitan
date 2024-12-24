@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,103 +21,209 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2SkuVendorRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2SkuVendorRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuVendorRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuVendorRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest();
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('vendorId', $data)) {
+                $object->setVendorId($data['vendorId']);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('vendorPart', $data) && $data['vendorPart'] !== null) {
+                $object->setVendorPart($data['vendorPart']);
+            } elseif (\array_key_exists('vendorPart', $data) && $data['vendorPart'] === null) {
+                $object->setVendorPart(null);
+            }
+            if (\array_key_exists('cost', $data)) {
+                $object->setCost($data['cost']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] !== null) {
+                $object->setPrimarySubAccount($data['primarySubAccount']);
+            } elseif (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] === null) {
+                $object->setPrimarySubAccount(null);
+            }
+            if (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] !== null) {
+                $values = [];
+                foreach ($data['otherSubAccounts'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2SkuVendorSubAccountRequest::class, 'json', $context);
+                }
+                $object->setOtherSubAccounts($values);
+            } elseif (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] === null) {
+                $object->setOtherSubAccounts(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('vendorId', $data)) {
-            $object->setVendorId($data['vendorId']);
-        }
-        if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
-            $object->setMemo($data['memo']);
-        } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
-            $object->setMemo(null);
-        }
-        if (\array_key_exists('vendorPart', $data) && $data['vendorPart'] !== null) {
-            $object->setVendorPart($data['vendorPart']);
-        } elseif (\array_key_exists('vendorPart', $data) && $data['vendorPart'] === null) {
-            $object->setVendorPart(null);
-        }
-        if (\array_key_exists('cost', $data)) {
-            $object->setCost($data['cost']);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] !== null) {
-            $object->setPrimarySubAccount($data['primarySubAccount']);
-        } elseif (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] === null) {
-            $object->setPrimarySubAccount(null);
-        }
-        if (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] !== null) {
-            $values = [];
-            foreach ($data['otherSubAccounts'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuVendorSubAccountRequest', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['vendorId'] = $object->getVendorId();
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
             }
-            $object->setOtherSubAccounts($values);
-        } elseif (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] === null) {
-            $object->setOtherSubAccounts(null);
+            if ($object->isInitialized('vendorPart') && null !== $object->getVendorPart()) {
+                $data['vendorPart'] = $object->getVendorPart();
+            }
+            $data['cost'] = $object->getCost();
+            $data['active'] = $object->getActive();
+            if ($object->isInitialized('primarySubAccount') && null !== $object->getPrimarySubAccount()) {
+                $data['primarySubAccount'] = $object->getPrimarySubAccount();
+            }
+            if ($object->isInitialized('otherSubAccounts') && null !== $object->getOtherSubAccounts()) {
+                $values = [];
+                foreach ($object->getOtherSubAccounts() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['otherSubAccounts'] = $values;
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2SkuVendorRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['vendorId'] = $object->getVendorId();
-        if (null !== $object->getMemo()) {
-            $data['memo'] = $object->getMemo();
-        }
-        if (null !== $object->getVendorPart()) {
-            $data['vendorPart'] = $object->getVendorPart();
-        }
-        $data['cost'] = $object->getCost();
-        $data['active'] = $object->getActive();
-        if (null !== $object->getPrimarySubAccount()) {
-            $data['primarySubAccount'] = $object->getPrimarySubAccount();
-        }
-        if (null !== $object->getOtherSubAccounts()) {
-            $values = [];
-            foreach ($object->getOtherSubAccounts() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['otherSubAccounts'] = $values;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest();
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('vendorId', $data)) {
+                $object->setVendorId($data['vendorId']);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('vendorPart', $data) && $data['vendorPart'] !== null) {
+                $object->setVendorPart($data['vendorPart']);
+            } elseif (\array_key_exists('vendorPart', $data) && $data['vendorPart'] === null) {
+                $object->setVendorPart(null);
+            }
+            if (\array_key_exists('cost', $data)) {
+                $object->setCost($data['cost']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] !== null) {
+                $object->setPrimarySubAccount($data['primarySubAccount']);
+            } elseif (\array_key_exists('primarySubAccount', $data) && $data['primarySubAccount'] === null) {
+                $object->setPrimarySubAccount(null);
+            }
+            if (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] !== null) {
+                $values = [];
+                foreach ($data['otherSubAccounts'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2SkuVendorSubAccountRequest::class, 'json', $context);
+                }
+                $object->setOtherSubAccounts($values);
+            } elseif (\array_key_exists('otherSubAccounts', $data) && $data['otherSubAccounts'] === null) {
+                $object->setOtherSubAccounts(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['vendorId'] = $object->getVendorId();
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('vendorPart') && null !== $object->getVendorPart()) {
+                $data['vendorPart'] = $object->getVendorPart();
+            }
+            $data['cost'] = $object->getCost();
+            $data['active'] = $object->getActive();
+            if ($object->isInitialized('primarySubAccount') && null !== $object->getPrimarySubAccount()) {
+                $data['primarySubAccount'] = $object->getPrimarySubAccount();
+            }
+            if ($object->isInitialized('otherSubAccounts') && null !== $object->getOtherSubAccounts()) {
+                $values = [];
+                foreach ($object->getOtherSubAccounts() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['otherSubAccounts'] = $values;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2SkuVendorRequest::class => false];
+        }
     }
 }

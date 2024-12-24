@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2InvoiceItemUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $skuId;
@@ -84,6 +93,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setSkuId(?int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -96,6 +106,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setSkuName(?string $skuName): self
     {
+        $this->initialized['skuName'] = true;
         $this->skuName = $skuName;
 
         return $this;
@@ -108,6 +119,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setTechnicianId(?int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -120,6 +132,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -132,6 +145,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -144,6 +158,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setUnitPrice(?float $unitPrice): self
     {
+        $this->initialized['unitPrice'] = true;
         $this->unitPrice = $unitPrice;
 
         return $this;
@@ -156,6 +171,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setCost(?float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -168,6 +184,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setIsAddOn(?bool $isAddOn): self
     {
+        $this->initialized['isAddOn'] = true;
         $this->isAddOn = $isAddOn;
 
         return $this;
@@ -180,6 +197,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setSignature(?string $signature): self
     {
+        $this->initialized['signature'] = true;
         $this->signature = $signature;
 
         return $this;
@@ -192,6 +210,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setTechnicianAcknowledgementSignature(?string $technicianAcknowledgementSignature): self
     {
+        $this->initialized['technicianAcknowledgementSignature'] = true;
         $this->technicianAcknowledgementSignature = $technicianAcknowledgementSignature;
 
         return $this;
@@ -204,6 +223,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setInstalledOn(?\DateTime $installedOn): self
     {
+        $this->initialized['installedOn'] = true;
         $this->installedOn = $installedOn;
 
         return $this;
@@ -216,6 +236,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setInventoryWarehouseName(?string $inventoryWarehouseName): self
     {
+        $this->initialized['inventoryWarehouseName'] = true;
         $this->inventoryWarehouseName = $inventoryWarehouseName;
 
         return $this;
@@ -228,6 +249,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setSkipUpdatingMembershipPrices(?bool $skipUpdatingMembershipPrices): self
     {
+        $this->initialized['skipUpdatingMembershipPrices'] = true;
         $this->skipUpdatingMembershipPrices = $skipUpdatingMembershipPrices;
 
         return $this;
@@ -240,6 +262,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setItemGroupName(?string $itemGroupName): self
     {
+        $this->initialized['itemGroupName'] = true;
         $this->itemGroupName = $itemGroupName;
 
         return $this;
@@ -252,6 +275,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setItemGroupRootId(?int $itemGroupRootId): self
     {
+        $this->initialized['itemGroupRootId'] = true;
         $this->itemGroupRootId = $itemGroupRootId;
 
         return $this;
@@ -264,6 +288,7 @@ class AccountingV2InvoiceItemUpdateRequest
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;

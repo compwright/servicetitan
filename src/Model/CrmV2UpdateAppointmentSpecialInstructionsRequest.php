@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2UpdateAppointmentSpecialInstructionsRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * New special instructions associated to the appointment.
      *
      * @var string
@@ -32,6 +41,7 @@ class CrmV2UpdateAppointmentSpecialInstructionsRequest
      */
     public function setSpecialInstructions(string $specialInstructions): self
     {
+        $this->initialized['specialInstructions'] = true;
         $this->specialInstructions = $specialInstructions;
 
         return $this;

@@ -52,27 +52,27 @@ class CustomersDeleteContact extends \CompWright\ServiceTitan\Runtime\Client\Bas
     }
 
     /**
-     * {@inheritdoc}
+     * @return null
      *
      * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactNotFoundException
      * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactConflictException
-     *
-     * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
             return null;
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactConflictException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\CustomersDeleteContactConflictException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

@@ -10,62 +10,61 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class TelecomClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class TelecomClient extends Runtime\Client\Client
 {
     /**
      * @param int    $id     format - int64
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \CompWright\ServiceTitan\Model\ModuleTelecomSharedDetailedBundleCallModel|\Psr\Http\Message\ResponseInterface|null
+     * @return Model\ModuleTelecomSharedDetailedBundleCallModel|\Psr\Http\Message\ResponseInterface|null
      */
     public function callsGetDetails(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CallsGetDetails($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsGetDetails($id, $tenant), $fetch);
     }
 
     /**
-     * @param int                                                                        $id          format - int64
-     * @param int                                                                        $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallInUpdateModelV2|null $requestBody
-     * @param string                                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \CompWright\ServiceTitan\Model\ModuleTelecomSharedDetailedCallModel|\Psr\Http\Message\ResponseInterface|null
+     * @return Model\ModuleTelecomSharedDetailedCallModel|\Psr\Http\Message\ResponseInterface|null
      */
     public function callsUpdate(int $id, int $tenant, ?Model\ModuleTelecomSharedCallInUpdateModelV2 $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CallsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $modifiedAfter format - date-time (as date-time in RFC3339)
-     *     @var int $minDuration format - int32
-     *     @var string $phoneNumberCalled
-     *     @var int $campaignId format - int64
-     *     @var int $agentId format - int64
-     *     @var string $agentName
-     *     @var bool $agentIsExternal
-     *     @var int $agentExternalId format - int64
-     *     @var string $orderBy
-     *     @var string $orderByDirection
-     *     @var bool $activeOnly
-     *     @var string $createdAfter format - date-time (as date-time in RFC3339)
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var array $ids
-     *     @var int $page format - int32
-     *     @var int $pageSize Format - int32.
-     * }
+     * @var string $modifiedAfter format - date-time (as date-time in RFC3339)
+     * @var int    $minDuration format - int32
+     * @var string $phoneNumberCalled
+     * @var int    $campaignId format - int64
+     * @var int    $agentId format - int64
+     * @var string $agentName
+     * @var bool   $agentIsExternal
+     * @var int    $agentExternalId format - int64
+     * @var string $orderBy
+     * @var string $orderByDirection
+     * @var bool   $activeOnly
+     * @var string $createdAfter format - date-time (as date-time in RFC3339)
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var array  $ids
+     * @var int    $page format - int32
+     * @var int    $pageSize Format - int32.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @return \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel|\Psr\Http\Message\ResponseInterface|null
+     * @return Model\CollectionResultOfModuleTelecomSharedBundleCallModel|\Psr\Http\Message\ResponseInterface|null
      */
     public function callsGetCalls(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CallsGetCalls($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsGetCalls($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -77,7 +76,7 @@ class TelecomClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      */
     public function callsGetRecording(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CallsGetRecording($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsGetRecording($id, $tenant), $fetch);
     }
 
     /**
@@ -89,7 +88,7 @@ class TelecomClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      */
     public function callsGetVoiceMail(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CallsGetVoiceMail($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CallsGetVoiceMail($id, $tenant), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -97,7 +96,7 @@ class TelecomClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -106,7 +105,7 @@ class TelecomClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

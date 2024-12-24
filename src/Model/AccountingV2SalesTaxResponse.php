@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2SalesTaxResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -32,6 +41,7 @@ class AccountingV2SalesTaxResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -44,6 +54,7 @@ class AccountingV2SalesTaxResponse
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -56,6 +67,7 @@ class AccountingV2SalesTaxResponse
 
     public function setTaxRate(float $taxRate): self
     {
+        $this->initialized['taxRate'] = true;
         $this->taxRate = $taxRate;
 
         return $this;

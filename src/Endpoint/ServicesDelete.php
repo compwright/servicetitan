@@ -49,23 +49,23 @@ class ServicesDelete extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoin
     }
 
     /**
-     * {@inheritdoc}
+     * @return null
      *
      * @throws \CompWright\ServiceTitan\Exception\ServicesDeleteBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\ServicesDeleteNotFoundException
-     *
-     * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\ServicesDeleteBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\ServicesDeleteBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (204 === $status) {
             return null;
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\ServicesDeleteNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\ServicesDeleteNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

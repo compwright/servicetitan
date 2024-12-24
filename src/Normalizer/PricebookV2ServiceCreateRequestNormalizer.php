@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,275 +21,583 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2ServiceCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2ServiceCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2ServiceCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2ServiceCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest();
+            if (\array_key_exists('price', $data) && \is_int($data['price'])) {
+                $data['price'] = (float) $data['price'];
+            }
+            if (\array_key_exists('memberPrice', $data) && \is_int($data['memberPrice'])) {
+                $data['memberPrice'] = (float) $data['memberPrice'];
+            }
+            if (\array_key_exists('addOnPrice', $data) && \is_int($data['addOnPrice'])) {
+                $data['addOnPrice'] = (float) $data['addOnPrice'];
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && \is_int($data['addOnMemberPrice'])) {
+                $data['addOnMemberPrice'] = (float) $data['addOnMemberPrice'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] !== null) {
+                $values = [];
+                foreach ($data['serviceMaterials'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceMaterials($values);
+            } elseif (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] === null) {
+                $object->setServiceMaterials(null);
+            }
+            if (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] !== null) {
+                $values_1 = [];
+                foreach ($data['serviceEquipment'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceEquipment($values_1);
+            } elseif (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] === null) {
+                $object->setServiceEquipment(null);
+            }
+            if (\array_key_exists('recommendations', $data) && $data['recommendations'] !== null) {
+                $values_2 = [];
+                foreach ($data['recommendations'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setRecommendations($values_2);
+            } elseif (\array_key_exists('recommendations', $data) && $data['recommendations'] === null) {
+                $object->setRecommendations(null);
+            }
+            if (\array_key_exists('upgrades', $data) && $data['upgrades'] !== null) {
+                $values_3 = [];
+                foreach ($data['upgrades'] as $value_3) {
+                    $values_3[] = $value_3;
+                }
+                $object->setUpgrades($values_3);
+            } elseif (\array_key_exists('upgrades', $data) && $data['upgrades'] === null) {
+                $object->setUpgrades(null);
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
+                $object->setDisplayName($data['displayName']);
+            } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
+                $object->setDisplayName(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('warranty', $data) && $data['warranty'] !== null) {
+                $object->setWarranty($data['warranty']);
+            } elseif (\array_key_exists('warranty', $data) && $data['warranty'] === null) {
+                $object->setWarranty(null);
+            }
+            if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
+                $values_4 = [];
+                foreach ($data['categories'] as $value_4) {
+                    $values_4[] = $value_4;
+                }
+                $object->setCategories($values_4);
+            } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
+                $object->setCategories(null);
+            }
+            if (\array_key_exists('price', $data) && $data['price'] !== null) {
+                $object->setPrice($data['price']);
+            } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
+                $object->setPrice(null);
+            }
+            if (\array_key_exists('memberPrice', $data) && $data['memberPrice'] !== null) {
+                $object->setMemberPrice($data['memberPrice']);
+            } elseif (\array_key_exists('memberPrice', $data) && $data['memberPrice'] === null) {
+                $object->setMemberPrice(null);
+            }
+            if (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] !== null) {
+                $object->setAddOnPrice($data['addOnPrice']);
+            } elseif (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] === null) {
+                $object->setAddOnPrice(null);
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] !== null) {
+                $object->setAddOnMemberPrice($data['addOnMemberPrice']);
+            } elseif (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] === null) {
+                $object->setAddOnMemberPrice(null);
+            }
+            if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
+                $object->setTaxable($data['taxable']);
+            } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
+                $object->setTaxable(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+            if (\array_key_exists('isLabor', $data) && $data['isLabor'] !== null) {
+                $object->setIsLabor($data['isLabor']);
+            } elseif (\array_key_exists('isLabor', $data) && $data['isLabor'] === null) {
+                $object->setIsLabor(null);
+            }
+            if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
+                $values_5 = [];
+                foreach ($data['assets'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_5);
+            } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
+                $object->setAssets(null);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
+                $object->setCrossSaleGroup(null);
+            }
+            if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
+                $object->setPaysCommission($data['paysCommission']);
+            } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
+                $object->setPaysCommission(null);
+            }
+            if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
+                $object->setCommissionBonus(null);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] !== null) {
-            $values = [];
-            foreach ($data['serviceMaterials'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuLinkRequest', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('serviceMaterials') && null !== $object->getServiceMaterials()) {
+                $values = [];
+                foreach ($object->getServiceMaterials() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['serviceMaterials'] = $values;
             }
-            $object->setServiceMaterials($values);
-        } elseif (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] === null) {
-            $object->setServiceMaterials(null);
-        }
-        if (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] !== null) {
-            $values_1 = [];
-            foreach ($data['serviceEquipment'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuLinkRequest', 'json', $context);
+            if ($object->isInitialized('serviceEquipment') && null !== $object->getServiceEquipment()) {
+                $values_1 = [];
+                foreach ($object->getServiceEquipment() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['serviceEquipment'] = $values_1;
             }
-            $object->setServiceEquipment($values_1);
-        } elseif (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] === null) {
-            $object->setServiceEquipment(null);
-        }
-        if (\array_key_exists('recommendations', $data) && $data['recommendations'] !== null) {
-            $values_2 = [];
-            foreach ($data['recommendations'] as $value_2) {
-                $values_2[] = $value_2;
+            if ($object->isInitialized('recommendations') && null !== $object->getRecommendations()) {
+                $values_2 = [];
+                foreach ($object->getRecommendations() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['recommendations'] = $values_2;
             }
-            $object->setRecommendations($values_2);
-        } elseif (\array_key_exists('recommendations', $data) && $data['recommendations'] === null) {
-            $object->setRecommendations(null);
-        }
-        if (\array_key_exists('upgrades', $data) && $data['upgrades'] !== null) {
-            $values_3 = [];
-            foreach ($data['upgrades'] as $value_3) {
-                $values_3[] = $value_3;
+            if ($object->isInitialized('upgrades') && null !== $object->getUpgrades()) {
+                $values_3 = [];
+                foreach ($object->getUpgrades() as $value_3) {
+                    $values_3[] = $value_3;
+                }
+                $data['upgrades'] = $values_3;
             }
-            $object->setUpgrades($values_3);
-        } elseif (\array_key_exists('upgrades', $data) && $data['upgrades'] === null) {
-            $object->setUpgrades(null);
-        }
-        if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
-        }
-        if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
-            $object->setDisplayName($data['displayName']);
-        } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
-            $object->setDisplayName(null);
-        }
-        if (\array_key_exists('description', $data)) {
-            $object->setDescription($data['description']);
-        }
-        if (\array_key_exists('warranty', $data) && $data['warranty'] !== null) {
-            $object->setWarranty($data['warranty']);
-        } elseif (\array_key_exists('warranty', $data) && $data['warranty'] === null) {
-            $object->setWarranty(null);
-        }
-        if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
-            $values_4 = [];
-            foreach ($data['categories'] as $value_4) {
-                $values_4[] = $value_4;
+            $data['code'] = $object->getCode();
+            if ($object->isInitialized('displayName') && null !== $object->getDisplayName()) {
+                $data['displayName'] = $object->getDisplayName();
             }
-            $object->setCategories($values_4);
-        } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
-            $object->setCategories(null);
-        }
-        if (\array_key_exists('price', $data) && $data['price'] !== null) {
-            $object->setPrice($data['price']);
-        } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
-            $object->setPrice(null);
-        }
-        if (\array_key_exists('memberPrice', $data) && $data['memberPrice'] !== null) {
-            $object->setMemberPrice($data['memberPrice']);
-        } elseif (\array_key_exists('memberPrice', $data) && $data['memberPrice'] === null) {
-            $object->setMemberPrice(null);
-        }
-        if (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] !== null) {
-            $object->setAddOnPrice($data['addOnPrice']);
-        } elseif (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] === null) {
-            $object->setAddOnPrice(null);
-        }
-        if (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] !== null) {
-            $object->setAddOnMemberPrice($data['addOnMemberPrice']);
-        } elseif (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] === null) {
-            $object->setAddOnMemberPrice(null);
-        }
-        if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
-            $object->setTaxable($data['taxable']);
-        } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
-            $object->setTaxable(null);
-        }
-        if (\array_key_exists('account', $data) && $data['account'] !== null) {
-            $object->setAccount($data['account']);
-        } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
-            $object->setAccount(null);
-        }
-        if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
-            $object->setHours($data['hours']);
-        } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
-            $object->setHours(null);
-        }
-        if (\array_key_exists('isLabor', $data) && $data['isLabor'] !== null) {
-            $object->setIsLabor($data['isLabor']);
-        } elseif (\array_key_exists('isLabor', $data) && $data['isLabor'] === null) {
-            $object->setIsLabor(null);
-        }
-        if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
-            $values_5 = [];
-            foreach ($data['assets'] as $value_5) {
-                $values_5[] = $this->denormalizer->denormalize($value_5, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuAssetRequest', 'json', $context);
+            $data['description'] = $object->getDescription();
+            if ($object->isInitialized('warranty') && null !== $object->getWarranty()) {
+                $data['warranty'] = $object->getWarranty();
             }
-            $object->setAssets($values_5);
-        } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
-            $object->setAssets(null);
-        }
-        if (\array_key_exists('active', $data) && $data['active'] !== null) {
-            $object->setActive($data['active']);
-        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
-            $object->setActive(null);
-        }
-        if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
-            $object->setCrossSaleGroup($data['crossSaleGroup']);
-        } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
-            $object->setCrossSaleGroup(null);
-        }
-        if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
-            $object->setPaysCommission($data['paysCommission']);
-        } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
-            $object->setPaysCommission(null);
-        }
-        if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
-            $object->setCommissionBonus($data['commissionBonus']);
-        } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
-            $object->setCommissionBonus(null);
-        }
-        if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
-            $object->setExternalData($data['externalData']);
-        } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
-            $object->setExternalData(null);
+            if ($object->isInitialized('categories') && null !== $object->getCategories()) {
+                $values_4 = [];
+                foreach ($object->getCategories() as $value_4) {
+                    $values_4[] = $value_4;
+                }
+                $data['categories'] = $values_4;
+            }
+            if ($object->isInitialized('price') && null !== $object->getPrice()) {
+                $data['price'] = $object->getPrice();
+            }
+            if ($object->isInitialized('memberPrice') && null !== $object->getMemberPrice()) {
+                $data['memberPrice'] = $object->getMemberPrice();
+            }
+            if ($object->isInitialized('addOnPrice') && null !== $object->getAddOnPrice()) {
+                $data['addOnPrice'] = $object->getAddOnPrice();
+            }
+            if ($object->isInitialized('addOnMemberPrice') && null !== $object->getAddOnMemberPrice()) {
+                $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
+            }
+            if ($object->isInitialized('taxable') && null !== $object->getTaxable()) {
+                $data['taxable'] = $object->getTaxable();
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+            if ($object->isInitialized('isLabor') && null !== $object->getIsLabor()) {
+                $data['isLabor'] = $object->getIsLabor();
+            }
+            if ($object->isInitialized('assets') && null !== $object->getAssets()) {
+                $values_5 = [];
+                foreach ($object->getAssets() as $value_5) {
+                    $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
+                }
+                $data['assets'] = $values_5;
+            }
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
+            }
+            if ($object->isInitialized('crossSaleGroup') && null !== $object->getCrossSaleGroup()) {
+                $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            }
+            if ($object->isInitialized('paysCommission') && null !== $object->getPaysCommission()) {
+                $data['paysCommission'] = $object->getPaysCommission();
+            }
+            if ($object->isInitialized('commissionBonus') && null !== $object->getCommissionBonus()) {
+                $data['commissionBonus'] = $object->getCommissionBonus();
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2ServiceCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getServiceMaterials()) {
-            $values = [];
-            foreach ($object->getServiceMaterials() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['serviceMaterials'] = $values;
-        }
-        if (null !== $object->getServiceEquipment()) {
-            $values_1 = [];
-            foreach ($object->getServiceEquipment() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['serviceEquipment'] = $values_1;
-        }
-        if (null !== $object->getRecommendations()) {
-            $values_2 = [];
-            foreach ($object->getRecommendations() as $value_2) {
-                $values_2[] = $value_2;
-            }
-            $data['recommendations'] = $values_2;
-        }
-        if (null !== $object->getUpgrades()) {
-            $values_3 = [];
-            foreach ($object->getUpgrades() as $value_3) {
-                $values_3[] = $value_3;
-            }
-            $data['upgrades'] = $values_3;
-        }
-        $data['code'] = $object->getCode();
-        if (null !== $object->getDisplayName()) {
-            $data['displayName'] = $object->getDisplayName();
-        }
-        $data['description'] = $object->getDescription();
-        if (null !== $object->getWarranty()) {
-            $data['warranty'] = $object->getWarranty();
-        }
-        if (null !== $object->getCategories()) {
-            $values_4 = [];
-            foreach ($object->getCategories() as $value_4) {
-                $values_4[] = $value_4;
-            }
-            $data['categories'] = $values_4;
-        }
-        if (null !== $object->getPrice()) {
-            $data['price'] = $object->getPrice();
-        }
-        if (null !== $object->getMemberPrice()) {
-            $data['memberPrice'] = $object->getMemberPrice();
-        }
-        if (null !== $object->getAddOnPrice()) {
-            $data['addOnPrice'] = $object->getAddOnPrice();
-        }
-        if (null !== $object->getAddOnMemberPrice()) {
-            $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
-        }
-        if (null !== $object->getTaxable()) {
-            $data['taxable'] = $object->getTaxable();
-        }
-        if (null !== $object->getAccount()) {
-            $data['account'] = $object->getAccount();
-        }
-        if (null !== $object->getHours()) {
-            $data['hours'] = $object->getHours();
-        }
-        if (null !== $object->getIsLabor()) {
-            $data['isLabor'] = $object->getIsLabor();
-        }
-        if (null !== $object->getAssets()) {
-            $values_5 = [];
-            foreach ($object->getAssets() as $value_5) {
-                $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
-            }
-            $data['assets'] = $values_5;
-        }
-        if (null !== $object->getActive()) {
-            $data['active'] = $object->getActive();
-        }
-        if (null !== $object->getCrossSaleGroup()) {
-            $data['crossSaleGroup'] = $object->getCrossSaleGroup();
-        }
-        if (null !== $object->getPaysCommission()) {
-            $data['paysCommission'] = $object->getPaysCommission();
-        }
-        if (null !== $object->getCommissionBonus()) {
-            $data['commissionBonus'] = $object->getCommissionBonus();
-        }
-        if (null !== $object->getExternalData()) {
-            $data['externalData'] = $object->getExternalData();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest();
+            if (\array_key_exists('price', $data) && \is_int($data['price'])) {
+                $data['price'] = (float) $data['price'];
+            }
+            if (\array_key_exists('memberPrice', $data) && \is_int($data['memberPrice'])) {
+                $data['memberPrice'] = (float) $data['memberPrice'];
+            }
+            if (\array_key_exists('addOnPrice', $data) && \is_int($data['addOnPrice'])) {
+                $data['addOnPrice'] = (float) $data['addOnPrice'];
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && \is_int($data['addOnMemberPrice'])) {
+                $data['addOnMemberPrice'] = (float) $data['addOnMemberPrice'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] !== null) {
+                $values = [];
+                foreach ($data['serviceMaterials'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceMaterials($values);
+            } elseif (\array_key_exists('serviceMaterials', $data) && $data['serviceMaterials'] === null) {
+                $object->setServiceMaterials(null);
+            }
+            if (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] !== null) {
+                $values_1 = [];
+                foreach ($data['serviceEquipment'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceEquipment($values_1);
+            } elseif (\array_key_exists('serviceEquipment', $data) && $data['serviceEquipment'] === null) {
+                $object->setServiceEquipment(null);
+            }
+            if (\array_key_exists('recommendations', $data) && $data['recommendations'] !== null) {
+                $values_2 = [];
+                foreach ($data['recommendations'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setRecommendations($values_2);
+            } elseif (\array_key_exists('recommendations', $data) && $data['recommendations'] === null) {
+                $object->setRecommendations(null);
+            }
+            if (\array_key_exists('upgrades', $data) && $data['upgrades'] !== null) {
+                $values_3 = [];
+                foreach ($data['upgrades'] as $value_3) {
+                    $values_3[] = $value_3;
+                }
+                $object->setUpgrades($values_3);
+            } elseif (\array_key_exists('upgrades', $data) && $data['upgrades'] === null) {
+                $object->setUpgrades(null);
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
+                $object->setDisplayName($data['displayName']);
+            } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
+                $object->setDisplayName(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('warranty', $data) && $data['warranty'] !== null) {
+                $object->setWarranty($data['warranty']);
+            } elseif (\array_key_exists('warranty', $data) && $data['warranty'] === null) {
+                $object->setWarranty(null);
+            }
+            if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
+                $values_4 = [];
+                foreach ($data['categories'] as $value_4) {
+                    $values_4[] = $value_4;
+                }
+                $object->setCategories($values_4);
+            } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
+                $object->setCategories(null);
+            }
+            if (\array_key_exists('price', $data) && $data['price'] !== null) {
+                $object->setPrice($data['price']);
+            } elseif (\array_key_exists('price', $data) && $data['price'] === null) {
+                $object->setPrice(null);
+            }
+            if (\array_key_exists('memberPrice', $data) && $data['memberPrice'] !== null) {
+                $object->setMemberPrice($data['memberPrice']);
+            } elseif (\array_key_exists('memberPrice', $data) && $data['memberPrice'] === null) {
+                $object->setMemberPrice(null);
+            }
+            if (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] !== null) {
+                $object->setAddOnPrice($data['addOnPrice']);
+            } elseif (\array_key_exists('addOnPrice', $data) && $data['addOnPrice'] === null) {
+                $object->setAddOnPrice(null);
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] !== null) {
+                $object->setAddOnMemberPrice($data['addOnMemberPrice']);
+            } elseif (\array_key_exists('addOnMemberPrice', $data) && $data['addOnMemberPrice'] === null) {
+                $object->setAddOnMemberPrice(null);
+            }
+            if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
+                $object->setTaxable($data['taxable']);
+            } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
+                $object->setTaxable(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+            if (\array_key_exists('isLabor', $data) && $data['isLabor'] !== null) {
+                $object->setIsLabor($data['isLabor']);
+            } elseif (\array_key_exists('isLabor', $data) && $data['isLabor'] === null) {
+                $object->setIsLabor(null);
+            }
+            if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
+                $values_5 = [];
+                foreach ($data['assets'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_5);
+            } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
+                $object->setAssets(null);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
+                $object->setCrossSaleGroup(null);
+            }
+            if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
+                $object->setPaysCommission($data['paysCommission']);
+            } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
+                $object->setPaysCommission(null);
+            }
+            if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
+                $object->setCommissionBonus(null);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('serviceMaterials') && null !== $object->getServiceMaterials()) {
+                $values = [];
+                foreach ($object->getServiceMaterials() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['serviceMaterials'] = $values;
+            }
+            if ($object->isInitialized('serviceEquipment') && null !== $object->getServiceEquipment()) {
+                $values_1 = [];
+                foreach ($object->getServiceEquipment() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['serviceEquipment'] = $values_1;
+            }
+            if ($object->isInitialized('recommendations') && null !== $object->getRecommendations()) {
+                $values_2 = [];
+                foreach ($object->getRecommendations() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['recommendations'] = $values_2;
+            }
+            if ($object->isInitialized('upgrades') && null !== $object->getUpgrades()) {
+                $values_3 = [];
+                foreach ($object->getUpgrades() as $value_3) {
+                    $values_3[] = $value_3;
+                }
+                $data['upgrades'] = $values_3;
+            }
+            $data['code'] = $object->getCode();
+            if ($object->isInitialized('displayName') && null !== $object->getDisplayName()) {
+                $data['displayName'] = $object->getDisplayName();
+            }
+            $data['description'] = $object->getDescription();
+            if ($object->isInitialized('warranty') && null !== $object->getWarranty()) {
+                $data['warranty'] = $object->getWarranty();
+            }
+            if ($object->isInitialized('categories') && null !== $object->getCategories()) {
+                $values_4 = [];
+                foreach ($object->getCategories() as $value_4) {
+                    $values_4[] = $value_4;
+                }
+                $data['categories'] = $values_4;
+            }
+            if ($object->isInitialized('price') && null !== $object->getPrice()) {
+                $data['price'] = $object->getPrice();
+            }
+            if ($object->isInitialized('memberPrice') && null !== $object->getMemberPrice()) {
+                $data['memberPrice'] = $object->getMemberPrice();
+            }
+            if ($object->isInitialized('addOnPrice') && null !== $object->getAddOnPrice()) {
+                $data['addOnPrice'] = $object->getAddOnPrice();
+            }
+            if ($object->isInitialized('addOnMemberPrice') && null !== $object->getAddOnMemberPrice()) {
+                $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
+            }
+            if ($object->isInitialized('taxable') && null !== $object->getTaxable()) {
+                $data['taxable'] = $object->getTaxable();
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+            if ($object->isInitialized('isLabor') && null !== $object->getIsLabor()) {
+                $data['isLabor'] = $object->getIsLabor();
+            }
+            if ($object->isInitialized('assets') && null !== $object->getAssets()) {
+                $values_5 = [];
+                foreach ($object->getAssets() as $value_5) {
+                    $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
+                }
+                $data['assets'] = $values_5;
+            }
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
+            }
+            if ($object->isInitialized('crossSaleGroup') && null !== $object->getCrossSaleGroup()) {
+                $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            }
+            if ($object->isInitialized('paysCommission') && null !== $object->getPaysCommission()) {
+                $data['paysCommission'] = $object->getPaysCommission();
+            }
+            if ($object->isInitialized('commissionBonus') && null !== $object->getCommissionBonus()) {
+                $data['commissionBonus'] = $object->getCommissionBonus();
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest::class => false];
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2SubtaskCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var bool
      */
     protected $isClosed;
@@ -36,6 +45,7 @@ class TaskManagementV2SubtaskCreateRequest
 
     public function setIsClosed(bool $isClosed): self
     {
+        $this->initialized['isClosed'] = true;
         $this->isClosed = $isClosed;
 
         return $this;
@@ -48,6 +58,7 @@ class TaskManagementV2SubtaskCreateRequest
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -60,6 +71,7 @@ class TaskManagementV2SubtaskCreateRequest
 
     public function setAssignedToId(int $assignedToId): self
     {
+        $this->initialized['assignedToId'] = true;
         $this->assignedToId = $assignedToId;
 
         return $this;
@@ -72,6 +84,7 @@ class TaskManagementV2SubtaskCreateRequest
 
     public function setDueDateTime(?\DateTime $dueDateTime): self
     {
+        $this->initialized['dueDateTime'] = true;
         $this->dueDateTime = $dueDateTime;
 
         return $this;

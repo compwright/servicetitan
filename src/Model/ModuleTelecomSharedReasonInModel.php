@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleTelecomSharedReasonInModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $name;
@@ -28,6 +37,7 @@ class ModuleTelecomSharedReasonInModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -40,6 +50,7 @@ class ModuleTelecomSharedReasonInModel
 
     public function setLead(bool $lead): self
     {
+        $this->initialized['lead'] = true;
         $this->lead = $lead;
 
         return $this;

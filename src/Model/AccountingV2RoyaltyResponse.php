@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2RoyaltyResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string|null
      */
     protected $status;
@@ -36,6 +45,7 @@ class AccountingV2RoyaltyResponse
 
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -48,6 +58,7 @@ class AccountingV2RoyaltyResponse
 
     public function setDate(?\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -60,6 +71,7 @@ class AccountingV2RoyaltyResponse
 
     public function setSentOn(?\DateTime $sentOn): self
     {
+        $this->initialized['sentOn'] = true;
         $this->sentOn = $sentOn;
 
         return $this;
@@ -72,6 +84,7 @@ class AccountingV2RoyaltyResponse
 
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;

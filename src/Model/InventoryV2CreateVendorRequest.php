@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2CreateVendorRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Name.
      *
      * @var string
@@ -104,12 +113,11 @@ class InventoryV2CreateVendorRequest
     protected $remittanceVendorId;
     /**
      * Address.
-     *
-     * @var mixed
      */
     protected $address;
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this vendor.
      *
      * @var mixed|null
      */
@@ -117,13 +125,13 @@ class InventoryV2CreateVendorRequest
     /**
      * Tags.
      *
-     * @var InventoryV2TagRequest[]|null
+     * @var list<InventoryV2TagRequest>|null
      */
     protected $tags;
     /**
      * Email Recipients.
      *
-     * @var InventoryV2CreateVendorContactRequest[]|null
+     * @var list<InventoryV2CreateVendorContactRequest>|null
      */
     protected $vendorContacts;
 
@@ -140,6 +148,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -158,6 +167,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -176,6 +186,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -194,6 +205,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setFirstName(?string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -212,6 +224,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setLastName(?string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -230,6 +243,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setPhone(?string $phone): self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
 
         return $this;
@@ -248,6 +262,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -266,6 +281,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setFax(?string $fax): self
     {
+        $this->initialized['fax'] = true;
         $this->fax = $fax;
 
         return $this;
@@ -284,6 +300,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setIsTruckReplenishment(bool $isTruckReplenishment): self
     {
+        $this->initialized['isTruckReplenishment'] = true;
         $this->isTruckReplenishment = $isTruckReplenishment;
 
         return $this;
@@ -291,8 +308,6 @@ class InventoryV2CreateVendorRequest
 
     /**
      * Default PO Delivery Method.
-     *
-     * @return mixed
      */
     public function getDeliveryOption()
     {
@@ -301,11 +316,10 @@ class InventoryV2CreateVendorRequest
 
     /**
      * Default PO Delivery Method.
-     *
-     * @param mixed $deliveryOption
      */
     public function setDeliveryOption($deliveryOption): self
     {
+        $this->initialized['deliveryOption'] = true;
         $this->deliveryOption = $deliveryOption;
 
         return $this;
@@ -324,6 +338,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setTaxRate(float $taxRate): self
     {
+        $this->initialized['taxRate'] = true;
         $this->taxRate = $taxRate;
 
         return $this;
@@ -342,6 +357,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setRestrictedMobileCreation(bool $restrictedMobileCreation): self
     {
+        $this->initialized['restrictedMobileCreation'] = true;
         $this->restrictedMobileCreation = $restrictedMobileCreation;
 
         return $this;
@@ -360,6 +376,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setVendorQuickbooksItem(?string $vendorQuickbooksItem): self
     {
+        $this->initialized['vendorQuickbooksItem'] = true;
         $this->vendorQuickbooksItem = $vendorQuickbooksItem;
 
         return $this;
@@ -378,6 +395,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setPaymentTermId(?int $paymentTermId): self
     {
+        $this->initialized['paymentTermId'] = true;
         $this->paymentTermId = $paymentTermId;
 
         return $this;
@@ -396,6 +414,7 @@ class InventoryV2CreateVendorRequest
      */
     public function setRemittanceVendorId(?int $remittanceVendorId): self
     {
+        $this->initialized['remittanceVendorId'] = true;
         $this->remittanceVendorId = $remittanceVendorId;
 
         return $this;
@@ -403,8 +422,6 @@ class InventoryV2CreateVendorRequest
 
     /**
      * Address.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -413,20 +430,18 @@ class InventoryV2CreateVendorRequest
 
     /**
      * Address.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @return mixed
+     * Optional model that contains a list of external data items
+     * that should be attached to this vendor.
      */
     public function getExternalData()
     {
@@ -434,12 +449,12 @@ class InventoryV2CreateVendorRequest
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @param mixed $externalData
+     * Optional model that contains a list of external data items
+     * that should be attached to this vendor.
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;
@@ -448,7 +463,7 @@ class InventoryV2CreateVendorRequest
     /**
      * Tags.
      *
-     * @return InventoryV2TagRequest[]|null
+     * @return list<InventoryV2TagRequest>|null
      */
     public function getTags(): ?array
     {
@@ -458,10 +473,11 @@ class InventoryV2CreateVendorRequest
     /**
      * Tags.
      *
-     * @param InventoryV2TagRequest[]|null $tags
+     * @param list<InventoryV2TagRequest>|null $tags
      */
     public function setTags(?array $tags): self
     {
+        $this->initialized['tags'] = true;
         $this->tags = $tags;
 
         return $this;
@@ -470,7 +486,7 @@ class InventoryV2CreateVendorRequest
     /**
      * Email Recipients.
      *
-     * @return InventoryV2CreateVendorContactRequest[]|null
+     * @return list<InventoryV2CreateVendorContactRequest>|null
      */
     public function getVendorContacts(): ?array
     {
@@ -480,10 +496,11 @@ class InventoryV2CreateVendorRequest
     /**
      * Email Recipients.
      *
-     * @param InventoryV2CreateVendorContactRequest[]|null $vendorContacts
+     * @param list<InventoryV2CreateVendorContactRequest>|null $vendorContacts
      */
     public function setVendorContacts(?array $vendorContacts): self
     {
+        $this->initialized['vendorContacts'] = true;
         $this->vendorContacts = $vendorContacts;
 
         return $this;

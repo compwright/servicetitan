@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2MaterialBulkUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Code for the SKU.
      *
      * @var string
@@ -124,26 +133,24 @@ class PricebookV2MaterialBulkUpdateRequest
     protected $taxable;
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @var mixed
      */
     protected $primaryVendor;
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @var PricebookV2SkuVendorRequest[]
+     * @var list<PricebookV2SkuVendorRequest>
      */
     protected $otherVendors;
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetRequest[]
+     * @var list<PricebookV2SkuAssetRequest>
      */
     protected $assets;
     /**
      * Categories that this SKU belongs to.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $categories;
     /**
@@ -170,6 +177,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -188,6 +196,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setDisplayName(string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -206,6 +215,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -224,6 +234,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -242,6 +253,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -260,6 +272,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setPrice(float $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -278,6 +291,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setMemberPrice(float $memberPrice): self
     {
+        $this->initialized['memberPrice'] = true;
         $this->memberPrice = $memberPrice;
 
         return $this;
@@ -296,6 +310,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setAddOnPrice(float $addOnPrice): self
     {
+        $this->initialized['addOnPrice'] = true;
         $this->addOnPrice = $addOnPrice;
 
         return $this;
@@ -314,6 +329,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setAddOnMemberPrice(float $addOnMemberPrice): self
     {
+        $this->initialized['addOnMemberPrice'] = true;
         $this->addOnMemberPrice = $addOnMemberPrice;
 
         return $this;
@@ -332,6 +348,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setHours(float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -350,6 +367,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setCommissionBonus(float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -368,6 +386,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setPaysCommission(bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -386,6 +405,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setDeductAsJobCost(bool $deductAsJobCost): self
     {
+        $this->initialized['deductAsJobCost'] = true;
         $this->deductAsJobCost = $deductAsJobCost;
 
         return $this;
@@ -404,6 +424,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setUnitOfMeasure(string $unitOfMeasure): self
     {
+        $this->initialized['unitOfMeasure'] = true;
         $this->unitOfMeasure = $unitOfMeasure;
 
         return $this;
@@ -422,6 +443,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setIsInventory(bool $isInventory): self
     {
+        $this->initialized['isInventory'] = true;
         $this->isInventory = $isInventory;
 
         return $this;
@@ -440,6 +462,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setAccount(string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -452,6 +475,7 @@ class PricebookV2MaterialBulkUpdateRequest
 
     public function setCostOfSaleAccount(string $costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
@@ -464,6 +488,7 @@ class PricebookV2MaterialBulkUpdateRequest
 
     public function setAssetAccount(string $assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;
@@ -482,6 +507,7 @@ class PricebookV2MaterialBulkUpdateRequest
      */
     public function setTaxable(bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -489,8 +515,6 @@ class PricebookV2MaterialBulkUpdateRequest
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @return mixed
      */
     public function getPrimaryVendor()
     {
@@ -499,11 +523,10 @@ class PricebookV2MaterialBulkUpdateRequest
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @param mixed $primaryVendor
      */
     public function setPrimaryVendor($primaryVendor): self
     {
+        $this->initialized['primaryVendor'] = true;
         $this->primaryVendor = $primaryVendor;
 
         return $this;
@@ -512,7 +535,7 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @return PricebookV2SkuVendorRequest[]
+     * @return list<PricebookV2SkuVendorRequest>
      */
     public function getOtherVendors(): array
     {
@@ -522,10 +545,11 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @param PricebookV2SkuVendorRequest[] $otherVendors
+     * @param list<PricebookV2SkuVendorRequest> $otherVendors
      */
     public function setOtherVendors(array $otherVendors): self
     {
+        $this->initialized['otherVendors'] = true;
         $this->otherVendors = $otherVendors;
 
         return $this;
@@ -534,7 +558,7 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetRequest[]
+     * @return list<PricebookV2SkuAssetRequest>
      */
     public function getAssets(): array
     {
@@ -544,10 +568,11 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetRequest[] $assets
+     * @param list<PricebookV2SkuAssetRequest> $assets
      */
     public function setAssets(array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -556,7 +581,7 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getCategories(): array
     {
@@ -566,10 +591,11 @@ class PricebookV2MaterialBulkUpdateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @param int[] $categories
+     * @param list<int> $categories
      */
     public function setCategories(array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -577,8 +603,6 @@ class PricebookV2MaterialBulkUpdateRequest
 
     /**
      * External data update model.
-     *
-     * @return mixed
      */
     public function getExternalData()
     {
@@ -587,11 +611,10 @@ class PricebookV2MaterialBulkUpdateRequest
 
     /**
      * External data update model.
-     *
-     * @param mixed $externalData
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;
@@ -604,6 +627,7 @@ class PricebookV2MaterialBulkUpdateRequest
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;

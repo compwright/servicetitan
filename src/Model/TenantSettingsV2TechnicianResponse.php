@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2TechnicianResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -57,7 +66,7 @@ class TenantSettingsV2TechnicianResponse
      */
     protected $isManagedTech;
     /**
-     * @var TenantSettingsV2TechnicianCustomFieldResponse[]|null
+     * @var list<TenantSettingsV2TechnicianCustomFieldResponse>|null
      */
     protected $customFields;
     /**
@@ -72,6 +81,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -84,6 +94,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -96,6 +107,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -108,6 +120,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -120,6 +133,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -132,6 +146,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -144,6 +159,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setPhoneNumber(?string $phoneNumber): self
     {
+        $this->initialized['phoneNumber'] = true;
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -156,24 +172,20 @@ class TenantSettingsV2TechnicianResponse
 
     public function setLoginName(?string $loginName): self
     {
+        $this->initialized['loginName'] = true;
         $this->loginName = $loginName;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getHome()
     {
         return $this->home;
     }
 
-    /**
-     * @param mixed $home
-     */
     public function setHome($home): self
     {
+        $this->initialized['home'] = true;
         $this->home = $home;
 
         return $this;
@@ -186,6 +198,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setDailyGoal(float $dailyGoal): self
     {
+        $this->initialized['dailyGoal'] = true;
         $this->dailyGoal = $dailyGoal;
 
         return $this;
@@ -198,13 +211,14 @@ class TenantSettingsV2TechnicianResponse
 
     public function setIsManagedTech(bool $isManagedTech): self
     {
+        $this->initialized['isManagedTech'] = true;
         $this->isManagedTech = $isManagedTech;
 
         return $this;
     }
 
     /**
-     * @return TenantSettingsV2TechnicianCustomFieldResponse[]|null
+     * @return list<TenantSettingsV2TechnicianCustomFieldResponse>|null
      */
     public function getCustomFields(): ?array
     {
@@ -212,10 +226,11 @@ class TenantSettingsV2TechnicianResponse
     }
 
     /**
-     * @param TenantSettingsV2TechnicianCustomFieldResponse[]|null $customFields
+     * @param list<TenantSettingsV2TechnicianCustomFieldResponse>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -228,6 +243,7 @@ class TenantSettingsV2TechnicianResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

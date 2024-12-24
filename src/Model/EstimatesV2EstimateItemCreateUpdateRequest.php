@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EstimatesV2EstimateItemCreateUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -64,6 +73,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -76,6 +86,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setSkuId(?int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -88,6 +99,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setSkuName(?string $skuName): self
     {
+        $this->initialized['skuName'] = true;
         $this->skuName = $skuName;
 
         return $this;
@@ -100,6 +112,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setParentItemId(?int $parentItemId): self
     {
+        $this->initialized['parentItemId'] = true;
         $this->parentItemId = $parentItemId;
 
         return $this;
@@ -112,6 +125,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -124,6 +138,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setIsAddOn(?bool $isAddOn): self
     {
+        $this->initialized['isAddOn'] = true;
         $this->isAddOn = $isAddOn;
 
         return $this;
@@ -136,6 +151,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setQuantity(?float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -148,6 +164,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setUnitPrice(?float $unitPrice): self
     {
+        $this->initialized['unitPrice'] = true;
         $this->unitPrice = $unitPrice;
 
         return $this;
@@ -160,6 +177,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setSkipUpdatingMembershipPrices(?bool $skipUpdatingMembershipPrices): self
     {
+        $this->initialized['skipUpdatingMembershipPrices'] = true;
         $this->skipUpdatingMembershipPrices = $skipUpdatingMembershipPrices;
 
         return $this;
@@ -172,6 +190,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setItemGroupName(?string $itemGroupName): self
     {
+        $this->initialized['itemGroupName'] = true;
         $this->itemGroupName = $itemGroupName;
 
         return $this;
@@ -184,6 +203,7 @@ class EstimatesV2EstimateItemCreateUpdateRequest
 
     public function setItemGroupRootId(?int $itemGroupRootId): self
     {
+        $this->initialized['itemGroupRootId'] = true;
         $this->itemGroupRootId = $itemGroupRootId;
 
         return $this;

@@ -13,9 +13,16 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersNewCustomerContact
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -33,8 +40,6 @@ class CrmV2CustomersNewCustomerContact
 
     /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -43,11 +48,10 @@ class CrmV2CustomersNewCustomerContact
 
     /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -66,6 +70,7 @@ class CrmV2CustomersNewCustomerContact
      */
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -84,6 +89,7 @@ class CrmV2CustomersNewCustomerContact
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;

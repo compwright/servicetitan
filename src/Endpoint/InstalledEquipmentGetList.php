@@ -19,18 +19,21 @@ class InstalledEquipmentGetList extends \CompWright\ServiceTitan\Runtime\Client\
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $locationIds
-     *     @var string $ids
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $sort Applies sorting by the specified field:\
-    Available fields are: Id, CreatedOn, ModifiedOn.
-     * }
+     * @var string $locationIds
+     * @var string $ids
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, CreatedOn, ModifiedOn.
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -64,34 +67,34 @@ class InstalledEquipmentGetList extends \CompWright\ServiceTitan\Runtime\Client\
         $optionsResolver->setDefined(['locationIds', 'ids', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter', 'page', 'pageSize', 'includeTotal', 'sort']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('locationIds', ['string']);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('sort', ['string']);
+        $optionsResolver->addAllowedTypes('locationIds', ['string']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('sort', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEquipmentSystemsV2InstalledEquipmentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\InstalledEquipmentGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEquipmentSystemsV2InstalledEquipmentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfEquipmentSystemsV2InstalledEquipmentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfEquipmentSystemsV2InstalledEquipmentResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

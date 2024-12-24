@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentTermAPIModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -60,6 +69,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -72,6 +82,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -84,6 +95,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setDueDayType(string $dueDayType): self
     {
+        $this->initialized['dueDayType'] = true;
         $this->dueDayType = $dueDayType;
 
         return $this;
@@ -96,6 +108,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setDueDay(?int $dueDay): self
     {
+        $this->initialized['dueDay'] = true;
         $this->dueDay = $dueDay;
 
         return $this;
@@ -108,6 +121,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setIsCustomerDefault(bool $isCustomerDefault): self
     {
+        $this->initialized['isCustomerDefault'] = true;
         $this->isCustomerDefault = $isCustomerDefault;
 
         return $this;
@@ -120,6 +134,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setIsVendorDefault(bool $isVendorDefault): self
     {
+        $this->initialized['isVendorDefault'] = true;
         $this->isVendorDefault = $isVendorDefault;
 
         return $this;
@@ -132,6 +147,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -144,6 +160,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setInUse(?bool $inUse): self
     {
+        $this->initialized['inUse'] = true;
         $this->inUse = $inUse;
 
         return $this;
@@ -156,6 +173,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setPaymentTermPenaltyModel(AccountingV2PaymentTermPenaltyAPIModel $paymentTermPenaltyModel): self
     {
+        $this->initialized['paymentTermPenaltyModel'] = true;
         $this->paymentTermPenaltyModel = $paymentTermPenaltyModel;
 
         return $this;
@@ -168,6 +186,7 @@ class AccountingV2PaymentTermAPIModel
 
     public function setPaymentTermDiscountModel(AccountingV2PaymentTermDiscountAPIModel $paymentTermDiscountModel): self
     {
+        $this->initialized['paymentTermDiscountModel'] = true;
         $this->paymentTermDiscountModel = $paymentTermDiscountModel;
 
         return $this;

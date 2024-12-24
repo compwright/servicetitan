@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2DetailedPaymentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -65,11 +74,11 @@ class AccountingV2DetailedPaymentResponse
      */
     protected $generalLedgerAccount;
     /**
-     * @var AccountingV2PaymentAppliedResponse[]|null
+     * @var list<AccountingV2PaymentAppliedResponse>|null
      */
     protected $appliedTo;
     /**
-     * @var AccountingCustomFieldModel[]|null
+     * @var list<AccountingCustomFieldModel>|null
      */
     protected $customFields;
     /**
@@ -88,6 +97,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -100,6 +110,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setSyncStatus(?string $syncStatus): self
     {
+        $this->initialized['syncStatus'] = true;
         $this->syncStatus = $syncStatus;
 
         return $this;
@@ -112,6 +123,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setReferenceNumber(?string $referenceNumber): self
     {
+        $this->initialized['referenceNumber'] = true;
         $this->referenceNumber = $referenceNumber;
 
         return $this;
@@ -124,6 +136,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setDate(?\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -136,6 +149,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -148,6 +162,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setTypeId(?string $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -160,6 +175,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setTotal(?string $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
 
         return $this;
@@ -172,6 +188,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setUnappliedAmount(?string $unappliedAmount): self
     {
+        $this->initialized['unappliedAmount'] = true;
         $this->unappliedAmount = $unappliedAmount;
 
         return $this;
@@ -184,42 +201,33 @@ class AccountingV2DetailedPaymentResponse
 
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCustomer()
     {
         return $this->customer;
     }
 
-    /**
-     * @param mixed $customer
-     */
     public function setCustomer($customer): self
     {
+        $this->initialized['customer'] = true;
         $this->customer = $customer;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getBatch()
     {
         return $this->batch;
     }
 
-    /**
-     * @param mixed $batch
-     */
     public function setBatch($batch): self
     {
+        $this->initialized['batch'] = true;
         $this->batch = $batch;
 
         return $this;
@@ -232,31 +240,27 @@ class AccountingV2DetailedPaymentResponse
 
     public function setCreatedBy(?string $createdBy): self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getGeneralLedgerAccount()
     {
         return $this->generalLedgerAccount;
     }
 
-    /**
-     * @param mixed $generalLedgerAccount
-     */
     public function setGeneralLedgerAccount($generalLedgerAccount): self
     {
+        $this->initialized['generalLedgerAccount'] = true;
         $this->generalLedgerAccount = $generalLedgerAccount;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2PaymentAppliedResponse[]|null
+     * @return list<AccountingV2PaymentAppliedResponse>|null
      */
     public function getAppliedTo(): ?array
     {
@@ -264,17 +268,18 @@ class AccountingV2DetailedPaymentResponse
     }
 
     /**
-     * @param AccountingV2PaymentAppliedResponse[]|null $appliedTo
+     * @param list<AccountingV2PaymentAppliedResponse>|null $appliedTo
      */
     public function setAppliedTo(?array $appliedTo): self
     {
+        $this->initialized['appliedTo'] = true;
         $this->appliedTo = $appliedTo;
 
         return $this;
     }
 
     /**
-     * @return AccountingCustomFieldModel[]|null
+     * @return list<AccountingCustomFieldModel>|null
      */
     public function getCustomFields(): ?array
     {
@@ -282,10 +287,11 @@ class AccountingV2DetailedPaymentResponse
     }
 
     /**
-     * @param AccountingCustomFieldModel[]|null $customFields
+     * @param list<AccountingCustomFieldModel>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -298,6 +304,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setAuthCode(?string $authCode): self
     {
+        $this->initialized['authCode'] = true;
         $this->authCode = $authCode;
 
         return $this;
@@ -310,6 +317,7 @@ class AccountingV2DetailedPaymentResponse
 
     public function setCheckNumber(?string $checkNumber): self
     {
+        $this->initialized['checkNumber'] = true;
         $this->checkNumber = $checkNumber;
 
         return $this;

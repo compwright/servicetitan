@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2DismissLeadRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Select a Call Reason to associate to a Booking that’s being dismissed for reporting purposes.
      *
      * @var int
@@ -32,6 +41,7 @@ class CrmV2DismissLeadRequest
      */
     public function setDismissingReasonId(int $dismissingReasonId): self
     {
+        $this->initialized['dismissingReasonId'] = true;
         $this->dismissingReasonId = $dismissingReasonId;
 
         return $this;

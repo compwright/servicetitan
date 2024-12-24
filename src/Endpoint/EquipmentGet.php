@@ -23,9 +23,9 @@ class EquipmentGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided.
+     *             }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -60,29 +60,29 @@ class EquipmentGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['externalDataApplicationGuid']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\EquipmentGetBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\EquipmentGetNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\EquipmentGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\EquipmentGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PricebookV2EquipmentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse', 'json');
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\EquipmentGetNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\EquipmentGetNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

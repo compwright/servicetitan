@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2PurchaseOrderResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Purchase order Id.
      *
      * @var int
@@ -68,8 +77,6 @@ class InventoryV2PurchaseOrderResponse
     protected $technicianId;
     /**
      * Shipping address for this PO.
-     *
-     * @var mixed
      */
     protected $shipTo;
     /**
@@ -159,13 +166,13 @@ class InventoryV2PurchaseOrderResponse
     /**
      * List of PO items.
      *
-     * @var InventoryV2PurchaseOrderItemResponse[]
+     * @var list<InventoryV2PurchaseOrderItemResponse>
      */
     protected $items;
     /**
      * List of custom fields for this PO.
      *
-     * @var InventoryV2CustomFieldResponse[]
+     * @var list<InventoryV2CustomFieldResponse>
      */
     protected $customFields;
 
@@ -182,6 +189,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -200,6 +208,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -218,6 +227,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setInvoiceId(?int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;
@@ -236,6 +246,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -254,6 +265,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setProjectId(?int $projectId): self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
 
         return $this;
@@ -272,6 +284,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setStatus(string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -290,6 +303,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setTypeId(int $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -308,6 +322,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setVendorId(int $vendorId): self
     {
+        $this->initialized['vendorId'] = true;
         $this->vendorId = $vendorId;
 
         return $this;
@@ -326,6 +341,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setTechnicianId(?int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -333,8 +349,6 @@ class InventoryV2PurchaseOrderResponse
 
     /**
      * Shipping address for this PO.
-     *
-     * @return mixed
      */
     public function getShipTo()
     {
@@ -343,11 +357,10 @@ class InventoryV2PurchaseOrderResponse
 
     /**
      * Shipping address for this PO.
-     *
-     * @param mixed $shipTo
      */
     public function setShipTo($shipTo): self
     {
+        $this->initialized['shipTo'] = true;
         $this->shipTo = $shipTo;
 
         return $this;
@@ -366,6 +379,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -384,6 +398,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setInventoryLocationId(?int $inventoryLocationId): self
     {
+        $this->initialized['inventoryLocationId'] = true;
         $this->inventoryLocationId = $inventoryLocationId;
 
         return $this;
@@ -402,6 +417,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setBatchId(?int $batchId): self
     {
+        $this->initialized['batchId'] = true;
         $this->batchId = $batchId;
 
         return $this;
@@ -420,6 +436,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setVendorDocumentNumber(string $vendorDocumentNumber): self
     {
+        $this->initialized['vendorDocumentNumber'] = true;
         $this->vendorDocumentNumber = $vendorDocumentNumber;
 
         return $this;
@@ -438,6 +455,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -456,6 +474,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setRequiredOn(?\DateTime $requiredOn): self
     {
+        $this->initialized['requiredOn'] = true;
         $this->requiredOn = $requiredOn;
 
         return $this;
@@ -474,6 +493,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setSentOn(?\DateTime $sentOn): self
     {
+        $this->initialized['sentOn'] = true;
         $this->sentOn = $sentOn;
 
         return $this;
@@ -492,6 +512,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setReceivedOn(?\DateTime $receivedOn): self
     {
+        $this->initialized['receivedOn'] = true;
         $this->receivedOn = $receivedOn;
 
         return $this;
@@ -510,6 +531,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -528,6 +550,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -546,6 +569,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setTotal(float $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
 
         return $this;
@@ -564,6 +588,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setTax(float $tax): self
     {
+        $this->initialized['tax'] = true;
         $this->tax = $tax;
 
         return $this;
@@ -582,6 +607,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setShipping(float $shipping): self
     {
+        $this->initialized['shipping'] = true;
         $this->shipping = $shipping;
 
         return $this;
@@ -600,6 +626,7 @@ class InventoryV2PurchaseOrderResponse
      */
     public function setSummary(string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -608,7 +635,7 @@ class InventoryV2PurchaseOrderResponse
     /**
      * List of PO items.
      *
-     * @return InventoryV2PurchaseOrderItemResponse[]
+     * @return list<InventoryV2PurchaseOrderItemResponse>
      */
     public function getItems(): array
     {
@@ -618,10 +645,11 @@ class InventoryV2PurchaseOrderResponse
     /**
      * List of PO items.
      *
-     * @param InventoryV2PurchaseOrderItemResponse[] $items
+     * @param list<InventoryV2PurchaseOrderItemResponse> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
@@ -630,7 +658,7 @@ class InventoryV2PurchaseOrderResponse
     /**
      * List of custom fields for this PO.
      *
-     * @return InventoryV2CustomFieldResponse[]
+     * @return list<InventoryV2CustomFieldResponse>
      */
     public function getCustomFields(): array
     {
@@ -640,10 +668,11 @@ class InventoryV2PurchaseOrderResponse
     /**
      * List of custom fields for this PO.
      *
-     * @param InventoryV2CustomFieldResponse[] $customFields
+     * @param list<InventoryV2CustomFieldResponse> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

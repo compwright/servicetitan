@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2EquipmentRecommendationResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * SKU unique identifier.
      *
      * @var int
@@ -20,8 +29,6 @@ class PricebookV2EquipmentRecommendationResponse
     protected $skuId;
     /**
      * Recommended SKU type (Service or Material).
-     *
-     * @var mixed
      */
     protected $type;
 
@@ -38,6 +45,7 @@ class PricebookV2EquipmentRecommendationResponse
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -45,8 +53,6 @@ class PricebookV2EquipmentRecommendationResponse
 
     /**
      * Recommended SKU type (Service or Material).
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -55,11 +61,10 @@ class PricebookV2EquipmentRecommendationResponse
 
     /**
      * Recommended SKU type (Service or Material).
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;

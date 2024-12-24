@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Membership type name.
      *
      * @var string
@@ -26,20 +35,14 @@ class MembershipsV2MembershipTypeResponse
     protected $active;
     /**
      * Membership discount mode.
-     *
-     * @var mixed
      */
     protected $discountMode;
     /**
      * Membership location target.
-     *
-     * @var mixed
      */
     protected $locationTarget;
     /**
      * Membership revenue recognition mode.
-     *
-     * @var mixed
      */
     protected $revenueRecognitionMode;
     /**
@@ -110,6 +113,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -128,6 +132,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -135,8 +140,6 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership discount mode.
-     *
-     * @return mixed
      */
     public function getDiscountMode()
     {
@@ -145,11 +148,10 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership discount mode.
-     *
-     * @param mixed $discountMode
      */
     public function setDiscountMode($discountMode): self
     {
+        $this->initialized['discountMode'] = true;
         $this->discountMode = $discountMode;
 
         return $this;
@@ -157,8 +159,6 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership location target.
-     *
-     * @return mixed
      */
     public function getLocationTarget()
     {
@@ -167,11 +167,10 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership location target.
-     *
-     * @param mixed $locationTarget
      */
     public function setLocationTarget($locationTarget): self
     {
+        $this->initialized['locationTarget'] = true;
         $this->locationTarget = $locationTarget;
 
         return $this;
@@ -179,8 +178,6 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership revenue recognition mode.
-     *
-     * @return mixed
      */
     public function getRevenueRecognitionMode()
     {
@@ -189,11 +186,10 @@ class MembershipsV2MembershipTypeResponse
 
     /**
      * Membership revenue recognition mode.
-     *
-     * @param mixed $revenueRecognitionMode
      */
     public function setRevenueRecognitionMode($revenueRecognitionMode): self
     {
+        $this->initialized['revenueRecognitionMode'] = true;
         $this->revenueRecognitionMode = $revenueRecognitionMode;
 
         return $this;
@@ -212,6 +208,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setAutoCalculateInvoiceTemplates(bool $autoCalculateInvoiceTemplates): self
     {
+        $this->initialized['autoCalculateInvoiceTemplates'] = true;
         $this->autoCalculateInvoiceTemplates = $autoCalculateInvoiceTemplates;
 
         return $this;
@@ -230,6 +227,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setUseMembershipPricingTable(bool $useMembershipPricingTable): self
     {
+        $this->initialized['useMembershipPricingTable'] = true;
         $this->useMembershipPricingTable = $useMembershipPricingTable;
 
         return $this;
@@ -248,6 +246,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setShowMembershipSavings(bool $showMembershipSavings): self
     {
+        $this->initialized['showMembershipSavings'] = true;
         $this->showMembershipSavings = $showMembershipSavings;
 
         return $this;
@@ -266,6 +265,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -284,6 +284,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -302,6 +303,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -320,6 +322,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -338,6 +341,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -356,6 +360,7 @@ class MembershipsV2MembershipTypeResponse
      */
     public function setBillingTemplateId(?int $billingTemplateId): self
     {
+        $this->initialized['billingTemplateId'] = true;
         $this->billingTemplateId = $billingTemplateId;
 
         return $this;

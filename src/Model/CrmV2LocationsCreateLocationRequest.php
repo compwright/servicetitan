@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2LocationsCreateLocationRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Name of the location.
      *
      * @var string
@@ -20,20 +29,18 @@ class CrmV2LocationsCreateLocationRequest
     protected $name;
     /**
      * Address of the location record.
-     *
-     * @var mixed
      */
     protected $address;
     /**
      * Contacts for the location.
      *
-     * @var CrmV2CustomersNewCustomerContact[]|null
+     * @var list<CrmV2CustomersNewCustomerContact>|null
      */
     protected $contacts;
     /**
      * Location record’s custom fields.
      *
-     * @var CrmV2CustomersCustomFieldUpdateModel[]|null
+     * @var list<CrmV2CustomersCustomFieldUpdateModel>|null
      */
     protected $customFields;
     /**
@@ -56,6 +63,7 @@ class CrmV2LocationsCreateLocationRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -63,8 +71,6 @@ class CrmV2LocationsCreateLocationRequest
 
     /**
      * Address of the location record.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -73,11 +79,10 @@ class CrmV2LocationsCreateLocationRequest
 
     /**
      * Address of the location record.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -86,7 +91,7 @@ class CrmV2LocationsCreateLocationRequest
     /**
      * Contacts for the location.
      *
-     * @return CrmV2CustomersNewCustomerContact[]|null
+     * @return list<CrmV2CustomersNewCustomerContact>|null
      */
     public function getContacts(): ?array
     {
@@ -96,10 +101,11 @@ class CrmV2LocationsCreateLocationRequest
     /**
      * Contacts for the location.
      *
-     * @param CrmV2CustomersNewCustomerContact[]|null $contacts
+     * @param list<CrmV2CustomersNewCustomerContact>|null $contacts
      */
     public function setContacts(?array $contacts): self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
 
         return $this;
@@ -108,7 +114,7 @@ class CrmV2LocationsCreateLocationRequest
     /**
      * Location record’s custom fields.
      *
-     * @return CrmV2CustomersCustomFieldUpdateModel[]|null
+     * @return list<CrmV2CustomersCustomFieldUpdateModel>|null
      */
     public function getCustomFields(): ?array
     {
@@ -118,10 +124,11 @@ class CrmV2LocationsCreateLocationRequest
     /**
      * Location record’s custom fields.
      *
-     * @param CrmV2CustomersCustomFieldUpdateModel[]|null $customFields
+     * @param list<CrmV2CustomersCustomFieldUpdateModel>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -140,6 +147,7 @@ class CrmV2LocationsCreateLocationRequest
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;

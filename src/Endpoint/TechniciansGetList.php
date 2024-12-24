@@ -21,17 +21,17 @@ class TechniciansGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEnd
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $name
-     *     @var string $active Values: [True, Any, False]
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var string $ids
+     * @var string $name
+     * @var string $active Values: [True, Any, False]
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -65,34 +65,34 @@ class TechniciansGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEnd
         $optionsResolver->setDefined(['ids', 'name', 'active', 'page', 'pageSize', 'includeTotal', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('name', ['string']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('name', ['string']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2TechnicianResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\TechniciansGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2TechnicianResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfTenantSettingsV2TechnicianResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2TechnicianResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\TechniciansGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\TechniciansGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

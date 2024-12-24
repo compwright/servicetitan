@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,175 +21,353 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmContractsCustomersCustomerModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmContractsCustomersCustomerModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmContractsCustomersCustomerModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmContractsCustomersCustomerModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel();
+            if (\array_key_exists('balance', $data) && \is_int($data['balance'])) {
+                $data['balance'] = (float) $data['balance'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('email', $data)) {
+                $object->setEmail($data['email']);
+            }
+            if (\array_key_exists('balance', $data) && $data['balance'] !== null) {
+                $object->setBalance($data['balance']);
+            } elseif (\array_key_exists('balance', $data) && $data['balance'] === null) {
+                $object->setBalance(null);
+            }
+            if (\array_key_exists('doNotMail', $data)) {
+                $object->setDoNotMail($data['doNotMail']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($this->denormalizer->denormalize($data['address'], \CompWright\ServiceTitan\Model\AddressOutput::class, 'json', $context));
+            }
+            if (\array_key_exists('importId', $data)) {
+                $object->setImportId($data['importId']);
+            }
+            if (\array_key_exists('doNotService', $data)) {
+                $object->setDoNotService($data['doNotService']);
+            }
+            if (\array_key_exists('type', $data)) {
+                $object->setType($data['type']);
+            }
+            if (\array_key_exists('contacts', $data)) {
+                $values = [];
+                foreach ($data['contacts'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\ContactsContractsContactOutputModel::class, 'json', $context);
+                }
+                $object->setContacts($values);
+            }
+            if (\array_key_exists('mergedToId', $data) && $data['mergedToId'] !== null) {
+                $object->setMergedToId($data['mergedToId']);
+            } elseif (\array_key_exists('mergedToId', $data) && $data['mergedToId'] === null) {
+                $object->setMergedToId(null);
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('memberships', $data)) {
+                $values_1 = [];
+                foreach ($data['memberships'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\MembershipsMembershipModel::class, 'json', $context);
+                }
+                $object->setMemberships($values_1);
+            }
+            if (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] !== null) {
+                $object->setHasActiveMembership($data['hasActiveMembership']);
+            } elseif (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] === null) {
+                $object->setHasActiveMembership(null);
+            }
+            if (\array_key_exists('customFields', $data)) {
+                $values_2 = [];
+                foreach ($data['customFields'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\CustomFieldApiModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_2);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
+                $object->setCreatedBy($data['createdBy']);
+            } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
+                $object->setCreatedBy(null);
+            }
+            if (\array_key_exists('phoneSettings', $data)) {
+                $values_3 = [];
+                foreach ($data['phoneSettings'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerPhoneModel::class, 'json', $context);
+                }
+                $object->setPhoneSettings($values_3);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('email', $data)) {
-            $object->setEmail($data['email']);
-        }
-        if (\array_key_exists('balance', $data) && $data['balance'] !== null) {
-            $object->setBalance($data['balance']);
-        } elseif (\array_key_exists('balance', $data) && $data['balance'] === null) {
-            $object->setBalance(null);
-        }
-        if (\array_key_exists('doNotMail', $data)) {
-            $object->setDoNotMail($data['doNotMail']);
-        }
-        if (\array_key_exists('address', $data)) {
-            $object->setAddress($this->denormalizer->denormalize($data['address'], 'CompWright\\ServiceTitan\\Model\\AddressOutput', 'json', $context));
-        }
-        if (\array_key_exists('importId', $data)) {
-            $object->setImportId($data['importId']);
-        }
-        if (\array_key_exists('doNotService', $data)) {
-            $object->setDoNotService($data['doNotService']);
-        }
-        if (\array_key_exists('type', $data)) {
-            $object->setType($data['type']);
-        }
-        if (\array_key_exists('contacts', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['active'] = $object->getActive();
+            $data['name'] = $object->getName();
+            $data['email'] = $object->getEmail();
+            if ($object->isInitialized('balance') && null !== $object->getBalance()) {
+                $data['balance'] = $object->getBalance();
+            }
+            $data['doNotMail'] = $object->getDoNotMail();
+            $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
+            $data['importId'] = $object->getImportId();
+            $data['doNotService'] = $object->getDoNotService();
+            $data['type'] = $object->getType();
             $values = [];
-            foreach ($data['contacts'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\ContactsContractsContactOutputModel', 'json', $context);
+            foreach ($object->getContacts() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setContacts($values);
-        }
-        if (\array_key_exists('mergedToId', $data) && $data['mergedToId'] !== null) {
-            $object->setMergedToId($data['mergedToId']);
-        } elseif (\array_key_exists('mergedToId', $data) && $data['mergedToId'] === null) {
-            $object->setMergedToId(null);
-        }
-        if (\array_key_exists('modifiedOn', $data)) {
-            $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['modifiedOn']));
-        }
-        if (\array_key_exists('memberships', $data)) {
+            $data['contacts'] = $values;
+            if ($object->isInitialized('mergedToId') && null !== $object->getMergedToId()) {
+                $data['mergedToId'] = $object->getMergedToId();
+            }
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
             $values_1 = [];
-            foreach ($data['memberships'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\MembershipsMembershipModel', 'json', $context);
+            foreach ($object->getMemberships() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $object->setMemberships($values_1);
-        }
-        if (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] !== null) {
-            $object->setHasActiveMembership($data['hasActiveMembership']);
-        } elseif (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] === null) {
-            $object->setHasActiveMembership(null);
-        }
-        if (\array_key_exists('customFields', $data)) {
+            $data['memberships'] = $values_1;
+            if ($object->isInitialized('hasActiveMembership') && null !== $object->getHasActiveMembership()) {
+                $data['hasActiveMembership'] = $object->getHasActiveMembership();
+            }
             $values_2 = [];
-            foreach ($data['customFields'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'CompWright\\ServiceTitan\\Model\\CustomFieldApiModel', 'json', $context);
+            foreach ($object->getCustomFields() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $object->setCustomFields($values_2);
-        }
-        if (\array_key_exists('createdOn', $data)) {
-            $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdOn']));
-        }
-        if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
-            $object->setCreatedBy($data['createdBy']);
-        } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
-            $object->setCreatedBy(null);
-        }
-        if (\array_key_exists('phoneSettings', $data)) {
+            $data['customFields'] = $values_2;
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+                $data['createdBy'] = $object->getCreatedBy();
+            }
             $values_3 = [];
-            foreach ($data['phoneSettings'] as $value_3) {
-                $values_3[] = $this->denormalizer->denormalize($value_3, 'CompWright\\ServiceTitan\\Model\\CrmContractsCustomersCustomerPhoneModel', 'json', $context);
+            foreach ($object->getPhoneSettings() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
             }
-            $object->setPhoneSettings($values_3);
+            $data['phoneSettings'] = $values_3;
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmContractsCustomersCustomerModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        $data['active'] = $object->getActive();
-        $data['name'] = $object->getName();
-        $data['email'] = $object->getEmail();
-        if (null !== $object->getBalance()) {
-            $data['balance'] = $object->getBalance();
-        }
-        $data['doNotMail'] = $object->getDoNotMail();
-        $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
-        $data['importId'] = $object->getImportId();
-        $data['doNotService'] = $object->getDoNotService();
-        $data['type'] = $object->getType();
-        $values = [];
-        foreach ($object->getContacts() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['contacts'] = $values;
-        if (null !== $object->getMergedToId()) {
-            $data['mergedToId'] = $object->getMergedToId();
-        }
-        $data['modifiedOn'] = $object->getModifiedOn()->format('Y-m-d\\TH:i:sP');
-        $values_1 = [];
-        foreach ($object->getMemberships() as $value_1) {
-            $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-        }
-        $data['memberships'] = $values_1;
-        if (null !== $object->getHasActiveMembership()) {
-            $data['hasActiveMembership'] = $object->getHasActiveMembership();
-        }
-        $values_2 = [];
-        foreach ($object->getCustomFields() as $value_2) {
-            $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
-        }
-        $data['customFields'] = $values_2;
-        $data['createdOn'] = $object->getCreatedOn()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getCreatedBy()) {
-            $data['createdBy'] = $object->getCreatedBy();
-        }
-        $values_3 = [];
-        foreach ($object->getPhoneSettings() as $value_3) {
-            $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
-        }
-        $data['phoneSettings'] = $values_3;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel();
+            if (\array_key_exists('balance', $data) && \is_int($data['balance'])) {
+                $data['balance'] = (float) $data['balance'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('email', $data)) {
+                $object->setEmail($data['email']);
+            }
+            if (\array_key_exists('balance', $data) && $data['balance'] !== null) {
+                $object->setBalance($data['balance']);
+            } elseif (\array_key_exists('balance', $data) && $data['balance'] === null) {
+                $object->setBalance(null);
+            }
+            if (\array_key_exists('doNotMail', $data)) {
+                $object->setDoNotMail($data['doNotMail']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($this->denormalizer->denormalize($data['address'], \CompWright\ServiceTitan\Model\AddressOutput::class, 'json', $context));
+            }
+            if (\array_key_exists('importId', $data)) {
+                $object->setImportId($data['importId']);
+            }
+            if (\array_key_exists('doNotService', $data)) {
+                $object->setDoNotService($data['doNotService']);
+            }
+            if (\array_key_exists('type', $data)) {
+                $object->setType($data['type']);
+            }
+            if (\array_key_exists('contacts', $data)) {
+                $values = [];
+                foreach ($data['contacts'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\ContactsContractsContactOutputModel::class, 'json', $context);
+                }
+                $object->setContacts($values);
+            }
+            if (\array_key_exists('mergedToId', $data) && $data['mergedToId'] !== null) {
+                $object->setMergedToId($data['mergedToId']);
+            } elseif (\array_key_exists('mergedToId', $data) && $data['mergedToId'] === null) {
+                $object->setMergedToId(null);
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('memberships', $data)) {
+                $values_1 = [];
+                foreach ($data['memberships'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\MembershipsMembershipModel::class, 'json', $context);
+                }
+                $object->setMemberships($values_1);
+            }
+            if (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] !== null) {
+                $object->setHasActiveMembership($data['hasActiveMembership']);
+            } elseif (\array_key_exists('hasActiveMembership', $data) && $data['hasActiveMembership'] === null) {
+                $object->setHasActiveMembership(null);
+            }
+            if (\array_key_exists('customFields', $data)) {
+                $values_2 = [];
+                foreach ($data['customFields'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\CustomFieldApiModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_2);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
+                $object->setCreatedBy($data['createdBy']);
+            } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
+                $object->setCreatedBy(null);
+            }
+            if (\array_key_exists('phoneSettings', $data)) {
+                $values_3 = [];
+                foreach ($data['phoneSettings'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerPhoneModel::class, 'json', $context);
+                }
+                $object->setPhoneSettings($values_3);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['active'] = $object->getActive();
+            $data['name'] = $object->getName();
+            $data['email'] = $object->getEmail();
+            if ($object->isInitialized('balance') && null !== $object->getBalance()) {
+                $data['balance'] = $object->getBalance();
+            }
+            $data['doNotMail'] = $object->getDoNotMail();
+            $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
+            $data['importId'] = $object->getImportId();
+            $data['doNotService'] = $object->getDoNotService();
+            $data['type'] = $object->getType();
+            $values = [];
+            foreach ($object->getContacts() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['contacts'] = $values;
+            if ($object->isInitialized('mergedToId') && null !== $object->getMergedToId()) {
+                $data['mergedToId'] = $object->getMergedToId();
+            }
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $values_1 = [];
+            foreach ($object->getMemberships() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $data['memberships'] = $values_1;
+            if ($object->isInitialized('hasActiveMembership') && null !== $object->getHasActiveMembership()) {
+                $data['hasActiveMembership'] = $object->getHasActiveMembership();
+            }
+            $values_2 = [];
+            foreach ($object->getCustomFields() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+            }
+            $data['customFields'] = $values_2;
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+                $data['createdBy'] = $object->getCreatedBy();
+            }
+            $values_3 = [];
+            foreach ($object->getPhoneSettings() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+            }
+            $data['phoneSettings'] = $values_3;
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class => false];
+        }
     }
 }

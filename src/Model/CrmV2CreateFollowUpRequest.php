@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CreateFollowUpRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Follow-up date.
      *
      * @var \DateTime
@@ -44,6 +53,7 @@ class CrmV2CreateFollowUpRequest
      */
     public function setFollowUpDate(\DateTime $followUpDate): self
     {
+        $this->initialized['followUpDate'] = true;
         $this->followUpDate = $followUpDate;
 
         return $this;
@@ -62,6 +72,7 @@ class CrmV2CreateFollowUpRequest
      */
     public function setText(?string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;
@@ -80,6 +91,7 @@ class CrmV2CreateFollowUpRequest
      */
     public function setPinToTop(?bool $pinToTop): self
     {
+        $this->initialized['pinToTop'] = true;
         $this->pinToTop = $pinToTop;
 
         return $this;

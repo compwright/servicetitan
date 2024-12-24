@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2BusinessUnitAddressResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string|null
      */
     protected $street;
@@ -44,6 +53,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setStreet(?string $street): self
     {
+        $this->initialized['street'] = true;
         $this->street = $street;
 
         return $this;
@@ -56,6 +66,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setUnit(?string $unit): self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
 
         return $this;
@@ -68,6 +79,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setCity(?string $city): self
     {
+        $this->initialized['city'] = true;
         $this->city = $city;
 
         return $this;
@@ -80,6 +92,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setState(?string $state): self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
 
         return $this;
@@ -92,6 +105,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setZip(?string $zip): self
     {
+        $this->initialized['zip'] = true;
         $this->zip = $zip;
 
         return $this;
@@ -104,6 +118,7 @@ class TenantSettingsV2BusinessUnitAddressResponse
 
     public function setCountry(?string $country): self
     {
+        $this->initialized['country'] = true;
         $this->country = $country;
 
         return $this;

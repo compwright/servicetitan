@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2GrossPayItemsGrossPayItemCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The payroll ID.
      *
      * @var int
@@ -56,6 +65,7 @@ class PayrollV2GrossPayItemsGrossPayItemCreateRequest
      */
     public function setPayrollId(int $payrollId): self
     {
+        $this->initialized['payrollId'] = true;
         $this->payrollId = $payrollId;
 
         return $this;
@@ -74,6 +84,7 @@ class PayrollV2GrossPayItemsGrossPayItemCreateRequest
      */
     public function setAmount(float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -92,6 +103,7 @@ class PayrollV2GrossPayItemsGrossPayItemCreateRequest
      */
     public function setActivityCodeId(int $activityCodeId): self
     {
+        $this->initialized['activityCodeId'] = true;
         $this->activityCodeId = $activityCodeId;
 
         return $this;
@@ -110,6 +122,7 @@ class PayrollV2GrossPayItemsGrossPayItemCreateRequest
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -128,6 +141,7 @@ class PayrollV2GrossPayItemsGrossPayItemCreateRequest
      */
     public function setInvoiceId(?int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;

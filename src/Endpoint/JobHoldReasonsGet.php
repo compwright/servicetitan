@@ -21,12 +21,12 @@ class JobHoldReasonsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. Result page to load
-     *     @var int $pageSize Format - int32. Number of results per page
-     *     @var bool $includeTotal Include total count in the response
-     *     @var string $active Filter by status.  Acceptable values are true, false, any.\
-    Values: [True, Any, False]
-     * }
+     * @var int    $page Format - int32. Result page to load
+     * @var int    $pageSize Format - int32. Number of results per page
+     * @var bool   $includeTotal Include total count in the response
+     * @var string $active Filter by status.  Acceptable values are true, false, any.\
+     *             Values: [True, Any, False]
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -60,28 +60,28 @@ class JobHoldReasonsGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal', 'active']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2JobHoldReasonResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\JobHoldReasonsGetBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2JobHoldReasonResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfCrmV2JobHoldReasonResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2JobHoldReasonResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\JobHoldReasonsGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\JobHoldReasonsGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

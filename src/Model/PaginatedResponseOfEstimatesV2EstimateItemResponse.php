@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfEstimatesV2EstimateItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var EstimatesV2EstimateItemResponse[]
+     * @var list<EstimatesV2EstimateItemResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return EstimatesV2EstimateItemResponse[]
+     * @return list<EstimatesV2EstimateItemResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfEstimatesV2EstimateItemResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param EstimatesV2EstimateItemResponse[] $data
+     * @param list<EstimatesV2EstimateItemResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

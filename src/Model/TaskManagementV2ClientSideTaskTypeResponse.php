@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2ClientSideTaskTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -25,7 +34,7 @@ class TaskManagementV2ClientSideTaskTypeResponse
      */
     protected $active;
     /**
-     * @var int[]
+     * @var list<int>
      */
     protected $excludedTaskResolutionIds;
 
@@ -36,6 +45,7 @@ class TaskManagementV2ClientSideTaskTypeResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class TaskManagementV2ClientSideTaskTypeResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -60,13 +71,14 @@ class TaskManagementV2ClientSideTaskTypeResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
     }
 
     /**
-     * @return int[]
+     * @return list<int>
      */
     public function getExcludedTaskResolutionIds(): array
     {
@@ -74,10 +86,11 @@ class TaskManagementV2ClientSideTaskTypeResponse
     }
 
     /**
-     * @param int[] $excludedTaskResolutionIds
+     * @param list<int> $excludedTaskResolutionIds
      */
     public function setExcludedTaskResolutionIds(array $excludedTaskResolutionIds): self
     {
+        $this->initialized['excludedTaskResolutionIds'] = true;
         $this->excludedTaskResolutionIds = $excludedTaskResolutionIds;
 
         return $this;

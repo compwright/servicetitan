@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersCreatedCustomerResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the customer.
      *
      * @var int
@@ -32,20 +41,16 @@ class CrmV2CustomersCreatedCustomerResponse
     protected $name;
     /**
      * Residential or commercial.
-     *
-     * @var mixed
      */
     protected $type;
     /**
      * Bill-To address of the customer record.
-     *
-     * @var mixed
      */
     protected $address;
     /**
      * Customer record’s custom fields.
      *
-     * @var CrmV2CustomersCustomFieldModel[]
+     * @var list<CrmV2CustomersCustomFieldModel>
      */
     protected $customFields;
     /**
@@ -93,13 +98,13 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Locations for the customer.
      *
-     * @var CrmV2LocationsCreateLocationResponse[]
+     * @var list<CrmV2LocationsCreateLocationResponse>
      */
     protected $locations;
     /**
      * Contacts for the customer.
      *
-     * @var CrmV2CustomersCustomerContact[]
+     * @var list<CrmV2CustomersCustomerContact>
      */
     protected $contacts;
 
@@ -116,6 +121,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -134,6 +140,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -152,6 +159,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -159,8 +167,6 @@ class CrmV2CustomersCreatedCustomerResponse
 
     /**
      * Residential or commercial.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -169,11 +175,10 @@ class CrmV2CustomersCreatedCustomerResponse
 
     /**
      * Residential or commercial.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -181,8 +186,6 @@ class CrmV2CustomersCreatedCustomerResponse
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -191,11 +194,10 @@ class CrmV2CustomersCreatedCustomerResponse
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -204,7 +206,7 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Customer record’s custom fields.
      *
-     * @return CrmV2CustomersCustomFieldModel[]
+     * @return list<CrmV2CustomersCustomFieldModel>
      */
     public function getCustomFields(): array
     {
@@ -214,10 +216,11 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Customer record’s custom fields.
      *
-     * @param CrmV2CustomersCustomFieldModel[] $customFields
+     * @param list<CrmV2CustomersCustomFieldModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -236,6 +239,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setBalance(float $balance): self
     {
+        $this->initialized['balance'] = true;
         $this->balance = $balance;
 
         return $this;
@@ -254,6 +258,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setDoNotMail(bool $doNotMail): self
     {
+        $this->initialized['doNotMail'] = true;
         $this->doNotMail = $doNotMail;
 
         return $this;
@@ -272,6 +277,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setDoNotService(bool $doNotService): self
     {
+        $this->initialized['doNotService'] = true;
         $this->doNotService = $doNotService;
 
         return $this;
@@ -290,6 +296,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -308,6 +315,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -326,6 +334,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -344,6 +353,7 @@ class CrmV2CustomersCreatedCustomerResponse
      */
     public function setMergedToId(?int $mergedToId): self
     {
+        $this->initialized['mergedToId'] = true;
         $this->mergedToId = $mergedToId;
 
         return $this;
@@ -352,7 +362,7 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Locations for the customer.
      *
-     * @return CrmV2LocationsCreateLocationResponse[]
+     * @return list<CrmV2LocationsCreateLocationResponse>
      */
     public function getLocations(): array
     {
@@ -362,10 +372,11 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Locations for the customer.
      *
-     * @param CrmV2LocationsCreateLocationResponse[] $locations
+     * @param list<CrmV2LocationsCreateLocationResponse> $locations
      */
     public function setLocations(array $locations): self
     {
+        $this->initialized['locations'] = true;
         $this->locations = $locations;
 
         return $this;
@@ -374,7 +385,7 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Contacts for the customer.
      *
-     * @return CrmV2CustomersCustomerContact[]
+     * @return list<CrmV2CustomersCustomerContact>
      */
     public function getContacts(): array
     {
@@ -384,10 +395,11 @@ class CrmV2CustomersCreatedCustomerResponse
     /**
      * Contacts for the customer.
      *
-     * @param CrmV2CustomersCustomerContact[] $contacts
+     * @param list<CrmV2CustomersCustomerContact> $contacts
      */
     public function setContacts(array $contacts): self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
 
         return $this;

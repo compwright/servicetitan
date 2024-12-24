@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,107 +21,211 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2PaymentTermAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2PaymentTermAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermAPIModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermAPIModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('dueDayType', $data)) {
+                $object->setDueDayType($data['dueDayType']);
+            }
+            if (\array_key_exists('dueDay', $data) && $data['dueDay'] !== null) {
+                $object->setDueDay($data['dueDay']);
+            } elseif (\array_key_exists('dueDay', $data) && $data['dueDay'] === null) {
+                $object->setDueDay(null);
+            }
+            if (\array_key_exists('isCustomerDefault', $data)) {
+                $object->setIsCustomerDefault($data['isCustomerDefault']);
+            }
+            if (\array_key_exists('isVendorDefault', $data)) {
+                $object->setIsVendorDefault($data['isVendorDefault']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('inUse', $data) && $data['inUse'] !== null) {
+                $object->setInUse($data['inUse']);
+            } elseif (\array_key_exists('inUse', $data) && $data['inUse'] === null) {
+                $object->setInUse(null);
+            }
+            if (\array_key_exists('paymentTermPenaltyModel', $data)) {
+                $object->setPaymentTermPenaltyModel($this->denormalizer->denormalize($data['paymentTermPenaltyModel'], \CompWright\ServiceTitan\Model\AccountingV2PaymentTermPenaltyAPIModel::class, 'json', $context));
+            }
+            if (\array_key_exists('paymentTermDiscountModel', $data)) {
+                $object->setPaymentTermDiscountModel($this->denormalizer->denormalize($data['paymentTermDiscountModel'], \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class, 'json', $context));
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
-            $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
-            $object->setName(null);
-        }
-        if (\array_key_exists('dueDayType', $data)) {
-            $object->setDueDayType($data['dueDayType']);
-        }
-        if (\array_key_exists('dueDay', $data) && $data['dueDay'] !== null) {
-            $object->setDueDay($data['dueDay']);
-        } elseif (\array_key_exists('dueDay', $data) && $data['dueDay'] === null) {
-            $object->setDueDay(null);
-        }
-        if (\array_key_exists('isCustomerDefault', $data)) {
-            $object->setIsCustomerDefault($data['isCustomerDefault']);
-        }
-        if (\array_key_exists('isVendorDefault', $data)) {
-            $object->setIsVendorDefault($data['isVendorDefault']);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('inUse', $data) && $data['inUse'] !== null) {
-            $object->setInUse($data['inUse']);
-        } elseif (\array_key_exists('inUse', $data) && $data['inUse'] === null) {
-            $object->setInUse(null);
-        }
-        if (\array_key_exists('paymentTermPenaltyModel', $data)) {
-            $object->setPaymentTermPenaltyModel($this->denormalizer->denormalize($data['paymentTermPenaltyModel'], 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermPenaltyAPIModel', 'json', $context));
-        }
-        if (\array_key_exists('paymentTermDiscountModel', $data)) {
-            $object->setPaymentTermDiscountModel($this->denormalizer->denormalize($data['paymentTermDiscountModel'], 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermDiscountAPIModel', 'json', $context));
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            $data['dueDayType'] = $object->getDueDayType();
+            if ($object->isInitialized('dueDay') && null !== $object->getDueDay()) {
+                $data['dueDay'] = $object->getDueDay();
+            }
+            $data['isCustomerDefault'] = $object->getIsCustomerDefault();
+            $data['isVendorDefault'] = $object->getIsVendorDefault();
+            $data['active'] = $object->getActive();
+            if ($object->isInitialized('inUse') && null !== $object->getInUse()) {
+                $data['inUse'] = $object->getInUse();
+            }
+            $data['paymentTermPenaltyModel'] = $this->normalizer->normalize($object->getPaymentTermPenaltyModel(), 'json', $context);
+            $data['paymentTermDiscountModel'] = $this->normalizer->normalize($object->getPaymentTermDiscountModel(), 'json', $context);
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2PaymentTermAPIModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        $data['dueDayType'] = $object->getDueDayType();
-        if (null !== $object->getDueDay()) {
-            $data['dueDay'] = $object->getDueDay();
-        }
-        $data['isCustomerDefault'] = $object->getIsCustomerDefault();
-        $data['isVendorDefault'] = $object->getIsVendorDefault();
-        $data['active'] = $object->getActive();
-        if (null !== $object->getInUse()) {
-            $data['inUse'] = $object->getInUse();
-        }
-        $data['paymentTermPenaltyModel'] = $this->normalizer->normalize($object->getPaymentTermPenaltyModel(), 'json', $context);
-        $data['paymentTermDiscountModel'] = $this->normalizer->normalize($object->getPaymentTermDiscountModel(), 'json', $context);
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('dueDayType', $data)) {
+                $object->setDueDayType($data['dueDayType']);
+            }
+            if (\array_key_exists('dueDay', $data) && $data['dueDay'] !== null) {
+                $object->setDueDay($data['dueDay']);
+            } elseif (\array_key_exists('dueDay', $data) && $data['dueDay'] === null) {
+                $object->setDueDay(null);
+            }
+            if (\array_key_exists('isCustomerDefault', $data)) {
+                $object->setIsCustomerDefault($data['isCustomerDefault']);
+            }
+            if (\array_key_exists('isVendorDefault', $data)) {
+                $object->setIsVendorDefault($data['isVendorDefault']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('inUse', $data) && $data['inUse'] !== null) {
+                $object->setInUse($data['inUse']);
+            } elseif (\array_key_exists('inUse', $data) && $data['inUse'] === null) {
+                $object->setInUse(null);
+            }
+            if (\array_key_exists('paymentTermPenaltyModel', $data)) {
+                $object->setPaymentTermPenaltyModel($this->denormalizer->denormalize($data['paymentTermPenaltyModel'], \CompWright\ServiceTitan\Model\AccountingV2PaymentTermPenaltyAPIModel::class, 'json', $context));
+            }
+            if (\array_key_exists('paymentTermDiscountModel', $data)) {
+                $object->setPaymentTermDiscountModel($this->denormalizer->denormalize($data['paymentTermDiscountModel'], \CompWright\ServiceTitan\Model\AccountingV2PaymentTermDiscountAPIModel::class, 'json', $context));
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            $data['dueDayType'] = $object->getDueDayType();
+            if ($object->isInitialized('dueDay') && null !== $object->getDueDay()) {
+                $data['dueDay'] = $object->getDueDay();
+            }
+            $data['isCustomerDefault'] = $object->getIsCustomerDefault();
+            $data['isVendorDefault'] = $object->getIsVendorDefault();
+            $data['active'] = $object->getActive();
+            if ($object->isInitialized('inUse') && null !== $object->getInUse()) {
+                $data['inUse'] = $object->getInUse();
+            }
+            $data['paymentTermPenaltyModel'] = $this->normalizer->normalize($object->getPaymentTermPenaltyModel(), 'json', $context);
+            $data['paymentTermDiscountModel'] = $this->normalizer->normalize($object->getPaymentTermDiscountModel(), 'json', $context);
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel::class => false];
+        }
     }
 }

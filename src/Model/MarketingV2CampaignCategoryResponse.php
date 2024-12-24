@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingV2CampaignCategoryResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -36,6 +45,7 @@ class MarketingV2CampaignCategoryResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class MarketingV2CampaignCategoryResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -60,6 +71,7 @@ class MarketingV2CampaignCategoryResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -72,6 +84,7 @@ class MarketingV2CampaignCategoryResponse
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;

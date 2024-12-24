@@ -21,24 +21,24 @@ class PurchaseOrdersGetList extends \CompWright\ServiceTitan\Runtime\Client\Base
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $status Filters by PO status
-     *     @var string $number Filters by PO number
-     *     @var int $jobId Format - int64. Filters by JobId associated with PO
-     *     @var int $technicianId Format - int64. Filter by TechnicianId associated with PO
-     *     @var int $projectId Format - int64. Filter by ProjectId associated with PO
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return POs with date on or after certain date/time
-     *     @var string $dateBefore Format - date-time (as date-time in RFC3339). Return POs with date before certain date/time
-     *     @var string $sentOnOrAfter Format - date-time (as date-time in RFC3339). Return POs sent on or after certain date/time
-     *     @var string $sentBefore Format - date-time (as date-time in RFC3339). Return POs sent before certain date/time
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $status Filters by PO status
+     * @var string $number Filters by PO number
+     * @var int    $jobId Format - int64. Filters by JobId associated with PO
+     * @var int    $technicianId Format - int64. Filter by TechnicianId associated with PO
+     * @var int    $projectId Format - int64. Filter by ProjectId associated with PO
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return POs with date on or after certain date/time
+     * @var string $dateBefore Format - date-time (as date-time in RFC3339). Return POs with date before certain date/time
+     * @var string $sentOnOrAfter Format - date-time (as date-time in RFC3339). Return POs sent on or after certain date/time
+     * @var string $sentBefore Format - date-time (as date-time in RFC3339). Return POs sent before certain date/time
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -72,41 +72,41 @@ class PurchaseOrdersGetList extends \CompWright\ServiceTitan\Runtime\Client\Base
         $optionsResolver->setDefined(['ids', 'status', 'number', 'jobId', 'technicianId', 'projectId', 'createdOnOrAfter', 'createdBefore', 'modifiedOnOrAfter', 'modifiedBefore', 'dateOnOrAfter', 'dateBefore', 'sentOnOrAfter', 'sentBefore', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('status', ['string']);
-        $optionsResolver->setAllowedTypes('number', ['string']);
-        $optionsResolver->setAllowedTypes('jobId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('technicianId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('projectId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('sentOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('sentBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('status', ['string']);
+        $optionsResolver->addAllowedTypes('number', ['string']);
+        $optionsResolver->addAllowedTypes('jobId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('technicianId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('projectId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('sentOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('sentBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2PurchaseOrderResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2PurchaseOrderResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfInventoryV2PurchaseOrderResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2PurchaseOrderResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PurchaseOrdersGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PurchaseOrdersGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

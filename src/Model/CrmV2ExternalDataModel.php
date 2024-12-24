@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2ExternalDataModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * External data key.
      *
      * @var string
@@ -38,6 +47,7 @@ class CrmV2ExternalDataModel
      */
     public function setKey(string $key): self
     {
+        $this->initialized['key'] = true;
         $this->key = $key;
 
         return $this;
@@ -56,6 +66,7 @@ class CrmV2ExternalDataModel
      */
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;

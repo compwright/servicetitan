@@ -21,27 +21,28 @@ class TransfersGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $statuses Filter by a collection of statuses
-     *     @var string $number Number filter
-     *     @var string $referenceNumber Reference number filter
-     *     @var int $batchId Format - int64. Batch filter
-     *     @var string $transferTypeIds Filter by a collection of transfer types
-     *     @var string $fromLocationIds Filter by a collection of From field locations
-     *     @var string $toLocationIds Filter by a collection of To field locations
-     *     @var string $syncStatuses Filter by a collection of sync statuses
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return transfers with date on or after certain date/time
-     *     @var string $dateBefore Format - date-time (as date-time in RFC3339). Return transfers with date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $statuses Filter by a collection of statuses
+     * @var string $number Number filter
+     * @var string $referenceNumber Reference number filter
+     * @var int    $batchId Format - int64. Batch filter
+     * @var string $transferTypeIds Filter by a collection of transfer types
+     * @var string $fromLocationIds Filter by a collection of From field locations
+     * @var string $toLocationIds Filter by a collection of To field locations
+     * @var string $syncStatuses Filter by a collection of sync statuses
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return transfers with date on or after certain date/time
+     * @var string $dateBefore Format - date-time (as date-time in RFC3339). Return transfers with date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -75,44 +76,44 @@ class TransfersGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['ids', 'statuses', 'number', 'referenceNumber', 'batchId', 'transferTypeIds', 'fromLocationIds', 'toLocationIds', 'syncStatuses', 'customFields.Fields', 'customFields.Operator', 'dateOnOrAfter', 'dateBefore', 'createdOnOrAfter', 'createdBefore', 'modifiedOnOrAfter', 'modifiedBefore', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('statuses', ['string']);
-        $optionsResolver->setAllowedTypes('number', ['string']);
-        $optionsResolver->setAllowedTypes('referenceNumber', ['string']);
-        $optionsResolver->setAllowedTypes('batchId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('transferTypeIds', ['string']);
-        $optionsResolver->setAllowedTypes('fromLocationIds', ['string']);
-        $optionsResolver->setAllowedTypes('toLocationIds', ['string']);
-        $optionsResolver->setAllowedTypes('syncStatuses', ['string']);
-        $optionsResolver->setAllowedTypes('customFields.Fields', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customFields.Operator', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('statuses', ['string']);
+        $optionsResolver->addAllowedTypes('number', ['string']);
+        $optionsResolver->addAllowedTypes('referenceNumber', ['string']);
+        $optionsResolver->addAllowedTypes('batchId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('transferTypeIds', ['string']);
+        $optionsResolver->addAllowedTypes('fromLocationIds', ['string']);
+        $optionsResolver->addAllowedTypes('toLocationIds', ['string']);
+        $optionsResolver->addAllowedTypes('syncStatuses', ['string']);
+        $optionsResolver->addAllowedTypes('customFields.Fields', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customFields.Operator', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryTransferResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\TransfersGetBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryTransferResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfInventoryV2InventoryTransferResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryTransferResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\TransfersGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\TransfersGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

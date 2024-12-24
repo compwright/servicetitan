@@ -10,59 +10,59 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class AccountingClient extends Runtime\Client\Client
 {
     /**
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var int $batchId format - int64
-     *     @var int $batchNumber format - int32
-     *     @var string $billNumber
-     *     @var string $businessUnitIds
-     *     @var string $customField.Fields Name, value
-     *     @var string $customField.Operator Can be "or" or "null" or "and"\
-     *     @var string $dateFrom format - date-time (as date-time in RFC3339)
-     *     @var string $dateTo format - date-time (as date-time in RFC3339)
-     *     @var string $jobNumber
-     *     @var string $purchaseOrderNumber
-     *     @var string $purchaseOrderTypes
-     *     @var array $syncStatuses
-     *     @var float $minCost format - decimal
-     *     @var float $maxCost format - decimal
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var bool $includeTotal
-     * }
+     * @var string $ids
+     * @var int    $batchId format - int64
+     * @var int    $batchNumber format - int32
+     * @var string $billNumber
+     * @var string $businessUnitIds
+     * @var string $customField.Fields Name, value
+     * @var string $customField.Operator Can be "or" or "null" or "and"\
+     *             Values: [And, Or]
+     * @var string $dateFrom format - date-time (as date-time in RFC3339)
+     * @var string $dateTo format - date-time (as date-time in RFC3339)
+     * @var string $jobNumber
+     * @var string $purchaseOrderNumber
+     * @var string $purchaseOrderTypes
+     * @var array  $syncStatuses
+     * @var float  $minCost format - decimal
+     * @var float  $maxCost format - decimal
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var bool   $includeTotal
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InventoryBillsGetListBadRequestException
+     * @return Model\AccountingV2InventoryBillResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2InventoryBillResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InventoryBillsGetListBadRequestException
      */
     public function inventoryBillsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InventoryBillsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\InventoryBillsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\InventoryBillsUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InventoryBillsUpdateCustomFieldsBadRequestException
      */
     public function inventoryBillsUpdateCustomFields(int $tenant, ?Model\AccountingV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InventoryBillsUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InventoryBillsUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -71,108 +71,105 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var array $statuses
-     *     @var int $batchId format - int64
-     *     @var int $batchNumber format - int32
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var string $customField.Fields Name, value
-     *     @var string $customField.Operator Can be "or" or "null" or "and"\
-     *     @var bool $includeTotal
-     *     @var int $jobId format - int64
-     *     @var string $jobNumber
-     *     @var int $businessUnitId format - int64
-     *     @var int $customerId format - int64
-     *     @var string $invoicedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $invoicedOnBefore format - date-time (as date-time in RFC3339)
-     *     @var int $adjustmentToId format - int64
-     *     @var string $number
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var float $totalGreater format - decimal
-     *     @var float $totalLess format - decimal
-     *     @var string $orderBy
-     *     @var string $orderByDirection
-     * }
+     * @var string $ids
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var array  $statuses
+     * @var int    $batchId format - int64
+     * @var int    $batchNumber format - int32
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var string $customField.Fields Name, value
+     * @var string $customField.Operator Can be "or" or "null" or "and"\
+     *             Values: [And, Or]
+     * @var bool   $includeTotal
+     * @var int    $jobId format - int64
+     * @var string $jobNumber
+     * @var int    $businessUnitId format - int64
+     * @var int    $customerId format - int64
+     * @var string $invoicedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $invoicedOnBefore format - date-time (as date-time in RFC3339)
+     * @var int    $adjustmentToId format - int64
+     * @var string $number
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var float  $totalGreater format - decimal
+     * @var float  $totalLess format - decimal
+     * @var string $orderBy
+     * @var string $orderByDirection
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesGetListBadRequestException
+     * @return Model\PaginatedResponseOfAccountingV2InvoiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2InvoiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoicesGetListBadRequestException
      */
     public function invoicesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * create adjustment invoice.
      *
-     * @param int                                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2AdjustmentInvoiceCreateRequest|null $requestBody
-     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesCreateAdjustmentInvoiceBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InvoicesCreateAdjustmentInvoiceBadRequestException
      */
     public function invoicesCreateAdjustmentInvoice(int $tenant, ?Model\AccountingV2AdjustmentInvoiceCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesCreateAdjustmentInvoice($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesCreateAdjustmentInvoice($tenant, $requestBody), $fetch);
     }
 
     /**
      * Updates custom fields for specified invoices.
      *
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InvoicesUpdateCustomFieldsBadRequestException
      */
     public function invoicesUpdateCustomFields(int $tenant, ?Model\AccountingV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
      * update invoice.
      *
-     * @param int                                                                  $id          format - int64
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2InvoiceUpdateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesUpdateInvoiceBadRequestException
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InvoicesUpdateInvoiceBadRequestException
      */
     public function invoicesUpdateInvoice(int $id, int $tenant, ?Model\AccountingV2InvoiceUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesUpdateInvoice($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesUpdateInvoice($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * update invoice items.
      *
-     * @param int                                                                      $invoiceId   format - int64
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesUpdateInvoiceItemsBadRequestException
+     * @param int    $invoiceId format - int64
+     * @param int    $tenant    Tenant ID
+     * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InvoicesUpdateInvoiceItemsBadRequestException
      */
     public function invoicesUpdateInvoiceItems(int $invoiceId, int $tenant, ?Model\AccountingV2InvoiceItemUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesUpdateInvoiceItems($invoiceId, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesUpdateInvoiceItems($invoiceId, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -183,29 +180,29 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant    Tenant ID
      * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesDeleteInvoiceItemBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\InvoicesDeleteInvoiceItemBadRequestException
      */
     public function invoicesDeleteInvoiceItem(int $invoiceId, int $itemId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesDeleteInvoiceItem($invoiceId, $itemId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesDeleteInvoiceItem($invoiceId, $itemId, $tenant), $fetch);
     }
 
     /**
      * mark invoice as exported. Id = invoiceId.
      *
-     * @param int                                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2MarkInvoiceAsExportedUpdateRequest[]|null $requestBody
-     * @param string                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int                                                         $tenant      Tenant ID
+     * @param Model\AccountingV2MarkInvoiceAsExportedUpdateRequest[]|null $requestBody
+     * @param string                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoicesMarkAsExportedBadRequestException
+     * @return Model\AccountingV2MarkInvoiceAsExportedUpdateResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2MarkInvoiceAsExportedUpdateResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoicesMarkAsExportedBadRequestException
      */
     public function invoicesMarkAsExported(int $tenant, ?array $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoicesMarkAsExported($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoicesMarkAsExported($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -214,100 +211,97 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $statuses
-     *     @var string $paidOnAfter format - date-time (as date-time in RFC3339)
-     *     @var string $paidOnBefore format - date-time (as date-time in RFC3339)
-     *     @var string $businessUnitIds
-     *     @var int $batchNumber format - int32
-     *     @var int $batchId format - int64
-     *     @var string $transactionType Values: [Undefined, JournalEntry, ReceivePayment]
-     *     @var int $customerId format - int64
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $customField.Fields Name, value
-     *     @var string $customField.Operator Can be "or" or "null" or "and"\
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var string $ids
+     * @var string $statuses
+     * @var string $paidOnAfter format - date-time (as date-time in RFC3339)
+     * @var string $paidOnBefore format - date-time (as date-time in RFC3339)
+     * @var string $businessUnitIds
+     * @var int    $batchNumber format - int32
+     * @var int    $batchId format - int64
+     * @var string $transactionType Values: [Undefined, JournalEntry, ReceivePayment]
+     * @var int    $customerId format - int64
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $customField.Fields Name, value
+     * @var string $customField.Operator Can be "or" or "null" or "and"\
+     *             Values: [And, Or]
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentsGetListBadRequestException
+     * @return Model\PaginatedResponseOfAccountingV2DetailedPaymentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2DetailedPaymentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentsGetListBadRequestException
      */
     public function paymentsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new payment.
      *
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentsCreateBadRequestException
+     * @return Model\AccountingV2PaymentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentsCreateBadRequestException
      */
     public function paymentsCreate(int $tenant, ?Model\AccountingV2PaymentCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
      * Update custom fields for specified payments.
      *
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentsUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PaymentsUpdateCustomFieldsBadRequestException
      */
     public function paymentsUpdateCustomFields(int $tenant, ?Model\AccountingV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentsUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentsUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
      * Updates specified payment in "patch" mode.
      *
-     * @param int                                                                  $id          format - int64
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2PaymentUpdateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentsUpdateBadRequestException
+     * @return Model\AccountingV2PaymentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentsUpdateBadRequestException
      */
     public function paymentsUpdate(int $id, int $tenant, ?Model\AccountingV2PaymentUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * Updates payment status.
      *
-     * @param int                                                                       $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\AccountingV2PaymentStatusBatchRequest|null $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentsUpdateStatusBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PaymentsUpdateStatusBadRequestException
      */
     public function paymentsUpdateStatus(int $tenant, ?Model\AccountingV2PaymentStatusBatchRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentsUpdateStatus($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentsUpdateStatus($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -317,13 +311,13 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant     Tenant ID
      * @param string $fetch      Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentTermsGetPaymentTermModelBadRequestException
+     * @return Model\AccountingV2PaymentTermAPIModel|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentTermsGetPaymentTermModelBadRequestException
      */
     public function paymentTermsGetPaymentTermModel(int $customerId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentTermsGetPaymentTermModel($customerId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentTermsGetPaymentTermModel($customerId, $tenant), $fetch);
     }
 
     /**
@@ -332,24 +326,25 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentTypesGetListBadRequestException
+     * @return Model\PaginatedResponseOfAccountingV2PaymentTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2PaymentTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentTypesGetListBadRequestException
      */
     public function paymentTypesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentTypesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentTypesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -359,37 +354,39 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PaymentTypesGetBadRequestException
+     * @return Model\AccountingV2PaymentTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PaymentTypesGetBadRequestException
      */
     public function paymentTypesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PaymentTypesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\PaymentTypesGet($id, $tenant), $fetch);
     }
 
     /**
      * Gets a list of tax zones and their rates based on the supplied filter.
+     * If no filter is supplied it returns all tax zones.
      *
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Tax Zone Ids to pull tax zones for
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Tax Zone Ids to pull tax zones for
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TaxZonesGetListBadRequestException
+     * @return Model\PaginatedResponseOfAccountingV2TaxZoneResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2TaxZoneResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TaxZonesGetListBadRequestException
      */
     public function taxZonesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TaxZonesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TaxZonesGetList($tenant, $queryParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -397,7 +394,7 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -406,7 +403,7 @@ class AccountingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentSplitApiModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $invoiceId;
@@ -28,6 +37,7 @@ class AccountingV2PaymentSplitApiModel
 
     public function setInvoiceId(?int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;
@@ -40,6 +50,7 @@ class AccountingV2PaymentSplitApiModel
 
     public function setAmount(?float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2InvoiceTemplateResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Invoice template ID.
      *
      * @var int
@@ -63,7 +72,7 @@ class MembershipsV2InvoiceTemplateResponse
     /**
      * A list of invoice template items.
      *
-     * @var MembershipsV2InvoiceTemplateItemResponse[]
+     * @var list<MembershipsV2InvoiceTemplateItemResponse>
      */
     protected $items;
 
@@ -80,6 +89,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -98,6 +108,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -116,6 +127,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -134,6 +146,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -152,6 +165,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -170,6 +184,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setTotal(float $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
 
         return $this;
@@ -188,6 +203,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setIsSettingsTemplate(bool $isSettingsTemplate): self
     {
+        $this->initialized['isSettingsTemplate'] = true;
         $this->isSettingsTemplate = $isSettingsTemplate;
 
         return $this;
@@ -206,6 +222,7 @@ class MembershipsV2InvoiceTemplateResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -214,7 +231,7 @@ class MembershipsV2InvoiceTemplateResponse
     /**
      * A list of invoice template items.
      *
-     * @return MembershipsV2InvoiceTemplateItemResponse[]
+     * @return list<MembershipsV2InvoiceTemplateItemResponse>
      */
     public function getItems(): array
     {
@@ -224,10 +241,11 @@ class MembershipsV2InvoiceTemplateResponse
     /**
      * A list of invoice template items.
      *
-     * @param MembershipsV2InvoiceTemplateItemResponse[] $items
+     * @param list<MembershipsV2InvoiceTemplateItemResponse> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;

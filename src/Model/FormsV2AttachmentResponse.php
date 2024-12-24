@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class FormsV2AttachmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Original filename.
      *
      * @var string
@@ -32,6 +41,7 @@ class FormsV2AttachmentResponse
      */
     public function setFileName(string $fileName): self
     {
+        $this->initialized['fileName'] = true;
         $this->fileName = $fileName;
 
         return $this;

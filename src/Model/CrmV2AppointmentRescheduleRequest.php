@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AppointmentRescheduleRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * New start date/time (in UTC) for appointment.
      *
      * @var \DateTime
@@ -50,6 +59,7 @@ class CrmV2AppointmentRescheduleRequest
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -68,6 +78,7 @@ class CrmV2AppointmentRescheduleRequest
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;
@@ -86,6 +97,7 @@ class CrmV2AppointmentRescheduleRequest
      */
     public function setArrivalWindowStart(?\DateTime $arrivalWindowStart): self
     {
+        $this->initialized['arrivalWindowStart'] = true;
         $this->arrivalWindowStart = $arrivalWindowStart;
 
         return $this;
@@ -104,6 +116,7 @@ class CrmV2AppointmentRescheduleRequest
      */
     public function setArrivalWindowEnd(?\DateTime $arrivalWindowEnd): self
     {
+        $this->initialized['arrivalWindowEnd'] = true;
         $this->arrivalWindowEnd = $arrivalWindowEnd;
 
         return $this;

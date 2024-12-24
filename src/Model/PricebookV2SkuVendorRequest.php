@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuVendorRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $vendorId;
@@ -37,7 +46,7 @@ class PricebookV2SkuVendorRequest
      */
     protected $primarySubAccount;
     /**
-     * @var PricebookV2SkuVendorSubAccountRequest[]|null
+     * @var list<PricebookV2SkuVendorSubAccountRequest>|null
      */
     protected $otherSubAccounts;
 
@@ -48,6 +57,7 @@ class PricebookV2SkuVendorRequest
 
     public function setVendorId(int $vendorId): self
     {
+        $this->initialized['vendorId'] = true;
         $this->vendorId = $vendorId;
 
         return $this;
@@ -60,6 +70,7 @@ class PricebookV2SkuVendorRequest
 
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -72,6 +83,7 @@ class PricebookV2SkuVendorRequest
 
     public function setVendorPart(?string $vendorPart): self
     {
+        $this->initialized['vendorPart'] = true;
         $this->vendorPart = $vendorPart;
 
         return $this;
@@ -84,6 +96,7 @@ class PricebookV2SkuVendorRequest
 
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -96,31 +109,27 @@ class PricebookV2SkuVendorRequest
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPrimarySubAccount()
     {
         return $this->primarySubAccount;
     }
 
-    /**
-     * @param mixed $primarySubAccount
-     */
     public function setPrimarySubAccount($primarySubAccount): self
     {
+        $this->initialized['primarySubAccount'] = true;
         $this->primarySubAccount = $primarySubAccount;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2SkuVendorSubAccountRequest[]|null
+     * @return list<PricebookV2SkuVendorSubAccountRequest>|null
      */
     public function getOtherSubAccounts(): ?array
     {
@@ -128,10 +137,11 @@ class PricebookV2SkuVendorRequest
     }
 
     /**
-     * @param PricebookV2SkuVendorSubAccountRequest[]|null $otherSubAccounts
+     * @param list<PricebookV2SkuVendorSubAccountRequest>|null $otherSubAccounts
      */
     public function setOtherSubAccounts(?array $otherSubAccounts): self
     {
+        $this->initialized['otherSubAccounts'] = true;
         $this->otherSubAccounts = $otherSubAccounts;
 
         return $this;

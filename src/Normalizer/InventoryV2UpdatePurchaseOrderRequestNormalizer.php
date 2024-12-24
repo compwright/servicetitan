@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,155 +21,319 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class InventoryV2UpdatePurchaseOrderRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class InventoryV2UpdatePurchaseOrderRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\InventoryV2UpdatePurchaseOrderRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\InventoryV2UpdatePurchaseOrderRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest();
+            if (\array_key_exists('tax', $data) && \is_int($data['tax'])) {
+                $data['tax'] = (float) $data['tax'];
+            }
+            if (\array_key_exists('shipping', $data) && \is_int($data['shipping'])) {
+                $data['shipping'] = (float) $data['shipping'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('vendorId', $data)) {
+                $object->setVendorId($data['vendorId']);
+            }
+            if (\array_key_exists('typeId', $data)) {
+                $object->setTypeId($data['typeId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('inventoryLocationId', $data)) {
+                $object->setInventoryLocationId($data['inventoryLocationId']);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('technicianId', $data)) {
+                $object->setTechnicianId($data['technicianId']);
+            }
+            if (\array_key_exists('projectId', $data)) {
+                $object->setProjectId($data['projectId']);
+            }
+            if (\array_key_exists('shipTo', $data)) {
+                $object->setShipTo($data['shipTo']);
+            }
+            if (\array_key_exists('vendorInvoiceNumber', $data)) {
+                $object->setVendorInvoiceNumber($data['vendorInvoiceNumber']);
+            }
+            if (\array_key_exists('impactsTechnicianPayroll', $data)) {
+                $object->setImpactsTechnicianPayroll($data['impactsTechnicianPayroll']);
+            }
+            if (\array_key_exists('memo', $data)) {
+                $object->setMemo($data['memo']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('requiredOn', $data)) {
+                $object->setRequiredOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['requiredOn']));
+            }
+            if (\array_key_exists('tax', $data)) {
+                $object->setTax($data['tax']);
+            }
+            if (\array_key_exists('shipping', $data)) {
+                $object->setShipping($data['shipping']);
+            }
+            if (\array_key_exists('items', $data)) {
+                $values = [];
+                foreach ($data['items'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderItemRequest::class, 'json', $context);
+                }
+                $object->setItems($values);
+            }
+
             return $object;
         }
-        if (\array_key_exists('vendorId', $data)) {
-            $object->setVendorId($data['vendorId']);
-        }
-        if (\array_key_exists('typeId', $data)) {
-            $object->setTypeId($data['typeId']);
-        }
-        if (\array_key_exists('businessUnitId', $data)) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        }
-        if (\array_key_exists('inventoryLocationId', $data)) {
-            $object->setInventoryLocationId($data['inventoryLocationId']);
-        }
-        if (\array_key_exists('jobId', $data)) {
-            $object->setJobId($data['jobId']);
-        }
-        if (\array_key_exists('technicianId', $data)) {
-            $object->setTechnicianId($data['technicianId']);
-        }
-        if (\array_key_exists('projectId', $data)) {
-            $object->setProjectId($data['projectId']);
-        }
-        if (\array_key_exists('shipTo', $data)) {
-            $object->setShipTo($data['shipTo']);
-        }
-        if (\array_key_exists('vendorInvoiceNumber', $data)) {
-            $object->setVendorInvoiceNumber($data['vendorInvoiceNumber']);
-        }
-        if (\array_key_exists('impactsTechnicianPayroll', $data)) {
-            $object->setImpactsTechnicianPayroll($data['impactsTechnicianPayroll']);
-        }
-        if (\array_key_exists('memo', $data)) {
-            $object->setMemo($data['memo']);
-        }
-        if (\array_key_exists('date', $data)) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
-        }
-        if (\array_key_exists('requiredOn', $data)) {
-            $object->setRequiredOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['requiredOn']));
-        }
-        if (\array_key_exists('tax', $data)) {
-            $object->setTax($data['tax']);
-        }
-        if (\array_key_exists('shipping', $data)) {
-            $object->setShipping($data['shipping']);
-        }
-        if (\array_key_exists('items', $data)) {
-            $values = [];
-            foreach ($data['items'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\InventoryV2UpdatePurchaseOrderItemRequest', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('vendorId') && null !== $object->getVendorId()) {
+                $data['vendorId'] = $object->getVendorId();
             }
-            $object->setItems($values);
+            if ($object->isInitialized('typeId') && null !== $object->getTypeId()) {
+                $data['typeId'] = $object->getTypeId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('inventoryLocationId') && null !== $object->getInventoryLocationId()) {
+                $data['inventoryLocationId'] = $object->getInventoryLocationId();
+            }
+            if ($object->isInitialized('jobId') && null !== $object->getJobId()) {
+                $data['jobId'] = $object->getJobId();
+            }
+            if ($object->isInitialized('technicianId') && null !== $object->getTechnicianId()) {
+                $data['technicianId'] = $object->getTechnicianId();
+            }
+            if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+                $data['projectId'] = $object->getProjectId();
+            }
+            if ($object->isInitialized('shipTo') && null !== $object->getShipTo()) {
+                $data['shipTo'] = $object->getShipTo();
+            }
+            if ($object->isInitialized('vendorInvoiceNumber') && null !== $object->getVendorInvoiceNumber()) {
+                $data['vendorInvoiceNumber'] = $object->getVendorInvoiceNumber();
+            }
+            if ($object->isInitialized('impactsTechnicianPayroll') && null !== $object->getImpactsTechnicianPayroll()) {
+                $data['impactsTechnicianPayroll'] = $object->getImpactsTechnicianPayroll();
+            }
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('date') && null !== $object->getDate()) {
+                $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('requiredOn') && null !== $object->getRequiredOn()) {
+                $data['requiredOn'] = $object->getRequiredOn()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('tax') && null !== $object->getTax()) {
+                $data['tax'] = $object->getTax();
+            }
+            if ($object->isInitialized('shipping') && null !== $object->getShipping()) {
+                $data['shipping'] = $object->getShipping();
+            }
+            if ($object->isInitialized('items') && null !== $object->getItems()) {
+                $values = [];
+                foreach ($object->getItems() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['items'] = $values;
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class InventoryV2UpdatePurchaseOrderRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getVendorId()) {
-            $data['vendorId'] = $object->getVendorId();
-        }
-        if (null !== $object->getTypeId()) {
-            $data['typeId'] = $object->getTypeId();
-        }
-        if (null !== $object->getBusinessUnitId()) {
-            $data['businessUnitId'] = $object->getBusinessUnitId();
-        }
-        if (null !== $object->getInventoryLocationId()) {
-            $data['inventoryLocationId'] = $object->getInventoryLocationId();
-        }
-        if (null !== $object->getJobId()) {
-            $data['jobId'] = $object->getJobId();
-        }
-        if (null !== $object->getTechnicianId()) {
-            $data['technicianId'] = $object->getTechnicianId();
-        }
-        if (null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
-        }
-        if (null !== $object->getShipTo()) {
-            $data['shipTo'] = $object->getShipTo();
-        }
-        if (null !== $object->getVendorInvoiceNumber()) {
-            $data['vendorInvoiceNumber'] = $object->getVendorInvoiceNumber();
-        }
-        if (null !== $object->getImpactsTechnicianPayroll()) {
-            $data['impactsTechnicianPayroll'] = $object->getImpactsTechnicianPayroll();
-        }
-        if (null !== $object->getMemo()) {
-            $data['memo'] = $object->getMemo();
-        }
-        if (null !== $object->getDate()) {
-            $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getRequiredOn()) {
-            $data['requiredOn'] = $object->getRequiredOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getTax()) {
-            $data['tax'] = $object->getTax();
-        }
-        if (null !== $object->getShipping()) {
-            $data['shipping'] = $object->getShipping();
-        }
-        if (null !== $object->getItems()) {
-            $values = [];
-            foreach ($object->getItems() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['items'] = $values;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest();
+            if (\array_key_exists('tax', $data) && \is_int($data['tax'])) {
+                $data['tax'] = (float) $data['tax'];
+            }
+            if (\array_key_exists('shipping', $data) && \is_int($data['shipping'])) {
+                $data['shipping'] = (float) $data['shipping'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('vendorId', $data)) {
+                $object->setVendorId($data['vendorId']);
+            }
+            if (\array_key_exists('typeId', $data)) {
+                $object->setTypeId($data['typeId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('inventoryLocationId', $data)) {
+                $object->setInventoryLocationId($data['inventoryLocationId']);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('technicianId', $data)) {
+                $object->setTechnicianId($data['technicianId']);
+            }
+            if (\array_key_exists('projectId', $data)) {
+                $object->setProjectId($data['projectId']);
+            }
+            if (\array_key_exists('shipTo', $data)) {
+                $object->setShipTo($data['shipTo']);
+            }
+            if (\array_key_exists('vendorInvoiceNumber', $data)) {
+                $object->setVendorInvoiceNumber($data['vendorInvoiceNumber']);
+            }
+            if (\array_key_exists('impactsTechnicianPayroll', $data)) {
+                $object->setImpactsTechnicianPayroll($data['impactsTechnicianPayroll']);
+            }
+            if (\array_key_exists('memo', $data)) {
+                $object->setMemo($data['memo']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('requiredOn', $data)) {
+                $object->setRequiredOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['requiredOn']));
+            }
+            if (\array_key_exists('tax', $data)) {
+                $object->setTax($data['tax']);
+            }
+            if (\array_key_exists('shipping', $data)) {
+                $object->setShipping($data['shipping']);
+            }
+            if (\array_key_exists('items', $data)) {
+                $values = [];
+                foreach ($data['items'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderItemRequest::class, 'json', $context);
+                }
+                $object->setItems($values);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('vendorId') && null !== $object->getVendorId()) {
+                $data['vendorId'] = $object->getVendorId();
+            }
+            if ($object->isInitialized('typeId') && null !== $object->getTypeId()) {
+                $data['typeId'] = $object->getTypeId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('inventoryLocationId') && null !== $object->getInventoryLocationId()) {
+                $data['inventoryLocationId'] = $object->getInventoryLocationId();
+            }
+            if ($object->isInitialized('jobId') && null !== $object->getJobId()) {
+                $data['jobId'] = $object->getJobId();
+            }
+            if ($object->isInitialized('technicianId') && null !== $object->getTechnicianId()) {
+                $data['technicianId'] = $object->getTechnicianId();
+            }
+            if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+                $data['projectId'] = $object->getProjectId();
+            }
+            if ($object->isInitialized('shipTo') && null !== $object->getShipTo()) {
+                $data['shipTo'] = $object->getShipTo();
+            }
+            if ($object->isInitialized('vendorInvoiceNumber') && null !== $object->getVendorInvoiceNumber()) {
+                $data['vendorInvoiceNumber'] = $object->getVendorInvoiceNumber();
+            }
+            if ($object->isInitialized('impactsTechnicianPayroll') && null !== $object->getImpactsTechnicianPayroll()) {
+                $data['impactsTechnicianPayroll'] = $object->getImpactsTechnicianPayroll();
+            }
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('date') && null !== $object->getDate()) {
+                $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('requiredOn') && null !== $object->getRequiredOn()) {
+                $data['requiredOn'] = $object->getRequiredOn()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('tax') && null !== $object->getTax()) {
+                $data['tax'] = $object->getTax();
+            }
+            if ($object->isInitialized('shipping') && null !== $object->getShipping()) {
+                $data['shipping'] = $object->getShipping();
+            }
+            if ($object->isInitialized('items') && null !== $object->getItems()) {
+                $values = [];
+                foreach ($object->getItems() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['items'] = $values;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest::class => false];
+        }
     }
 }

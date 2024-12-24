@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,71 +21,139 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2CreateCustomerNoteRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2CreateCustomerNoteRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2CreateCustomerNoteRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2CreateCustomerNoteRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('text', $data)) {
+                $object->setText($data['text']);
+            }
+            if (\array_key_exists('pinToTop', $data) && $data['pinToTop'] !== null) {
+                $object->setPinToTop($data['pinToTop']);
+            } elseif (\array_key_exists('pinToTop', $data) && $data['pinToTop'] === null) {
+                $object->setPinToTop(null);
+            }
+            if (\array_key_exists('addToLocations', $data) && $data['addToLocations'] !== null) {
+                $object->setAddToLocations($data['addToLocations']);
+            } elseif (\array_key_exists('addToLocations', $data) && $data['addToLocations'] === null) {
+                $object->setAddToLocations(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('text', $data)) {
-            $object->setText($data['text']);
-        }
-        if (\array_key_exists('pinToTop', $data) && $data['pinToTop'] !== null) {
-            $object->setPinToTop($data['pinToTop']);
-        } elseif (\array_key_exists('pinToTop', $data) && $data['pinToTop'] === null) {
-            $object->setPinToTop(null);
-        }
-        if (\array_key_exists('addToLocations', $data) && $data['addToLocations'] !== null) {
-            $object->setAddToLocations($data['addToLocations']);
-        } elseif (\array_key_exists('addToLocations', $data) && $data['addToLocations'] === null) {
-            $object->setAddToLocations(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['text'] = $object->getText();
+            if ($object->isInitialized('pinToTop') && null !== $object->getPinToTop()) {
+                $data['pinToTop'] = $object->getPinToTop();
+            }
+            if ($object->isInitialized('addToLocations') && null !== $object->getAddToLocations()) {
+                $data['addToLocations'] = $object->getAddToLocations();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2CreateCustomerNoteRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['text'] = $object->getText();
-        if (null !== $object->getPinToTop()) {
-            $data['pinToTop'] = $object->getPinToTop();
-        }
-        if (null !== $object->getAddToLocations()) {
-            $data['addToLocations'] = $object->getAddToLocations();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('text', $data)) {
+                $object->setText($data['text']);
+            }
+            if (\array_key_exists('pinToTop', $data) && $data['pinToTop'] !== null) {
+                $object->setPinToTop($data['pinToTop']);
+            } elseif (\array_key_exists('pinToTop', $data) && $data['pinToTop'] === null) {
+                $object->setPinToTop(null);
+            }
+            if (\array_key_exists('addToLocations', $data) && $data['addToLocations'] !== null) {
+                $object->setAddToLocations($data['addToLocations']);
+            } elseif (\array_key_exists('addToLocations', $data) && $data['addToLocations'] === null) {
+                $object->setAddToLocations(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['text'] = $object->getText();
+            if ($object->isInitialized('pinToTop') && null !== $object->getPinToTop()) {
+                $data['pinToTop'] = $object->getPinToTop();
+            }
+            if ($object->isInitialized('addToLocations') && null !== $object->getAddToLocations()) {
+                $data['addToLocations'] = $object->getAddToLocations();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest::class => false];
+        }
     }
 }

@@ -21,19 +21,19 @@ class BusinessUnitsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseE
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $name
-     *     @var string $active Values: [True, Any, False]
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
-    this application guid will be returned.
-     * }
+     * @var string $ids
+     * @var string $name
+     * @var string $active Values: [True, Any, False]
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
+     *             this application guid will be returned.
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -67,35 +67,35 @@ class BusinessUnitsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseE
         $optionsResolver->setDefined(['ids', 'name', 'active', 'page', 'pageSize', 'includeTotal', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter', 'externalDataApplicationGuid']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('name', ['string']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('name', ['string']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\BusinessUnitsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\BusinessUnitsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

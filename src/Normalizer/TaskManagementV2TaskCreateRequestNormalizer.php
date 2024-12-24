@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,143 +21,283 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class TaskManagementV2TaskCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class TaskManagementV2TaskCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\TaskManagementV2TaskCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\TaskManagementV2TaskCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('reportedById', $data)) {
+                $object->setReportedById($data['reportedById']);
+            }
+            if (\array_key_exists('assignedToId', $data)) {
+                $object->setAssignedToId($data['assignedToId']);
+            }
+            if (\array_key_exists('isClosed', $data)) {
+                $object->setIsClosed($data['isClosed']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('employeeTaskTypeId', $data)) {
+                $object->setEmployeeTaskTypeId($data['employeeTaskTypeId']);
+            }
+            if (\array_key_exists('employeeTaskSourceId', $data)) {
+                $object->setEmployeeTaskSourceId($data['employeeTaskSourceId']);
+            }
+            if (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] !== null) {
+                $object->setEmployeeTaskResolutionId($data['employeeTaskResolutionId']);
+            } elseif (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] === null) {
+                $object->setEmployeeTaskResolutionId(null);
+            }
+            if (\array_key_exists('reportedDate', $data)) {
+                $object->setReportedDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['reportedDate']));
+            }
+            if (\array_key_exists('completeBy', $data) && $data['completeBy'] !== null) {
+                $object->setCompleteBy(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['completeBy']));
+            } elseif (\array_key_exists('completeBy', $data) && $data['completeBy'] === null) {
+                $object->setCompleteBy(null);
+            }
+            if (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] !== null) {
+                $values = [];
+                foreach ($data['involvedEmployeeIdList'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setInvolvedEmployeeIdList($values);
+            } elseif (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] === null) {
+                $object->setInvolvedEmployeeIdList(null);
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('jobId', $data) && $data['jobId'] !== null) {
+                $object->setJobId($data['jobId']);
+            } elseif (\array_key_exists('jobId', $data) && $data['jobId'] === null) {
+                $object->setJobId(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('reportedById', $data)) {
-            $object->setReportedById($data['reportedById']);
-        }
-        if (\array_key_exists('assignedToId', $data)) {
-            $object->setAssignedToId($data['assignedToId']);
-        }
-        if (\array_key_exists('isClosed', $data)) {
-            $object->setIsClosed($data['isClosed']);
-        }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('businessUnitId', $data)) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        }
-        if (\array_key_exists('employeeTaskTypeId', $data)) {
-            $object->setEmployeeTaskTypeId($data['employeeTaskTypeId']);
-        }
-        if (\array_key_exists('employeeTaskSourceId', $data)) {
-            $object->setEmployeeTaskSourceId($data['employeeTaskSourceId']);
-        }
-        if (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] !== null) {
-            $object->setEmployeeTaskResolutionId($data['employeeTaskResolutionId']);
-        } elseif (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] === null) {
-            $object->setEmployeeTaskResolutionId(null);
-        }
-        if (\array_key_exists('reportedDate', $data)) {
-            $object->setReportedDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['reportedDate']));
-        }
-        if (\array_key_exists('completeBy', $data) && $data['completeBy'] !== null) {
-            $object->setCompleteBy(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['completeBy']));
-        } elseif (\array_key_exists('completeBy', $data) && $data['completeBy'] === null) {
-            $object->setCompleteBy(null);
-        }
-        if (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] !== null) {
-            $values = [];
-            foreach ($data['involvedEmployeeIdList'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['reportedById'] = $object->getReportedById();
+            $data['assignedToId'] = $object->getAssignedToId();
+            $data['isClosed'] = $object->getIsClosed();
+            $data['name'] = $object->getName();
+            $data['businessUnitId'] = $object->getBusinessUnitId();
+            $data['employeeTaskTypeId'] = $object->getEmployeeTaskTypeId();
+            $data['employeeTaskSourceId'] = $object->getEmployeeTaskSourceId();
+            if ($object->isInitialized('employeeTaskResolutionId') && null !== $object->getEmployeeTaskResolutionId()) {
+                $data['employeeTaskResolutionId'] = $object->getEmployeeTaskResolutionId();
             }
-            $object->setInvolvedEmployeeIdList($values);
-        } elseif (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] === null) {
-            $object->setInvolvedEmployeeIdList(null);
-        }
-        if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
-            $object->setCustomerId($data['customerId']);
-        } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
-            $object->setCustomerId(null);
-        }
-        if (\array_key_exists('jobId', $data) && $data['jobId'] !== null) {
-            $object->setJobId($data['jobId']);
-        } elseif (\array_key_exists('jobId', $data) && $data['jobId'] === null) {
-            $object->setJobId(null);
-        }
-        if (\array_key_exists('description', $data) && $data['description'] !== null) {
-            $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
-            $object->setDescription(null);
-        }
-        if (\array_key_exists('priority', $data)) {
-            $object->setPriority($data['priority']);
+            $data['reportedDate'] = $object->getReportedDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('completeBy') && null !== $object->getCompleteBy()) {
+                $data['completeBy'] = $object->getCompleteBy()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('involvedEmployeeIdList') && null !== $object->getInvolvedEmployeeIdList()) {
+                $values = [];
+                foreach ($object->getInvolvedEmployeeIdList() as $value) {
+                    $values[] = $value;
+                }
+                $data['involvedEmployeeIdList'] = $values;
+            }
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('jobId') && null !== $object->getJobId()) {
+                $data['jobId'] = $object->getJobId();
+            }
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            $data['priority'] = $object->getPriority();
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class TaskManagementV2TaskCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['reportedById'] = $object->getReportedById();
-        $data['assignedToId'] = $object->getAssignedToId();
-        $data['isClosed'] = $object->getIsClosed();
-        $data['name'] = $object->getName();
-        $data['businessUnitId'] = $object->getBusinessUnitId();
-        $data['employeeTaskTypeId'] = $object->getEmployeeTaskTypeId();
-        $data['employeeTaskSourceId'] = $object->getEmployeeTaskSourceId();
-        if (null !== $object->getEmployeeTaskResolutionId()) {
-            $data['employeeTaskResolutionId'] = $object->getEmployeeTaskResolutionId();
-        }
-        $data['reportedDate'] = $object->getReportedDate()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getCompleteBy()) {
-            $data['completeBy'] = $object->getCompleteBy()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getInvolvedEmployeeIdList()) {
-            $values = [];
-            foreach ($object->getInvolvedEmployeeIdList() as $value) {
-                $values[] = $value;
-            }
-            $data['involvedEmployeeIdList'] = $values;
-        }
-        if (null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
-        }
-        if (null !== $object->getJobId()) {
-            $data['jobId'] = $object->getJobId();
-        }
-        if (null !== $object->getDescription()) {
-            $data['description'] = $object->getDescription();
-        }
-        $data['priority'] = $object->getPriority();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('reportedById', $data)) {
+                $object->setReportedById($data['reportedById']);
+            }
+            if (\array_key_exists('assignedToId', $data)) {
+                $object->setAssignedToId($data['assignedToId']);
+            }
+            if (\array_key_exists('isClosed', $data)) {
+                $object->setIsClosed($data['isClosed']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('employeeTaskTypeId', $data)) {
+                $object->setEmployeeTaskTypeId($data['employeeTaskTypeId']);
+            }
+            if (\array_key_exists('employeeTaskSourceId', $data)) {
+                $object->setEmployeeTaskSourceId($data['employeeTaskSourceId']);
+            }
+            if (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] !== null) {
+                $object->setEmployeeTaskResolutionId($data['employeeTaskResolutionId']);
+            } elseif (\array_key_exists('employeeTaskResolutionId', $data) && $data['employeeTaskResolutionId'] === null) {
+                $object->setEmployeeTaskResolutionId(null);
+            }
+            if (\array_key_exists('reportedDate', $data)) {
+                $object->setReportedDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['reportedDate']));
+            }
+            if (\array_key_exists('completeBy', $data) && $data['completeBy'] !== null) {
+                $object->setCompleteBy(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['completeBy']));
+            } elseif (\array_key_exists('completeBy', $data) && $data['completeBy'] === null) {
+                $object->setCompleteBy(null);
+            }
+            if (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] !== null) {
+                $values = [];
+                foreach ($data['involvedEmployeeIdList'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setInvolvedEmployeeIdList($values);
+            } elseif (\array_key_exists('involvedEmployeeIdList', $data) && $data['involvedEmployeeIdList'] === null) {
+                $object->setInvolvedEmployeeIdList(null);
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('jobId', $data) && $data['jobId'] !== null) {
+                $object->setJobId($data['jobId']);
+            } elseif (\array_key_exists('jobId', $data) && $data['jobId'] === null) {
+                $object->setJobId(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['reportedById'] = $object->getReportedById();
+            $data['assignedToId'] = $object->getAssignedToId();
+            $data['isClosed'] = $object->getIsClosed();
+            $data['name'] = $object->getName();
+            $data['businessUnitId'] = $object->getBusinessUnitId();
+            $data['employeeTaskTypeId'] = $object->getEmployeeTaskTypeId();
+            $data['employeeTaskSourceId'] = $object->getEmployeeTaskSourceId();
+            if ($object->isInitialized('employeeTaskResolutionId') && null !== $object->getEmployeeTaskResolutionId()) {
+                $data['employeeTaskResolutionId'] = $object->getEmployeeTaskResolutionId();
+            }
+            $data['reportedDate'] = $object->getReportedDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('completeBy') && null !== $object->getCompleteBy()) {
+                $data['completeBy'] = $object->getCompleteBy()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('involvedEmployeeIdList') && null !== $object->getInvolvedEmployeeIdList()) {
+                $values = [];
+                foreach ($object->getInvolvedEmployeeIdList() as $value) {
+                    $values[] = $value;
+                }
+                $data['involvedEmployeeIdList'] = $values;
+            }
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('jobId') && null !== $object->getJobId()) {
+                $data['jobId'] = $object->getJobId();
+            }
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            $data['priority'] = $object->getPriority();
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest::class => false];
+        }
     }
 }

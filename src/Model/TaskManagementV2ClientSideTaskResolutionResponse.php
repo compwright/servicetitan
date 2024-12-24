@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2ClientSideTaskResolutionResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -29,7 +38,7 @@ class TaskManagementV2ClientSideTaskResolutionResponse
      */
     protected $active;
     /**
-     * @var int[]
+     * @var list<int>
      */
     protected $excludedTaskTypeIds;
 
@@ -40,6 +49,7 @@ class TaskManagementV2ClientSideTaskResolutionResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -52,6 +62,7 @@ class TaskManagementV2ClientSideTaskResolutionResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -64,6 +75,7 @@ class TaskManagementV2ClientSideTaskResolutionResponse
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -76,13 +88,14 @@ class TaskManagementV2ClientSideTaskResolutionResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
     }
 
     /**
-     * @return int[]
+     * @return list<int>
      */
     public function getExcludedTaskTypeIds(): array
     {
@@ -90,10 +103,11 @@ class TaskManagementV2ClientSideTaskResolutionResponse
     }
 
     /**
-     * @param int[] $excludedTaskTypeIds
+     * @param list<int> $excludedTaskTypeIds
      */
     public function setExcludedTaskTypeIds(array $excludedTaskTypeIds): self
     {
+        $this->initialized['excludedTaskTypeIds'] = true;
         $this->excludedTaskTypeIds = $excludedTaskTypeIds;
 
         return $this;

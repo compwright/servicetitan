@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2LeadUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the campaign.
      *
      * @var int
@@ -20,8 +29,6 @@ class CrmV2LeadUpdateRequest
     protected $campaignId;
     /**
      * Priority of the lead.
-     *
-     * @var mixed
      */
     protected $priority;
     /**
@@ -50,6 +57,7 @@ class CrmV2LeadUpdateRequest
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -57,8 +65,6 @@ class CrmV2LeadUpdateRequest
 
     /**
      * Priority of the lead.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -67,11 +73,10 @@ class CrmV2LeadUpdateRequest
 
     /**
      * Priority of the lead.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -90,6 +95,7 @@ class CrmV2LeadUpdateRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -108,6 +114,7 @@ class CrmV2LeadUpdateRequest
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;

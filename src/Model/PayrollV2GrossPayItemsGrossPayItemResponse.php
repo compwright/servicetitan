@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2GrossPayItemsGrossPayItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The gross pay item ID.
      *
      * @var int|null
@@ -86,8 +95,6 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
     protected $payoutBusinessUnitName;
     /**
      * Type of the gross pay item.
-     *
-     * @var mixed
      */
     protected $grossPayItemType;
     /**
@@ -242,6 +249,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -260,6 +268,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setEmployeeId(?int $employeeId): self
     {
+        $this->initialized['employeeId'] = true;
         $this->employeeId = $employeeId;
 
         return $this;
@@ -267,8 +276,6 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * The employee type.
-     *
-     * @return mixed
      */
     public function getEmployeeType()
     {
@@ -277,11 +284,10 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * The employee type.
-     *
-     * @param mixed $employeeType
      */
     public function setEmployeeType($employeeType): self
     {
+        $this->initialized['employeeType'] = true;
         $this->employeeType = $employeeType;
 
         return $this;
@@ -300,6 +306,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setBusinessUnitName(?string $businessUnitName): self
     {
+        $this->initialized['businessUnitName'] = true;
         $this->businessUnitName = $businessUnitName;
 
         return $this;
@@ -318,6 +325,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setPayrollId(int $payrollId): self
     {
+        $this->initialized['payrollId'] = true;
         $this->payrollId = $payrollId;
 
         return $this;
@@ -336,6 +344,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -354,6 +363,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setActivity(?string $activity): self
     {
+        $this->initialized['activity'] = true;
         $this->activity = $activity;
 
         return $this;
@@ -372,6 +382,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setActivityCodeId(?int $activityCodeId): self
     {
+        $this->initialized['activityCodeId'] = true;
         $this->activityCodeId = $activityCodeId;
 
         return $this;
@@ -390,6 +401,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setActivityCode(?string $activityCode): self
     {
+        $this->initialized['activityCode'] = true;
         $this->activityCode = $activityCode;
 
         return $this;
@@ -408,6 +420,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setAmount(float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -426,6 +439,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setAmountAdjustment(?float $amountAdjustment): self
     {
+        $this->initialized['amountAdjustment'] = true;
         $this->amountAdjustment = $amountAdjustment;
 
         return $this;
@@ -444,6 +458,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setPayoutBusinessUnitName(?string $payoutBusinessUnitName): self
     {
+        $this->initialized['payoutBusinessUnitName'] = true;
         $this->payoutBusinessUnitName = $payoutBusinessUnitName;
 
         return $this;
@@ -451,8 +466,6 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * Type of the gross pay item.
-     *
-     * @return mixed
      */
     public function getGrossPayItemType()
     {
@@ -461,11 +474,10 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * Type of the gross pay item.
-     *
-     * @param mixed $grossPayItemType
      */
     public function setGrossPayItemType($grossPayItemType): self
     {
+        $this->initialized['grossPayItemType'] = true;
         $this->grossPayItemType = $grossPayItemType;
 
         return $this;
@@ -484,6 +496,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setStartedOn(?\DateTime $startedOn): self
     {
+        $this->initialized['startedOn'] = true;
         $this->startedOn = $startedOn;
 
         return $this;
@@ -502,6 +515,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setEndedOn(?\DateTime $endedOn): self
     {
+        $this->initialized['endedOn'] = true;
         $this->endedOn = $endedOn;
 
         return $this;
@@ -520,6 +534,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setPaidDurationHours(?float $paidDurationHours): self
     {
+        $this->initialized['paidDurationHours'] = true;
         $this->paidDurationHours = $paidDurationHours;
 
         return $this;
@@ -527,8 +542,6 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * Type of the paid time.
-     *
-     * @return mixed
      */
     public function getPaidTimeType()
     {
@@ -537,11 +550,10 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
 
     /**
      * Type of the paid time.
-     *
-     * @param mixed $paidTimeType
      */
     public function setPaidTimeType($paidTimeType): self
     {
+        $this->initialized['paidTimeType'] = true;
         $this->paidTimeType = $paidTimeType;
 
         return $this;
@@ -560,6 +572,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -578,6 +591,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setJobNumber(?string $jobNumber): self
     {
+        $this->initialized['jobNumber'] = true;
         $this->jobNumber = $jobNumber;
 
         return $this;
@@ -596,6 +610,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setJobTypeName(?string $jobTypeName): self
     {
+        $this->initialized['jobTypeName'] = true;
         $this->jobTypeName = $jobTypeName;
 
         return $this;
@@ -614,6 +629,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setProjectNumber(?string $projectNumber): self
     {
+        $this->initialized['projectNumber'] = true;
         $this->projectNumber = $projectNumber;
 
         return $this;
@@ -632,6 +648,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setProjectId(?int $projectId): self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
 
         return $this;
@@ -650,6 +667,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setInvoiceId(?int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;
@@ -668,6 +686,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setInvoiceNumber(?string $invoiceNumber): self
     {
+        $this->initialized['invoiceNumber'] = true;
         $this->invoiceNumber = $invoiceNumber;
 
         return $this;
@@ -686,6 +705,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setInvoiceItemId(?int $invoiceItemId): self
     {
+        $this->initialized['invoiceItemId'] = true;
         $this->invoiceItemId = $invoiceItemId;
 
         return $this;
@@ -704,6 +724,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setCustomerId(?int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -722,6 +743,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setCustomerName(?string $customerName): self
     {
+        $this->initialized['customerName'] = true;
         $this->customerName = $customerName;
 
         return $this;
@@ -740,6 +762,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLocationId(?int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -758,6 +781,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLocationName(?string $locationName): self
     {
+        $this->initialized['locationName'] = true;
         $this->locationName = $locationName;
 
         return $this;
@@ -776,6 +800,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLocationAddress(?string $locationAddress): self
     {
+        $this->initialized['locationAddress'] = true;
         $this->locationAddress = $locationAddress;
 
         return $this;
@@ -794,6 +819,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLocationZip(?string $locationZip): self
     {
+        $this->initialized['locationZip'] = true;
         $this->locationZip = $locationZip;
 
         return $this;
@@ -812,6 +838,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setZoneName(?string $zoneName): self
     {
+        $this->initialized['zoneName'] = true;
         $this->zoneName = $zoneName;
 
         return $this;
@@ -830,6 +857,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setTaxZoneName(?string $taxZoneName): self
     {
+        $this->initialized['taxZoneName'] = true;
         $this->taxZoneName = $taxZoneName;
 
         return $this;
@@ -848,6 +876,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLaborTypeId(?int $laborTypeId): self
     {
+        $this->initialized['laborTypeId'] = true;
         $this->laborTypeId = $laborTypeId;
 
         return $this;
@@ -866,6 +895,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setLaborTypeCode(?string $laborTypeCode): self
     {
+        $this->initialized['laborTypeCode'] = true;
         $this->laborTypeCode = $laborTypeCode;
 
         return $this;
@@ -884,6 +914,7 @@ class PayrollV2GrossPayItemsGrossPayItemResponse
      */
     public function setIsPrevailingWageJob(?bool $isPrevailingWageJob): self
     {
+        $this->initialized['isPrevailingWageJob'] = true;
         $this->isPrevailingWageJob = $isPrevailingWageJob;
 
         return $this;

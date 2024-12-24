@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2JobNoteCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Text content of job note.
      *
      * @var string
@@ -38,6 +47,7 @@ class CrmV2JobNoteCreateRequest
      */
     public function setText(string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;
@@ -56,6 +66,7 @@ class CrmV2JobNoteCreateRequest
      */
     public function setPinToTop(?bool $pinToTop): self
     {
+        $this->initialized['pinToTop'] = true;
         $this->pinToTop = $pinToTop;
 
         return $this;

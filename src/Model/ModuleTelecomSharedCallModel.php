@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleTelecomSharedCallModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -80,6 +89,7 @@ class ModuleTelecomSharedCallModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -92,6 +102,7 @@ class ModuleTelecomSharedCallModel
 
     public function setReceivedOn(\DateTime $receivedOn): self
     {
+        $this->initialized['receivedOn'] = true;
         $this->receivedOn = $receivedOn;
 
         return $this;
@@ -104,6 +115,7 @@ class ModuleTelecomSharedCallModel
 
     public function setDuration(string $duration): self
     {
+        $this->initialized['duration'] = true;
         $this->duration = $duration;
 
         return $this;
@@ -116,6 +128,7 @@ class ModuleTelecomSharedCallModel
 
     public function setFrom(string $from): self
     {
+        $this->initialized['from'] = true;
         $this->from = $from;
 
         return $this;
@@ -128,6 +141,7 @@ class ModuleTelecomSharedCallModel
 
     public function setTo(string $to): self
     {
+        $this->initialized['to'] = true;
         $this->to = $to;
 
         return $this;
@@ -140,24 +154,20 @@ class ModuleTelecomSharedCallModel
 
     public function setDirection(string $direction): self
     {
+        $this->initialized['direction'] = true;
         $this->direction = $direction;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCallType()
     {
         return $this->callType;
     }
 
-    /**
-     * @param mixed $callType
-     */
     public function setCallType($callType): self
     {
+        $this->initialized['callType'] = true;
         $this->callType = $callType;
 
         return $this;
@@ -170,6 +180,7 @@ class ModuleTelecomSharedCallModel
 
     public function setReason(ModuleTelecomSharedCallReasonModel $reason): self
     {
+        $this->initialized['reason'] = true;
         $this->reason = $reason;
 
         return $this;
@@ -182,6 +193,7 @@ class ModuleTelecomSharedCallModel
 
     public function setRecordingUrl(string $recordingUrl): self
     {
+        $this->initialized['recordingUrl'] = true;
         $this->recordingUrl = $recordingUrl;
 
         return $this;
@@ -194,6 +206,7 @@ class ModuleTelecomSharedCallModel
 
     public function setVoiceMailUrl(string $voiceMailUrl): self
     {
+        $this->initialized['voiceMailUrl'] = true;
         $this->voiceMailUrl = $voiceMailUrl;
 
         return $this;
@@ -206,6 +219,7 @@ class ModuleTelecomSharedCallModel
 
     public function setCreatedBy(ServicesNamedModel $createdBy): self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
 
         return $this;
@@ -218,6 +232,7 @@ class ModuleTelecomSharedCallModel
 
     public function setCustomer(CrmContractsCustomersCustomerModel $customer): self
     {
+        $this->initialized['customer'] = true;
         $this->customer = $customer;
 
         return $this;
@@ -230,6 +245,7 @@ class ModuleTelecomSharedCallModel
 
     public function setCampaign(MarketingCoreCampaignModel $campaign): self
     {
+        $this->initialized['campaign'] = true;
         $this->campaign = $campaign;
 
         return $this;
@@ -242,6 +258,7 @@ class ModuleTelecomSharedCallModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -254,6 +271,7 @@ class ModuleTelecomSharedCallModel
 
     public function setAgent(ModuleTelecomSharedCallAgentModel $agent): self
     {
+        $this->initialized['agent'] = true;
         $this->agent = $agent;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2ItemGroupResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $rootId;
@@ -28,6 +37,7 @@ class AccountingV2ItemGroupResponse
 
     public function setRootId(int $rootId): self
     {
+        $this->initialized['rootId'] = true;
         $this->rootId = $rootId;
 
         return $this;
@@ -40,6 +50,7 @@ class AccountingV2ItemGroupResponse
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;

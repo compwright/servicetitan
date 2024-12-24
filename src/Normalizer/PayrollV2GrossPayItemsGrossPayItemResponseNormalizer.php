@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,319 +21,653 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PayrollV2GrossPayItemsGrossPayItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PayrollV2GrossPayItemsGrossPayItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PayrollV2GrossPayItemsGrossPayItemResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PayrollV2GrossPayItemsGrossPayItemResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (\array_key_exists('amountAdjustment', $data) && \is_int($data['amountAdjustment'])) {
+                $data['amountAdjustment'] = (float) $data['amountAdjustment'];
+            }
+            if (\array_key_exists('paidDurationHours', $data) && \is_int($data['paidDurationHours'])) {
+                $data['paidDurationHours'] = (float) $data['paidDurationHours'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('employeeId', $data) && $data['employeeId'] !== null) {
+                $object->setEmployeeId($data['employeeId']);
+            } elseif (\array_key_exists('employeeId', $data) && $data['employeeId'] === null) {
+                $object->setEmployeeId(null);
+            }
+            if (\array_key_exists('employeeType', $data) && $data['employeeType'] !== null) {
+                $object->setEmployeeType($data['employeeType']);
+            } elseif (\array_key_exists('employeeType', $data) && $data['employeeType'] === null) {
+                $object->setEmployeeType(null);
+            }
+            if (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] !== null) {
+                $object->setBusinessUnitName($data['businessUnitName']);
+            } elseif (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] === null) {
+                $object->setBusinessUnitName(null);
+            }
+            if (\array_key_exists('payrollId', $data)) {
+                $object->setPayrollId($data['payrollId']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('activity', $data) && $data['activity'] !== null) {
+                $object->setActivity($data['activity']);
+            } elseif (\array_key_exists('activity', $data) && $data['activity'] === null) {
+                $object->setActivity(null);
+            }
+            if (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] !== null) {
+                $object->setActivityCodeId($data['activityCodeId']);
+            } elseif (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] === null) {
+                $object->setActivityCodeId(null);
+            }
+            if (\array_key_exists('activityCode', $data) && $data['activityCode'] !== null) {
+                $object->setActivityCode($data['activityCode']);
+            } elseif (\array_key_exists('activityCode', $data) && $data['activityCode'] === null) {
+                $object->setActivityCode(null);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] !== null) {
+                $object->setAmountAdjustment($data['amountAdjustment']);
+            } elseif (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] === null) {
+                $object->setAmountAdjustment(null);
+            }
+            if (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] !== null) {
+                $object->setPayoutBusinessUnitName($data['payoutBusinessUnitName']);
+            } elseif (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] === null) {
+                $object->setPayoutBusinessUnitName(null);
+            }
+            if (\array_key_exists('grossPayItemType', $data)) {
+                $object->setGrossPayItemType($data['grossPayItemType']);
+            }
+            if (\array_key_exists('startedOn', $data) && $data['startedOn'] !== null) {
+                $object->setStartedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['startedOn']));
+            } elseif (\array_key_exists('startedOn', $data) && $data['startedOn'] === null) {
+                $object->setStartedOn(null);
+            }
+            if (\array_key_exists('endedOn', $data) && $data['endedOn'] !== null) {
+                $object->setEndedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['endedOn']));
+            } elseif (\array_key_exists('endedOn', $data) && $data['endedOn'] === null) {
+                $object->setEndedOn(null);
+            }
+            if (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] !== null) {
+                $object->setPaidDurationHours($data['paidDurationHours']);
+            } elseif (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] === null) {
+                $object->setPaidDurationHours(null);
+            }
+            if (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] !== null) {
+                $object->setPaidTimeType($data['paidTimeType']);
+            } elseif (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] === null) {
+                $object->setPaidTimeType(null);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('jobNumber', $data) && $data['jobNumber'] !== null) {
+                $object->setJobNumber($data['jobNumber']);
+            } elseif (\array_key_exists('jobNumber', $data) && $data['jobNumber'] === null) {
+                $object->setJobNumber(null);
+            }
+            if (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] !== null) {
+                $object->setJobTypeName($data['jobTypeName']);
+            } elseif (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] === null) {
+                $object->setJobTypeName(null);
+            }
+            if (\array_key_exists('projectNumber', $data) && $data['projectNumber'] !== null) {
+                $object->setProjectNumber($data['projectNumber']);
+            } elseif (\array_key_exists('projectNumber', $data) && $data['projectNumber'] === null) {
+                $object->setProjectNumber(null);
+            }
+            if (\array_key_exists('projectId', $data) && $data['projectId'] !== null) {
+                $object->setProjectId($data['projectId']);
+            } elseif (\array_key_exists('projectId', $data) && $data['projectId'] === null) {
+                $object->setProjectId(null);
+            }
+            if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+                $object->setInvoiceId($data['invoiceId']);
+            } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
+                $object->setInvoiceId(null);
+            }
+            if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
+                $object->setInvoiceNumber($data['invoiceNumber']);
+            } elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+                $object->setInvoiceNumber(null);
+            }
+            if (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] !== null) {
+                $object->setInvoiceItemId($data['invoiceItemId']);
+            } elseif (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] === null) {
+                $object->setInvoiceItemId(null);
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('customerName', $data) && $data['customerName'] !== null) {
+                $object->setCustomerName($data['customerName']);
+            } elseif (\array_key_exists('customerName', $data) && $data['customerName'] === null) {
+                $object->setCustomerName(null);
+            }
+            if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
+                $object->setLocationId($data['locationId']);
+            } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
+                $object->setLocationId(null);
+            }
+            if (\array_key_exists('locationName', $data) && $data['locationName'] !== null) {
+                $object->setLocationName($data['locationName']);
+            } elseif (\array_key_exists('locationName', $data) && $data['locationName'] === null) {
+                $object->setLocationName(null);
+            }
+            if (\array_key_exists('locationAddress', $data) && $data['locationAddress'] !== null) {
+                $object->setLocationAddress($data['locationAddress']);
+            } elseif (\array_key_exists('locationAddress', $data) && $data['locationAddress'] === null) {
+                $object->setLocationAddress(null);
+            }
+            if (\array_key_exists('locationZip', $data) && $data['locationZip'] !== null) {
+                $object->setLocationZip($data['locationZip']);
+            } elseif (\array_key_exists('locationZip', $data) && $data['locationZip'] === null) {
+                $object->setLocationZip(null);
+            }
+            if (\array_key_exists('zoneName', $data) && $data['zoneName'] !== null) {
+                $object->setZoneName($data['zoneName']);
+            } elseif (\array_key_exists('zoneName', $data) && $data['zoneName'] === null) {
+                $object->setZoneName(null);
+            }
+            if (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] !== null) {
+                $object->setTaxZoneName($data['taxZoneName']);
+            } elseif (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] === null) {
+                $object->setTaxZoneName(null);
+            }
+            if (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] !== null) {
+                $object->setLaborTypeId($data['laborTypeId']);
+            } elseif (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] === null) {
+                $object->setLaborTypeId(null);
+            }
+            if (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] !== null) {
+                $object->setLaborTypeCode($data['laborTypeCode']);
+            } elseif (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] === null) {
+                $object->setLaborTypeCode(null);
+            }
+            if (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] !== null) {
+                $object->setIsPrevailingWageJob($data['isPrevailingWageJob']);
+            } elseif (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] === null) {
+                $object->setIsPrevailingWageJob(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('employeeId', $data) && $data['employeeId'] !== null) {
-            $object->setEmployeeId($data['employeeId']);
-        } elseif (\array_key_exists('employeeId', $data) && $data['employeeId'] === null) {
-            $object->setEmployeeId(null);
-        }
-        if (\array_key_exists('employeeType', $data) && $data['employeeType'] !== null) {
-            $object->setEmployeeType($data['employeeType']);
-        } elseif (\array_key_exists('employeeType', $data) && $data['employeeType'] === null) {
-            $object->setEmployeeType(null);
-        }
-        if (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] !== null) {
-            $object->setBusinessUnitName($data['businessUnitName']);
-        } elseif (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] === null) {
-            $object->setBusinessUnitName(null);
-        }
-        if (\array_key_exists('payrollId', $data)) {
-            $object->setPayrollId($data['payrollId']);
-        }
-        if (\array_key_exists('date', $data)) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
-        }
-        if (\array_key_exists('activity', $data) && $data['activity'] !== null) {
-            $object->setActivity($data['activity']);
-        } elseif (\array_key_exists('activity', $data) && $data['activity'] === null) {
-            $object->setActivity(null);
-        }
-        if (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] !== null) {
-            $object->setActivityCodeId($data['activityCodeId']);
-        } elseif (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] === null) {
-            $object->setActivityCodeId(null);
-        }
-        if (\array_key_exists('activityCode', $data) && $data['activityCode'] !== null) {
-            $object->setActivityCode($data['activityCode']);
-        } elseif (\array_key_exists('activityCode', $data) && $data['activityCode'] === null) {
-            $object->setActivityCode(null);
-        }
-        if (\array_key_exists('amount', $data)) {
-            $object->setAmount($data['amount']);
-        }
-        if (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] !== null) {
-            $object->setAmountAdjustment($data['amountAdjustment']);
-        } elseif (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] === null) {
-            $object->setAmountAdjustment(null);
-        }
-        if (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] !== null) {
-            $object->setPayoutBusinessUnitName($data['payoutBusinessUnitName']);
-        } elseif (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] === null) {
-            $object->setPayoutBusinessUnitName(null);
-        }
-        if (\array_key_exists('grossPayItemType', $data)) {
-            $object->setGrossPayItemType($data['grossPayItemType']);
-        }
-        if (\array_key_exists('startedOn', $data) && $data['startedOn'] !== null) {
-            $object->setStartedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['startedOn']));
-        } elseif (\array_key_exists('startedOn', $data) && $data['startedOn'] === null) {
-            $object->setStartedOn(null);
-        }
-        if (\array_key_exists('endedOn', $data) && $data['endedOn'] !== null) {
-            $object->setEndedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['endedOn']));
-        } elseif (\array_key_exists('endedOn', $data) && $data['endedOn'] === null) {
-            $object->setEndedOn(null);
-        }
-        if (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] !== null) {
-            $object->setPaidDurationHours($data['paidDurationHours']);
-        } elseif (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] === null) {
-            $object->setPaidDurationHours(null);
-        }
-        if (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] !== null) {
-            $object->setPaidTimeType($data['paidTimeType']);
-        } elseif (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] === null) {
-            $object->setPaidTimeType(null);
-        }
-        if (\array_key_exists('jobId', $data)) {
-            $object->setJobId($data['jobId']);
-        }
-        if (\array_key_exists('jobNumber', $data) && $data['jobNumber'] !== null) {
-            $object->setJobNumber($data['jobNumber']);
-        } elseif (\array_key_exists('jobNumber', $data) && $data['jobNumber'] === null) {
-            $object->setJobNumber(null);
-        }
-        if (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] !== null) {
-            $object->setJobTypeName($data['jobTypeName']);
-        } elseif (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] === null) {
-            $object->setJobTypeName(null);
-        }
-        if (\array_key_exists('projectNumber', $data) && $data['projectNumber'] !== null) {
-            $object->setProjectNumber($data['projectNumber']);
-        } elseif (\array_key_exists('projectNumber', $data) && $data['projectNumber'] === null) {
-            $object->setProjectNumber(null);
-        }
-        if (\array_key_exists('projectId', $data) && $data['projectId'] !== null) {
-            $object->setProjectId($data['projectId']);
-        } elseif (\array_key_exists('projectId', $data) && $data['projectId'] === null) {
-            $object->setProjectId(null);
-        }
-        if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
-            $object->setInvoiceId($data['invoiceId']);
-        } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
-            $object->setInvoiceId(null);
-        }
-        if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
-            $object->setInvoiceNumber($data['invoiceNumber']);
-        } elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
-            $object->setInvoiceNumber(null);
-        }
-        if (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] !== null) {
-            $object->setInvoiceItemId($data['invoiceItemId']);
-        } elseif (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] === null) {
-            $object->setInvoiceItemId(null);
-        }
-        if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
-            $object->setCustomerId($data['customerId']);
-        } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
-            $object->setCustomerId(null);
-        }
-        if (\array_key_exists('customerName', $data) && $data['customerName'] !== null) {
-            $object->setCustomerName($data['customerName']);
-        } elseif (\array_key_exists('customerName', $data) && $data['customerName'] === null) {
-            $object->setCustomerName(null);
-        }
-        if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
-            $object->setLocationId($data['locationId']);
-        } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
-            $object->setLocationId(null);
-        }
-        if (\array_key_exists('locationName', $data) && $data['locationName'] !== null) {
-            $object->setLocationName($data['locationName']);
-        } elseif (\array_key_exists('locationName', $data) && $data['locationName'] === null) {
-            $object->setLocationName(null);
-        }
-        if (\array_key_exists('locationAddress', $data) && $data['locationAddress'] !== null) {
-            $object->setLocationAddress($data['locationAddress']);
-        } elseif (\array_key_exists('locationAddress', $data) && $data['locationAddress'] === null) {
-            $object->setLocationAddress(null);
-        }
-        if (\array_key_exists('locationZip', $data) && $data['locationZip'] !== null) {
-            $object->setLocationZip($data['locationZip']);
-        } elseif (\array_key_exists('locationZip', $data) && $data['locationZip'] === null) {
-            $object->setLocationZip(null);
-        }
-        if (\array_key_exists('zoneName', $data) && $data['zoneName'] !== null) {
-            $object->setZoneName($data['zoneName']);
-        } elseif (\array_key_exists('zoneName', $data) && $data['zoneName'] === null) {
-            $object->setZoneName(null);
-        }
-        if (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] !== null) {
-            $object->setTaxZoneName($data['taxZoneName']);
-        } elseif (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] === null) {
-            $object->setTaxZoneName(null);
-        }
-        if (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] !== null) {
-            $object->setLaborTypeId($data['laborTypeId']);
-        } elseif (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] === null) {
-            $object->setLaborTypeId(null);
-        }
-        if (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] !== null) {
-            $object->setLaborTypeCode($data['laborTypeCode']);
-        } elseif (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] === null) {
-            $object->setLaborTypeCode(null);
-        }
-        if (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] !== null) {
-            $object->setIsPrevailingWageJob($data['isPrevailingWageJob']);
-        } elseif (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] === null) {
-            $object->setIsPrevailingWageJob(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('employeeId') && null !== $object->getEmployeeId()) {
+                $data['employeeId'] = $object->getEmployeeId();
+            }
+            if ($object->isInitialized('employeeType') && null !== $object->getEmployeeType()) {
+                $data['employeeType'] = $object->getEmployeeType();
+            }
+            if ($object->isInitialized('businessUnitName') && null !== $object->getBusinessUnitName()) {
+                $data['businessUnitName'] = $object->getBusinessUnitName();
+            }
+            $data['payrollId'] = $object->getPayrollId();
+            $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('activity') && null !== $object->getActivity()) {
+                $data['activity'] = $object->getActivity();
+            }
+            if ($object->isInitialized('activityCodeId') && null !== $object->getActivityCodeId()) {
+                $data['activityCodeId'] = $object->getActivityCodeId();
+            }
+            if ($object->isInitialized('activityCode') && null !== $object->getActivityCode()) {
+                $data['activityCode'] = $object->getActivityCode();
+            }
+            $data['amount'] = $object->getAmount();
+            if ($object->isInitialized('amountAdjustment') && null !== $object->getAmountAdjustment()) {
+                $data['amountAdjustment'] = $object->getAmountAdjustment();
+            }
+            if ($object->isInitialized('payoutBusinessUnitName') && null !== $object->getPayoutBusinessUnitName()) {
+                $data['payoutBusinessUnitName'] = $object->getPayoutBusinessUnitName();
+            }
+            $data['grossPayItemType'] = $object->getGrossPayItemType();
+            if ($object->isInitialized('startedOn') && null !== $object->getStartedOn()) {
+                $data['startedOn'] = $object->getStartedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('endedOn') && null !== $object->getEndedOn()) {
+                $data['endedOn'] = $object->getEndedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('paidDurationHours') && null !== $object->getPaidDurationHours()) {
+                $data['paidDurationHours'] = $object->getPaidDurationHours();
+            }
+            if ($object->isInitialized('paidTimeType') && null !== $object->getPaidTimeType()) {
+                $data['paidTimeType'] = $object->getPaidTimeType();
+            }
+            $data['jobId'] = $object->getJobId();
+            if ($object->isInitialized('jobNumber') && null !== $object->getJobNumber()) {
+                $data['jobNumber'] = $object->getJobNumber();
+            }
+            if ($object->isInitialized('jobTypeName') && null !== $object->getJobTypeName()) {
+                $data['jobTypeName'] = $object->getJobTypeName();
+            }
+            if ($object->isInitialized('projectNumber') && null !== $object->getProjectNumber()) {
+                $data['projectNumber'] = $object->getProjectNumber();
+            }
+            if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+                $data['projectId'] = $object->getProjectId();
+            }
+            if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+                $data['invoiceId'] = $object->getInvoiceId();
+            }
+            if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
+                $data['invoiceNumber'] = $object->getInvoiceNumber();
+            }
+            if ($object->isInitialized('invoiceItemId') && null !== $object->getInvoiceItemId()) {
+                $data['invoiceItemId'] = $object->getInvoiceItemId();
+            }
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('customerName') && null !== $object->getCustomerName()) {
+                $data['customerName'] = $object->getCustomerName();
+            }
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
+            }
+            if ($object->isInitialized('locationName') && null !== $object->getLocationName()) {
+                $data['locationName'] = $object->getLocationName();
+            }
+            if ($object->isInitialized('locationAddress') && null !== $object->getLocationAddress()) {
+                $data['locationAddress'] = $object->getLocationAddress();
+            }
+            if ($object->isInitialized('locationZip') && null !== $object->getLocationZip()) {
+                $data['locationZip'] = $object->getLocationZip();
+            }
+            if ($object->isInitialized('zoneName') && null !== $object->getZoneName()) {
+                $data['zoneName'] = $object->getZoneName();
+            }
+            if ($object->isInitialized('taxZoneName') && null !== $object->getTaxZoneName()) {
+                $data['taxZoneName'] = $object->getTaxZoneName();
+            }
+            if ($object->isInitialized('laborTypeId') && null !== $object->getLaborTypeId()) {
+                $data['laborTypeId'] = $object->getLaborTypeId();
+            }
+            if ($object->isInitialized('laborTypeCode') && null !== $object->getLaborTypeCode()) {
+                $data['laborTypeCode'] = $object->getLaborTypeCode();
+            }
+            if ($object->isInitialized('isPrevailingWageJob') && null !== $object->getIsPrevailingWageJob()) {
+                $data['isPrevailingWageJob'] = $object->getIsPrevailingWageJob();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PayrollV2GrossPayItemsGrossPayItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
-        if (null !== $object->getEmployeeId()) {
-            $data['employeeId'] = $object->getEmployeeId();
-        }
-        if (null !== $object->getEmployeeType()) {
-            $data['employeeType'] = $object->getEmployeeType();
-        }
-        if (null !== $object->getBusinessUnitName()) {
-            $data['businessUnitName'] = $object->getBusinessUnitName();
-        }
-        $data['payrollId'] = $object->getPayrollId();
-        $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getActivity()) {
-            $data['activity'] = $object->getActivity();
-        }
-        if (null !== $object->getActivityCodeId()) {
-            $data['activityCodeId'] = $object->getActivityCodeId();
-        }
-        if (null !== $object->getActivityCode()) {
-            $data['activityCode'] = $object->getActivityCode();
-        }
-        $data['amount'] = $object->getAmount();
-        if (null !== $object->getAmountAdjustment()) {
-            $data['amountAdjustment'] = $object->getAmountAdjustment();
-        }
-        if (null !== $object->getPayoutBusinessUnitName()) {
-            $data['payoutBusinessUnitName'] = $object->getPayoutBusinessUnitName();
-        }
-        $data['grossPayItemType'] = $object->getGrossPayItemType();
-        if (null !== $object->getStartedOn()) {
-            $data['startedOn'] = $object->getStartedOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getEndedOn()) {
-            $data['endedOn'] = $object->getEndedOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getPaidDurationHours()) {
-            $data['paidDurationHours'] = $object->getPaidDurationHours();
-        }
-        if (null !== $object->getPaidTimeType()) {
-            $data['paidTimeType'] = $object->getPaidTimeType();
-        }
-        $data['jobId'] = $object->getJobId();
-        if (null !== $object->getJobNumber()) {
-            $data['jobNumber'] = $object->getJobNumber();
-        }
-        if (null !== $object->getJobTypeName()) {
-            $data['jobTypeName'] = $object->getJobTypeName();
-        }
-        if (null !== $object->getProjectNumber()) {
-            $data['projectNumber'] = $object->getProjectNumber();
-        }
-        if (null !== $object->getProjectId()) {
-            $data['projectId'] = $object->getProjectId();
-        }
-        if (null !== $object->getInvoiceId()) {
-            $data['invoiceId'] = $object->getInvoiceId();
-        }
-        if (null !== $object->getInvoiceNumber()) {
-            $data['invoiceNumber'] = $object->getInvoiceNumber();
-        }
-        if (null !== $object->getInvoiceItemId()) {
-            $data['invoiceItemId'] = $object->getInvoiceItemId();
-        }
-        if (null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
-        }
-        if (null !== $object->getCustomerName()) {
-            $data['customerName'] = $object->getCustomerName();
-        }
-        if (null !== $object->getLocationId()) {
-            $data['locationId'] = $object->getLocationId();
-        }
-        if (null !== $object->getLocationName()) {
-            $data['locationName'] = $object->getLocationName();
-        }
-        if (null !== $object->getLocationAddress()) {
-            $data['locationAddress'] = $object->getLocationAddress();
-        }
-        if (null !== $object->getLocationZip()) {
-            $data['locationZip'] = $object->getLocationZip();
-        }
-        if (null !== $object->getZoneName()) {
-            $data['zoneName'] = $object->getZoneName();
-        }
-        if (null !== $object->getTaxZoneName()) {
-            $data['taxZoneName'] = $object->getTaxZoneName();
-        }
-        if (null !== $object->getLaborTypeId()) {
-            $data['laborTypeId'] = $object->getLaborTypeId();
-        }
-        if (null !== $object->getLaborTypeCode()) {
-            $data['laborTypeCode'] = $object->getLaborTypeCode();
-        }
-        if (null !== $object->getIsPrevailingWageJob()) {
-            $data['isPrevailingWageJob'] = $object->getIsPrevailingWageJob();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (\array_key_exists('amountAdjustment', $data) && \is_int($data['amountAdjustment'])) {
+                $data['amountAdjustment'] = (float) $data['amountAdjustment'];
+            }
+            if (\array_key_exists('paidDurationHours', $data) && \is_int($data['paidDurationHours'])) {
+                $data['paidDurationHours'] = (float) $data['paidDurationHours'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('employeeId', $data) && $data['employeeId'] !== null) {
+                $object->setEmployeeId($data['employeeId']);
+            } elseif (\array_key_exists('employeeId', $data) && $data['employeeId'] === null) {
+                $object->setEmployeeId(null);
+            }
+            if (\array_key_exists('employeeType', $data) && $data['employeeType'] !== null) {
+                $object->setEmployeeType($data['employeeType']);
+            } elseif (\array_key_exists('employeeType', $data) && $data['employeeType'] === null) {
+                $object->setEmployeeType(null);
+            }
+            if (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] !== null) {
+                $object->setBusinessUnitName($data['businessUnitName']);
+            } elseif (\array_key_exists('businessUnitName', $data) && $data['businessUnitName'] === null) {
+                $object->setBusinessUnitName(null);
+            }
+            if (\array_key_exists('payrollId', $data)) {
+                $object->setPayrollId($data['payrollId']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('activity', $data) && $data['activity'] !== null) {
+                $object->setActivity($data['activity']);
+            } elseif (\array_key_exists('activity', $data) && $data['activity'] === null) {
+                $object->setActivity(null);
+            }
+            if (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] !== null) {
+                $object->setActivityCodeId($data['activityCodeId']);
+            } elseif (\array_key_exists('activityCodeId', $data) && $data['activityCodeId'] === null) {
+                $object->setActivityCodeId(null);
+            }
+            if (\array_key_exists('activityCode', $data) && $data['activityCode'] !== null) {
+                $object->setActivityCode($data['activityCode']);
+            } elseif (\array_key_exists('activityCode', $data) && $data['activityCode'] === null) {
+                $object->setActivityCode(null);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] !== null) {
+                $object->setAmountAdjustment($data['amountAdjustment']);
+            } elseif (\array_key_exists('amountAdjustment', $data) && $data['amountAdjustment'] === null) {
+                $object->setAmountAdjustment(null);
+            }
+            if (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] !== null) {
+                $object->setPayoutBusinessUnitName($data['payoutBusinessUnitName']);
+            } elseif (\array_key_exists('payoutBusinessUnitName', $data) && $data['payoutBusinessUnitName'] === null) {
+                $object->setPayoutBusinessUnitName(null);
+            }
+            if (\array_key_exists('grossPayItemType', $data)) {
+                $object->setGrossPayItemType($data['grossPayItemType']);
+            }
+            if (\array_key_exists('startedOn', $data) && $data['startedOn'] !== null) {
+                $object->setStartedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['startedOn']));
+            } elseif (\array_key_exists('startedOn', $data) && $data['startedOn'] === null) {
+                $object->setStartedOn(null);
+            }
+            if (\array_key_exists('endedOn', $data) && $data['endedOn'] !== null) {
+                $object->setEndedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['endedOn']));
+            } elseif (\array_key_exists('endedOn', $data) && $data['endedOn'] === null) {
+                $object->setEndedOn(null);
+            }
+            if (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] !== null) {
+                $object->setPaidDurationHours($data['paidDurationHours']);
+            } elseif (\array_key_exists('paidDurationHours', $data) && $data['paidDurationHours'] === null) {
+                $object->setPaidDurationHours(null);
+            }
+            if (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] !== null) {
+                $object->setPaidTimeType($data['paidTimeType']);
+            } elseif (\array_key_exists('paidTimeType', $data) && $data['paidTimeType'] === null) {
+                $object->setPaidTimeType(null);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('jobNumber', $data) && $data['jobNumber'] !== null) {
+                $object->setJobNumber($data['jobNumber']);
+            } elseif (\array_key_exists('jobNumber', $data) && $data['jobNumber'] === null) {
+                $object->setJobNumber(null);
+            }
+            if (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] !== null) {
+                $object->setJobTypeName($data['jobTypeName']);
+            } elseif (\array_key_exists('jobTypeName', $data) && $data['jobTypeName'] === null) {
+                $object->setJobTypeName(null);
+            }
+            if (\array_key_exists('projectNumber', $data) && $data['projectNumber'] !== null) {
+                $object->setProjectNumber($data['projectNumber']);
+            } elseif (\array_key_exists('projectNumber', $data) && $data['projectNumber'] === null) {
+                $object->setProjectNumber(null);
+            }
+            if (\array_key_exists('projectId', $data) && $data['projectId'] !== null) {
+                $object->setProjectId($data['projectId']);
+            } elseif (\array_key_exists('projectId', $data) && $data['projectId'] === null) {
+                $object->setProjectId(null);
+            }
+            if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+                $object->setInvoiceId($data['invoiceId']);
+            } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
+                $object->setInvoiceId(null);
+            }
+            if (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] !== null) {
+                $object->setInvoiceNumber($data['invoiceNumber']);
+            } elseif (\array_key_exists('invoiceNumber', $data) && $data['invoiceNumber'] === null) {
+                $object->setInvoiceNumber(null);
+            }
+            if (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] !== null) {
+                $object->setInvoiceItemId($data['invoiceItemId']);
+            } elseif (\array_key_exists('invoiceItemId', $data) && $data['invoiceItemId'] === null) {
+                $object->setInvoiceItemId(null);
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('customerName', $data) && $data['customerName'] !== null) {
+                $object->setCustomerName($data['customerName']);
+            } elseif (\array_key_exists('customerName', $data) && $data['customerName'] === null) {
+                $object->setCustomerName(null);
+            }
+            if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
+                $object->setLocationId($data['locationId']);
+            } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
+                $object->setLocationId(null);
+            }
+            if (\array_key_exists('locationName', $data) && $data['locationName'] !== null) {
+                $object->setLocationName($data['locationName']);
+            } elseif (\array_key_exists('locationName', $data) && $data['locationName'] === null) {
+                $object->setLocationName(null);
+            }
+            if (\array_key_exists('locationAddress', $data) && $data['locationAddress'] !== null) {
+                $object->setLocationAddress($data['locationAddress']);
+            } elseif (\array_key_exists('locationAddress', $data) && $data['locationAddress'] === null) {
+                $object->setLocationAddress(null);
+            }
+            if (\array_key_exists('locationZip', $data) && $data['locationZip'] !== null) {
+                $object->setLocationZip($data['locationZip']);
+            } elseif (\array_key_exists('locationZip', $data) && $data['locationZip'] === null) {
+                $object->setLocationZip(null);
+            }
+            if (\array_key_exists('zoneName', $data) && $data['zoneName'] !== null) {
+                $object->setZoneName($data['zoneName']);
+            } elseif (\array_key_exists('zoneName', $data) && $data['zoneName'] === null) {
+                $object->setZoneName(null);
+            }
+            if (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] !== null) {
+                $object->setTaxZoneName($data['taxZoneName']);
+            } elseif (\array_key_exists('taxZoneName', $data) && $data['taxZoneName'] === null) {
+                $object->setTaxZoneName(null);
+            }
+            if (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] !== null) {
+                $object->setLaborTypeId($data['laborTypeId']);
+            } elseif (\array_key_exists('laborTypeId', $data) && $data['laborTypeId'] === null) {
+                $object->setLaborTypeId(null);
+            }
+            if (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] !== null) {
+                $object->setLaborTypeCode($data['laborTypeCode']);
+            } elseif (\array_key_exists('laborTypeCode', $data) && $data['laborTypeCode'] === null) {
+                $object->setLaborTypeCode(null);
+            }
+            if (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] !== null) {
+                $object->setIsPrevailingWageJob($data['isPrevailingWageJob']);
+            } elseif (\array_key_exists('isPrevailingWageJob', $data) && $data['isPrevailingWageJob'] === null) {
+                $object->setIsPrevailingWageJob(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            if ($object->isInitialized('employeeId') && null !== $object->getEmployeeId()) {
+                $data['employeeId'] = $object->getEmployeeId();
+            }
+            if ($object->isInitialized('employeeType') && null !== $object->getEmployeeType()) {
+                $data['employeeType'] = $object->getEmployeeType();
+            }
+            if ($object->isInitialized('businessUnitName') && null !== $object->getBusinessUnitName()) {
+                $data['businessUnitName'] = $object->getBusinessUnitName();
+            }
+            $data['payrollId'] = $object->getPayrollId();
+            $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('activity') && null !== $object->getActivity()) {
+                $data['activity'] = $object->getActivity();
+            }
+            if ($object->isInitialized('activityCodeId') && null !== $object->getActivityCodeId()) {
+                $data['activityCodeId'] = $object->getActivityCodeId();
+            }
+            if ($object->isInitialized('activityCode') && null !== $object->getActivityCode()) {
+                $data['activityCode'] = $object->getActivityCode();
+            }
+            $data['amount'] = $object->getAmount();
+            if ($object->isInitialized('amountAdjustment') && null !== $object->getAmountAdjustment()) {
+                $data['amountAdjustment'] = $object->getAmountAdjustment();
+            }
+            if ($object->isInitialized('payoutBusinessUnitName') && null !== $object->getPayoutBusinessUnitName()) {
+                $data['payoutBusinessUnitName'] = $object->getPayoutBusinessUnitName();
+            }
+            $data['grossPayItemType'] = $object->getGrossPayItemType();
+            if ($object->isInitialized('startedOn') && null !== $object->getStartedOn()) {
+                $data['startedOn'] = $object->getStartedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('endedOn') && null !== $object->getEndedOn()) {
+                $data['endedOn'] = $object->getEndedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('paidDurationHours') && null !== $object->getPaidDurationHours()) {
+                $data['paidDurationHours'] = $object->getPaidDurationHours();
+            }
+            if ($object->isInitialized('paidTimeType') && null !== $object->getPaidTimeType()) {
+                $data['paidTimeType'] = $object->getPaidTimeType();
+            }
+            $data['jobId'] = $object->getJobId();
+            if ($object->isInitialized('jobNumber') && null !== $object->getJobNumber()) {
+                $data['jobNumber'] = $object->getJobNumber();
+            }
+            if ($object->isInitialized('jobTypeName') && null !== $object->getJobTypeName()) {
+                $data['jobTypeName'] = $object->getJobTypeName();
+            }
+            if ($object->isInitialized('projectNumber') && null !== $object->getProjectNumber()) {
+                $data['projectNumber'] = $object->getProjectNumber();
+            }
+            if ($object->isInitialized('projectId') && null !== $object->getProjectId()) {
+                $data['projectId'] = $object->getProjectId();
+            }
+            if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+                $data['invoiceId'] = $object->getInvoiceId();
+            }
+            if ($object->isInitialized('invoiceNumber') && null !== $object->getInvoiceNumber()) {
+                $data['invoiceNumber'] = $object->getInvoiceNumber();
+            }
+            if ($object->isInitialized('invoiceItemId') && null !== $object->getInvoiceItemId()) {
+                $data['invoiceItemId'] = $object->getInvoiceItemId();
+            }
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('customerName') && null !== $object->getCustomerName()) {
+                $data['customerName'] = $object->getCustomerName();
+            }
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
+            }
+            if ($object->isInitialized('locationName') && null !== $object->getLocationName()) {
+                $data['locationName'] = $object->getLocationName();
+            }
+            if ($object->isInitialized('locationAddress') && null !== $object->getLocationAddress()) {
+                $data['locationAddress'] = $object->getLocationAddress();
+            }
+            if ($object->isInitialized('locationZip') && null !== $object->getLocationZip()) {
+                $data['locationZip'] = $object->getLocationZip();
+            }
+            if ($object->isInitialized('zoneName') && null !== $object->getZoneName()) {
+                $data['zoneName'] = $object->getZoneName();
+            }
+            if ($object->isInitialized('taxZoneName') && null !== $object->getTaxZoneName()) {
+                $data['taxZoneName'] = $object->getTaxZoneName();
+            }
+            if ($object->isInitialized('laborTypeId') && null !== $object->getLaborTypeId()) {
+                $data['laborTypeId'] = $object->getLaborTypeId();
+            }
+            if ($object->isInitialized('laborTypeCode') && null !== $object->getLaborTypeCode()) {
+                $data['laborTypeCode'] = $object->getLaborTypeCode();
+            }
+            if ($object->isInitialized('isPrevailingWageJob') && null !== $object->getIsPrevailingWageJob()) {
+                $data['isPrevailingWageJob'] = $object->getIsPrevailingWageJob();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemResponse::class => false];
+        }
     }
 }

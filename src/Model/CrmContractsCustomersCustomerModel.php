@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmContractsCustomersCustomerModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -53,7 +62,7 @@ class CrmContractsCustomersCustomerModel
      */
     protected $type;
     /**
-     * @var ContactsContractsContactOutputModel[]
+     * @var list<ContactsContractsContactOutputModel>
      */
     protected $contacts;
     /**
@@ -65,7 +74,7 @@ class CrmContractsCustomersCustomerModel
      */
     protected $modifiedOn;
     /**
-     * @var MembershipsMembershipModel[]
+     * @var list<MembershipsMembershipModel>
      */
     protected $memberships;
     /**
@@ -73,7 +82,7 @@ class CrmContractsCustomersCustomerModel
      */
     protected $hasActiveMembership;
     /**
-     * @var CustomFieldApiModel[]
+     * @var list<CustomFieldApiModel>
      */
     protected $customFields;
     /**
@@ -85,7 +94,7 @@ class CrmContractsCustomersCustomerModel
      */
     protected $createdBy;
     /**
-     * @var CrmContractsCustomersCustomerPhoneModel[]
+     * @var list<CrmContractsCustomersCustomerPhoneModel>
      */
     protected $phoneSettings;
 
@@ -96,6 +105,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -108,6 +118,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -120,6 +131,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -132,6 +144,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setEmail(string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -144,6 +157,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setBalance(?float $balance): self
     {
+        $this->initialized['balance'] = true;
         $this->balance = $balance;
 
         return $this;
@@ -156,6 +170,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setDoNotMail(bool $doNotMail): self
     {
+        $this->initialized['doNotMail'] = true;
         $this->doNotMail = $doNotMail;
 
         return $this;
@@ -168,6 +183,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setAddress(AddressOutput $address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -180,6 +196,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setImportId(string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -192,6 +209,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setDoNotService(bool $doNotService): self
     {
+        $this->initialized['doNotService'] = true;
         $this->doNotService = $doNotService;
 
         return $this;
@@ -204,13 +222,14 @@ class CrmContractsCustomersCustomerModel
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
     }
 
     /**
-     * @return ContactsContractsContactOutputModel[]
+     * @return list<ContactsContractsContactOutputModel>
      */
     public function getContacts(): array
     {
@@ -218,10 +237,11 @@ class CrmContractsCustomersCustomerModel
     }
 
     /**
-     * @param ContactsContractsContactOutputModel[] $contacts
+     * @param list<ContactsContractsContactOutputModel> $contacts
      */
     public function setContacts(array $contacts): self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
 
         return $this;
@@ -234,6 +254,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setMergedToId(?int $mergedToId): self
     {
+        $this->initialized['mergedToId'] = true;
         $this->mergedToId = $mergedToId;
 
         return $this;
@@ -246,13 +267,14 @@ class CrmContractsCustomersCustomerModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
     }
 
     /**
-     * @return MembershipsMembershipModel[]
+     * @return list<MembershipsMembershipModel>
      */
     public function getMemberships(): array
     {
@@ -260,10 +282,11 @@ class CrmContractsCustomersCustomerModel
     }
 
     /**
-     * @param MembershipsMembershipModel[] $memberships
+     * @param list<MembershipsMembershipModel> $memberships
      */
     public function setMemberships(array $memberships): self
     {
+        $this->initialized['memberships'] = true;
         $this->memberships = $memberships;
 
         return $this;
@@ -276,13 +299,14 @@ class CrmContractsCustomersCustomerModel
 
     public function setHasActiveMembership(?bool $hasActiveMembership): self
     {
+        $this->initialized['hasActiveMembership'] = true;
         $this->hasActiveMembership = $hasActiveMembership;
 
         return $this;
     }
 
     /**
-     * @return CustomFieldApiModel[]
+     * @return list<CustomFieldApiModel>
      */
     public function getCustomFields(): array
     {
@@ -290,10 +314,11 @@ class CrmContractsCustomersCustomerModel
     }
 
     /**
-     * @param CustomFieldApiModel[] $customFields
+     * @param list<CustomFieldApiModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -306,6 +331,7 @@ class CrmContractsCustomersCustomerModel
 
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -318,13 +344,14 @@ class CrmContractsCustomersCustomerModel
 
     public function setCreatedBy(?int $createdBy): self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
 
         return $this;
     }
 
     /**
-     * @return CrmContractsCustomersCustomerPhoneModel[]
+     * @return list<CrmContractsCustomersCustomerPhoneModel>
      */
     public function getPhoneSettings(): array
     {
@@ -332,10 +359,11 @@ class CrmContractsCustomersCustomerModel
     }
 
     /**
-     * @param CrmContractsCustomersCustomerPhoneModel[] $phoneSettings
+     * @param list<CrmContractsCustomersCustomerPhoneModel> $phoneSettings
      */
     public function setPhoneSettings(array $phoneSettings): self
     {
+        $this->initialized['phoneSettings'] = true;
         $this->phoneSettings = $phoneSettings;
 
         return $this;

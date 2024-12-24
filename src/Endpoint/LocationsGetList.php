@@ -21,27 +21,32 @@ class LocationsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpo
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $name Filters by customer's name
-     *     @var int $customerId Format - int64. Filters by customer ID
-     *     @var string $street Filters by customer's street
-     *     @var string $unit Filters by customer's unit
-     *     @var string $city Filters by customer's city
-     *     @var string $state Filters by customer's state
-     *     @var string $zip Filters by customer's zip
-     *     @var string $country Filters by customer's country
-     *     @var float $latitude Format - double. Filters by customer's latitude
-     *     @var float $longitude Format - double. Filters by customer's longitude
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $name Filters by customer's name
+     * @var int    $customerId Format - int64. Filters by customer ID
+     * @var string $street Filters by customer's street
+     * @var string $unit Filters by customer's unit
+     * @var string $city Filters by customer's city
+     * @var string $state Filters by customer's state
+     * @var string $zip Filters by customer's zip
+     * @var string $country Filters by customer's country
+     * @var float  $latitude Format - double. Filters by customer's latitude
+     * @var float  $longitude Format - double. Filters by customer's longitude
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -75,44 +80,44 @@ class LocationsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpo
         $optionsResolver->setDefined(['ids', 'name', 'customerId', 'street', 'unit', 'city', 'state', 'zip', 'country', 'latitude', 'longitude', 'active', 'page', 'pageSize', 'includeTotal', 'sort', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('name', ['string']);
-        $optionsResolver->setAllowedTypes('customerId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('street', ['string']);
-        $optionsResolver->setAllowedTypes('unit', ['string']);
-        $optionsResolver->setAllowedTypes('city', ['string']);
-        $optionsResolver->setAllowedTypes('state', ['string']);
-        $optionsResolver->setAllowedTypes('zip', ['string']);
-        $optionsResolver->setAllowedTypes('country', ['string']);
-        $optionsResolver->setAllowedTypes('latitude', ['float', 'null']);
-        $optionsResolver->setAllowedTypes('longitude', ['float', 'null']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('sort', ['string']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('name', ['string']);
+        $optionsResolver->addAllowedTypes('customerId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('street', ['string']);
+        $optionsResolver->addAllowedTypes('unit', ['string']);
+        $optionsResolver->addAllowedTypes('city', ['string']);
+        $optionsResolver->addAllowedTypes('state', ['string']);
+        $optionsResolver->addAllowedTypes('zip', ['string']);
+        $optionsResolver->addAllowedTypes('country', ['string']);
+        $optionsResolver->addAllowedTypes('latitude', ['float', 'null']);
+        $optionsResolver->addAllowedTypes('longitude', ['float', 'null']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('sort', ['string']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationsLocationResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\LocationsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationsLocationResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfCrmV2LocationsLocationResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationsLocationResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

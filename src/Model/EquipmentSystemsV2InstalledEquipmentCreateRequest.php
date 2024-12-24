@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EquipmentSystemsV2InstalledEquipmentCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $locationId;
@@ -61,7 +70,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
      */
     protected $serviceProviderWarrantyEnd;
     /**
-     * @var EquipmentSystemsV2CustomFieldRequestModel[]|null
+     * @var list<EquipmentSystemsV2CustomFieldRequestModel>|null
      */
     protected $customFields;
 
@@ -72,6 +81,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -84,6 +94,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -96,6 +107,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setInstalledOn(?\DateTime $installedOn): self
     {
+        $this->initialized['installedOn'] = true;
         $this->installedOn = $installedOn;
 
         return $this;
@@ -108,6 +120,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setSerialNumber(?string $serialNumber): self
     {
+        $this->initialized['serialNumber'] = true;
         $this->serialNumber = $serialNumber;
 
         return $this;
@@ -120,6 +133,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -132,6 +146,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setManufacturer(?string $manufacturer): self
     {
+        $this->initialized['manufacturer'] = true;
         $this->manufacturer = $manufacturer;
 
         return $this;
@@ -144,6 +159,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setModel(?string $model): self
     {
+        $this->initialized['model'] = true;
         $this->model = $model;
 
         return $this;
@@ -156,6 +172,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setCost(?float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -168,6 +185,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setManufacturerWarrantyStart(?\DateTime $manufacturerWarrantyStart): self
     {
+        $this->initialized['manufacturerWarrantyStart'] = true;
         $this->manufacturerWarrantyStart = $manufacturerWarrantyStart;
 
         return $this;
@@ -180,6 +198,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setManufacturerWarrantyEnd(?\DateTime $manufacturerWarrantyEnd): self
     {
+        $this->initialized['manufacturerWarrantyEnd'] = true;
         $this->manufacturerWarrantyEnd = $manufacturerWarrantyEnd;
 
         return $this;
@@ -192,6 +211,7 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setServiceProviderWarrantyStart(?\DateTime $serviceProviderWarrantyStart): self
     {
+        $this->initialized['serviceProviderWarrantyStart'] = true;
         $this->serviceProviderWarrantyStart = $serviceProviderWarrantyStart;
 
         return $this;
@@ -204,13 +224,14 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
 
     public function setServiceProviderWarrantyEnd(?\DateTime $serviceProviderWarrantyEnd): self
     {
+        $this->initialized['serviceProviderWarrantyEnd'] = true;
         $this->serviceProviderWarrantyEnd = $serviceProviderWarrantyEnd;
 
         return $this;
     }
 
     /**
-     * @return EquipmentSystemsV2CustomFieldRequestModel[]|null
+     * @return list<EquipmentSystemsV2CustomFieldRequestModel>|null
      */
     public function getCustomFields(): ?array
     {
@@ -218,10 +239,11 @@ class EquipmentSystemsV2InstalledEquipmentCreateRequest
     }
 
     /**
-     * @param EquipmentSystemsV2CustomFieldRequestModel[]|null $customFields
+     * @param list<EquipmentSystemsV2CustomFieldRequestModel>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2DiscountAndFeesResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique id for the discount or fee.
      *
      * @var int
@@ -20,8 +29,6 @@ class PricebookV2DiscountAndFeesResponse
     protected $id;
     /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -44,8 +51,6 @@ class PricebookV2DiscountAndFeesResponse
     protected $description;
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @var mixed
      */
     protected $amountType;
     /**
@@ -69,7 +74,7 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * The category technicians will use to find the item.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $categories;
     /**
@@ -81,7 +86,7 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetResponse[]|null
+     * @var list<PricebookV2SkuAssetResponse>|null
      */
     protected $assets;
     /**
@@ -127,9 +132,10 @@ class PricebookV2DiscountAndFeesResponse
      */
     protected $excludeFromPayroll;
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var PricebookV2ExternalDataModel[]|null
+     * @var list<PricebookV2ExternalDataModel>|null
      */
     protected $externalData;
 
@@ -146,6 +152,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -153,8 +160,6 @@ class PricebookV2DiscountAndFeesResponse
 
     /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -163,11 +168,10 @@ class PricebookV2DiscountAndFeesResponse
 
     /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -186,6 +190,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -204,6 +209,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -222,6 +228,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -229,8 +236,6 @@ class PricebookV2DiscountAndFeesResponse
 
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @return mixed
      */
     public function getAmountType()
     {
@@ -239,11 +244,10 @@ class PricebookV2DiscountAndFeesResponse
 
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @param mixed $amountType
      */
     public function setAmountType($amountType): self
     {
+        $this->initialized['amountType'] = true;
         $this->amountType = $amountType;
 
         return $this;
@@ -262,6 +266,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setAmount(float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -280,6 +285,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setLimit(float $limit): self
     {
+        $this->initialized['limit'] = true;
         $this->limit = $limit;
 
         return $this;
@@ -298,6 +304,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setTaxable(bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -306,7 +313,7 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * The category technicians will use to find the item.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getCategories(): ?array
     {
@@ -316,10 +323,11 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * The category technicians will use to find the item.
      *
-     * @param int[]|null $categories
+     * @param list<int>|null $categories
      */
     public function setCategories(?array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -338,6 +346,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setHours(float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -346,7 +355,7 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetResponse[]|null
+     * @return list<PricebookV2SkuAssetResponse>|null
      */
     public function getAssets(): ?array
     {
@@ -356,10 +365,11 @@ class PricebookV2DiscountAndFeesResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetResponse[]|null $assets
+     * @param list<PricebookV2SkuAssetResponse>|null $assets
      */
     public function setAssets(?array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -378,6 +388,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -396,6 +407,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setCrossSaleGroup(?string $crossSaleGroup): self
     {
+        $this->initialized['crossSaleGroup'] = true;
         $this->crossSaleGroup = $crossSaleGroup;
 
         return $this;
@@ -414,6 +426,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -432,6 +445,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setBonus(float $bonus): self
     {
+        $this->initialized['bonus'] = true;
         $this->bonus = $bonus;
 
         return $this;
@@ -450,6 +464,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setCommissionBonus(float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -468,6 +483,7 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setPaysCommission(bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -486,15 +502,17 @@ class PricebookV2DiscountAndFeesResponse
      */
     public function setExcludeFromPayroll(bool $excludeFromPayroll): self
     {
+        $this->initialized['excludeFromPayroll'] = true;
         $this->excludeFromPayroll = $excludeFromPayroll;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return PricebookV2ExternalDataModel[]|null
+     * @return list<PricebookV2ExternalDataModel>|null
      */
     public function getExternalData(): ?array
     {
@@ -502,12 +520,14 @@ class PricebookV2DiscountAndFeesResponse
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param PricebookV2ExternalDataModel[]|null $externalData
+     * @param list<PricebookV2ExternalDataModel>|null $externalData
      */
     public function setExternalData(?array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfMarketingV2CampaignCategoryResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var MarketingV2CampaignCategoryResponse[]
+     * @var list<MarketingV2CampaignCategoryResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return MarketingV2CampaignCategoryResponse[]
+     * @return list<MarketingV2CampaignCategoryResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfMarketingV2CampaignCategoryResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param MarketingV2CampaignCategoryResponse[] $data
+     * @param list<MarketingV2CampaignCategoryResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

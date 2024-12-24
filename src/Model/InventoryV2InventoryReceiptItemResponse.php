@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2InventoryReceiptItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Item Id.
      *
      * @var int
@@ -86,6 +95,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -104,6 +114,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -122,6 +133,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -140,6 +152,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -158,6 +171,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -176,6 +190,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -194,6 +209,7 @@ class InventoryV2InventoryReceiptItemResponse
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -201,8 +217,6 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * General ledge account information.
-     *
-     * @return mixed
      */
     public function getGeneralLedgerAccount()
     {
@@ -211,11 +225,10 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * General ledge account information.
-     *
-     * @param mixed $generalLedgerAccount
      */
     public function setGeneralLedgerAccount($generalLedgerAccount): self
     {
+        $this->initialized['generalLedgerAccount'] = true;
         $this->generalLedgerAccount = $generalLedgerAccount;
 
         return $this;
@@ -223,8 +236,6 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * Cost of sale account information.
-     *
-     * @return mixed
      */
     public function getCostOfSaleAccount()
     {
@@ -233,11 +244,10 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * Cost of sale account information.
-     *
-     * @param mixed $costOfSaleAccount
      */
     public function setCostOfSaleAccount($costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
@@ -245,8 +255,6 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * Asset account information.
-     *
-     * @return mixed
      */
     public function getAssetAccount()
     {
@@ -255,11 +263,10 @@ class InventoryV2InventoryReceiptItemResponse
 
     /**
      * Asset account information.
-     *
-     * @param mixed $assetAccount
      */
     public function setAssetAccount($assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;

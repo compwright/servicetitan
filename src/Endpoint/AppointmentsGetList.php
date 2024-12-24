@@ -21,24 +21,28 @@ class AppointmentsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEn
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $jobId Format - int64. Return all appointments for this job
-     *     @var int $projectId Format - int64. Return all appointments for jobs that are part of this project
-     *     @var string $number Return all appointments with this appointment number
-     *     @var string $status Return items with specified status AppointmentStatus\
-     *     @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments that start on or after the specified date/time (in UTC)
-     *     @var string $startsBefore Format - date-time (as date-time in RFC3339). Return appointments that start before the specified date/time (in UTC)
-     *     @var int $technicianId Format - int64. Return appointments this technician is assigned to
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return appointments modified before a certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments modified on or after a certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments created on or after a certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return appointments created before a certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-    Available fields are: Id, ModifiedOn, CreatedOn.
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $jobId Format - int64. Return all appointments for this job
+     * @var int    $projectId Format - int64. Return all appointments for jobs that are part of this project
+     * @var string $number Return all appointments with this appointment number
+     * @var string $status Return items with specified status AppointmentStatus\
+     *             Values: [Scheduled, Dispatched, Working, Hold, Done, Canceled]
+     * @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments that start on or after the specified date/time (in UTC)
+     * @var string $startsBefore Format - date-time (as date-time in RFC3339). Return appointments that start before the specified date/time (in UTC)
+     * @var int    $technicianId Format - int64. Return appointments this technician is assigned to
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return appointments modified before a certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments modified on or after a certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return appointments created on or after a certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return appointments created before a certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -72,40 +76,40 @@ class AppointmentsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEn
         $optionsResolver->setDefined(['ids', 'jobId', 'projectId', 'number', 'status', 'startsOnOrAfter', 'startsBefore', 'technicianId', 'modifiedBefore', 'modifiedOnOrAfter', 'createdOnOrAfter', 'createdBefore', 'page', 'pageSize', 'includeTotal', 'sort']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('jobId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('projectId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('number', ['string']);
-        $optionsResolver->setAllowedTypes('status', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('startsOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('startsBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('technicianId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('sort', ['string']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('jobId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('projectId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('number', ['string']);
+        $optionsResolver->addAllowedTypes('status', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('startsOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('startsBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('technicianId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('sort', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2AppointmentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\AppointmentsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2AppointmentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfCrmV2AppointmentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2AppointmentResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\AppointmentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\AppointmentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

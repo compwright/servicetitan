@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AppointmentInformation
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Start date/time (in UTC) for the appointment.
      *
      * @var \DateTime
@@ -39,7 +48,7 @@ class CrmV2AppointmentInformation
     /**
      * List of IDs of technicians who will be assigned on the appointment.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $technicianIds;
 
@@ -56,6 +65,7 @@ class CrmV2AppointmentInformation
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -74,6 +84,7 @@ class CrmV2AppointmentInformation
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;
@@ -92,6 +103,7 @@ class CrmV2AppointmentInformation
      */
     public function setArrivalWindowStart(?\DateTime $arrivalWindowStart): self
     {
+        $this->initialized['arrivalWindowStart'] = true;
         $this->arrivalWindowStart = $arrivalWindowStart;
 
         return $this;
@@ -110,6 +122,7 @@ class CrmV2AppointmentInformation
      */
     public function setArrivalWindowEnd(?\DateTime $arrivalWindowEnd): self
     {
+        $this->initialized['arrivalWindowEnd'] = true;
         $this->arrivalWindowEnd = $arrivalWindowEnd;
 
         return $this;
@@ -118,7 +131,7 @@ class CrmV2AppointmentInformation
     /**
      * List of IDs of technicians who will be assigned on the appointment.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getTechnicianIds(): ?array
     {
@@ -128,10 +141,11 @@ class CrmV2AppointmentInformation
     /**
      * List of IDs of technicians who will be assigned on the appointment.
      *
-     * @param int[]|null $technicianIds
+     * @param list<int>|null $technicianIds
      */
     public function setTechnicianIds(?array $technicianIds): self
     {
+        $this->initialized['technicianIds'] = true;
         $this->technicianIds = $technicianIds;
 
         return $this;

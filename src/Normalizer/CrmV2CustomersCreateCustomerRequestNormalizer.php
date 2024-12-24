@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,127 +21,251 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2CustomersCreateCustomerRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2CustomersCreateCustomerRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2CustomersCreateCustomerRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2CustomersCreateCustomerRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('type', $data) && $data['type'] !== null) {
+                $object->setType($data['type']);
+            } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('doNotMail', $data) && $data['doNotMail'] !== null) {
+                $object->setDoNotMail($data['doNotMail']);
+            } elseif (\array_key_exists('doNotMail', $data) && $data['doNotMail'] === null) {
+                $object->setDoNotMail(null);
+            }
+            if (\array_key_exists('doNotService', $data) && $data['doNotService'] !== null) {
+                $object->setDoNotService($data['doNotService']);
+            } elseif (\array_key_exists('doNotService', $data) && $data['doNotService'] === null) {
+                $object->setDoNotService(null);
+            }
+            if (\array_key_exists('locations', $data)) {
+                $values = [];
+                foreach ($data['locations'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\CrmV2CustomersNewLocation::class, 'json', $context);
+                }
+                $object->setLocations($values);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($data['address']);
+            }
+            if (\array_key_exists('contacts', $data) && $data['contacts'] !== null) {
+                $values_1 = [];
+                foreach ($data['contacts'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\CrmV2CustomersNewCustomerContact::class, 'json', $context);
+                }
+                $object->setContacts($values_1);
+            } elseif (\array_key_exists('contacts', $data) && $data['contacts'] === null) {
+                $object->setContacts(null);
+            }
+            if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
+                $values_2 = [];
+                foreach ($data['customFields'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\CrmV2CustomersCustomFieldUpdateModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_2);
+            } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
+                $object->setCustomFields(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('type', $data) && $data['type'] !== null) {
-            $object->setType($data['type']);
-        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
-            $object->setType(null);
-        }
-        if (\array_key_exists('doNotMail', $data) && $data['doNotMail'] !== null) {
-            $object->setDoNotMail($data['doNotMail']);
-        } elseif (\array_key_exists('doNotMail', $data) && $data['doNotMail'] === null) {
-            $object->setDoNotMail(null);
-        }
-        if (\array_key_exists('doNotService', $data) && $data['doNotService'] !== null) {
-            $object->setDoNotService($data['doNotService']);
-        } elseif (\array_key_exists('doNotService', $data) && $data['doNotService'] === null) {
-            $object->setDoNotService(null);
-        }
-        if (\array_key_exists('locations', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['name'] = $object->getName();
+            if ($object->isInitialized('type') && null !== $object->getType()) {
+                $data['type'] = $object->getType();
+            }
+            if ($object->isInitialized('doNotMail') && null !== $object->getDoNotMail()) {
+                $data['doNotMail'] = $object->getDoNotMail();
+            }
+            if ($object->isInitialized('doNotService') && null !== $object->getDoNotService()) {
+                $data['doNotService'] = $object->getDoNotService();
+            }
             $values = [];
-            foreach ($data['locations'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\CrmV2CustomersNewLocation', 'json', $context);
+            foreach ($object->getLocations() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setLocations($values);
-        }
-        if (\array_key_exists('address', $data)) {
-            $object->setAddress($data['address']);
-        }
-        if (\array_key_exists('contacts', $data) && $data['contacts'] !== null) {
-            $values_1 = [];
-            foreach ($data['contacts'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\CrmV2CustomersNewCustomerContact', 'json', $context);
+            $data['locations'] = $values;
+            $data['address'] = $object->getAddress();
+            if ($object->isInitialized('contacts') && null !== $object->getContacts()) {
+                $values_1 = [];
+                foreach ($object->getContacts() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['contacts'] = $values_1;
             }
-            $object->setContacts($values_1);
-        } elseif (\array_key_exists('contacts', $data) && $data['contacts'] === null) {
-            $object->setContacts(null);
-        }
-        if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
-            $values_2 = [];
-            foreach ($data['customFields'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'CompWright\\ServiceTitan\\Model\\CrmV2CustomersCustomFieldUpdateModel', 'json', $context);
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values_2 = [];
+                foreach ($object->getCustomFields() as $value_2) {
+                    $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+                }
+                $data['customFields'] = $values_2;
             }
-            $object->setCustomFields($values_2);
-        } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
-            $object->setCustomFields(null);
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2CustomersCreateCustomerRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['name'] = $object->getName();
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
-        }
-        if (null !== $object->getDoNotMail()) {
-            $data['doNotMail'] = $object->getDoNotMail();
-        }
-        if (null !== $object->getDoNotService()) {
-            $data['doNotService'] = $object->getDoNotService();
-        }
-        $values = [];
-        foreach ($object->getLocations() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['locations'] = $values;
-        $data['address'] = $object->getAddress();
-        if (null !== $object->getContacts()) {
-            $values_1 = [];
-            foreach ($object->getContacts() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['contacts'] = $values_1;
-        }
-        if (null !== $object->getCustomFields()) {
-            $values_2 = [];
-            foreach ($object->getCustomFields() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
-            }
-            $data['customFields'] = $values_2;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('type', $data) && $data['type'] !== null) {
+                $object->setType($data['type']);
+            } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('doNotMail', $data) && $data['doNotMail'] !== null) {
+                $object->setDoNotMail($data['doNotMail']);
+            } elseif (\array_key_exists('doNotMail', $data) && $data['doNotMail'] === null) {
+                $object->setDoNotMail(null);
+            }
+            if (\array_key_exists('doNotService', $data) && $data['doNotService'] !== null) {
+                $object->setDoNotService($data['doNotService']);
+            } elseif (\array_key_exists('doNotService', $data) && $data['doNotService'] === null) {
+                $object->setDoNotService(null);
+            }
+            if (\array_key_exists('locations', $data)) {
+                $values = [];
+                foreach ($data['locations'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\CrmV2CustomersNewLocation::class, 'json', $context);
+                }
+                $object->setLocations($values);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($data['address']);
+            }
+            if (\array_key_exists('contacts', $data) && $data['contacts'] !== null) {
+                $values_1 = [];
+                foreach ($data['contacts'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\CrmV2CustomersNewCustomerContact::class, 'json', $context);
+                }
+                $object->setContacts($values_1);
+            } elseif (\array_key_exists('contacts', $data) && $data['contacts'] === null) {
+                $object->setContacts(null);
+            }
+            if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
+                $values_2 = [];
+                foreach ($data['customFields'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\CrmV2CustomersCustomFieldUpdateModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_2);
+            } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
+                $object->setCustomFields(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['name'] = $object->getName();
+            if ($object->isInitialized('type') && null !== $object->getType()) {
+                $data['type'] = $object->getType();
+            }
+            if ($object->isInitialized('doNotMail') && null !== $object->getDoNotMail()) {
+                $data['doNotMail'] = $object->getDoNotMail();
+            }
+            if ($object->isInitialized('doNotService') && null !== $object->getDoNotService()) {
+                $data['doNotService'] = $object->getDoNotService();
+            }
+            $values = [];
+            foreach ($object->getLocations() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['locations'] = $values;
+            $data['address'] = $object->getAddress();
+            if ($object->isInitialized('contacts') && null !== $object->getContacts()) {
+                $values_1 = [];
+                foreach ($object->getContacts() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['contacts'] = $values_1;
+            }
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values_2 = [];
+                foreach ($object->getCustomFields() as $value_2) {
+                    $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+                }
+                $data['customFields'] = $values_2;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest::class => false];
+        }
     }
 }

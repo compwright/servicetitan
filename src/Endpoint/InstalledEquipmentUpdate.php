@@ -52,23 +52,23 @@ class InstalledEquipmentUpdate extends \CompWright\ServiceTitan\Runtime\Client\B
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\EquipmentSystemsV2InstalledEquipmentDetailedResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\EquipmentSystemsV2InstalledEquipmentDetailedResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\EquipmentSystemsV2InstalledEquipmentDetailedResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\EquipmentSystemsV2InstalledEquipmentDetailedResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\InstalledEquipmentUpdateNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

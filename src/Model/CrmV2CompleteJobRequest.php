@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CompleteJobRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Date on which the job was completed.
      *
      * @var \DateTime
@@ -32,6 +41,7 @@ class CrmV2CompleteJobRequest
      */
     public function setCompletedOn(\DateTime $completedOn): self
     {
+        $this->initialized['completedOn'] = true;
         $this->completedOn = $completedOn;
 
         return $this;

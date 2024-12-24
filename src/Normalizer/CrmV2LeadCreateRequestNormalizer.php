@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,131 +21,259 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2LeadCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2LeadCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2LeadCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2LeadCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
+                $object->setLocationId($data['locationId']);
+            } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
+                $object->setLocationId(null);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
+                $object->setBusinessUnitId(null);
+            }
+            if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
+                $object->setJobTypeId($data['jobTypeId']);
+            } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
+                $object->setJobTypeId(null);
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] !== null) {
+                $values = [];
+                foreach ($data['tagTypeIds'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setTagTypeIds($values);
+            } elseif (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] === null) {
+                $object->setTagTypeIds(null);
+            }
+            if (\array_key_exists('priority', $data) && $data['priority'] !== null) {
+                $object->setPriority($data['priority']);
+            } elseif (\array_key_exists('priority', $data) && $data['priority'] === null) {
+                $object->setPriority(null);
+            }
+            if (\array_key_exists('callReasonId', $data) && $data['callReasonId'] !== null) {
+                $object->setCallReasonId($data['callReasonId']);
+            } elseif (\array_key_exists('callReasonId', $data) && $data['callReasonId'] === null) {
+                $object->setCallReasonId(null);
+            }
+            if (\array_key_exists('followUpDate', $data) && $data['followUpDate'] !== null) {
+                $object->setFollowUpDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['followUpDate']));
+            } elseif (\array_key_exists('followUpDate', $data) && $data['followUpDate'] === null) {
+                $object->setFollowUpDate(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
-            $object->setCustomerId($data['customerId']);
-        } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
-            $object->setCustomerId(null);
-        }
-        if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
-            $object->setLocationId($data['locationId']);
-        } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
-            $object->setLocationId(null);
-        }
-        if (\array_key_exists('campaignId', $data)) {
-            $object->setCampaignId($data['campaignId']);
-        }
-        if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
-            $object->setBusinessUnitId(null);
-        }
-        if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
-            $object->setJobTypeId($data['jobTypeId']);
-        } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
-            $object->setJobTypeId(null);
-        }
-        if (\array_key_exists('summary', $data)) {
-            $object->setSummary($data['summary']);
-        }
-        if (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] !== null) {
-            $values = [];
-            foreach ($data['tagTypeIds'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
             }
-            $object->setTagTypeIds($values);
-        } elseif (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] === null) {
-            $object->setTagTypeIds(null);
-        }
-        if (\array_key_exists('priority', $data) && $data['priority'] !== null) {
-            $object->setPriority($data['priority']);
-        } elseif (\array_key_exists('priority', $data) && $data['priority'] === null) {
-            $object->setPriority(null);
-        }
-        if (\array_key_exists('callReasonId', $data) && $data['callReasonId'] !== null) {
-            $object->setCallReasonId($data['callReasonId']);
-        } elseif (\array_key_exists('callReasonId', $data) && $data['callReasonId'] === null) {
-            $object->setCallReasonId(null);
-        }
-        if (\array_key_exists('followUpDate', $data) && $data['followUpDate'] !== null) {
-            $object->setFollowUpDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['followUpDate']));
-        } elseif (\array_key_exists('followUpDate', $data) && $data['followUpDate'] === null) {
-            $object->setFollowUpDate(null);
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
+            }
+            $data['campaignId'] = $object->getCampaignId();
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            $data['summary'] = $object->getSummary();
+            if ($object->isInitialized('tagTypeIds') && null !== $object->getTagTypeIds()) {
+                $values = [];
+                foreach ($object->getTagTypeIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['tagTypeIds'] = $values;
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('callReasonId') && null !== $object->getCallReasonId()) {
+                $data['callReasonId'] = $object->getCallReasonId();
+            }
+            if ($object->isInitialized('followUpDate') && null !== $object->getFollowUpDate()) {
+                $data['followUpDate'] = $object->getFollowUpDate()->format('Y-m-d\TH:i:sP');
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2LeadCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
-        }
-        if (null !== $object->getLocationId()) {
-            $data['locationId'] = $object->getLocationId();
-        }
-        $data['campaignId'] = $object->getCampaignId();
-        if (null !== $object->getBusinessUnitId()) {
-            $data['businessUnitId'] = $object->getBusinessUnitId();
-        }
-        if (null !== $object->getJobTypeId()) {
-            $data['jobTypeId'] = $object->getJobTypeId();
-        }
-        $data['summary'] = $object->getSummary();
-        if (null !== $object->getTagTypeIds()) {
-            $values = [];
-            foreach ($object->getTagTypeIds() as $value) {
-                $values[] = $value;
-            }
-            $data['tagTypeIds'] = $values;
-        }
-        if (null !== $object->getPriority()) {
-            $data['priority'] = $object->getPriority();
-        }
-        if (null !== $object->getCallReasonId()) {
-            $data['callReasonId'] = $object->getCallReasonId();
-        }
-        if (null !== $object->getFollowUpDate()) {
-            $data['followUpDate'] = $object->getFollowUpDate()->format('Y-m-d\\TH:i:sP');
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+                $object->setCustomerId($data['customerId']);
+            } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
+                $object->setCustomerId(null);
+            }
+            if (\array_key_exists('locationId', $data) && $data['locationId'] !== null) {
+                $object->setLocationId($data['locationId']);
+            } elseif (\array_key_exists('locationId', $data) && $data['locationId'] === null) {
+                $object->setLocationId(null);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
+                $object->setBusinessUnitId(null);
+            }
+            if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
+                $object->setJobTypeId($data['jobTypeId']);
+            } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
+                $object->setJobTypeId(null);
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] !== null) {
+                $values = [];
+                foreach ($data['tagTypeIds'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setTagTypeIds($values);
+            } elseif (\array_key_exists('tagTypeIds', $data) && $data['tagTypeIds'] === null) {
+                $object->setTagTypeIds(null);
+            }
+            if (\array_key_exists('priority', $data) && $data['priority'] !== null) {
+                $object->setPriority($data['priority']);
+            } elseif (\array_key_exists('priority', $data) && $data['priority'] === null) {
+                $object->setPriority(null);
+            }
+            if (\array_key_exists('callReasonId', $data) && $data['callReasonId'] !== null) {
+                $object->setCallReasonId($data['callReasonId']);
+            } elseif (\array_key_exists('callReasonId', $data) && $data['callReasonId'] === null) {
+                $object->setCallReasonId(null);
+            }
+            if (\array_key_exists('followUpDate', $data) && $data['followUpDate'] !== null) {
+                $object->setFollowUpDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['followUpDate']));
+            } elseif (\array_key_exists('followUpDate', $data) && $data['followUpDate'] === null) {
+                $object->setFollowUpDate(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
+            }
+            $data['campaignId'] = $object->getCampaignId();
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            $data['summary'] = $object->getSummary();
+            if ($object->isInitialized('tagTypeIds') && null !== $object->getTagTypeIds()) {
+                $values = [];
+                foreach ($object->getTagTypeIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['tagTypeIds'] = $values;
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('callReasonId') && null !== $object->getCallReasonId()) {
+                $data['callReasonId'] = $object->getCallReasonId();
+            }
+            if ($object->isInitialized('followUpDate') && null !== $object->getFollowUpDate()) {
+                $data['followUpDate'] = $object->getFollowUpDate()->format('Y-m-d\TH:i:sP');
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest::class => false];
+        }
     }
 }

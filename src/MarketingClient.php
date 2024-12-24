@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class MarketingClient extends Runtime\Client\Client
 {
     /**
      * Gets a paginated list of campaign categories.
@@ -18,36 +18,35 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCategoriesGetListBadRequestException
+     * @return Model\PaginatedResponseOfMarketingV2CampaignCategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignCategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCategoriesGetListBadRequestException
      */
     public function campaignCategoriesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCategoriesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCategoriesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new campaign category.
      *
-     * @param int                                                                          $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2CampaignCategoryCreateRequest|null $requestBody
-     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCategoriesCreateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCategoriesCreateBadRequestException
      */
     public function campaignCategoriesCreate(int $tenant, ?Model\MarketingV2CampaignCategoryCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCategoriesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCategoriesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -57,30 +56,29 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCategoriesGetBadRequestException
+     * @return Model\MarketingV2CampaignCategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignCategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCategoriesGetBadRequestException
      */
     public function campaignCategoriesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCategoriesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCategoriesGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified campaign category in "patch" mode.
      *
-     * @param int                                                                          $id          format - int64
-     * @param int                                                                          $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2CampaignCategoryUpdateRequest|null $requestBody
-     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCategoriesUpdateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCategoriesUpdateBadRequestException
      */
     public function campaignCategoriesUpdate(int $id, int $tenant, ?Model\MarketingV2CampaignCategoryUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCategoriesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCategoriesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -90,46 +88,44 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCostsGetBadRequestException
+     * @return Model\MarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCostsGetBadRequestException
      */
     public function campaignCostsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCostsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCostsGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified campaign cost in "patch" mode.
      *
-     * @param int                                                                      $id          format - int64
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2UpdateCampaignCostRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCostsUpdateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCostsUpdateBadRequestException
      */
     public function campaignCostsUpdate(int $id, int $tenant, ?Model\MarketingV2UpdateCampaignCostRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCostsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCostsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * Creates new campaign cost.
      *
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignCostsCreateBadRequestException
+     * @return Model\MarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignCostsCreateBadRequestException
      */
     public function campaignCostsCreate(int $tenant, ?Model\MarketingV2CreateCampaignCostRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignCostsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignCostsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -138,41 +134,41 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $name Filters records by name (case-insensitive "contains" operation)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $name Filters records by name (case-insensitive "contains" operation)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignsGetListBadRequestException
+     * @return Model\PaginatedResponseOfMarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignsGetListBadRequestException
      */
     public function campaignsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new campaign.
      *
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2CampaignUpsertRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignsCreateBadRequestException
+     * @return Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignsCreateBadRequestException
      */
     public function campaignsCreate(int $tenant, ?Model\MarketingV2CampaignUpsertRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -182,30 +178,29 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignsGetBadRequestException
+     * @return Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignsGetBadRequestException
      */
     public function campaignsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignsGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified campaign in "patch" mode.
      *
-     * @param int                                                                  $id          format - int64
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingV2CampaignUpsertRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignsUpdateBadRequestException
+     * @return Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MarketingV2CampaignResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignsUpdateBadRequestException
      */
     public function campaignsUpdate(int $id, int $tenant, ?Model\MarketingV2CampaignUpsertRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -215,22 +210,22 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var int $year format - int32
-     *     @var int $month Format - int32.
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     * @var int  $year format - int32
+     * @var int  $month Format - int32.
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CampaignsGetCostsBadRequestException
+     * @return Model\PaginatedResponseOfMarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignCostResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CampaignsGetCostsBadRequestException
      */
     public function campaignsGetCosts(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CampaignsGetCosts($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CampaignsGetCosts($id, $tenant, $queryParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -238,7 +233,7 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -247,7 +242,7 @@ class MarketingClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

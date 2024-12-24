@@ -23,9 +23,9 @@ class MembershipTypesGetDurationBillingList extends \CompWright\ServiceTitan\Run
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-    Values: [True, Any, False]
-     * }
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     *             }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -60,29 +60,29 @@ class MembershipTypesGetDurationBillingList extends \CompWright\ServiceTitan\Run
         $optionsResolver->setDefined(['active']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse[]|null
      *
      * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\MembershipsV2MembershipTypeDurationBillingItemResponse[]', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse[]', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

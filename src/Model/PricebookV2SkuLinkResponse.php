@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuLinkResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Linked SKU unique id.
      *
      * @var int
@@ -38,6 +47,7 @@ class PricebookV2SkuLinkResponse
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -56,6 +66,7 @@ class PricebookV2SkuLinkResponse
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;

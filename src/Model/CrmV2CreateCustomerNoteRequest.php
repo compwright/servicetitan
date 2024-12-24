@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CreateCustomerNoteRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Text content of customer note.
      *
      * @var string
@@ -44,6 +53,7 @@ class CrmV2CreateCustomerNoteRequest
      */
     public function setText(string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;
@@ -62,6 +72,7 @@ class CrmV2CreateCustomerNoteRequest
      */
     public function setPinToTop(?bool $pinToTop): self
     {
+        $this->initialized['pinToTop'] = true;
         $this->pinToTop = $pinToTop;
 
         return $this;
@@ -80,6 +91,7 @@ class CrmV2CreateCustomerNoteRequest
      */
     public function setAddToLocations(?bool $addToLocations): self
     {
+        $this->initialized['addToLocations'] = true;
         $this->addToLocations = $addToLocations;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuVendorSubAccountRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var float
      */
     protected $cost;
@@ -28,6 +37,7 @@ class PricebookV2SkuVendorSubAccountRequest
 
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -40,6 +50,7 @@ class PricebookV2SkuVendorSubAccountRequest
 
     public function setAccountName(string $accountName): self
     {
+        $this->initialized['accountName'] = true;
         $this->accountName = $accountName;
 
         return $this;

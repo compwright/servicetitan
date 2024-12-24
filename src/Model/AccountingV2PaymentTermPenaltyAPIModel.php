@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentTermPenaltyAPIModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -48,24 +57,20 @@ class AccountingV2PaymentTermPenaltyAPIModel
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPenaltyApplyTo()
     {
         return $this->penaltyApplyTo;
     }
 
-    /**
-     * @param mixed $penaltyApplyTo
-     */
     public function setPenaltyApplyTo($penaltyApplyTo): self
     {
+        $this->initialized['penaltyApplyTo'] = true;
         $this->penaltyApplyTo = $penaltyApplyTo;
 
         return $this;
@@ -78,24 +83,20 @@ class AccountingV2PaymentTermPenaltyAPIModel
 
     public function setPenalty(?float $penalty): self
     {
+        $this->initialized['penalty'] = true;
         $this->penalty = $penalty;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPenaltyType()
     {
         return $this->penaltyType;
     }
 
-    /**
-     * @param mixed $penaltyType
-     */
     public function setPenaltyType($penaltyType): self
     {
+        $this->initialized['penaltyType'] = true;
         $this->penaltyType = $penaltyType;
 
         return $this;
@@ -108,24 +109,20 @@ class AccountingV2PaymentTermPenaltyAPIModel
 
     public function setMaxPenaltyAmount(?float $maxPenaltyAmount): self
     {
+        $this->initialized['maxPenaltyAmount'] = true;
         $this->maxPenaltyAmount = $maxPenaltyAmount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPenaltyFrequency()
     {
         return $this->penaltyFrequency;
     }
 
-    /**
-     * @param mixed $penaltyFrequency
-     */
     public function setPenaltyFrequency($penaltyFrequency): self
     {
+        $this->initialized['penaltyFrequency'] = true;
         $this->penaltyFrequency = $penaltyFrequency;
 
         return $this;
@@ -138,6 +135,7 @@ class AccountingV2PaymentTermPenaltyAPIModel
 
     public function setServiceTaskId(?int $serviceTaskId): self
     {
+        $this->initialized['serviceTaskId'] = true;
         $this->serviceTaskId = $serviceTaskId;
 
         return $this;

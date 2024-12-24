@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2JobTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the job type.
      *
      * @var int
@@ -31,9 +40,10 @@ class CrmV2JobTypeResponse
      */
     protected $modifiedOn;
     /**
-     * List of external data attached to this job type,.
+     * List of external data attached to this job type,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var CrmV2ExternalDataModel[]
+     * @var list<CrmV2ExternalDataModel>
      */
     protected $externalData;
 
@@ -50,6 +60,7 @@ class CrmV2JobTypeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +79,7 @@ class CrmV2JobTypeResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -86,15 +98,17 @@ class CrmV2JobTypeResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this job type,.
+     * List of external data attached to this job type,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return CrmV2ExternalDataModel[]
+     * @return list<CrmV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -102,12 +116,14 @@ class CrmV2JobTypeResponse
     }
 
     /**
-     * List of external data attached to this job type,.
+     * List of external data attached to this job type,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param CrmV2ExternalDataModel[] $externalData
+     * @param list<CrmV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

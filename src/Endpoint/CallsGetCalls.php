@@ -19,23 +19,23 @@ class CallsGetCalls extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $modifiedAfter format - date-time (as date-time in RFC3339)
-     *     @var int $minDuration format - int32
-     *     @var string $phoneNumberCalled
-     *     @var int $campaignId format - int64
-     *     @var int $agentId format - int64
-     *     @var string $agentName
-     *     @var bool $agentIsExternal
-     *     @var int $agentExternalId format - int64
-     *     @var string $orderBy
-     *     @var string $orderByDirection
-     *     @var bool $activeOnly
-     *     @var string $createdAfter format - date-time (as date-time in RFC3339)
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var array $ids
-     *     @var int $page format - int32
-     *     @var int $pageSize Format - int32.
-     * }
+     * @var string $modifiedAfter format - date-time (as date-time in RFC3339)
+     * @var int    $minDuration format - int32
+     * @var string $phoneNumberCalled
+     * @var int    $campaignId format - int64
+     * @var int    $agentId format - int64
+     * @var string $agentName
+     * @var bool   $agentIsExternal
+     * @var int    $agentExternalId format - int64
+     * @var string $orderBy
+     * @var string $orderByDirection
+     * @var bool   $activeOnly
+     * @var string $createdAfter format - date-time (as date-time in RFC3339)
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var array  $ids
+     * @var int    $page format - int32
+     * @var int    $pageSize Format - int32.
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -69,35 +69,35 @@ class CallsGetCalls extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint
         $optionsResolver->setDefined(['modifiedAfter', 'minDuration', 'phoneNumberCalled', 'campaignId', 'agentId', 'agentName', 'agentIsExternal', 'agentExternalId', 'orderBy', 'orderByDirection', 'activeOnly', 'createdAfter', 'createdBefore', 'ids', 'page', 'pageSize']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('modifiedAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('minDuration', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('phoneNumberCalled', ['string']);
-        $optionsResolver->setAllowedTypes('campaignId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('agentId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('agentName', ['string']);
-        $optionsResolver->setAllowedTypes('agentIsExternal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('agentExternalId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('orderBy', ['string']);
-        $optionsResolver->setAllowedTypes('orderByDirection', ['string']);
-        $optionsResolver->setAllowedTypes('activeOnly', ['bool']);
-        $optionsResolver->setAllowedTypes('createdAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('ids', ['array']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('minDuration', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('phoneNumberCalled', ['string']);
+        $optionsResolver->addAllowedTypes('campaignId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('agentId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('agentName', ['string']);
+        $optionsResolver->addAllowedTypes('agentIsExternal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('agentExternalId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('orderBy', ['string']);
+        $optionsResolver->addAllowedTypes('orderByDirection', ['string']);
+        $optionsResolver->addAllowedTypes('activeOnly', ['bool']);
+        $optionsResolver->addAllowedTypes('createdAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['array']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\CollectionResultOfModuleTelecomSharedBundleCallModel', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel', 'json');
         }
     }
 

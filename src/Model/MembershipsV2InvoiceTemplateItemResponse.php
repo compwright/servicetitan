@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2InvoiceTemplateItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Invoice template item ID.
      *
      * @var int
@@ -26,8 +35,6 @@ class MembershipsV2InvoiceTemplateItemResponse
     protected $skuId;
     /**
      * The type of linked SKU.
-     *
-     * @var mixed
      */
     protected $skuType;
     /**
@@ -92,6 +99,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -110,6 +118,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -117,8 +126,6 @@ class MembershipsV2InvoiceTemplateItemResponse
 
     /**
      * The type of linked SKU.
-     *
-     * @return mixed
      */
     public function getSkuType()
     {
@@ -127,11 +134,10 @@ class MembershipsV2InvoiceTemplateItemResponse
 
     /**
      * The type of linked SKU.
-     *
-     * @param mixed $skuType
      */
     public function setSkuType($skuType): self
     {
+        $this->initialized['skuType'] = true;
         $this->skuType = $skuType;
 
         return $this;
@@ -150,6 +156,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -168,6 +175,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setUnitPrice(float $unitPrice): self
     {
+        $this->initialized['unitPrice'] = true;
         $this->unitPrice = $unitPrice;
 
         return $this;
@@ -186,6 +194,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setIsAddOn(bool $isAddOn): self
     {
+        $this->initialized['isAddOn'] = true;
         $this->isAddOn = $isAddOn;
 
         return $this;
@@ -204,6 +213,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -222,6 +232,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setWorkflowActionItemId(?int $workflowActionItemId): self
     {
+        $this->initialized['workflowActionItemId'] = true;
         $this->workflowActionItemId = $workflowActionItemId;
 
         return $this;
@@ -240,6 +251,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -258,6 +270,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setCost(?float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -276,6 +289,7 @@ class MembershipsV2InvoiceTemplateItemResponse
      */
     public function setHours(?float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;

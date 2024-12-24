@@ -60,27 +60,27 @@ class BookingsUpdateBookingContact extends \CompWright\ServiceTitan\Runtime\Clie
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\CrmV2UpdateBookingContactRequest|null
      *
      * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactNotFoundException
      * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactConflictException
-     *
-     * @return \CompWright\ServiceTitan\Model\CrmV2UpdateBookingContactRequest|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\CrmV2UpdateBookingContactRequest', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\CrmV2UpdateBookingContactRequest', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactConflictException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactConflictException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

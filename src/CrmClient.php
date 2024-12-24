@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class CrmClient extends Runtime\Client\Client
 {
     /**
      * Gets a booking by ID.
@@ -19,14 +19,14 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetNotFoundException
+     * @return Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetBadRequestException
+     * @throws Exception\BookingsGetNotFoundException
      */
     public function bookingsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGet($id, $tenant), $fetch);
     }
 
     /**
@@ -35,26 +35,31 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $externalId Filters by booking's external ID
-     *     @var string $sort Applies sorting by the specified field:\
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $externalId Filters by booking's external ID
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     *             }
+     *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetListBadRequestException
      */
     public function bookingsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -64,21 +69,21 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetContactListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetContactListNotFoundException
+     * @return Model\PaginatedResponseOfCrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetContactListBadRequestException
+     * @throws Exception\BookingsGetContactListNotFoundException
      */
     public function bookingsGetContactList(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGetContactList($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGetContactList($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -89,34 +94,33 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant          Tenant ID
      * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetForProviderBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetForProviderNotFoundException
+     * @return Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetForProviderBadRequestException
+     * @throws Exception\BookingsGetForProviderNotFoundException
      */
     public function bookingsGetForProvider(int $bookingProvider, int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGetForProvider($bookingProvider, $id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGetForProvider($bookingProvider, $id, $tenant), $fetch);
     }
 
     /**
      * Updates a booking for a booking provider.
      *
-     * @param int                                                           $bookingProvider format - int64
-     * @param int                                                           $id              format - int64
-     * @param int                                                           $tenant          Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest|null $requestBody
-     * @param string                                                        $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $bookingProvider format - int64
+     * @param int    $id              format - int64
+     * @param int    $tenant          Tenant ID
+     * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateConflictException
+     * @return Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsUpdateBadRequestException
+     * @throws Exception\BookingsUpdateNotFoundException
+     * @throws Exception\BookingsUpdateConflictException
      */
     public function bookingsUpdate(int $bookingProvider, int $id, int $tenant, ?Model\CrmV2UpdateBookingRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsUpdate($bookingProvider, $id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsUpdate($bookingProvider, $id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -126,43 +130,47 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $externalId Filters by booking's external ID
-     *     @var string $sort Applies sorting by the specified field:\
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $externalId Filters by booking's external ID
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     *             }
+     *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetList2BadRequestException
+     * @return Model\PaginatedResponseOfCrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetList2BadRequestException
      */
     public function bookingsGetList2(int $bookingProvider, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGetList2($bookingProvider, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGetList2($bookingProvider, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a booking for a booking provider.
      *
-     * @param int                                                           $bookingProvider format - int64
-     * @param int                                                           $tenant          Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CreateBookingRequest|null $requestBody
-     * @param string                                                        $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $bookingProvider format - int64
+     * @param int    $tenant          Tenant ID
+     * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsCreateBadRequestException
+     * @return Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2BookingResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsCreateBadRequestException
      */
     public function bookingsCreate(int $bookingProvider, int $tenant, ?Model\CrmV2CreateBookingRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsCreate($bookingProvider, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsCreate($bookingProvider, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -173,40 +181,39 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetContactList2BadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsGetContactList2NotFoundException
+     * @return Model\PaginatedResponseOfCrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsGetContactList2BadRequestException
+     * @throws Exception\BookingsGetContactList2NotFoundException
      */
     public function bookingsGetContactList2(int $bookingProvider, int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsGetContactList2($bookingProvider, $id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsGetContactList2($bookingProvider, $id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a contact on the specified booking for a booking provider.
      *
-     * @param int                                                           $bookingProvider format - int64
-     * @param int                                                           $id              format - int64
-     * @param int                                                           $tenant          Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2ContactCreateRequest|null $requestBody
-     * @param string                                                        $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $bookingProvider format - int64
+     * @param int    $id              format - int64
+     * @param int    $tenant          Tenant ID
+     * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsCreateContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsCreateContactNotFoundException
+     * @return Model\CrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2BookingContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsCreateContactBadRequestException
+     * @throws Exception\BookingsCreateContactNotFoundException
      */
     public function bookingsCreateContact(int $bookingProvider, int $id, int $tenant, ?Model\CrmV2ContactCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsCreateContact($bookingProvider, $id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsCreateContact($bookingProvider, $id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -218,69 +225,66 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant          Tenant ID
      * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsDeleteContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsDeleteContactNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\BookingsDeleteContactBadRequestException
+     * @throws Exception\BookingsDeleteContactNotFoundException
      */
     public function bookingsDeleteContact(int $bookingProvider, int $id, int $contactId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsDeleteContact($bookingProvider, $id, $contactId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsDeleteContact($bookingProvider, $id, $contactId, $tenant), $fetch);
     }
 
     /**
      * Updates a single booking contact for a booking provider.
      *
-     * @param int                                                                  $bookingProvider format - int64
-     * @param int                                                                  $id              format - int64
-     * @param int                                                                  $contactId       format - int64
-     * @param int                                                                  $tenant          Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2UpdateBookingContactRequest|null $requestBody
-     * @param string                                                               $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $bookingProvider format - int64
+     * @param int    $id              format - int64
+     * @param int    $contactId       format - int64
+     * @param int    $tenant          Tenant ID
+     * @param string $fetch           Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\BookingsUpdateBookingContactConflictException
+     * @return Model\CrmV2UpdateBookingContactRequest|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2UpdateBookingContactRequest|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BookingsUpdateBookingContactBadRequestException
+     * @throws Exception\BookingsUpdateBookingContactNotFoundException
+     * @throws Exception\BookingsUpdateBookingContactConflictException
      */
     public function bookingsUpdateBookingContact(int $bookingProvider, int $id, int $contactId, int $tenant, ?Model\CrmV2UpdateBookingContactRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BookingsUpdateBookingContact($bookingProvider, $id, $contactId, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BookingsUpdateBookingContact($bookingProvider, $id, $contactId, $tenant, $requestBody), $fetch);
     }
 
     /**
      * Remove multiple tags to more than 1 customer.
      *
-     * @param int                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2RemoveBulkTagsRequest|null $requestBody
-     * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\BulkTagsRemoveTagsBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BulkTagsRemoveTagsConflictException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\BulkTagsRemoveTagsBadRequestException
+     * @throws Exception\BulkTagsRemoveTagsConflictException
      */
     public function bulkTagsRemoveTags(int $tenant, ?Model\CrmV2RemoveBulkTagsRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BulkTagsRemoveTags($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BulkTagsRemoveTags($tenant, $requestBody), $fetch);
     }
 
     /**
      * Add multiple tags to more than 1 customer.
      *
-     * @param int                                                         $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2AddBulkTagsRequest|null $requestBody
-     * @param string                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\BulkTagsAddTagsBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BulkTagsAddTagsConflictException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\BulkTagsAddTagsBadRequestException
+     * @throws Exception\BulkTagsAddTagsConflictException
      */
     public function bulkTagsAddTags(int $tenant, ?Model\CrmV2AddBulkTagsRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BulkTagsAddTags($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BulkTagsAddTags($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -290,32 +294,31 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetNotFoundException
+     * @return Model\CrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersGetBadRequestException
+     * @throws Exception\CustomersGetNotFoundException
      */
     public function customersGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersGet($id, $tenant), $fetch);
     }
 
     /**
      * Update a customer.
      *
-     * @param int                                                                     $id          format - int64
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CustomersUpdateCustomerRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersUpdateNotFoundException
+     * @return Model\CrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersUpdateBadRequestException
+     * @throws Exception\CustomersUpdateNotFoundException
      */
     public function customersUpdate(int $id, int $tenant, ?Model\CrmV2CustomersUpdateCustomerRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -324,54 +327,57 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $ids returns specific customer records by customer ID
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Returns customer records created before the requested date (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Returns customer records created on or after the requested date (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Returns customer records modified before the requested date (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customer records modified after the requested date (in UTC)
-     *     @var string $name returns customer records by name
-     *     @var string $street returns customer records by street
-     *     @var string $unit returns customer records by unit
-     *     @var string $city returns customer records by city
-     *     @var string $state returns customer records by state
-     *     @var string $zip returns customer records by zip
-     *     @var string $country returns customer records by country
-     *     @var float $latitude Format - double. Returns customer records by latitude.
-     *     @var float $longitude Format - double. Returns customer records by longitude.
-     *     @var string $phone returns customer records by phone number of contacts
-     *     @var string $active Returns customer records by active status. only active items will be returned by default.\
-    Values: [True, Any, False]
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     * @var string $ids returns specific customer records by customer ID
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Returns customer records created before the requested date (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Returns customer records created on or after the requested date (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Returns customer records modified before the requested date (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customer records modified after the requested date (in UTC)
+     * @var string $name returns customer records by name
+     * @var string $street returns customer records by street
+     * @var string $unit returns customer records by unit
+     * @var string $city returns customer records by city
+     * @var string $state returns customer records by state
+     * @var string $zip returns customer records by zip
+     * @var string $country returns customer records by country
+     * @var float  $latitude Format - double. Returns customer records by latitude.
+     * @var float  $longitude Format - double. Returns customer records by longitude.
+     * @var string $phone returns customer records by phone number of contacts
+     * @var string $active Returns customer records by active status. only active items will be returned by default.\
+     *             Values: [True, Any, False]
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2CustomersCustomerResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersGetListBadRequestException
      */
     public function customersGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a New Customer.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateBadRequestException
+     * @return Model\CrmV2CustomersCreatedCustomerResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2CustomersCreatedCustomerResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersCreateBadRequestException
      */
     public function customersCreate(int $tenant, ?Model\CrmV2CustomersCreateCustomerRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -381,39 +387,38 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetNotesBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetNotesNotFoundException
+     * @return Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersGetNotesBadRequestException
+     * @throws Exception\CustomersGetNotesNotFoundException
      */
     public function customersGetNotes(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersGetNotes($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersGetNotes($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a New Note.
      *
-     * @param int                                                                $id          format - int64
-     * @param int                                                                $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CreateCustomerNoteRequest|null $requestBody
-     * @param string                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateNoteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateNoteNotFoundException
+     * @return Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersCreateNoteBadRequestException
+     * @throws Exception\CustomersCreateNoteNotFoundException
      */
     public function customersCreateNote(int $id, int $tenant, ?Model\CrmV2CreateCustomerNoteRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersCreateNote($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersCreateNote($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -423,41 +428,40 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     * }
+     * @var int  $page format - int32
+     * @var int  $pageSize format - int32
+     * @var bool $includeTotal
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetContactsListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetContactsListNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetContactsListConflictException
+     * @return Model\PaginatedResponseOfCrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersGetContactsListBadRequestException
+     * @throws Exception\CustomersGetContactsListNotFoundException
+     * @throws Exception\CustomersGetContactsListConflictException
      */
     public function customersGetContactsList(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersGetContactsList($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersGetContactsList($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a contact on the customer.
      *
-     * @param int                                                                            $id          format - int64
-     * @param int                                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CustomersCreateCustomerContactRequest|null $requestBody
-     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersCreateContactConflictException
+     * @return Model\CrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersCreateContactBadRequestException
+     * @throws Exception\CustomersCreateContactNotFoundException
+     * @throws Exception\CustomersCreateContactConflictException
      */
     public function customersCreateContact(int $id, int $tenant, ?Model\CrmV2CustomersCreateCustomerContactRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersCreateContact($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersCreateContact($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -468,35 +472,34 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant    Tenant ID
      * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersDeleteContactConflictException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\CustomersDeleteContactBadRequestException
+     * @throws Exception\CustomersDeleteContactNotFoundException
+     * @throws Exception\CustomersDeleteContactConflictException
      */
     public function customersDeleteContact(int $id, int $contactId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersDeleteContact($id, $contactId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersDeleteContact($id, $contactId, $tenant), $fetch);
     }
 
     /**
      * Updates a contact on the customer.
      *
-     * @param int                                                                            $id          format - int64
-     * @param int                                                                            $contactId   format - int64
-     * @param int                                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CustomersUpdateCustomerContactRequest|null $requestBody
-     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id        format - int64
+     * @param int    $contactId format - int64
+     * @param int    $tenant    Tenant ID
+     * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersUpdateContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersUpdateContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersUpdateContactConflictException
+     * @return Model\CrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2CustomersCustomerContactWithModifiedOnResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersUpdateContactBadRequestException
+     * @throws Exception\CustomersUpdateContactNotFoundException
+     * @throws Exception\CustomersUpdateContactConflictException
      */
     public function customersUpdateContact(int $id, int $contactId, int $tenant, ?Model\CrmV2CustomersUpdateCustomerContactRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersUpdateContact($id, $contactId, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersUpdateContact($id, $contactId, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -505,23 +508,23 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on/after certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on/after certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetModifiedContactsListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomersGetModifiedContactsListNotFoundException
+     * @return Model\PaginatedResponseOfCrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomersGetModifiedContactsListBadRequestException
+     * @throws Exception\CustomersGetModifiedContactsListNotFoundException
      */
     public function customersGetModifiedContactsList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomersGetModifiedContactsList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomersGetModifiedContactsList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -531,31 +534,30 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LeadsGetNotFoundException
+     * @return Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsGetBadRequestException
+     * @throws Exception\LeadsGetNotFoundException
      */
     public function leadsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates a lead.
      *
-     * @param int                                                        $id          format - int64
-     * @param int                                                        $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LeadUpdateRequest|null $requestBody
-     * @param string                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsUpdateBadRequestException
+     * @return Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsUpdateBadRequestException
      */
     public function leadsUpdate(int $id, int $tenant, ?Model\CrmV2LeadUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -564,66 +566,78 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var int $customerId Format - int64. Filters by associated customer
-     *     @var bool $isProspect Allows to filter leads where the customer doesn't have a job, or there is no customer.
-     *     @var bool $withoutCustomer Allows to filter leads that don't have a customer or location record associated to it.
-     *     @var string $status Filters by status\
-     *     @var string $customerCity Filters by customer city
-     *     @var string $customerState Filters by customer state
-     *     @var string $customerZip Filters by customer zip
-     *     @var string $customerCreatedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were created on or before a certain date/time (in UTC)
-     *     @var string $customerCreatedBefore Format - date-time (as date-time in RFC3339). Returns customers who were created after a certain date/time (in UTC)
-     *     @var string $customerModifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were modified on or before a certain date/time (in UTC)
-     *     @var string $sort Applies sorting by the specified field:\
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var int    $customerId Format - int64. Filters by associated customer
+     * @var bool   $isProspect Allows to filter leads where the customer doesn't have a job, or there is no customer.
+     *             Possible values are:
+     *             null (return all leads);
+     *             true (return leads without customer/jobs);
+     *             false (return leads with customer and job)
+     * @var bool   $withoutCustomer Allows to filter leads that don't have a customer or location record associated to it.
+     *             Possible values are:
+     *             null (return all leads);
+     *             true (return leads without customers or locations only);
+     *             false (return leads with customers and locations only)
+     * @var string $status Filters by status\
+     *             Values: [Open, Dismissed, Converted]
+     * @var string $customerCity Filters by customer city
+     * @var string $customerState Filters by customer state
+     * @var string $customerZip Filters by customer zip
+     * @var string $customerCreatedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were created on or before a certain date/time (in UTC)
+     * @var string $customerCreatedBefore Format - date-time (as date-time in RFC3339). Returns customers who were created after a certain date/time (in UTC)
+     * @var string $customerModifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were modified on or before a certain date/time (in UTC)
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     *             }
+     *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsGetListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsGetListBadRequestException
      */
     public function leadsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a lead.
      *
-     * @param int                                                        $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LeadCreateRequest|null $requestBody
-     * @param string                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsCreateBadRequestException
+     * @return Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LeadResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsCreateBadRequestException
      */
     public function leadsCreate(int $tenant, ?Model\CrmV2LeadCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
-     * @param int                                                            $id          format - int64
-     * @param int                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2CreateFollowUpRequest|null $requestBody
-     * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsCreateFollowUpBadRequestException
+     * @return Model\CrmV2FollowUpResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2FollowUpResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsCreateFollowUpBadRequestException
      */
     public function leadsCreateFollowUp(int $id, int $tenant, ?Model\CrmV2CreateFollowUpRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsCreateFollowUp($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsCreateFollowUp($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -633,57 +647,55 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsGetNotesBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LeadsGetNotesNotFoundException
+     * @return Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsGetNotesBadRequestException
+     * @throws Exception\LeadsGetNotesNotFoundException
      */
     public function leadsGetNotes(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsGetNotes($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsGetNotes($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a note on the specified lead.
      *
-     * @param int                                                            $id          format - int64
-     * @param int                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LeadNoteCreateRequest|null $requestBody
-     * @param string                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsCreateNoteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LeadsCreateNoteNotFoundException
+     * @return Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LeadsCreateNoteBadRequestException
+     * @throws Exception\LeadsCreateNoteNotFoundException
      */
     public function leadsCreateNote(int $id, int $tenant, ?Model\CrmV2LeadNoteCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsCreateNote($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsCreateNote($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * Dismisses a lead specified by ID.
      *
-     * @param int                                                         $id          format - int64
-     * @param int                                                         $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2DismissLeadRequest|null $requestBody
-     * @param string                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\LeadsDismissBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LeadsDismissNotFoundException
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\LeadsDismissBadRequestException
+     * @throws Exception\LeadsDismissNotFoundException
      */
     public function leadsDismiss(int $id, int $tenant, ?Model\CrmV2DismissLeadRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LeadsDismiss($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LeadsDismiss($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -693,33 +705,32 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetNotFoundException
+     * @return Model\CrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsGetBadRequestException
+     * @throws Exception\LocationsGetNotFoundException
      */
     public function locationsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates a location.
      *
-     * @param int                                                                     $id          format - int64
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LocationsUpdateLocationRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateConflictException
+     * @return Model\CrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsUpdateBadRequestException
+     * @throws Exception\LocationsUpdateNotFoundException
+     * @throws Exception\LocationsUpdateConflictException
      */
     public function locationsUpdate(int $id, int $tenant, ?Model\CrmV2LocationsUpdateLocationRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -728,54 +739,58 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $name Filters by customer's name
-     *     @var int $customerId Format - int64. Filters by customer ID
-     *     @var string $street Filters by customer's street
-     *     @var string $unit Filters by customer's unit
-     *     @var string $city Filters by customer's city
-     *     @var string $state Filters by customer's state
-     *     @var string $zip Filters by customer's zip
-     *     @var string $country Filters by customer's country
-     *     @var float $latitude Format - double. Filters by customer's latitude
-     *     @var float $longitude Format - double. Filters by customer's longitude
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $name Filters by customer's name
+     * @var int    $customerId Format - int64. Filters by customer ID
+     * @var string $street Filters by customer's street
+     * @var string $unit Filters by customer's unit
+     * @var string $city Filters by customer's city
+     * @var string $state Filters by customer's state
+     * @var string $zip Filters by customer's zip
+     * @var string $country Filters by customer's country
+     * @var float  $latitude Format - double. Filters by customer's latitude
+     * @var float  $longitude Format - double. Filters by customer's longitude
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationsLocationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsGetListBadRequestException
      */
     public function locationsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a new location.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LocationsCreateLocationRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateConflictException
+     * @return Model\CrmV2LocationsCreateLocationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LocationsCreateLocationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsCreateBadRequestException
+     * @throws Exception\LocationsCreateConflictException
      */
     public function locationsCreate(int $tenant, ?Model\CrmV2LocationsCreateLocationRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -785,39 +800,38 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetLocationNotesBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetLocationNotesNotFoundException
+     * @return Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsGetLocationNotesBadRequestException
+     * @throws Exception\LocationsGetLocationNotesNotFoundException
      */
     public function locationsGetLocationNotes(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsGetLocationNotes($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsGetLocationNotes($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a note on the specified location.
      *
-     * @param int                                                                $id          format - int64
-     * @param int                                                                $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LocationNoteCreateRequest|null $requestBody
-     * @param string                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateNoteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateNoteNotFoundException
+     * @return Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2NoteResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsCreateNoteBadRequestException
+     * @throws Exception\LocationsCreateNoteNotFoundException
      */
     public function locationsCreateNote(int $id, int $tenant, ?Model\CrmV2LocationNoteCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsCreateNote($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsCreateNote($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -827,41 +841,40 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetContactsListConflictException
+     * @return Model\PaginatedResponseOfCrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsGetContactsListBadRequestException
+     * @throws Exception\LocationsGetContactsListNotFoundException
+     * @throws Exception\LocationsGetContactsListConflictException
      */
     public function locationsGetContactsList(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsGetContactsList($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsGetContactsList($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates a contact on the location.
      *
-     * @param int                                                                   $id          format - int64
-     * @param int                                                                   $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LocationContactCreateRequest|null $requestBody
-     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsCreateContactConflictException
+     * @return Model\CrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsCreateContactBadRequestException
+     * @throws Exception\LocationsCreateContactNotFoundException
+     * @throws Exception\LocationsCreateContactConflictException
      */
     public function locationsCreateContact(int $id, int $tenant, ?Model\CrmV2LocationContactCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsCreateContact($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsCreateContact($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -870,22 +883,22 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on/after certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on/after certain date/time (in UTC). Either modifiedBefore or modifiedOnOrAfter parameter must be specified
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsGetLocationsContactsListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2LocationsContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LocationsContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsGetLocationsContactsListBadRequestException
      */
     public function locationsGetLocationsContactsList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsGetLocationsContactsList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsGetLocationsContactsList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -896,35 +909,34 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant    Tenant ID
      * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsDeleteContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsDeleteContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsDeleteContactConflictException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\LocationsDeleteContactBadRequestException
+     * @throws Exception\LocationsDeleteContactNotFoundException
+     * @throws Exception\LocationsDeleteContactConflictException
      */
     public function locationsDeleteContact(int $id, int $contactId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsDeleteContact($id, $contactId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsDeleteContact($id, $contactId, $tenant), $fetch);
     }
 
     /**
      * Updates a contact on the location.
      *
-     * @param int                                                                   $id          format - int64
-     * @param int                                                                   $contactId   format - int64
-     * @param int                                                                   $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2LocationContactUpdateRequest|null $requestBody
-     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id        format - int64
+     * @param int    $contactId format - int64
+     * @param int    $tenant    Tenant ID
+     * @param string $fetch     Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateContactBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateContactNotFoundException
-     * @throws \CompWright\ServiceTitan\Exception\LocationsUpdateContactConflictException
+     * @return Model\CrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2LocationContactResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationsUpdateContactBadRequestException
+     * @throws Exception\LocationsUpdateContactNotFoundException
+     * @throws Exception\LocationsUpdateContactConflictException
      */
     public function locationsUpdateContact(int $id, int $contactId, int $tenant, ?Model\CrmV2LocationContactUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationsUpdateContact($id, $contactId, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationsUpdateContact($id, $contactId, $tenant, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -932,7 +944,7 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -941,7 +953,7 @@ class CrmClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

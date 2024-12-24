@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2TaskCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $reportedById;
@@ -53,7 +62,7 @@ class TaskManagementV2TaskCreateRequest
      */
     protected $completeBy;
     /**
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $involvedEmployeeIdList;
     /**
@@ -80,6 +89,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setReportedById(int $reportedById): self
     {
+        $this->initialized['reportedById'] = true;
         $this->reportedById = $reportedById;
 
         return $this;
@@ -92,6 +102,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setAssignedToId(int $assignedToId): self
     {
+        $this->initialized['assignedToId'] = true;
         $this->assignedToId = $assignedToId;
 
         return $this;
@@ -104,6 +115,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setIsClosed(bool $isClosed): self
     {
+        $this->initialized['isClosed'] = true;
         $this->isClosed = $isClosed;
 
         return $this;
@@ -116,6 +128,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -128,6 +141,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -140,6 +154,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setEmployeeTaskTypeId(int $employeeTaskTypeId): self
     {
+        $this->initialized['employeeTaskTypeId'] = true;
         $this->employeeTaskTypeId = $employeeTaskTypeId;
 
         return $this;
@@ -152,6 +167,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setEmployeeTaskSourceId(int $employeeTaskSourceId): self
     {
+        $this->initialized['employeeTaskSourceId'] = true;
         $this->employeeTaskSourceId = $employeeTaskSourceId;
 
         return $this;
@@ -164,6 +180,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setEmployeeTaskResolutionId(?int $employeeTaskResolutionId): self
     {
+        $this->initialized['employeeTaskResolutionId'] = true;
         $this->employeeTaskResolutionId = $employeeTaskResolutionId;
 
         return $this;
@@ -176,6 +193,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setReportedDate(\DateTime $reportedDate): self
     {
+        $this->initialized['reportedDate'] = true;
         $this->reportedDate = $reportedDate;
 
         return $this;
@@ -188,13 +206,14 @@ class TaskManagementV2TaskCreateRequest
 
     public function setCompleteBy(?\DateTime $completeBy): self
     {
+        $this->initialized['completeBy'] = true;
         $this->completeBy = $completeBy;
 
         return $this;
     }
 
     /**
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getInvolvedEmployeeIdList(): ?array
     {
@@ -202,10 +221,11 @@ class TaskManagementV2TaskCreateRequest
     }
 
     /**
-     * @param int[]|null $involvedEmployeeIdList
+     * @param list<int>|null $involvedEmployeeIdList
      */
     public function setInvolvedEmployeeIdList(?array $involvedEmployeeIdList): self
     {
+        $this->initialized['involvedEmployeeIdList'] = true;
         $this->involvedEmployeeIdList = $involvedEmployeeIdList;
 
         return $this;
@@ -218,6 +238,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setCustomerId(?int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -230,6 +251,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -242,6 +264,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -254,6 +277,7 @@ class TaskManagementV2TaskCreateRequest
 
     public function setPriority(string $priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;

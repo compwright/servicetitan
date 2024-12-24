@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2CategoryResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The id for the category.
      *
      * @var int
@@ -56,32 +65,30 @@ class PricebookV2CategoryResponse
     protected $position;
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @var mixed
      */
     protected $categoryType;
     /**
      * The array of the subcategories.
      *
-     * @var PricebookV2CategoryResponse[]|null
+     * @var list<PricebookV2CategoryResponse>|null
      */
     protected $subcategories;
     /**
      * The business units that are associated with this category.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $businessUnitIds;
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $skuImages;
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $skuVideos;
     /**
@@ -110,6 +117,7 @@ class PricebookV2CategoryResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -128,6 +136,7 @@ class PricebookV2CategoryResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -146,6 +155,7 @@ class PricebookV2CategoryResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -164,6 +174,7 @@ class PricebookV2CategoryResponse
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -182,6 +193,7 @@ class PricebookV2CategoryResponse
      */
     public function setImage(?string $image): self
     {
+        $this->initialized['image'] = true;
         $this->image = $image;
 
         return $this;
@@ -200,6 +212,7 @@ class PricebookV2CategoryResponse
      */
     public function setParentId(?int $parentId): self
     {
+        $this->initialized['parentId'] = true;
         $this->parentId = $parentId;
 
         return $this;
@@ -218,6 +231,7 @@ class PricebookV2CategoryResponse
      */
     public function setPosition(int $position): self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
 
         return $this;
@@ -225,8 +239,6 @@ class PricebookV2CategoryResponse
 
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @return mixed
      */
     public function getCategoryType()
     {
@@ -235,11 +247,10 @@ class PricebookV2CategoryResponse
 
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @param mixed $categoryType
      */
     public function setCategoryType($categoryType): self
     {
+        $this->initialized['categoryType'] = true;
         $this->categoryType = $categoryType;
 
         return $this;
@@ -248,7 +259,7 @@ class PricebookV2CategoryResponse
     /**
      * The array of the subcategories.
      *
-     * @return PricebookV2CategoryResponse[]|null
+     * @return list<PricebookV2CategoryResponse>|null
      */
     public function getSubcategories(): ?array
     {
@@ -258,10 +269,11 @@ class PricebookV2CategoryResponse
     /**
      * The array of the subcategories.
      *
-     * @param PricebookV2CategoryResponse[]|null $subcategories
+     * @param list<PricebookV2CategoryResponse>|null $subcategories
      */
     public function setSubcategories(?array $subcategories): self
     {
+        $this->initialized['subcategories'] = true;
         $this->subcategories = $subcategories;
 
         return $this;
@@ -270,7 +282,7 @@ class PricebookV2CategoryResponse
     /**
      * The business units that are associated with this category.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getBusinessUnitIds(): ?array
     {
@@ -280,10 +292,11 @@ class PricebookV2CategoryResponse
     /**
      * The business units that are associated with this category.
      *
-     * @param int[]|null $businessUnitIds
+     * @param list<int>|null $businessUnitIds
      */
     public function setBusinessUnitIds(?array $businessUnitIds): self
     {
+        $this->initialized['businessUnitIds'] = true;
         $this->businessUnitIds = $businessUnitIds;
 
         return $this;
@@ -292,7 +305,7 @@ class PricebookV2CategoryResponse
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSkuImages(): ?array
     {
@@ -302,10 +315,11 @@ class PricebookV2CategoryResponse
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @param string[]|null $skuImages
+     * @param list<string>|null $skuImages
      */
     public function setSkuImages(?array $skuImages): self
     {
+        $this->initialized['skuImages'] = true;
         $this->skuImages = $skuImages;
 
         return $this;
@@ -314,7 +328,7 @@ class PricebookV2CategoryResponse
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSkuVideos(): ?array
     {
@@ -324,10 +338,11 @@ class PricebookV2CategoryResponse
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @param string[]|null $skuVideos
+     * @param list<string>|null $skuVideos
      */
     public function setSkuVideos(?array $skuVideos): self
     {
+        $this->initialized['skuVideos'] = true;
         $this->skuVideos = $skuVideos;
 
         return $this;
@@ -346,6 +361,7 @@ class PricebookV2CategoryResponse
      */
     public function setSource(?string $source): self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
 
         return $this;
@@ -364,6 +380,7 @@ class PricebookV2CategoryResponse
      */
     public function setExternalId(?string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;

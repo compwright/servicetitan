@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TaskManagementV2SubtaskCreateResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var bool
      */
     protected $isClosed;
@@ -56,6 +65,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setIsClosed(bool $isClosed): self
     {
+        $this->initialized['isClosed'] = true;
         $this->isClosed = $isClosed;
 
         return $this;
@@ -68,6 +78,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -80,6 +91,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setAssignedToId(int $assignedToId): self
     {
+        $this->initialized['assignedToId'] = true;
         $this->assignedToId = $assignedToId;
 
         return $this;
@@ -92,6 +104,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setDueDateTime(?\DateTime $dueDateTime): self
     {
+        $this->initialized['dueDateTime'] = true;
         $this->dueDateTime = $dueDateTime;
 
         return $this;
@@ -104,6 +117,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setParentTaskId(int $parentTaskId): self
     {
+        $this->initialized['parentTaskId'] = true;
         $this->parentTaskId = $parentTaskId;
 
         return $this;
@@ -116,6 +130,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setSubtaskNumber(string $subtaskNumber): self
     {
+        $this->initialized['subtaskNumber'] = true;
         $this->subtaskNumber = $subtaskNumber;
 
         return $this;
@@ -128,6 +143,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setIsViewed(bool $isViewed): self
     {
+        $this->initialized['isViewed'] = true;
         $this->isViewed = $isViewed;
 
         return $this;
@@ -140,6 +156,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setAssignedDateTime(\DateTime $assignedDateTime): self
     {
+        $this->initialized['assignedDateTime'] = true;
         $this->assignedDateTime = $assignedDateTime;
 
         return $this;
@@ -152,6 +169,7 @@ class TaskManagementV2SubtaskCreateResponse
 
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;

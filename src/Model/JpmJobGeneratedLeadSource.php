@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class JpmJobGeneratedLeadSource
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $jobId;
@@ -28,6 +37,7 @@ class JpmJobGeneratedLeadSource
 
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -40,6 +50,7 @@ class JpmJobGeneratedLeadSource
 
     public function setEmployeeId(?int $employeeId): self
     {
+        $this->initialized['employeeId'] = true;
         $this->employeeId = $employeeId;
 
         return $this;

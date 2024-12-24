@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MarkEventCompletedStatusUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The job ID that the event is marked as completed/incompleted on.
      *
      * @var int
@@ -32,6 +41,7 @@ class MembershipsV2MarkEventCompletedStatusUpdateRequest
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;

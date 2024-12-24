@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $typeId;
@@ -53,7 +62,7 @@ class AccountingV2PaymentUpdateRequest
      */
     protected $status;
     /**
-     * @var AccountingV2PaymentSplitApiModel[]
+     * @var list<AccountingV2PaymentSplitApiModel>
      */
     protected $splits;
 
@@ -64,6 +73,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setTypeId(int $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -76,6 +86,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -88,6 +99,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -100,6 +112,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setPaidOn(\DateTime $paidOn): self
     {
+        $this->initialized['paidOn'] = true;
         $this->paidOn = $paidOn;
 
         return $this;
@@ -112,6 +125,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setAuthCode(string $authCode): self
     {
+        $this->initialized['authCode'] = true;
         $this->authCode = $authCode;
 
         return $this;
@@ -124,6 +138,7 @@ class AccountingV2PaymentUpdateRequest
 
     public function setCheckNumber(string $checkNumber): self
     {
+        $this->initialized['checkNumber'] = true;
         $this->checkNumber = $checkNumber;
 
         return $this;
@@ -142,24 +157,20 @@ class AccountingV2PaymentUpdateRequest
      */
     public function setExportId(string $exportId): self
     {
+        $this->initialized['exportId'] = true;
         $this->exportId = $exportId;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTransactionStatus()
     {
         return $this->transactionStatus;
     }
 
-    /**
-     * @param mixed $transactionStatus
-     */
     public function setTransactionStatus($transactionStatus): self
     {
+        $this->initialized['transactionStatus'] = true;
         $this->transactionStatus = $transactionStatus;
 
         return $this;
@@ -178,13 +189,14 @@ class AccountingV2PaymentUpdateRequest
      */
     public function setStatus(string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2PaymentSplitApiModel[]
+     * @return list<AccountingV2PaymentSplitApiModel>
      */
     public function getSplits(): array
     {
@@ -192,10 +204,11 @@ class AccountingV2PaymentUpdateRequest
     }
 
     /**
-     * @param AccountingV2PaymentSplitApiModel[] $splits
+     * @param list<AccountingV2PaymentSplitApiModel> $splits
      */
     public function setSplits(array $splits): self
     {
+        $this->initialized['splits'] = true;
         $this->splits = $splits;
 
         return $this;

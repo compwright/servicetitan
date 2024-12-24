@@ -10,22 +10,21 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class MarketingAdsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class MarketingAdsClient extends Runtime\Client\Client
 {
     /**
      * Attributes a web booking to a web session.
      *
-     * @param int                                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MarketingAdsV2CreateWebBookingAttributionRequest|null $requestBody
-     * @param string                                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\WebBookingAttributionsCreateBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\WebBookingAttributionsCreateBadRequestException
      */
     public function webBookingAttributionsCreate(int $tenant, ?Model\MarketingAdsV2CreateWebBookingAttributionRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\WebBookingAttributionsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\WebBookingAttributionsCreate($tenant, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -33,7 +32,7 @@ class MarketingAdsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -42,7 +41,7 @@ class MarketingAdsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

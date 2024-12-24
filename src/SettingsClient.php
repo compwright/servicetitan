@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class SettingsClient extends Runtime\Client\Client
 {
     /**
      * Gets a list of business units.
@@ -18,29 +18,29 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $name
-     *     @var string $active Values: [True, Any, False]
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
-    this application guid will be returned.
-     * }
+     * @var string $ids
+     * @var string $name
+     * @var string $active Values: [True, Any, False]
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
+     *             this application guid will be returned.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsGetListBadRequestException
+     * @return Model\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2BusinessUnitResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BusinessUnitsGetListBadRequestException
      */
     public function businessUnitsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BusinessUnitsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BusinessUnitsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -50,37 +50,36 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsGetNotFoundException
+     * @return Model\TenantSettingsV2BusinessUnitResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TenantSettingsV2BusinessUnitResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BusinessUnitsGetBadRequestException
+     * @throws Exception\BusinessUnitsGetNotFoundException
      */
     public function businessUnitsGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BusinessUnitsGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\BusinessUnitsGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update an existing BusinessUnit.
      *
-     * @param int                                                                           $id          Format - int64. BusinessUnit Id
-     * @param int                                                                           $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\TenantSettingsV2UpdateBusinessUnitRequest|null $requestBody
-     * @param string                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. BusinessUnit Id
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\BusinessUnitsUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\BusinessUnitsUpdateBadRequestException
+     * @throws Exception\BusinessUnitsUpdateNotFoundException
      */
     public function businessUnitsUpdate(int $id, int $tenant, ?Model\TenantSettingsV2UpdateBusinessUnitRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\BusinessUnitsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\BusinessUnitsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -89,27 +88,27 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $name
-     *     @var string $active Values: [True, Any, False]
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var string $ids
+     * @var string $name
+     * @var string $active Values: [True, Any, False]
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EmployeesGetListBadRequestException
+     * @return Model\PaginatedResponseOfTenantSettingsV2EmployeeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2EmployeeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EmployeesGetListBadRequestException
      */
     public function employeesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EmployeesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EmployeesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -119,14 +118,14 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EmployeesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\EmployeesGetNotFoundException
+     * @return Model\TenantSettingsV2EmployeeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TenantSettingsV2EmployeeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EmployeesGetBadRequestException
+     * @throws Exception\EmployeesGetNotFoundException
      */
     public function employeesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EmployeesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EmployeesGet($id, $tenant), $fetch);
     }
 
     /**
@@ -135,27 +134,27 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $name
-     *     @var string $active Values: [True, Any, False]
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var string $ids
+     * @var string $name
+     * @var string $active Values: [True, Any, False]
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TechniciansGetListBadRequestException
+     * @return Model\PaginatedResponseOfTenantSettingsV2TechnicianResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2TechnicianResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TechniciansGetListBadRequestException
      */
     public function techniciansGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TechniciansGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TechniciansGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -165,14 +164,14 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TechniciansGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\TechniciansGetNotFoundException
+     * @return Model\TenantSettingsV2TechnicianResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TenantSettingsV2TechnicianResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TechniciansGetBadRequestException
+     * @throws Exception\TechniciansGetNotFoundException
      */
     public function techniciansGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TechniciansGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\TechniciansGet($id, $tenant), $fetch);
     }
 
     /**
@@ -181,22 +180,22 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-    Values: [True, Any, False]
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TagTypesGetListBadRequestException
+     * @return Model\PaginatedResponseOfTenantSettingsV2TagTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfTenantSettingsV2TagTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TagTypesGetListBadRequestException
      */
     public function tagTypesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TagTypesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TagTypesGetList($tenant, $queryParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -204,7 +203,7 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -213,7 +212,7 @@ class SettingsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

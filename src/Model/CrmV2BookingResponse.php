@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2BookingResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the booking.
      *
      * @var int
@@ -81,7 +90,7 @@ class CrmV2BookingResponse
     /**
      * Uploaded images.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $uploadedImages;
     /**
@@ -92,8 +101,6 @@ class CrmV2BookingResponse
     protected $isSendConfirmationEmail;
     /**
      * Booking status.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -152,6 +159,7 @@ class CrmV2BookingResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -170,6 +178,7 @@ class CrmV2BookingResponse
      */
     public function setSource(string $source): self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
 
         return $this;
@@ -188,6 +197,7 @@ class CrmV2BookingResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -206,6 +216,7 @@ class CrmV2BookingResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -213,8 +224,6 @@ class CrmV2BookingResponse
 
     /**
      * Address of the booking.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -223,11 +232,10 @@ class CrmV2BookingResponse
 
     /**
      * Address of the booking.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -235,8 +243,6 @@ class CrmV2BookingResponse
 
     /**
      * Type of customer (Residential/Commercial).
-     *
-     * @return mixed
      */
     public function getCustomerType()
     {
@@ -245,11 +251,10 @@ class CrmV2BookingResponse
 
     /**
      * Type of customer (Residential/Commercial).
-     *
-     * @param mixed $customerType
      */
     public function setCustomerType($customerType): self
     {
+        $this->initialized['customerType'] = true;
         $this->customerType = $customerType;
 
         return $this;
@@ -268,6 +273,7 @@ class CrmV2BookingResponse
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -286,6 +292,7 @@ class CrmV2BookingResponse
      */
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -304,6 +311,7 @@ class CrmV2BookingResponse
      */
     public function setCampaignId(?int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -322,6 +330,7 @@ class CrmV2BookingResponse
      */
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -340,6 +349,7 @@ class CrmV2BookingResponse
      */
     public function setIsFirstTimeClient(?bool $isFirstTimeClient): self
     {
+        $this->initialized['isFirstTimeClient'] = true;
         $this->isFirstTimeClient = $isFirstTimeClient;
 
         return $this;
@@ -348,7 +358,7 @@ class CrmV2BookingResponse
     /**
      * Uploaded images.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getUploadedImages(): ?array
     {
@@ -358,10 +368,11 @@ class CrmV2BookingResponse
     /**
      * Uploaded images.
      *
-     * @param string[]|null $uploadedImages
+     * @param list<string>|null $uploadedImages
      */
     public function setUploadedImages(?array $uploadedImages): self
     {
+        $this->initialized['uploadedImages'] = true;
         $this->uploadedImages = $uploadedImages;
 
         return $this;
@@ -380,6 +391,7 @@ class CrmV2BookingResponse
      */
     public function setIsSendConfirmationEmail(?bool $isSendConfirmationEmail): self
     {
+        $this->initialized['isSendConfirmationEmail'] = true;
         $this->isSendConfirmationEmail = $isSendConfirmationEmail;
 
         return $this;
@@ -387,8 +399,6 @@ class CrmV2BookingResponse
 
     /**
      * Booking status.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -397,11 +407,10 @@ class CrmV2BookingResponse
 
     /**
      * Booking status.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -420,6 +429,7 @@ class CrmV2BookingResponse
      */
     public function setDismissingReasonId(?int $dismissingReasonId): self
     {
+        $this->initialized['dismissingReasonId'] = true;
         $this->dismissingReasonId = $dismissingReasonId;
 
         return $this;
@@ -438,6 +448,7 @@ class CrmV2BookingResponse
      */
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -456,6 +467,7 @@ class CrmV2BookingResponse
      */
     public function setExternalId(string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
@@ -463,8 +475,6 @@ class CrmV2BookingResponse
 
     /**
      * Booking priority.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -473,11 +483,10 @@ class CrmV2BookingResponse
 
     /**
      * Booking priority.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -496,6 +505,7 @@ class CrmV2BookingResponse
      */
     public function setJobTypeId(?int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -514,6 +524,7 @@ class CrmV2BookingResponse
      */
     public function setBookingProviderId(int $bookingProviderId): self
     {
+        $this->initialized['bookingProviderId'] = true;
         $this->bookingProviderId = $bookingProviderId;
 
         return $this;
@@ -532,6 +543,7 @@ class CrmV2BookingResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

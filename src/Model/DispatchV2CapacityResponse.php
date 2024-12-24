@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2CapacityResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * When the request was processed.
      *
      * @var \DateTime
@@ -21,7 +30,7 @@ class DispatchV2CapacityResponse
     /**
      * Availability calculations by time frame.
      *
-     * @var DispatchV2CapacityResponseAvailability[]
+     * @var list<DispatchV2CapacityResponseAvailability>
      */
     protected $availabilities;
 
@@ -38,6 +47,7 @@ class DispatchV2CapacityResponse
      */
     public function setTimeStamp(\DateTime $timeStamp): self
     {
+        $this->initialized['timeStamp'] = true;
         $this->timeStamp = $timeStamp;
 
         return $this;
@@ -46,7 +56,7 @@ class DispatchV2CapacityResponse
     /**
      * Availability calculations by time frame.
      *
-     * @return DispatchV2CapacityResponseAvailability[]
+     * @return list<DispatchV2CapacityResponseAvailability>
      */
     public function getAvailabilities(): array
     {
@@ -56,10 +66,11 @@ class DispatchV2CapacityResponse
     /**
      * Availability calculations by time frame.
      *
-     * @param DispatchV2CapacityResponseAvailability[] $availabilities
+     * @param list<DispatchV2CapacityResponseAvailability> $availabilities
      */
     public function setAvailabilities(array $availabilities): self
     {
+        $this->initialized['availabilities'] = true;
         $this->availabilities = $availabilities;
 
         return $this;

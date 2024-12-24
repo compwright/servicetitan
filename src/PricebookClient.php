@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class PricebookClient extends Runtime\Client\Client
 {
     /**
      * GET the categories in your pricebook.
@@ -18,38 +18,37 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by specified fields
-     *     @var string $categoryType Values: [Services, Materials]
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by specified fields
+     * @var string $categoryType Values: [Services, Materials]
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesGetListBadRequestException
+     * @return Model\PaginatedResponseOfPricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CategoriesGetListBadRequestException
      */
     public function categoriesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CategoriesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CategoriesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Post to add a new category to your pricebook.
      *
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesCreateBadRequestException
+     * @return Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CategoriesCreateBadRequestException
      */
     public function categoriesCreate(int $tenant, ?Model\PricebookV2CategoryCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CategoriesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CategoriesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -59,14 +58,14 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesDeleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesDeleteNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\CategoriesDeleteBadRequestException
+     * @throws Exception\CategoriesDeleteNotFoundException
      */
     public function categoriesDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CategoriesDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CategoriesDelete($id, $tenant), $fetch);
     }
 
     /**
@@ -76,32 +75,31 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesGetNotFoundException
+     * @return Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CategoriesGetBadRequestException
+     * @throws Exception\CategoriesGetNotFoundException
      */
     public function categoriesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CategoriesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CategoriesGet($id, $tenant), $fetch);
     }
 
     /**
      * Edits an existing category in your pricebook.
      *
-     * @param int                                                                  $id          Format - int64. Unique id for the SKU is modified
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2CategoryUpdateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Unique id for the SKU is modified
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CategoriesUpdateNotFoundException
+     * @return Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2CategoryResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CategoriesUpdateBadRequestException
+     * @throws Exception\CategoriesUpdateNotFoundException
      */
     public function categoriesUpdate(int $id, int $tenant, ?Model\PricebookV2CategoryUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CategoriesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CategoriesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -110,45 +108,49 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, Code, DisplayName, CreatedOn, ModifiedOn, Price, MemberPrice, AddOnPrice, AddOnMemberPrice, MaterialsCost, PrimaryVendor, Cost, Manufacturer, Priority.
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesGetListBadRequestException
+     * @return Model\PaginatedResponseOfPricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\DiscountAndFeesGetListBadRequestException
      */
     public function discountAndFeesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\DiscountAndFeesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DiscountAndFeesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Post to add a new discount or fee to your pricebook.
      *
-     * @param int                                                                         $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesCreateRequest|null $requestBody
-     * @param string                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesCreateBadRequestException
+     * @return Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\DiscountAndFeesCreateBadRequestException
      */
     public function discountAndFeesCreate(int $tenant, ?Model\PricebookV2DiscountAndFeesCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\DiscountAndFeesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\DiscountAndFeesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -158,14 +160,14 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesDeleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesDeleteNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\DiscountAndFeesDeleteBadRequestException
+     * @throws Exception\DiscountAndFeesDeleteNotFoundException
      */
     public function discountAndFeesDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\DiscountAndFeesDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\DiscountAndFeesDelete($id, $tenant), $fetch);
     }
 
     /**
@@ -175,38 +177,37 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesGetNotFoundException
+     * @return Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\DiscountAndFeesGetBadRequestException
+     * @throws Exception\DiscountAndFeesGetNotFoundException
      */
     public function discountAndFeesGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\DiscountAndFeesGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\DiscountAndFeesGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Edit an existing item in your pricebook.
      *
-     * @param int                                                                         $id          Format - int64. Unique id for the SKU is modified
-     * @param int                                                                         $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesUpdateRequest|null $requestBody
-     * @param string                                                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Unique id for the SKU is modified
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\DiscountAndFeesUpdateNotFoundException
+     * @return Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\DiscountAndFeesUpdateBadRequestException
+     * @throws Exception\DiscountAndFeesUpdateNotFoundException
      */
     public function discountAndFeesUpdate(int $id, int $tenant, ?Model\PricebookV2DiscountAndFeesUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\DiscountAndFeesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\DiscountAndFeesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -215,45 +216,49 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, Code, DisplayName, CreatedOn, ModifiedOn, Price, MemberPrice, AddOnPrice, AddOnMemberPrice, MaterialsCost, PrimaryVendor, Cost, Manufacturer, Priority.
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentGetListBadRequestException
+     * @return Model\PaginatedResponseOfPricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EquipmentGetListBadRequestException
      */
     public function equipmentGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EquipmentGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EquipmentGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Post to add a new equipment to your pricebook.
      *
-     * @param int                                                                   $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2EquipmentCreateRequest|null $requestBody
-     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentCreateBadRequestException
+     * @return Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EquipmentCreateBadRequestException
      */
     public function equipmentCreate(int $tenant, ?Model\PricebookV2EquipmentCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EquipmentCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EquipmentCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -263,14 +268,14 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentDeleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentDeleteNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\EquipmentDeleteBadRequestException
+     * @throws Exception\EquipmentDeleteNotFoundException
      */
     public function equipmentDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EquipmentDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EquipmentDelete($id, $tenant), $fetch);
     }
 
     /**
@@ -280,38 +285,37 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentGetNotFoundException
+     * @return Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EquipmentGetBadRequestException
+     * @throws Exception\EquipmentGetNotFoundException
      */
     public function equipmentGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EquipmentGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EquipmentGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Edit an existing item in your pricebook.
      *
-     * @param int                                                                   $id          Format - int64. Unique id for the SKU is modified
-     * @param int                                                                   $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2EquipmentUpdateRequest|null $requestBody
-     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Unique id for the SKU is modified
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\EquipmentUpdateNotFoundException
+     * @return Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2EquipmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EquipmentUpdateBadRequestException
+     * @throws Exception\EquipmentUpdateNotFoundException
      */
     public function equipmentUpdate(int $id, int $tenant, ?Model\PricebookV2EquipmentUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EquipmentUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EquipmentUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -320,45 +324,49 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, Code, DisplayName, CreatedOn, ModifiedOn, Price, MemberPrice, AddOnPrice, AddOnMemberPrice, MaterialsCost, PrimaryVendor, Cost, Manufacturer, Priority.
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsGetListBadRequestException
+     * @return Model\PaginatedResponseOfPricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MaterialsGetListBadRequestException
      */
     public function materialsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MaterialsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\MaterialsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Add a new Materials to your pricebook.
      *
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2MaterialCreateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsCreateBadRequestException
+     * @return Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MaterialsCreateBadRequestException
      */
     public function materialsCreate(int $tenant, ?Model\PricebookV2MaterialCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MaterialsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\MaterialsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -368,14 +376,14 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsDeleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsDeleteNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\MaterialsDeleteBadRequestException
+     * @throws Exception\MaterialsDeleteNotFoundException
      */
     public function materialsDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MaterialsDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\MaterialsDelete($id, $tenant), $fetch);
     }
 
     /**
@@ -385,66 +393,63 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsGetNotFoundException
+     * @return Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MaterialsGetBadRequestException
+     * @throws Exception\MaterialsGetNotFoundException
      */
     public function materialsGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MaterialsGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\MaterialsGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Edit an existing item in your pricebook.
      *
-     * @param int                                                                  $id          Format - int64. Unique id for the SKU is modified
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2MaterialUpdateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Unique id for the SKU is modified
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MaterialsUpdateNotFoundException
+     * @return Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2MaterialResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MaterialsUpdateBadRequestException
+     * @throws Exception\MaterialsUpdateNotFoundException
      */
     public function materialsUpdate(int $id, int $tenant, ?Model\PricebookV2MaterialUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MaterialsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\MaterialsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
-     * @param int                                                                       $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest|null $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\PricebookBulkUpdateBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\PricebookBulkUpdateBadRequestException
      */
     public function pricebookBulkUpdate(int $tenant, ?Model\PricebookV2PricebookBulkUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PricebookBulkUpdate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PricebookBulkUpdate($tenant, $requestBody), $fetch);
     }
 
     /**
-     * @param int                                                                       $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkCreateRequest|null $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PricebookBulkCreateBadRequestException
+     * @return Model\PricebookV2PricebookBulkCreateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkCreateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PricebookBulkCreateBadRequestException
      */
     public function pricebookBulkCreate(int $tenant, ?Model\PricebookV2PricebookBulkCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PricebookBulkCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PricebookBulkCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -453,45 +458,49 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $sort Applies sorting by the specified field:\
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, Code, DisplayName, CreatedOn, ModifiedOn, Price, MemberPrice, AddOnPrice, AddOnMemberPrice, MaterialsCost, PrimaryVendor, Cost, Manufacturer, Priority.
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ServicesGetListBadRequestException
+     * @return Model\PaginatedResponseOfPricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ServicesGetListBadRequestException
      */
     public function servicesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ServicesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ServicesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Post to add a new service to your pricebook.
      *
-     * @param int                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2ServiceCreateRequest|null $requestBody
-     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ServicesCreateBadRequestException
+     * @return Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ServicesCreateBadRequestException
      */
     public function servicesCreate(int $tenant, ?Model\PricebookV2ServiceCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ServicesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\ServicesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -501,14 +510,14 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ServicesDeleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\ServicesDeleteNotFoundException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\ServicesDeleteBadRequestException
+     * @throws Exception\ServicesDeleteNotFoundException
      */
     public function servicesDelete(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ServicesDelete($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\ServicesDelete($id, $tenant), $fetch);
     }
 
     /**
@@ -518,38 +527,37 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
-    only when the same application guid is provided.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. Items that are created with a specific guid, could be fetched/updated/removed
+     *             only when the same application guid is provided.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ServicesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\ServicesGetNotFoundException
+     * @return Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ServicesGetBadRequestException
+     * @throws Exception\ServicesGetNotFoundException
      */
     public function servicesGet(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ServicesGet($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ServicesGet($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Edit an existing item in your pricebook.
      *
-     * @param int                                                                 $id          Format - int64. Unique id for the SKU is modified
-     * @param int                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\PricebookV2ServiceUpdateRequest|null $requestBody
-     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Unique id for the SKU is modified
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ServicesUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\ServicesUpdateNotFoundException
+     * @return Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PricebookV2ServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ServicesUpdateBadRequestException
+     * @throws Exception\ServicesUpdateNotFoundException
      */
     public function servicesUpdate(int $id, int $tenant, ?Model\PricebookV2ServiceUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ServicesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\ServicesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -557,7 +565,7 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -566,7 +574,7 @@ class PricebookClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

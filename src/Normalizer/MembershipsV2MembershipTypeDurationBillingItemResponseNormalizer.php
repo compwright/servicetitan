@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,103 +21,221 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class MembershipsV2MembershipTypeDurationBillingItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class MembershipsV2MembershipTypeDurationBillingItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\MembershipsV2MembershipTypeDurationBillingItemResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\MembershipsV2MembershipTypeDurationBillingItemResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse();
+            if (\array_key_exists('salePrice', $data) && \is_int($data['salePrice'])) {
+                $data['salePrice'] = (float) $data['salePrice'];
+            }
+            if (\array_key_exists('billingPrice', $data) && \is_int($data['billingPrice'])) {
+                $data['billingPrice'] = (float) $data['billingPrice'];
+            }
+            if (\array_key_exists('renewalPrice', $data) && \is_int($data['renewalPrice'])) {
+                $data['renewalPrice'] = (float) $data['renewalPrice'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('duration', $data) && $data['duration'] !== null) {
+                $object->setDuration($data['duration']);
+            } elseif (\array_key_exists('duration', $data) && $data['duration'] === null) {
+                $object->setDuration(null);
+            }
+            if (\array_key_exists('billingFrequency', $data)) {
+                $object->setBillingFrequency($data['billingFrequency']);
+            }
+            if (\array_key_exists('salePrice', $data)) {
+                $object->setSalePrice($data['salePrice']);
+            }
+            if (\array_key_exists('billingPrice', $data)) {
+                $object->setBillingPrice($data['billingPrice']);
+            }
+            if (\array_key_exists('renewalPrice', $data)) {
+                $object->setRenewalPrice($data['renewalPrice']);
+            }
+            if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
+                $object->setImportId($data['importId']);
+            } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
+                $object->setImportId(null);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
+                $object->setCreatedById($data['createdById']);
+            } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
+                $object->setCreatedById(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('duration', $data) && $data['duration'] !== null) {
-            $object->setDuration($data['duration']);
-        } elseif (\array_key_exists('duration', $data) && $data['duration'] === null) {
-            $object->setDuration(null);
-        }
-        if (\array_key_exists('billingFrequency', $data)) {
-            $object->setBillingFrequency($data['billingFrequency']);
-        }
-        if (\array_key_exists('salePrice', $data)) {
-            $object->setSalePrice($data['salePrice']);
-        }
-        if (\array_key_exists('billingPrice', $data)) {
-            $object->setBillingPrice($data['billingPrice']);
-        }
-        if (\array_key_exists('renewalPrice', $data)) {
-            $object->setRenewalPrice($data['renewalPrice']);
-        }
-        if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
-            $object->setImportId($data['importId']);
-        } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
-            $object->setImportId(null);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('createdOn', $data)) {
-            $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdOn']));
-        }
-        if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
-            $object->setCreatedById($data['createdById']);
-        } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
-            $object->setCreatedById(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            if ($object->isInitialized('duration') && null !== $object->getDuration()) {
+                $data['duration'] = $object->getDuration();
+            }
+            $data['billingFrequency'] = $object->getBillingFrequency();
+            $data['salePrice'] = $object->getSalePrice();
+            $data['billingPrice'] = $object->getBillingPrice();
+            $data['renewalPrice'] = $object->getRenewalPrice();
+            if ($object->isInitialized('importId') && null !== $object->getImportId()) {
+                $data['importId'] = $object->getImportId();
+            }
+            $data['active'] = $object->getActive();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdById') && null !== $object->getCreatedById()) {
+                $data['createdById'] = $object->getCreatedById();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class MembershipsV2MembershipTypeDurationBillingItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        if (null !== $object->getDuration()) {
-            $data['duration'] = $object->getDuration();
-        }
-        $data['billingFrequency'] = $object->getBillingFrequency();
-        $data['salePrice'] = $object->getSalePrice();
-        $data['billingPrice'] = $object->getBillingPrice();
-        $data['renewalPrice'] = $object->getRenewalPrice();
-        if (null !== $object->getImportId()) {
-            $data['importId'] = $object->getImportId();
-        }
-        $data['active'] = $object->getActive();
-        $data['createdOn'] = $object->getCreatedOn()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getCreatedById()) {
-            $data['createdById'] = $object->getCreatedById();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse();
+            if (\array_key_exists('salePrice', $data) && \is_int($data['salePrice'])) {
+                $data['salePrice'] = (float) $data['salePrice'];
+            }
+            if (\array_key_exists('billingPrice', $data) && \is_int($data['billingPrice'])) {
+                $data['billingPrice'] = (float) $data['billingPrice'];
+            }
+            if (\array_key_exists('renewalPrice', $data) && \is_int($data['renewalPrice'])) {
+                $data['renewalPrice'] = (float) $data['renewalPrice'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('duration', $data) && $data['duration'] !== null) {
+                $object->setDuration($data['duration']);
+            } elseif (\array_key_exists('duration', $data) && $data['duration'] === null) {
+                $object->setDuration(null);
+            }
+            if (\array_key_exists('billingFrequency', $data)) {
+                $object->setBillingFrequency($data['billingFrequency']);
+            }
+            if (\array_key_exists('salePrice', $data)) {
+                $object->setSalePrice($data['salePrice']);
+            }
+            if (\array_key_exists('billingPrice', $data)) {
+                $object->setBillingPrice($data['billingPrice']);
+            }
+            if (\array_key_exists('renewalPrice', $data)) {
+                $object->setRenewalPrice($data['renewalPrice']);
+            }
+            if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
+                $object->setImportId($data['importId']);
+            } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
+                $object->setImportId(null);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
+                $object->setCreatedById($data['createdById']);
+            } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
+                $object->setCreatedById(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            if ($object->isInitialized('duration') && null !== $object->getDuration()) {
+                $data['duration'] = $object->getDuration();
+            }
+            $data['billingFrequency'] = $object->getBillingFrequency();
+            $data['salePrice'] = $object->getSalePrice();
+            $data['billingPrice'] = $object->getBillingPrice();
+            $data['renewalPrice'] = $object->getRenewalPrice();
+            if ($object->isInitialized('importId') && null !== $object->getImportId()) {
+                $data['importId'] = $object->getImportId();
+            }
+            $data['active'] = $object->getActive();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdById') && null !== $object->getCreatedById()) {
+                $data['createdById'] = $object->getCreatedById();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse::class => false];
+        }
     }
 }

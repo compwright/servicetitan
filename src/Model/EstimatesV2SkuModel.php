@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EstimatesV2SkuModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -52,6 +61,7 @@ class EstimatesV2SkuModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -64,6 +74,7 @@ class EstimatesV2SkuModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -76,6 +87,7 @@ class EstimatesV2SkuModel
 
     public function setDisplayName(string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -88,6 +100,7 @@ class EstimatesV2SkuModel
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -100,6 +113,7 @@ class EstimatesV2SkuModel
 
     public function setSoldHours(float $soldHours): self
     {
+        $this->initialized['soldHours'] = true;
         $this->soldHours = $soldHours;
 
         return $this;
@@ -112,6 +126,7 @@ class EstimatesV2SkuModel
 
     public function setGeneralLedgerAccountId(int $generalLedgerAccountId): self
     {
+        $this->initialized['generalLedgerAccountId'] = true;
         $this->generalLedgerAccountId = $generalLedgerAccountId;
 
         return $this;
@@ -124,6 +139,7 @@ class EstimatesV2SkuModel
 
     public function setGeneralLedgerAccountName(string $generalLedgerAccountName): self
     {
+        $this->initialized['generalLedgerAccountName'] = true;
         $this->generalLedgerAccountName = $generalLedgerAccountName;
 
         return $this;
@@ -136,6 +152,7 @@ class EstimatesV2SkuModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

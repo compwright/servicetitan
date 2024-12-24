@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2TruckResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Truck Id.
      *
      * @var int
@@ -45,7 +54,7 @@ class InventoryV2TruckResponse
     /**
      * Technician Ids Attached.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $technicianIds;
 
@@ -62,6 +71,7 @@ class InventoryV2TruckResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -80,6 +90,7 @@ class InventoryV2TruckResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -98,6 +109,7 @@ class InventoryV2TruckResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -116,6 +128,7 @@ class InventoryV2TruckResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -134,6 +147,7 @@ class InventoryV2TruckResponse
      */
     public function setWarehouseId(?int $warehouseId): self
     {
+        $this->initialized['warehouseId'] = true;
         $this->warehouseId = $warehouseId;
 
         return $this;
@@ -142,7 +156,7 @@ class InventoryV2TruckResponse
     /**
      * Technician Ids Attached.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getTechnicianIds(): array
     {
@@ -152,10 +166,11 @@ class InventoryV2TruckResponse
     /**
      * Technician Ids Attached.
      *
-     * @param int[] $technicianIds
+     * @param list<int> $technicianIds
      */
     public function setTechnicianIds(array $technicianIds): self
     {
+        $this->initialized['technicianIds'] = true;
         $this->technicianIds = $technicianIds;
 
         return $this;

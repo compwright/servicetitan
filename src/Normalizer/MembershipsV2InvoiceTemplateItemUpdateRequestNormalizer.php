@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,99 +21,219 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class MembershipsV2InvoiceTemplateItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class MembershipsV2InvoiceTemplateItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\MembershipsV2InvoiceTemplateItemUpdateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\MembershipsV2InvoiceTemplateItemUpdateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest();
+            if (\array_key_exists('quantity', $data) && \is_int($data['quantity'])) {
+                $data['quantity'] = (float) $data['quantity'];
+            }
+            if (\array_key_exists('unitPrice', $data) && \is_int($data['unitPrice'])) {
+                $data['unitPrice'] = (float) $data['unitPrice'];
+            }
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('skuId', $data)) {
+                $object->setSkuId($data['skuId']);
+            }
+            if (\array_key_exists('quantity', $data)) {
+                $object->setQuantity($data['quantity']);
+            }
+            if (\array_key_exists('unitPrice', $data)) {
+                $object->setUnitPrice($data['unitPrice']);
+            }
+            if (\array_key_exists('isAddOn', $data)) {
+                $object->setIsAddOn($data['isAddOn']);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId(null);
-        }
-        if (\array_key_exists('skuId', $data)) {
-            $object->setSkuId($data['skuId']);
-        }
-        if (\array_key_exists('quantity', $data)) {
-            $object->setQuantity($data['quantity']);
-        }
-        if (\array_key_exists('unitPrice', $data)) {
-            $object->setUnitPrice($data['unitPrice']);
-        }
-        if (\array_key_exists('isAddOn', $data)) {
-            $object->setIsAddOn($data['isAddOn']);
-        }
-        if (\array_key_exists('description', $data) && $data['description'] !== null) {
-            $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
-            $object->setDescription(null);
-        }
-        if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
-            $object->setCost($data['cost']);
-        } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
-            $object->setCost(null);
-        }
-        if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
-            $object->setHours($data['hours']);
-        } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
-            $object->setHours(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            $data['skuId'] = $object->getSkuId();
+            $data['quantity'] = $object->getQuantity();
+            $data['unitPrice'] = $object->getUnitPrice();
+            $data['isAddOn'] = $object->getIsAddOn();
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class MembershipsV2InvoiceTemplateItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
-        $data['skuId'] = $object->getSkuId();
-        $data['quantity'] = $object->getQuantity();
-        $data['unitPrice'] = $object->getUnitPrice();
-        $data['isAddOn'] = $object->getIsAddOn();
-        if (null !== $object->getDescription()) {
-            $data['description'] = $object->getDescription();
-        }
-        if (null !== $object->getCost()) {
-            $data['cost'] = $object->getCost();
-        }
-        if (null !== $object->getHours()) {
-            $data['hours'] = $object->getHours();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest();
+            if (\array_key_exists('quantity', $data) && \is_int($data['quantity'])) {
+                $data['quantity'] = (float) $data['quantity'];
+            }
+            if (\array_key_exists('unitPrice', $data) && \is_int($data['unitPrice'])) {
+                $data['unitPrice'] = (float) $data['unitPrice'];
+            }
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+            if (\array_key_exists('skuId', $data)) {
+                $object->setSkuId($data['skuId']);
+            }
+            if (\array_key_exists('quantity', $data)) {
+                $object->setQuantity($data['quantity']);
+            }
+            if (\array_key_exists('unitPrice', $data)) {
+                $object->setUnitPrice($data['unitPrice']);
+            }
+            if (\array_key_exists('isAddOn', $data)) {
+                $object->setIsAddOn($data['isAddOn']);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+            $data['skuId'] = $object->getSkuId();
+            $data['quantity'] = $object->getQuantity();
+            $data['unitPrice'] = $object->getUnitPrice();
+            $data['isAddOn'] = $object->getIsAddOn();
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateItemUpdateRequest::class => false];
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2UpdateJobTypeRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Name of the job type.
      *
      * @var string
@@ -20,8 +29,6 @@ class CrmV2UpdateJobTypeRequest
     protected $name;
     /**
      * External data update model.
-     *
-     * @var mixed
      */
     protected $externalData;
 
@@ -38,6 +45,7 @@ class CrmV2UpdateJobTypeRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -45,8 +53,6 @@ class CrmV2UpdateJobTypeRequest
 
     /**
      * External data update model.
-     *
-     * @return mixed
      */
     public function getExternalData()
     {
@@ -55,11 +61,10 @@ class CrmV2UpdateJobTypeRequest
 
     /**
      * External data update model.
-     *
-     * @param mixed $externalData
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

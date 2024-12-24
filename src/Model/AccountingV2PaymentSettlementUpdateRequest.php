@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentSettlementUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -32,24 +41,20 @@ class AccountingV2PaymentSettlementUpdateRequest
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSettlementStatus()
     {
         return $this->settlementStatus;
     }
 
-    /**
-     * @param mixed $settlementStatus
-     */
     public function setSettlementStatus($settlementStatus): self
     {
+        $this->initialized['settlementStatus'] = true;
         $this->settlementStatus = $settlementStatus;
 
         return $this;
@@ -62,6 +67,7 @@ class AccountingV2PaymentSettlementUpdateRequest
 
     public function setSettlementDate(?\DateTime $settlementDate): self
     {
+        $this->initialized['settlementDate'] = true;
         $this->settlementDate = $settlementDate;
 
         return $this;

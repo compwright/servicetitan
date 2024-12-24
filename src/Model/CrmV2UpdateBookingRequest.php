@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2UpdateBookingRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Source of the booking.
      *
      * @var string
@@ -30,8 +39,6 @@ class CrmV2UpdateBookingRequest
     protected $address;
     /**
      * Type of customer (Residential/Commercial).
-     *
-     * @var mixed
      */
     protected $customerType;
     /**
@@ -66,8 +73,6 @@ class CrmV2UpdateBookingRequest
     protected $jobTypeId;
     /**
      * Booking priority.
-     *
-     * @var mixed
      */
     protected $priority;
     /**
@@ -79,7 +84,7 @@ class CrmV2UpdateBookingRequest
     /**
      * Uploaded images.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $uploadedImages;
     /**
@@ -102,6 +107,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setSource(string $source): self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
 
         return $this;
@@ -120,6 +126,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -132,6 +139,7 @@ class CrmV2UpdateBookingRequest
 
     public function setAddress(CrmV2AddressPatchModel $address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -139,8 +147,6 @@ class CrmV2UpdateBookingRequest
 
     /**
      * Type of customer (Residential/Commercial).
-     *
-     * @return mixed
      */
     public function getCustomerType()
     {
@@ -149,11 +155,10 @@ class CrmV2UpdateBookingRequest
 
     /**
      * Type of customer (Residential/Commercial).
-     *
-     * @param mixed $customerType
      */
     public function setCustomerType($customerType): self
     {
+        $this->initialized['customerType'] = true;
         $this->customerType = $customerType;
 
         return $this;
@@ -172,6 +177,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -190,6 +196,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setSummary(string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -208,6 +215,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -226,6 +234,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -244,6 +253,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -251,8 +261,6 @@ class CrmV2UpdateBookingRequest
 
     /**
      * Booking priority.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -261,11 +269,10 @@ class CrmV2UpdateBookingRequest
 
     /**
      * Booking priority.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -284,6 +291,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setIsFirstTimeClient(bool $isFirstTimeClient): self
     {
+        $this->initialized['isFirstTimeClient'] = true;
         $this->isFirstTimeClient = $isFirstTimeClient;
 
         return $this;
@@ -292,7 +300,7 @@ class CrmV2UpdateBookingRequest
     /**
      * Uploaded images.
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getUploadedImages(): array
     {
@@ -302,10 +310,11 @@ class CrmV2UpdateBookingRequest
     /**
      * Uploaded images.
      *
-     * @param string[] $uploadedImages
+     * @param list<string> $uploadedImages
      */
     public function setUploadedImages(array $uploadedImages): self
     {
+        $this->initialized['uploadedImages'] = true;
         $this->uploadedImages = $uploadedImages;
 
         return $this;
@@ -324,6 +333,7 @@ class CrmV2UpdateBookingRequest
      */
     public function setExternalId(string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2EquipmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique id for the SKU.
      *
      * @var int
@@ -80,44 +89,40 @@ class PricebookV2EquipmentResponse
     protected $model;
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @var mixed
      */
     protected $manufacturerWarranty;
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @var mixed
      */
     protected $serviceProviderWarranty;
     /**
      * Categories that this SKU belongs to.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $categories;
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetResponse[]
+     * @var list<PricebookV2SkuAssetResponse>
      */
     protected $assets;
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @var PricebookV2EquipmentRecommendationResponse[]
+     * @var list<PricebookV2EquipmentRecommendationResponse>
      */
     protected $recommendations;
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $upgrades;
     /**
      * Array of materials used with this equipment.
      *
-     * @var PricebookV2SkuLinkResponse[]
+     * @var list<PricebookV2SkuLinkResponse>
      */
     protected $equipmentMaterials;
     /**
@@ -129,7 +134,7 @@ class PricebookV2EquipmentResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @var PricebookV2SkuVendorResponse[]|null
+     * @var list<PricebookV2SkuVendorResponse>|null
      */
     protected $otherVendors;
     /**
@@ -213,9 +218,10 @@ class PricebookV2EquipmentResponse
      */
     protected $externalId;
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var PricebookV2ExternalDataModel[]|null
+     * @var list<PricebookV2ExternalDataModel>|null
      */
     protected $externalData;
 
@@ -232,6 +238,7 @@ class PricebookV2EquipmentResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -250,6 +257,7 @@ class PricebookV2EquipmentResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -268,6 +276,7 @@ class PricebookV2EquipmentResponse
      */
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -286,6 +295,7 @@ class PricebookV2EquipmentResponse
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -304,6 +314,7 @@ class PricebookV2EquipmentResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -322,6 +333,7 @@ class PricebookV2EquipmentResponse
      */
     public function setPrice(float $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -340,6 +352,7 @@ class PricebookV2EquipmentResponse
      */
     public function setMemberPrice(float $memberPrice): self
     {
+        $this->initialized['memberPrice'] = true;
         $this->memberPrice = $memberPrice;
 
         return $this;
@@ -358,6 +371,7 @@ class PricebookV2EquipmentResponse
      */
     public function setAddOnPrice(float $addOnPrice): self
     {
+        $this->initialized['addOnPrice'] = true;
         $this->addOnPrice = $addOnPrice;
 
         return $this;
@@ -376,6 +390,7 @@ class PricebookV2EquipmentResponse
      */
     public function setAddOnMemberPrice(float $addOnMemberPrice): self
     {
+        $this->initialized['addOnMemberPrice'] = true;
         $this->addOnMemberPrice = $addOnMemberPrice;
 
         return $this;
@@ -394,6 +409,7 @@ class PricebookV2EquipmentResponse
      */
     public function setManufacturer(?string $manufacturer): self
     {
+        $this->initialized['manufacturer'] = true;
         $this->manufacturer = $manufacturer;
 
         return $this;
@@ -412,6 +428,7 @@ class PricebookV2EquipmentResponse
      */
     public function setModel(?string $model): self
     {
+        $this->initialized['model'] = true;
         $this->model = $model;
 
         return $this;
@@ -419,8 +436,6 @@ class PricebookV2EquipmentResponse
 
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @return mixed
      */
     public function getManufacturerWarranty()
     {
@@ -429,11 +444,10 @@ class PricebookV2EquipmentResponse
 
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @param mixed $manufacturerWarranty
      */
     public function setManufacturerWarranty($manufacturerWarranty): self
     {
+        $this->initialized['manufacturerWarranty'] = true;
         $this->manufacturerWarranty = $manufacturerWarranty;
 
         return $this;
@@ -441,8 +455,6 @@ class PricebookV2EquipmentResponse
 
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @return mixed
      */
     public function getServiceProviderWarranty()
     {
@@ -451,11 +463,10 @@ class PricebookV2EquipmentResponse
 
     /**
      * Description of the manufacturer warranty included in this SKU.
-     *
-     * @param mixed $serviceProviderWarranty
      */
     public function setServiceProviderWarranty($serviceProviderWarranty): self
     {
+        $this->initialized['serviceProviderWarranty'] = true;
         $this->serviceProviderWarranty = $serviceProviderWarranty;
 
         return $this;
@@ -464,7 +475,7 @@ class PricebookV2EquipmentResponse
     /**
      * Categories that this SKU belongs to.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getCategories(): array
     {
@@ -474,10 +485,11 @@ class PricebookV2EquipmentResponse
     /**
      * Categories that this SKU belongs to.
      *
-     * @param int[] $categories
+     * @param list<int> $categories
      */
     public function setCategories(array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -486,7 +498,7 @@ class PricebookV2EquipmentResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetResponse[]
+     * @return list<PricebookV2SkuAssetResponse>
      */
     public function getAssets(): array
     {
@@ -496,10 +508,11 @@ class PricebookV2EquipmentResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetResponse[] $assets
+     * @param list<PricebookV2SkuAssetResponse> $assets
      */
     public function setAssets(array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -508,7 +521,7 @@ class PricebookV2EquipmentResponse
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @return PricebookV2EquipmentRecommendationResponse[]
+     * @return list<PricebookV2EquipmentRecommendationResponse>
      */
     public function getRecommendations(): array
     {
@@ -518,10 +531,11 @@ class PricebookV2EquipmentResponse
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @param PricebookV2EquipmentRecommendationResponse[] $recommendations
+     * @param list<PricebookV2EquipmentRecommendationResponse> $recommendations
      */
     public function setRecommendations(array $recommendations): self
     {
+        $this->initialized['recommendations'] = true;
         $this->recommendations = $recommendations;
 
         return $this;
@@ -530,7 +544,7 @@ class PricebookV2EquipmentResponse
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getUpgrades(): array
     {
@@ -540,10 +554,11 @@ class PricebookV2EquipmentResponse
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @param int[] $upgrades
+     * @param list<int> $upgrades
      */
     public function setUpgrades(array $upgrades): self
     {
+        $this->initialized['upgrades'] = true;
         $this->upgrades = $upgrades;
 
         return $this;
@@ -552,7 +567,7 @@ class PricebookV2EquipmentResponse
     /**
      * Array of materials used with this equipment.
      *
-     * @return PricebookV2SkuLinkResponse[]
+     * @return list<PricebookV2SkuLinkResponse>
      */
     public function getEquipmentMaterials(): array
     {
@@ -562,10 +577,11 @@ class PricebookV2EquipmentResponse
     /**
      * Array of materials used with this equipment.
      *
-     * @param PricebookV2SkuLinkResponse[] $equipmentMaterials
+     * @param list<PricebookV2SkuLinkResponse> $equipmentMaterials
      */
     public function setEquipmentMaterials(array $equipmentMaterials): self
     {
+        $this->initialized['equipmentMaterials'] = true;
         $this->equipmentMaterials = $equipmentMaterials;
 
         return $this;
@@ -573,8 +589,6 @@ class PricebookV2EquipmentResponse
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @return mixed
      */
     public function getPrimaryVendor()
     {
@@ -583,11 +597,10 @@ class PricebookV2EquipmentResponse
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @param mixed $primaryVendor
      */
     public function setPrimaryVendor($primaryVendor): self
     {
+        $this->initialized['primaryVendor'] = true;
         $this->primaryVendor = $primaryVendor;
 
         return $this;
@@ -596,7 +609,7 @@ class PricebookV2EquipmentResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @return PricebookV2SkuVendorResponse[]|null
+     * @return list<PricebookV2SkuVendorResponse>|null
      */
     public function getOtherVendors(): ?array
     {
@@ -606,10 +619,11 @@ class PricebookV2EquipmentResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @param PricebookV2SkuVendorResponse[]|null $otherVendors
+     * @param list<PricebookV2SkuVendorResponse>|null $otherVendors
      */
     public function setOtherVendors(?array $otherVendors): self
     {
+        $this->initialized['otherVendors'] = true;
         $this->otherVendors = $otherVendors;
 
         return $this;
@@ -628,6 +642,7 @@ class PricebookV2EquipmentResponse
      */
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -640,6 +655,7 @@ class PricebookV2EquipmentResponse
 
     public function setCostOfSaleAccount(?string $costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
@@ -652,6 +668,7 @@ class PricebookV2EquipmentResponse
 
     public function setAssetAccount(?string $assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;
@@ -670,6 +687,7 @@ class PricebookV2EquipmentResponse
      */
     public function setCrossSaleGroup(?string $crossSaleGroup): self
     {
+        $this->initialized['crossSaleGroup'] = true;
         $this->crossSaleGroup = $crossSaleGroup;
 
         return $this;
@@ -688,6 +706,7 @@ class PricebookV2EquipmentResponse
      */
     public function setPaysCommission(bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -706,6 +725,7 @@ class PricebookV2EquipmentResponse
      */
     public function setCommissionBonus(float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -724,6 +744,7 @@ class PricebookV2EquipmentResponse
      */
     public function setHours(float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -742,6 +763,7 @@ class PricebookV2EquipmentResponse
      */
     public function setTaxable(bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -760,6 +782,7 @@ class PricebookV2EquipmentResponse
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -778,6 +801,7 @@ class PricebookV2EquipmentResponse
      */
     public function setUnitOfMeasure(?string $unitOfMeasure): self
     {
+        $this->initialized['unitOfMeasure'] = true;
         $this->unitOfMeasure = $unitOfMeasure;
 
         return $this;
@@ -796,6 +820,7 @@ class PricebookV2EquipmentResponse
      */
     public function setIsInventory(bool $isInventory): self
     {
+        $this->initialized['isInventory'] = true;
         $this->isInventory = $isInventory;
 
         return $this;
@@ -814,6 +839,7 @@ class PricebookV2EquipmentResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -832,6 +858,7 @@ class PricebookV2EquipmentResponse
      */
     public function setSource(?string $source): self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
 
         return $this;
@@ -850,15 +877,17 @@ class PricebookV2EquipmentResponse
      */
     public function setExternalId(?string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return PricebookV2ExternalDataModel[]|null
+     * @return list<PricebookV2ExternalDataModel>|null
      */
     public function getExternalData(): ?array
     {
@@ -866,12 +895,14 @@ class PricebookV2EquipmentResponse
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param PricebookV2ExternalDataModel[]|null $externalData
+     * @param list<PricebookV2ExternalDataModel>|null $externalData
      */
     public function setExternalData(?array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

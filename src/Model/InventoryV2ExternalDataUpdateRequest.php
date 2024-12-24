@@ -13,21 +13,33 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2ExternalDataUpdateRequest
 {
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      *
      * @var string
      */
     protected $applicationGuid;
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @var InventoryV2ExternalDataModel[]
+     * @var list<InventoryV2ExternalDataModel>
      */
     protected $externalData;
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function getApplicationGuid(): string
     {
@@ -35,11 +47,12 @@ class InventoryV2ExternalDataUpdateRequest
     }
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function setApplicationGuid(string $applicationGuid): self
     {
+        $this->initialized['applicationGuid'] = true;
         $this->applicationGuid = $applicationGuid;
 
         return $this;
@@ -47,8 +60,10 @@ class InventoryV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @return InventoryV2ExternalDataModel[]
+     * @return list<InventoryV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -57,11 +72,14 @@ class InventoryV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @param InventoryV2ExternalDataModel[] $externalData
+     * @param list<InventoryV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

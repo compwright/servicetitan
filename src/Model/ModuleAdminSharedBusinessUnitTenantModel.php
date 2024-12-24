@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleAdminSharedBusinessUnitTenantModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -48,6 +57,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -60,6 +70,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -72,6 +83,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setQuickbooksClass(string $quickbooksClass): self
     {
+        $this->initialized['quickbooksClass'] = true;
         $this->quickbooksClass = $quickbooksClass;
 
         return $this;
@@ -84,6 +96,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setAccountCode(string $accountCode): self
     {
+        $this->initialized['accountCode'] = true;
         $this->accountCode = $accountCode;
 
         return $this;
@@ -96,6 +109,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setFranchiseId(string $franchiseId): self
     {
+        $this->initialized['franchiseId'] = true;
         $this->franchiseId = $franchiseId;
 
         return $this;
@@ -108,6 +122,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setConceptCode(string $conceptCode): self
     {
+        $this->initialized['conceptCode'] = true;
         $this->conceptCode = $conceptCode;
 
         return $this;
@@ -120,6 +135,7 @@ class ModuleAdminSharedBusinessUnitTenantModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

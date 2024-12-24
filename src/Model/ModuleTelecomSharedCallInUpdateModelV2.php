@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleTelecomSharedCallInUpdateModelV2
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $callId;
@@ -56,24 +65,20 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setCallId(?int $callId): self
     {
+        $this->initialized['callId'] = true;
         $this->callId = $callId;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCallType()
     {
         return $this->callType;
     }
 
-    /**
-     * @param mixed $callType
-     */
     public function setCallType($callType): self
     {
+        $this->initialized['callType'] = true;
         $this->callType = $callType;
 
         return $this;
@@ -86,6 +91,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setExcuseMemo(string $excuseMemo): self
     {
+        $this->initialized['excuseMemo'] = true;
         $this->excuseMemo = $excuseMemo;
 
         return $this;
@@ -98,6 +104,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setCampaignId(?int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -110,6 +117,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -122,6 +130,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setAgentId(?int $agentId): self
     {
+        $this->initialized['agentId'] = true;
         $this->agentId = $agentId;
 
         return $this;
@@ -134,6 +143,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setReason(ModuleTelecomSharedReasonInModel $reason): self
     {
+        $this->initialized['reason'] = true;
         $this->reason = $reason;
 
         return $this;
@@ -146,6 +156,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setCustomer(CustomerInModel $customer): self
     {
+        $this->initialized['customer'] = true;
         $this->customer = $customer;
 
         return $this;
@@ -158,6 +169,7 @@ class ModuleTelecomSharedCallInUpdateModelV2
 
     public function setLocation(LocationInModel $location): self
     {
+        $this->initialized['location'] = true;
         $this->location = $location;
 
         return $this;

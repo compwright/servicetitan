@@ -52,19 +52,19 @@ class EstimatesPutItem extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpo
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemUpdateResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\EstimatesPutItemBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemUpdateResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\EstimatesV2EstimateItemUpdateResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\EstimatesV2EstimateItemUpdateResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\EstimatesPutItemBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\EstimatesPutItemBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

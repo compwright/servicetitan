@@ -49,23 +49,23 @@ class LocationRecurringServicesGet extends \CompWright\ServiceTitan\Runtime\Clie
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\MembershipsV2LocationRecurringServiceResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2LocationRecurringServiceResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\MembershipsV2LocationRecurringServiceResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\MembershipsV2LocationRecurringServiceResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

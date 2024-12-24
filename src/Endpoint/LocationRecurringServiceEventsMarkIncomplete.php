@@ -17,7 +17,9 @@ class LocationRecurringServiceEventsMarkIncomplete extends \CompWright\ServiceTi
     protected $tenant;
 
     /**
-     * Marking an event as incomplete unlinks the job with provided JobID to the given Location Recurring Service.
+     * Marking an event as incomplete unlinks the job with provided JobID to the given Location Recurring Service
+     * Event. It will also delete the invoice items that were copied over when the Location Recurring Service Event
+     * was marked as completed on the Job.
      *
      * @param int $id     Format - int64. Recurring service event ID
      * @param int $tenant Tenant ID
@@ -54,23 +56,23 @@ class LocationRecurringServiceEventsMarkIncomplete extends \CompWright\ServiceTi
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\ModificationResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ModificationResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ModificationResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2WarehouseResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Warehouse Id.
      *
      * @var int
@@ -32,8 +41,6 @@ class InventoryV2WarehouseResponse
     protected $active;
     /**
      * Warehouse address.
-     *
-     * @var mixed
      */
     protected $address;
 
@@ -50,6 +57,7 @@ class InventoryV2WarehouseResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +76,7 @@ class InventoryV2WarehouseResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -86,6 +95,7 @@ class InventoryV2WarehouseResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -93,8 +103,6 @@ class InventoryV2WarehouseResponse
 
     /**
      * Warehouse address.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -103,11 +111,10 @@ class InventoryV2WarehouseResponse
 
     /**
      * Warehouse address.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;

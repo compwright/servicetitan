@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,163 +21,323 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class MembershipsV2RecurringServiceTypeResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class MembershipsV2RecurringServiceTypeResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\MembershipsV2RecurringServiceTypeResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\MembershipsV2RecurringServiceTypeResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
+                $object->setCreatedById($data['createdById']);
+            } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
+                $object->setCreatedById(null);
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('recurrenceType', $data)) {
+                $object->setRecurrenceType($data['recurrenceType']);
+            }
+            if (\array_key_exists('recurrenceInterval', $data)) {
+                $object->setRecurrenceInterval($data['recurrenceInterval']);
+            }
+            if (\array_key_exists('recurrenceMonths', $data)) {
+                $values = [];
+                foreach ($data['recurrenceMonths'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setRecurrenceMonths($values);
+            }
+            if (\array_key_exists('durationType', $data)) {
+                $object->setDurationType($data['durationType']);
+            }
+            if (\array_key_exists('durationLength', $data)) {
+                $object->setDurationLength($data['durationLength']);
+            }
+            if (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] !== null) {
+                $object->setInvoiceTemplateId($data['invoiceTemplateId']);
+            } elseif (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] === null) {
+                $object->setInvoiceTemplateId(null);
+            }
+            if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
+                $object->setBusinessUnitId(null);
+            }
+            if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
+                $object->setJobTypeId($data['jobTypeId']);
+            } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
+                $object->setJobTypeId(null);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('campaignId', $data) && $data['campaignId'] !== null) {
+                $object->setCampaignId($data['campaignId']);
+            } elseif (\array_key_exists('campaignId', $data) && $data['campaignId'] === null) {
+                $object->setCampaignId(null);
+            }
+            if (\array_key_exists('jobSummary', $data) && $data['jobSummary'] !== null) {
+                $object->setJobSummary($data['jobSummary']);
+            } elseif (\array_key_exists('jobSummary', $data) && $data['jobSummary'] === null) {
+                $object->setJobSummary(null);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
+                $object->setImportId($data['importId']);
+            } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
+                $object->setImportId(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('createdOn', $data)) {
-            $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdOn']));
-        }
-        if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
-            $object->setCreatedById($data['createdById']);
-        } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
-            $object->setCreatedById(null);
-        }
-        if (\array_key_exists('modifiedOn', $data)) {
-            $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['modifiedOn']));
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('recurrenceType', $data)) {
-            $object->setRecurrenceType($data['recurrenceType']);
-        }
-        if (\array_key_exists('recurrenceInterval', $data)) {
-            $object->setRecurrenceInterval($data['recurrenceInterval']);
-        }
-        if (\array_key_exists('recurrenceMonths', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdById') && null !== $object->getCreatedById()) {
+                $data['createdById'] = $object->getCreatedById();
+            }
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $data['active'] = $object->getActive();
+            $data['recurrenceType'] = $object->getRecurrenceType();
+            $data['recurrenceInterval'] = $object->getRecurrenceInterval();
             $values = [];
-            foreach ($data['recurrenceMonths'] as $value) {
+            foreach ($object->getRecurrenceMonths() as $value) {
                 $values[] = $value;
             }
-            $object->setRecurrenceMonths($values);
-        }
-        if (\array_key_exists('durationType', $data)) {
-            $object->setDurationType($data['durationType']);
-        }
-        if (\array_key_exists('durationLength', $data)) {
-            $object->setDurationLength($data['durationLength']);
-        }
-        if (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] !== null) {
-            $object->setInvoiceTemplateId($data['invoiceTemplateId']);
-        } elseif (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] === null) {
-            $object->setInvoiceTemplateId(null);
-        }
-        if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
-            $object->setBusinessUnitId(null);
-        }
-        if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
-            $object->setJobTypeId($data['jobTypeId']);
-        } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
-            $object->setJobTypeId(null);
-        }
-        if (\array_key_exists('priority', $data)) {
-            $object->setPriority($data['priority']);
-        }
-        if (\array_key_exists('campaignId', $data) && $data['campaignId'] !== null) {
-            $object->setCampaignId($data['campaignId']);
-        } elseif (\array_key_exists('campaignId', $data) && $data['campaignId'] === null) {
-            $object->setCampaignId(null);
-        }
-        if (\array_key_exists('jobSummary', $data) && $data['jobSummary'] !== null) {
-            $object->setJobSummary($data['jobSummary']);
-        } elseif (\array_key_exists('jobSummary', $data) && $data['jobSummary'] === null) {
-            $object->setJobSummary(null);
-        }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
-            $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
-            $object->setName(null);
-        }
-        if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
-            $object->setImportId($data['importId']);
-        } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
-            $object->setImportId(null);
+            $data['recurrenceMonths'] = $values;
+            $data['durationType'] = $object->getDurationType();
+            $data['durationLength'] = $object->getDurationLength();
+            if ($object->isInitialized('invoiceTemplateId') && null !== $object->getInvoiceTemplateId()) {
+                $data['invoiceTemplateId'] = $object->getInvoiceTemplateId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            $data['priority'] = $object->getPriority();
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('jobSummary') && null !== $object->getJobSummary()) {
+                $data['jobSummary'] = $object->getJobSummary();
+            }
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('importId') && null !== $object->getImportId()) {
+                $data['importId'] = $object->getImportId();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class MembershipsV2RecurringServiceTypeResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        $data['createdOn'] = $object->getCreatedOn()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getCreatedById()) {
-            $data['createdById'] = $object->getCreatedById();
-        }
-        $data['modifiedOn'] = $object->getModifiedOn()->format('Y-m-d\\TH:i:sP');
-        $data['active'] = $object->getActive();
-        $data['recurrenceType'] = $object->getRecurrenceType();
-        $data['recurrenceInterval'] = $object->getRecurrenceInterval();
-        $values = [];
-        foreach ($object->getRecurrenceMonths() as $value) {
-            $values[] = $value;
-        }
-        $data['recurrenceMonths'] = $values;
-        $data['durationType'] = $object->getDurationType();
-        $data['durationLength'] = $object->getDurationLength();
-        if (null !== $object->getInvoiceTemplateId()) {
-            $data['invoiceTemplateId'] = $object->getInvoiceTemplateId();
-        }
-        if (null !== $object->getBusinessUnitId()) {
-            $data['businessUnitId'] = $object->getBusinessUnitId();
-        }
-        if (null !== $object->getJobTypeId()) {
-            $data['jobTypeId'] = $object->getJobTypeId();
-        }
-        $data['priority'] = $object->getPriority();
-        if (null !== $object->getCampaignId()) {
-            $data['campaignId'] = $object->getCampaignId();
-        }
-        if (null !== $object->getJobSummary()) {
-            $data['jobSummary'] = $object->getJobSummary();
-        }
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getImportId()) {
-            $data['importId'] = $object->getImportId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('createdById', $data) && $data['createdById'] !== null) {
+                $object->setCreatedById($data['createdById']);
+            } elseif (\array_key_exists('createdById', $data) && $data['createdById'] === null) {
+                $object->setCreatedById(null);
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('recurrenceType', $data)) {
+                $object->setRecurrenceType($data['recurrenceType']);
+            }
+            if (\array_key_exists('recurrenceInterval', $data)) {
+                $object->setRecurrenceInterval($data['recurrenceInterval']);
+            }
+            if (\array_key_exists('recurrenceMonths', $data)) {
+                $values = [];
+                foreach ($data['recurrenceMonths'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setRecurrenceMonths($values);
+            }
+            if (\array_key_exists('durationType', $data)) {
+                $object->setDurationType($data['durationType']);
+            }
+            if (\array_key_exists('durationLength', $data)) {
+                $object->setDurationLength($data['durationLength']);
+            }
+            if (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] !== null) {
+                $object->setInvoiceTemplateId($data['invoiceTemplateId']);
+            } elseif (\array_key_exists('invoiceTemplateId', $data) && $data['invoiceTemplateId'] === null) {
+                $object->setInvoiceTemplateId(null);
+            }
+            if (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] !== null) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            } elseif (\array_key_exists('businessUnitId', $data) && $data['businessUnitId'] === null) {
+                $object->setBusinessUnitId(null);
+            }
+            if (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] !== null) {
+                $object->setJobTypeId($data['jobTypeId']);
+            } elseif (\array_key_exists('jobTypeId', $data) && $data['jobTypeId'] === null) {
+                $object->setJobTypeId(null);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('campaignId', $data) && $data['campaignId'] !== null) {
+                $object->setCampaignId($data['campaignId']);
+            } elseif (\array_key_exists('campaignId', $data) && $data['campaignId'] === null) {
+                $object->setCampaignId(null);
+            }
+            if (\array_key_exists('jobSummary', $data) && $data['jobSummary'] !== null) {
+                $object->setJobSummary($data['jobSummary']);
+            } elseif (\array_key_exists('jobSummary', $data) && $data['jobSummary'] === null) {
+                $object->setJobSummary(null);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('importId', $data) && $data['importId'] !== null) {
+                $object->setImportId($data['importId']);
+            } elseif (\array_key_exists('importId', $data) && $data['importId'] === null) {
+                $object->setImportId(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('createdById') && null !== $object->getCreatedById()) {
+                $data['createdById'] = $object->getCreatedById();
+            }
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $data['active'] = $object->getActive();
+            $data['recurrenceType'] = $object->getRecurrenceType();
+            $data['recurrenceInterval'] = $object->getRecurrenceInterval();
+            $values = [];
+            foreach ($object->getRecurrenceMonths() as $value) {
+                $values[] = $value;
+            }
+            $data['recurrenceMonths'] = $values;
+            $data['durationType'] = $object->getDurationType();
+            $data['durationLength'] = $object->getDurationLength();
+            if ($object->isInitialized('invoiceTemplateId') && null !== $object->getInvoiceTemplateId()) {
+                $data['invoiceTemplateId'] = $object->getInvoiceTemplateId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            $data['priority'] = $object->getPriority();
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('jobSummary') && null !== $object->getJobSummary()) {
+                $data['jobSummary'] = $object->getJobSummary();
+            }
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('importId') && null !== $object->getImportId()) {
+                $data['importId'] = $object->getImportId();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse::class => false];
+        }
     }
 }

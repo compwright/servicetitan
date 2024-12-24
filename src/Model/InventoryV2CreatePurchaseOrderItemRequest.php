@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2CreatePurchaseOrderItemRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of the SKU from pricebook, can be any active material or equipment.
      *
      * @var int
@@ -56,6 +65,7 @@ class InventoryV2CreatePurchaseOrderItemRequest
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -74,6 +84,7 @@ class InventoryV2CreatePurchaseOrderItemRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -92,6 +103,7 @@ class InventoryV2CreatePurchaseOrderItemRequest
      */
     public function setVendorPartNumber(string $vendorPartNumber): self
     {
+        $this->initialized['vendorPartNumber'] = true;
         $this->vendorPartNumber = $vendorPartNumber;
 
         return $this;
@@ -110,6 +122,7 @@ class InventoryV2CreatePurchaseOrderItemRequest
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -128,6 +141,7 @@ class InventoryV2CreatePurchaseOrderItemRequest
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;

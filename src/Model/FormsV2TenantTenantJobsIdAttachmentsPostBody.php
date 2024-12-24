@@ -10,8 +10,17 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan\Model;
 
-class FormsV2TenantTenantJobsIdAttachmentsPostBody
+class FormsV2TenantTenantJobsIdAttachmentsPostBody extends \ArrayObject
 {
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
     /**
      * @var string
      */
@@ -24,6 +33,7 @@ class FormsV2TenantTenantJobsIdAttachmentsPostBody
 
     public function setFile(string $file): self
     {
+        $this->initialized['file'] = true;
         $this->file = $file;
 
         return $this;

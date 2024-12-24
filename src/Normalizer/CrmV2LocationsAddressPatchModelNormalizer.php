@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,91 +21,191 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2LocationsAddressPatchModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2LocationsAddressPatchModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2LocationsAddressPatchModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2LocationsAddressPatchModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel();
+            if (\array_key_exists('latitude', $data) && \is_int($data['latitude'])) {
+                $data['latitude'] = (float) $data['latitude'];
+            }
+            if (\array_key_exists('longitude', $data) && \is_int($data['longitude'])) {
+                $data['longitude'] = (float) $data['longitude'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('street', $data)) {
+                $object->setStreet($data['street']);
+            }
+            if (\array_key_exists('unit', $data)) {
+                $object->setUnit($data['unit']);
+            }
+            if (\array_key_exists('city', $data)) {
+                $object->setCity($data['city']);
+            }
+            if (\array_key_exists('state', $data)) {
+                $object->setState($data['state']);
+            }
+            if (\array_key_exists('zip', $data)) {
+                $object->setZip($data['zip']);
+            }
+            if (\array_key_exists('country', $data)) {
+                $object->setCountry($data['country']);
+            }
+            if (\array_key_exists('latitude', $data) && $data['latitude'] !== null) {
+                $object->setLatitude($data['latitude']);
+            } elseif (\array_key_exists('latitude', $data) && $data['latitude'] === null) {
+                $object->setLatitude(null);
+            }
+            if (\array_key_exists('longitude', $data) && $data['longitude'] !== null) {
+                $object->setLongitude($data['longitude']);
+            } elseif (\array_key_exists('longitude', $data) && $data['longitude'] === null) {
+                $object->setLongitude(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('street', $data)) {
-            $object->setStreet($data['street']);
-        }
-        if (\array_key_exists('unit', $data)) {
-            $object->setUnit($data['unit']);
-        }
-        if (\array_key_exists('city', $data)) {
-            $object->setCity($data['city']);
-        }
-        if (\array_key_exists('state', $data)) {
-            $object->setState($data['state']);
-        }
-        if (\array_key_exists('zip', $data)) {
-            $object->setZip($data['zip']);
-        }
-        if (\array_key_exists('country', $data)) {
-            $object->setCountry($data['country']);
-        }
-        if (\array_key_exists('latitude', $data) && $data['latitude'] !== null) {
-            $object->setLatitude($data['latitude']);
-        } elseif (\array_key_exists('latitude', $data) && $data['latitude'] === null) {
-            $object->setLatitude(null);
-        }
-        if (\array_key_exists('longitude', $data) && $data['longitude'] !== null) {
-            $object->setLongitude($data['longitude']);
-        } elseif (\array_key_exists('longitude', $data) && $data['longitude'] === null) {
-            $object->setLongitude(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['street'] = $object->getStreet();
+            $data['unit'] = $object->getUnit();
+            $data['city'] = $object->getCity();
+            $data['state'] = $object->getState();
+            $data['zip'] = $object->getZip();
+            $data['country'] = $object->getCountry();
+            if ($object->isInitialized('latitude') && null !== $object->getLatitude()) {
+                $data['latitude'] = $object->getLatitude();
+            }
+            if ($object->isInitialized('longitude') && null !== $object->getLongitude()) {
+                $data['longitude'] = $object->getLongitude();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2LocationsAddressPatchModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['street'] = $object->getStreet();
-        $data['unit'] = $object->getUnit();
-        $data['city'] = $object->getCity();
-        $data['state'] = $object->getState();
-        $data['zip'] = $object->getZip();
-        $data['country'] = $object->getCountry();
-        if (null !== $object->getLatitude()) {
-            $data['latitude'] = $object->getLatitude();
-        }
-        if (null !== $object->getLongitude()) {
-            $data['longitude'] = $object->getLongitude();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel();
+            if (\array_key_exists('latitude', $data) && \is_int($data['latitude'])) {
+                $data['latitude'] = (float) $data['latitude'];
+            }
+            if (\array_key_exists('longitude', $data) && \is_int($data['longitude'])) {
+                $data['longitude'] = (float) $data['longitude'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('street', $data)) {
+                $object->setStreet($data['street']);
+            }
+            if (\array_key_exists('unit', $data)) {
+                $object->setUnit($data['unit']);
+            }
+            if (\array_key_exists('city', $data)) {
+                $object->setCity($data['city']);
+            }
+            if (\array_key_exists('state', $data)) {
+                $object->setState($data['state']);
+            }
+            if (\array_key_exists('zip', $data)) {
+                $object->setZip($data['zip']);
+            }
+            if (\array_key_exists('country', $data)) {
+                $object->setCountry($data['country']);
+            }
+            if (\array_key_exists('latitude', $data) && $data['latitude'] !== null) {
+                $object->setLatitude($data['latitude']);
+            } elseif (\array_key_exists('latitude', $data) && $data['latitude'] === null) {
+                $object->setLatitude(null);
+            }
+            if (\array_key_exists('longitude', $data) && $data['longitude'] !== null) {
+                $object->setLongitude($data['longitude']);
+            } elseif (\array_key_exists('longitude', $data) && $data['longitude'] === null) {
+                $object->setLongitude(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['street'] = $object->getStreet();
+            $data['unit'] = $object->getUnit();
+            $data['city'] = $object->getCity();
+            $data['state'] = $object->getState();
+            $data['zip'] = $object->getZip();
+            $data['country'] = $object->getCountry();
+            if ($object->isInitialized('latitude') && null !== $object->getLatitude()) {
+                $data['latitude'] = $object->getLatitude();
+            }
+            if ($object->isInitialized('longitude') && null !== $object->getLongitude()) {
+                $data['longitude'] = $object->getLongitude();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2LocationsAddressPatchModel::class => false];
+        }
     }
 }

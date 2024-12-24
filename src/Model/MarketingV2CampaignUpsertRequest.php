@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingV2CampaignUpsertRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $name;
@@ -40,6 +49,7 @@ class MarketingV2CampaignUpsertRequest
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -52,6 +62,7 @@ class MarketingV2CampaignUpsertRequest
 
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -64,6 +75,7 @@ class MarketingV2CampaignUpsertRequest
 
     public function setDnis(?string $dnis): self
     {
+        $this->initialized['dnis'] = true;
         $this->dnis = $dnis;
 
         return $this;
@@ -76,6 +88,7 @@ class MarketingV2CampaignUpsertRequest
 
     public function setCategoryId(int $categoryId): self
     {
+        $this->initialized['categoryId'] = true;
         $this->categoryId = $categoryId;
 
         return $this;
@@ -88,6 +101,7 @@ class MarketingV2CampaignUpsertRequest
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

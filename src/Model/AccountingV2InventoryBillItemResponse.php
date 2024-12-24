@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2InventoryBillItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $order;
@@ -60,6 +69,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setOrder(int $order): self
     {
+        $this->initialized['order'] = true;
         $this->order = $order;
 
         return $this;
@@ -72,6 +82,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -84,6 +95,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -96,6 +108,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setQuantity(?string $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -108,6 +121,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setCost(?string $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -120,6 +134,7 @@ class AccountingV2InventoryBillItemResponse
 
     public function setInventoryLocation(?string $inventoryLocation): self
     {
+        $this->initialized['inventoryLocation'] = true;
         $this->inventoryLocation = $inventoryLocation;
 
         return $this;
@@ -132,60 +147,46 @@ class AccountingV2InventoryBillItemResponse
 
     public function setSerialNumber(?string $serialNumber): self
     {
+        $this->initialized['serialNumber'] = true;
         $this->serialNumber = $serialNumber;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getGeneralLedgerAccount()
     {
         return $this->generalLedgerAccount;
     }
 
-    /**
-     * @param mixed $generalLedgerAccount
-     */
     public function setGeneralLedgerAccount($generalLedgerAccount): self
     {
+        $this->initialized['generalLedgerAccount'] = true;
         $this->generalLedgerAccount = $generalLedgerAccount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCostOfSaleAccount()
     {
         return $this->costOfSaleAccount;
     }
 
-    /**
-     * @param mixed $costOfSaleAccount
-     */
     public function setCostOfSaleAccount($costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAssetAccount()
     {
         return $this->assetAccount;
     }
 
-    /**
-     * @param mixed $assetAccount
-     */
     public function setAssetAccount($assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;

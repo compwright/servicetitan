@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2InventoryBillResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -89,11 +98,11 @@ class AccountingV2InventoryBillResponse
      */
     protected $shipTo;
     /**
-     * @var AccountingV2InventoryBillItemResponse[]|null
+     * @var list<AccountingV2InventoryBillItemResponse>|null
      */
     protected $items;
     /**
-     * @var AccountingV2CustomFieldResponse[]|null
+     * @var list<AccountingV2CustomFieldResponse>|null
      */
     protected $customFields;
     /**
@@ -112,6 +121,7 @@ class AccountingV2InventoryBillResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -124,6 +134,7 @@ class AccountingV2InventoryBillResponse
 
     public function setPurchaseOrderId(?int $purchaseOrderId): self
     {
+        $this->initialized['purchaseOrderId'] = true;
         $this->purchaseOrderId = $purchaseOrderId;
 
         return $this;
@@ -136,6 +147,7 @@ class AccountingV2InventoryBillResponse
 
     public function setSyncStatus(?string $syncStatus): self
     {
+        $this->initialized['syncStatus'] = true;
         $this->syncStatus = $syncStatus;
 
         return $this;
@@ -148,6 +160,7 @@ class AccountingV2InventoryBillResponse
 
     public function setReferenceNumber(?string $referenceNumber): self
     {
+        $this->initialized['referenceNumber'] = true;
         $this->referenceNumber = $referenceNumber;
 
         return $this;
@@ -160,6 +173,7 @@ class AccountingV2InventoryBillResponse
 
     public function setVendorNumber(?string $vendorNumber): self
     {
+        $this->initialized['vendorNumber'] = true;
         $this->vendorNumber = $vendorNumber;
 
         return $this;
@@ -172,6 +186,7 @@ class AccountingV2InventoryBillResponse
 
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -184,6 +199,7 @@ class AccountingV2InventoryBillResponse
 
     public function setBillDate(?\DateTime $billDate): self
     {
+        $this->initialized['billDate'] = true;
         $this->billDate = $billDate;
 
         return $this;
@@ -196,6 +212,7 @@ class AccountingV2InventoryBillResponse
 
     public function setBillAmount(?string $billAmount): self
     {
+        $this->initialized['billAmount'] = true;
         $this->billAmount = $billAmount;
 
         return $this;
@@ -208,6 +225,7 @@ class AccountingV2InventoryBillResponse
 
     public function setTaxAmount(?string $taxAmount): self
     {
+        $this->initialized['taxAmount'] = true;
         $this->taxAmount = $taxAmount;
 
         return $this;
@@ -220,6 +238,7 @@ class AccountingV2InventoryBillResponse
 
     public function setShippingAmount(?string $shippingAmount): self
     {
+        $this->initialized['shippingAmount'] = true;
         $this->shippingAmount = $shippingAmount;
 
         return $this;
@@ -232,6 +251,7 @@ class AccountingV2InventoryBillResponse
 
     public function setCreatedBy(?string $createdBy): self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
 
         return $this;
@@ -244,6 +264,7 @@ class AccountingV2InventoryBillResponse
 
     public function setCreatedOn(?\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -256,6 +277,7 @@ class AccountingV2InventoryBillResponse
 
     public function setTermName(?string $termName): self
     {
+        $this->initialized['termName'] = true;
         $this->termName = $termName;
 
         return $this;
@@ -268,6 +290,7 @@ class AccountingV2InventoryBillResponse
 
     public function setDueDate(?\DateTime $dueDate): self
     {
+        $this->initialized['dueDate'] = true;
         $this->dueDate = $dueDate;
 
         return $this;
@@ -280,85 +303,66 @@ class AccountingV2InventoryBillResponse
 
     public function setShipToDescription(?string $shipToDescription): self
     {
+        $this->initialized['shipToDescription'] = true;
         $this->shipToDescription = $shipToDescription;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getBatch()
     {
         return $this->batch;
     }
 
-    /**
-     * @param mixed $batch
-     */
     public function setBatch($batch): self
     {
+        $this->initialized['batch'] = true;
         $this->batch = $batch;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getBusinessUnit()
     {
         return $this->businessUnit;
     }
 
-    /**
-     * @param mixed $businessUnit
-     */
     public function setBusinessUnit($businessUnit): self
     {
+        $this->initialized['businessUnit'] = true;
         $this->businessUnit = $businessUnit;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getVendor()
     {
         return $this->vendor;
     }
 
-    /**
-     * @param mixed $vendor
-     */
     public function setVendor($vendor): self
     {
+        $this->initialized['vendor'] = true;
         $this->vendor = $vendor;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getShipTo()
     {
         return $this->shipTo;
     }
 
-    /**
-     * @param mixed $shipTo
-     */
     public function setShipTo($shipTo): self
     {
+        $this->initialized['shipTo'] = true;
         $this->shipTo = $shipTo;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2InventoryBillItemResponse[]|null
+     * @return list<AccountingV2InventoryBillItemResponse>|null
      */
     public function getItems(): ?array
     {
@@ -366,17 +370,18 @@ class AccountingV2InventoryBillResponse
     }
 
     /**
-     * @param AccountingV2InventoryBillItemResponse[]|null $items
+     * @param list<AccountingV2InventoryBillItemResponse>|null $items
      */
     public function setItems(?array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2CustomFieldResponse[]|null
+     * @return list<AccountingV2CustomFieldResponse>|null
      */
     public function getCustomFields(): ?array
     {
@@ -384,10 +389,11 @@ class AccountingV2InventoryBillResponse
     }
 
     /**
-     * @param AccountingV2CustomFieldResponse[]|null $customFields
+     * @param list<AccountingV2CustomFieldResponse>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -400,6 +406,7 @@ class AccountingV2InventoryBillResponse
 
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -412,6 +419,7 @@ class AccountingV2InventoryBillResponse
 
     public function setJobNumber(?string $jobNumber): self
     {
+        $this->initialized['jobNumber'] = true;
         $this->jobNumber = $jobNumber;
 
         return $this;

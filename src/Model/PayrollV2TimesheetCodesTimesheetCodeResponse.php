@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2TimesheetCodesTimesheetCodeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the timesheet code.
      *
      * @var int
@@ -32,20 +41,14 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
     protected $description;
     /**
      * Type of the timesheet code.
-     *
-     * @var mixed
      */
     protected $type;
     /**
      * Application employee type of the timesheet code.
-     *
-     * @var mixed
      */
     protected $applicableEmployeeType;
     /**
      * Rate info of the timesheet code.
-     *
-     * @var mixed
      */
     protected $rateInfo;
 
@@ -62,6 +65,7 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -80,6 +84,7 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -98,6 +103,7 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -105,8 +111,6 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Type of the timesheet code.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -115,11 +119,10 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Type of the timesheet code.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -127,8 +130,6 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Application employee type of the timesheet code.
-     *
-     * @return mixed
      */
     public function getApplicableEmployeeType()
     {
@@ -137,11 +138,10 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Application employee type of the timesheet code.
-     *
-     * @param mixed $applicableEmployeeType
      */
     public function setApplicableEmployeeType($applicableEmployeeType): self
     {
+        $this->initialized['applicableEmployeeType'] = true;
         $this->applicableEmployeeType = $applicableEmployeeType;
 
         return $this;
@@ -149,8 +149,6 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Rate info of the timesheet code.
-     *
-     * @return mixed
      */
     public function getRateInfo()
     {
@@ -159,11 +157,10 @@ class PayrollV2TimesheetCodesTimesheetCodeResponse
 
     /**
      * Rate info of the timesheet code.
-     *
-     * @param mixed $rateInfo
      */
     public function setRateInfo($rateInfo): self
     {
+        $this->initialized['rateInfo'] = true;
         $this->rateInfo = $rateInfo;
 
         return $this;

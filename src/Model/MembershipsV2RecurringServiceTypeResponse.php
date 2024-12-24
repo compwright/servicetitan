@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2RecurringServiceTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Recurring service type ID.
      *
      * @var int
@@ -44,8 +53,6 @@ class MembershipsV2RecurringServiceTypeResponse
     protected $active;
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly).
-     *
-     * @var mixed
      */
     protected $recurrenceType;
     /**
@@ -57,13 +64,11 @@ class MembershipsV2RecurringServiceTypeResponse
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $recurrenceMonths;
     /**
      * The recurrence duration type.
-     *
-     * @var mixed
      */
     protected $durationType;
     /**
@@ -92,8 +97,6 @@ class MembershipsV2RecurringServiceTypeResponse
     protected $jobTypeId;
     /**
      * Priority.
-     *
-     * @var mixed
      */
     protected $priority;
     /**
@@ -134,6 +137,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -152,6 +156,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -170,6 +175,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -188,6 +194,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -206,6 +213,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -213,8 +221,6 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly).
-     *
-     * @return mixed
      */
     public function getRecurrenceType()
     {
@@ -223,11 +229,10 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * The recurrence type (e.g. Daily, Weekly, Monthly).
-     *
-     * @param mixed $recurrenceType
      */
     public function setRecurrenceType($recurrenceType): self
     {
+        $this->initialized['recurrenceType'] = true;
         $this->recurrenceType = $recurrenceType;
 
         return $this;
@@ -246,6 +251,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setRecurrenceInterval(int $recurrenceInterval): self
     {
+        $this->initialized['recurrenceInterval'] = true;
         $this->recurrenceInterval = $recurrenceInterval;
 
         return $this;
@@ -254,7 +260,7 @@ class MembershipsV2RecurringServiceTypeResponse
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getRecurrenceMonths(): array
     {
@@ -264,10 +270,11 @@ class MembershipsV2RecurringServiceTypeResponse
     /**
      * A list of months when the recurring service occurs, if it is a seasonal recurrence type.
      *
-     * @param string[] $recurrenceMonths
+     * @param list<string> $recurrenceMonths
      */
     public function setRecurrenceMonths(array $recurrenceMonths): self
     {
+        $this->initialized['recurrenceMonths'] = true;
         $this->recurrenceMonths = $recurrenceMonths;
 
         return $this;
@@ -275,8 +282,6 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * The recurrence duration type.
-     *
-     * @return mixed
      */
     public function getDurationType()
     {
@@ -285,11 +290,10 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * The recurrence duration type.
-     *
-     * @param mixed $durationType
      */
     public function setDurationType($durationType): self
     {
+        $this->initialized['durationType'] = true;
         $this->durationType = $durationType;
 
         return $this;
@@ -308,6 +312,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setDurationLength(int $durationLength): self
     {
+        $this->initialized['durationLength'] = true;
         $this->durationLength = $durationLength;
 
         return $this;
@@ -326,6 +331,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setInvoiceTemplateId(?int $invoiceTemplateId): self
     {
+        $this->initialized['invoiceTemplateId'] = true;
         $this->invoiceTemplateId = $invoiceTemplateId;
 
         return $this;
@@ -344,6 +350,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -362,6 +369,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setJobTypeId(?int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -369,8 +377,6 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * Priority.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -379,11 +385,10 @@ class MembershipsV2RecurringServiceTypeResponse
 
     /**
      * Priority.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -402,6 +407,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setCampaignId(?int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -420,6 +426,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setJobSummary(?string $jobSummary): self
     {
+        $this->initialized['jobSummary'] = true;
         $this->jobSummary = $jobSummary;
 
         return $this;
@@ -438,6 +445,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -456,6 +464,7 @@ class MembershipsV2RecurringServiceTypeResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;

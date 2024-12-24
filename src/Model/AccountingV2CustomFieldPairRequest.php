@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2CustomFieldPairRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $name;
@@ -28,6 +37,7 @@ class AccountingV2CustomFieldPairRequest
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -40,6 +50,7 @@ class AccountingV2CustomFieldPairRequest
 
     public function setValue(?string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;

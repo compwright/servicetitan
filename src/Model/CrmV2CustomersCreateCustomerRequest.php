@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersCreateCustomerRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Name of the customer.
      *
      * @var string
@@ -39,25 +48,23 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Locations for the customer.
      *
-     * @var CrmV2CustomersNewLocation[]
+     * @var list<CrmV2CustomersNewLocation>
      */
     protected $locations;
     /**
      * Bill-To address of the customer record.
-     *
-     * @var mixed
      */
     protected $address;
     /**
      * Contacts for the customer.
      *
-     * @var CrmV2CustomersNewCustomerContact[]|null
+     * @var list<CrmV2CustomersNewCustomerContact>|null
      */
     protected $contacts;
     /**
      * Customer record’s custom fields.
      *
-     * @var CrmV2CustomersCustomFieldUpdateModel[]|null
+     * @var list<CrmV2CustomersCustomFieldUpdateModel>|null
      */
     protected $customFields;
 
@@ -74,6 +81,7 @@ class CrmV2CustomersCreateCustomerRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -81,8 +89,6 @@ class CrmV2CustomersCreateCustomerRequest
 
     /**
      * Residential or commercial.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -91,11 +97,10 @@ class CrmV2CustomersCreateCustomerRequest
 
     /**
      * Residential or commercial.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -114,6 +119,7 @@ class CrmV2CustomersCreateCustomerRequest
      */
     public function setDoNotMail(?bool $doNotMail): self
     {
+        $this->initialized['doNotMail'] = true;
         $this->doNotMail = $doNotMail;
 
         return $this;
@@ -132,6 +138,7 @@ class CrmV2CustomersCreateCustomerRequest
      */
     public function setDoNotService(?bool $doNotService): self
     {
+        $this->initialized['doNotService'] = true;
         $this->doNotService = $doNotService;
 
         return $this;
@@ -140,7 +147,7 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Locations for the customer.
      *
-     * @return CrmV2CustomersNewLocation[]
+     * @return list<CrmV2CustomersNewLocation>
      */
     public function getLocations(): array
     {
@@ -150,10 +157,11 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Locations for the customer.
      *
-     * @param CrmV2CustomersNewLocation[] $locations
+     * @param list<CrmV2CustomersNewLocation> $locations
      */
     public function setLocations(array $locations): self
     {
+        $this->initialized['locations'] = true;
         $this->locations = $locations;
 
         return $this;
@@ -161,8 +169,6 @@ class CrmV2CustomersCreateCustomerRequest
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -171,11 +177,10 @@ class CrmV2CustomersCreateCustomerRequest
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -184,7 +189,7 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Contacts for the customer.
      *
-     * @return CrmV2CustomersNewCustomerContact[]|null
+     * @return list<CrmV2CustomersNewCustomerContact>|null
      */
     public function getContacts(): ?array
     {
@@ -194,10 +199,11 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Contacts for the customer.
      *
-     * @param CrmV2CustomersNewCustomerContact[]|null $contacts
+     * @param list<CrmV2CustomersNewCustomerContact>|null $contacts
      */
     public function setContacts(?array $contacts): self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
 
         return $this;
@@ -206,7 +212,7 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Customer record’s custom fields.
      *
-     * @return CrmV2CustomersCustomFieldUpdateModel[]|null
+     * @return list<CrmV2CustomersCustomFieldUpdateModel>|null
      */
     public function getCustomFields(): ?array
     {
@@ -216,10 +222,11 @@ class CrmV2CustomersCreateCustomerRequest
     /**
      * Customer record’s custom fields.
      *
-     * @param CrmV2CustomersCustomFieldUpdateModel[]|null $customFields
+     * @param list<CrmV2CustomersCustomFieldUpdateModel>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

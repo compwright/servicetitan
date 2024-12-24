@@ -13,9 +13,16 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2DiscountAndFeesCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -38,8 +45,6 @@ class PricebookV2DiscountAndFeesCreateRequest
     protected $description;
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @var mixed
      */
     protected $amountType;
     /**
@@ -63,7 +68,7 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * The category technicians will use to find the item.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $categories;
     /**
@@ -75,7 +80,7 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetRequest[]|null
+     * @var list<PricebookV2SkuAssetRequest>|null
      */
     protected $assets;
     /**
@@ -121,7 +126,8 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     protected $excludeFromPayroll;
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      *
      * @var mixed|null
      */
@@ -129,8 +135,6 @@ class PricebookV2DiscountAndFeesCreateRequest
 
     /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -139,11 +143,10 @@ class PricebookV2DiscountAndFeesCreateRequest
 
     /**
      * Type should be entered as Discount or Fee to show the type.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -162,6 +165,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -180,6 +184,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -198,6 +203,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -205,8 +211,6 @@ class PricebookV2DiscountAndFeesCreateRequest
 
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @return mixed
      */
     public function getAmountType()
     {
@@ -215,11 +219,10 @@ class PricebookV2DiscountAndFeesCreateRequest
 
     /**
      * The amount type takes either "percentage" or "flat " and apply the "amount" field accordingly.
-     *
-     * @param mixed $amountType
      */
     public function setAmountType($amountType): self
     {
+        $this->initialized['amountType'] = true;
         $this->amountType = $amountType;
 
         return $this;
@@ -238,6 +241,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setAmount(float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -256,6 +260,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setLimit(?float $limit): self
     {
+        $this->initialized['limit'] = true;
         $this->limit = $limit;
 
         return $this;
@@ -274,6 +279,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setTaxable(?bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -282,7 +288,7 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * The category technicians will use to find the item.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getCategories(): ?array
     {
@@ -292,10 +298,11 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * The category technicians will use to find the item.
      *
-     * @param int[]|null $categories
+     * @param list<int>|null $categories
      */
     public function setCategories(?array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -314,6 +321,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setHours(?float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -322,7 +330,7 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetRequest[]|null
+     * @return list<PricebookV2SkuAssetRequest>|null
      */
     public function getAssets(): ?array
     {
@@ -332,10 +340,11 @@ class PricebookV2DiscountAndFeesCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetRequest[]|null $assets
+     * @param list<PricebookV2SkuAssetRequest>|null $assets
      */
     public function setAssets(?array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -354,6 +363,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -372,6 +382,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setCrossSaleGroup(?string $crossSaleGroup): self
     {
+        $this->initialized['crossSaleGroup'] = true;
         $this->crossSaleGroup = $crossSaleGroup;
 
         return $this;
@@ -390,6 +401,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setActive(?bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -408,6 +420,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setBonus(?float $bonus): self
     {
+        $this->initialized['bonus'] = true;
         $this->bonus = $bonus;
 
         return $this;
@@ -426,6 +439,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setCommissionBonus(?float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -444,6 +458,7 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setPaysCommission(?bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -462,15 +477,15 @@ class PricebookV2DiscountAndFeesCreateRequest
      */
     public function setExcludeFromPayroll(?bool $excludeFromPayroll): self
     {
+        $this->initialized['excludeFromPayroll'] = true;
         $this->excludeFromPayroll = $excludeFromPayroll;
 
         return $this;
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @return mixed
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      */
     public function getExternalData()
     {
@@ -478,12 +493,12 @@ class PricebookV2DiscountAndFeesCreateRequest
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @param mixed $externalData
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

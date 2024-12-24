@@ -21,16 +21,17 @@ class TechnicianShiftsGetList extends \CompWright\ServiceTitan\Runtime\Client\Ba
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of shift should be at or after
-     *     @var string $endsOnOrBefore Format - date-time (as date-time in RFC3339). When the End of shift should be at or before
-     *     @var string $shiftType Value to match ShiftType to\
-     *     @var int $technicianId Format - int64. Unique Id of technician shift must apply to
-     *     @var string $titleContains Text that must appear in the Title
-     *     @var string $noteContains Text that must appear in the Note
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of shift should be at or after
+     * @var string $endsOnOrBefore Format - date-time (as date-time in RFC3339). When the End of shift should be at or before
+     * @var string $shiftType Value to match ShiftType to\
+     *             Values: [Normal, OnCall, TimeOff]
+     * @var int    $technicianId Format - int64. Unique Id of technician shift must apply to
+     * @var string $titleContains Text that must appear in the Title
+     * @var string $noteContains Text that must appear in the Note
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -64,33 +65,33 @@ class TechnicianShiftsGetList extends \CompWright\ServiceTitan\Runtime\Client\Ba
         $optionsResolver->setDefined(['startsOnOrAfter', 'endsOnOrBefore', 'shiftType', 'technicianId', 'titleContains', 'noteContains', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('startsOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('endsOnOrBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('shiftType', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('technicianId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('titleContains', ['string']);
-        $optionsResolver->setAllowedTypes('noteContains', ['string']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('startsOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('endsOnOrBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('shiftType', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('technicianId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('titleContains', ['string']);
+        $optionsResolver->addAllowedTypes('noteContains', ['string']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2TechnicianShiftResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\TechnicianShiftsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2TechnicianShiftResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfDispatchV2TechnicianShiftResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2TechnicianShiftResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\TechnicianShiftsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\TechnicianShiftsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

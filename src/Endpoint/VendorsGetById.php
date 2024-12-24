@@ -23,8 +23,8 @@ class VendorsGetById extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoin
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid.
+     *             }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -59,29 +59,29 @@ class VendorsGetById extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoin
         $optionsResolver->setDefined(['externalDataApplicationGuid']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\InventoryV2VendorResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\VendorsGetByIdBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\VendorsGetByIdNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\InventoryV2VendorResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\InventoryV2VendorResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\InventoryV2VendorResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\VendorsGetByIdBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\VendorsGetByIdBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\VendorsGetByIdNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\VendorsGetByIdNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

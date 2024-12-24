@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2GpsPingCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Gets or sets the ID of the object for which location information is provided.
      *
      * @var string
@@ -110,6 +119,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setUnitId(string $unitId): self
     {
+        $this->initialized['unitId'] = true;
         $this->unitId = $unitId;
 
         return $this;
@@ -128,6 +138,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setUnitName(string $unitName): self
     {
+        $this->initialized['unitName'] = true;
         $this->unitName = $unitName;
 
         return $this;
@@ -146,6 +157,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setEventTime(\DateTime $eventTime): self
     {
+        $this->initialized['eventTime'] = true;
         $this->eventTime = $eventTime;
 
         return $this;
@@ -164,6 +176,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setLatitude(?float $latitude): self
     {
+        $this->initialized['latitude'] = true;
         $this->latitude = $latitude;
 
         return $this;
@@ -182,6 +195,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setLongitude(?float $longitude): self
     {
+        $this->initialized['longitude'] = true;
         $this->longitude = $longitude;
 
         return $this;
@@ -200,6 +214,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setSpeed(?float $speed): self
     {
+        $this->initialized['speed'] = true;
         $this->speed = $speed;
 
         return $this;
@@ -218,6 +233,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setStreet(string $street): self
     {
+        $this->initialized['street'] = true;
         $this->street = $street;
 
         return $this;
@@ -236,6 +252,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setCity(string $city): self
     {
+        $this->initialized['city'] = true;
         $this->city = $city;
 
         return $this;
@@ -254,6 +271,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setRegion(string $region): self
     {
+        $this->initialized['region'] = true;
         $this->region = $region;
 
         return $this;
@@ -272,6 +290,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setPostalCode(string $postalCode): self
     {
+        $this->initialized['postalCode'] = true;
         $this->postalCode = $postalCode;
 
         return $this;
@@ -290,6 +309,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setMessage(string $message): self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
 
         return $this;
@@ -308,6 +328,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setExternalId(string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
@@ -326,6 +347,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setIsNew(bool $isNew): self
     {
+        $this->initialized['isNew'] = true;
         $this->isNew = $isNew;
 
         return $this;
@@ -344,6 +366,7 @@ class DispatchV2GpsPingCreateRequest
      */
     public function setStatusMessage(string $statusMessage): self
     {
+        $this->initialized['statusMessage'] = true;
         $this->statusMessage = $statusMessage;
 
         return $this;

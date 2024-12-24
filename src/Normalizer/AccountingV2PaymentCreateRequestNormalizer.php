@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,123 +21,243 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2PaymentCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2PaymentCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('typeId', $data)) {
+                $object->setTypeId($data['typeId']);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('paidOn', $data) && $data['paidOn'] !== null) {
+                $object->setPaidOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['paidOn']));
+            } elseif (\array_key_exists('paidOn', $data) && $data['paidOn'] === null) {
+                $object->setPaidOn(null);
+            }
+            if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
+                $object->setAuthCode($data['authCode']);
+            } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
+                $object->setAuthCode(null);
+            }
+            if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
+                $object->setCheckNumber($data['checkNumber']);
+            } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
+                $object->setCheckNumber(null);
+            }
+            if (\array_key_exists('exportId', $data) && $data['exportId'] !== null) {
+                $object->setExportId($data['exportId']);
+            } elseif (\array_key_exists('exportId', $data) && $data['exportId'] === null) {
+                $object->setExportId(null);
+            }
+            if (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] !== null) {
+                $object->setTransactionStatus($data['transactionStatus']);
+            } elseif (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] === null) {
+                $object->setTransactionStatus(null);
+            }
+            if (\array_key_exists('status', $data) && $data['status'] !== null) {
+                $object->setStatus($data['status']);
+            } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
+                $object->setStatus(null);
+            }
+            if (\array_key_exists('splits', $data)) {
+                $values = [];
+                foreach ($data['splits'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\AccountingV2PaymentSplitApiModel::class, 'json', $context);
+                }
+                $object->setSplits($values);
+            }
+
             return $object;
         }
-        if (\array_key_exists('typeId', $data)) {
-            $object->setTypeId($data['typeId']);
-        }
-        if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
-            $object->setMemo($data['memo']);
-        } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
-            $object->setMemo(null);
-        }
-        if (\array_key_exists('paidOn', $data) && $data['paidOn'] !== null) {
-            $object->setPaidOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['paidOn']));
-        } elseif (\array_key_exists('paidOn', $data) && $data['paidOn'] === null) {
-            $object->setPaidOn(null);
-        }
-        if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
-            $object->setAuthCode($data['authCode']);
-        } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
-            $object->setAuthCode(null);
-        }
-        if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
-            $object->setCheckNumber($data['checkNumber']);
-        } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
-            $object->setCheckNumber(null);
-        }
-        if (\array_key_exists('exportId', $data) && $data['exportId'] !== null) {
-            $object->setExportId($data['exportId']);
-        } elseif (\array_key_exists('exportId', $data) && $data['exportId'] === null) {
-            $object->setExportId(null);
-        }
-        if (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] !== null) {
-            $object->setTransactionStatus($data['transactionStatus']);
-        } elseif (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] === null) {
-            $object->setTransactionStatus(null);
-        }
-        if (\array_key_exists('status', $data) && $data['status'] !== null) {
-            $object->setStatus($data['status']);
-        } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
-            $object->setStatus(null);
-        }
-        if (\array_key_exists('splits', $data)) {
-            $values = [];
-            foreach ($data['splits'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentSplitApiModel', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['typeId'] = $object->getTypeId();
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
             }
-            $object->setSplits($values);
+            if ($object->isInitialized('paidOn') && null !== $object->getPaidOn()) {
+                $data['paidOn'] = $object->getPaidOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('authCode') && null !== $object->getAuthCode()) {
+                $data['authCode'] = $object->getAuthCode();
+            }
+            if ($object->isInitialized('checkNumber') && null !== $object->getCheckNumber()) {
+                $data['checkNumber'] = $object->getCheckNumber();
+            }
+            if ($object->isInitialized('exportId') && null !== $object->getExportId()) {
+                $data['exportId'] = $object->getExportId();
+            }
+            if ($object->isInitialized('transactionStatus') && null !== $object->getTransactionStatus()) {
+                $data['transactionStatus'] = $object->getTransactionStatus();
+            }
+            if ($object->isInitialized('status') && null !== $object->getStatus()) {
+                $data['status'] = $object->getStatus();
+            }
+            $values = [];
+            foreach ($object->getSplits() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['splits'] = $values;
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2PaymentCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['typeId'] = $object->getTypeId();
-        if (null !== $object->getMemo()) {
-            $data['memo'] = $object->getMemo();
-        }
-        if (null !== $object->getPaidOn()) {
-            $data['paidOn'] = $object->getPaidOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getAuthCode()) {
-            $data['authCode'] = $object->getAuthCode();
-        }
-        if (null !== $object->getCheckNumber()) {
-            $data['checkNumber'] = $object->getCheckNumber();
-        }
-        if (null !== $object->getExportId()) {
-            $data['exportId'] = $object->getExportId();
-        }
-        if (null !== $object->getTransactionStatus()) {
-            $data['transactionStatus'] = $object->getTransactionStatus();
-        }
-        if (null !== $object->getStatus()) {
-            $data['status'] = $object->getStatus();
-        }
-        $values = [];
-        foreach ($object->getSplits() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['splits'] = $values;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('typeId', $data)) {
+                $object->setTypeId($data['typeId']);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('paidOn', $data) && $data['paidOn'] !== null) {
+                $object->setPaidOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['paidOn']));
+            } elseif (\array_key_exists('paidOn', $data) && $data['paidOn'] === null) {
+                $object->setPaidOn(null);
+            }
+            if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
+                $object->setAuthCode($data['authCode']);
+            } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
+                $object->setAuthCode(null);
+            }
+            if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
+                $object->setCheckNumber($data['checkNumber']);
+            } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
+                $object->setCheckNumber(null);
+            }
+            if (\array_key_exists('exportId', $data) && $data['exportId'] !== null) {
+                $object->setExportId($data['exportId']);
+            } elseif (\array_key_exists('exportId', $data) && $data['exportId'] === null) {
+                $object->setExportId(null);
+            }
+            if (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] !== null) {
+                $object->setTransactionStatus($data['transactionStatus']);
+            } elseif (\array_key_exists('transactionStatus', $data) && $data['transactionStatus'] === null) {
+                $object->setTransactionStatus(null);
+            }
+            if (\array_key_exists('status', $data) && $data['status'] !== null) {
+                $object->setStatus($data['status']);
+            } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
+                $object->setStatus(null);
+            }
+            if (\array_key_exists('splits', $data)) {
+                $values = [];
+                foreach ($data['splits'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\AccountingV2PaymentSplitApiModel::class, 'json', $context);
+                }
+                $object->setSplits($values);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['typeId'] = $object->getTypeId();
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('paidOn') && null !== $object->getPaidOn()) {
+                $data['paidOn'] = $object->getPaidOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('authCode') && null !== $object->getAuthCode()) {
+                $data['authCode'] = $object->getAuthCode();
+            }
+            if ($object->isInitialized('checkNumber') && null !== $object->getCheckNumber()) {
+                $data['checkNumber'] = $object->getCheckNumber();
+            }
+            if ($object->isInitialized('exportId') && null !== $object->getExportId()) {
+                $data['exportId'] = $object->getExportId();
+            }
+            if ($object->isInitialized('transactionStatus') && null !== $object->getTransactionStatus()) {
+                $data['transactionStatus'] = $object->getTransactionStatus();
+            }
+            if ($object->isInitialized('status') && null !== $object->getStatus()) {
+                $data['status'] = $object->getStatus();
+            }
+            $values = [];
+            foreach ($object->getSplits() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['splits'] = $values;
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2PaymentCreateRequest::class => false];
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2InventoryTransferResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Inventory transfer Id.
      *
      * @var int
@@ -104,20 +113,18 @@ class InventoryV2InventoryTransferResponse
     protected $batchId;
     /**
      * Sync status.
-     *
-     * @var mixed
      */
     protected $syncStatus;
     /**
      * Collection of transfer items.
      *
-     * @var InventoryV2InventoryTransferItemResponse[]
+     * @var list<InventoryV2InventoryTransferItemResponse>
      */
     protected $items;
     /**
      * Collection of custom fields.
      *
-     * @var InventoryV2CustomFieldResponse[]
+     * @var list<InventoryV2CustomFieldResponse>
      */
     protected $customFields;
 
@@ -134,6 +141,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -152,6 +160,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setTransferType(string $transferType): self
     {
+        $this->initialized['transferType'] = true;
         $this->transferType = $transferType;
 
         return $this;
@@ -170,6 +179,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setStatus(string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -188,6 +198,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -206,6 +217,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setReferenceNumber(string $referenceNumber): self
     {
+        $this->initialized['referenceNumber'] = true;
         $this->referenceNumber = $referenceNumber;
 
         return $this;
@@ -224,6 +236,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setFromLocationId(int $fromLocationId): self
     {
+        $this->initialized['fromLocationId'] = true;
         $this->fromLocationId = $fromLocationId;
 
         return $this;
@@ -242,6 +255,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setToLocationId(int $toLocationId): self
     {
+        $this->initialized['toLocationId'] = true;
         $this->toLocationId = $toLocationId;
 
         return $this;
@@ -260,6 +274,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -278,6 +293,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -296,6 +312,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -314,6 +331,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setPickedDate(?\DateTime $pickedDate): self
     {
+        $this->initialized['pickedDate'] = true;
         $this->pickedDate = $pickedDate;
 
         return $this;
@@ -332,6 +350,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setReceivedDate(?\DateTime $receivedDate): self
     {
+        $this->initialized['receivedDate'] = true;
         $this->receivedDate = $receivedDate;
 
         return $this;
@@ -350,6 +369,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -368,6 +388,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -386,6 +407,7 @@ class InventoryV2InventoryTransferResponse
      */
     public function setBatchId(?int $batchId): self
     {
+        $this->initialized['batchId'] = true;
         $this->batchId = $batchId;
 
         return $this;
@@ -393,8 +415,6 @@ class InventoryV2InventoryTransferResponse
 
     /**
      * Sync status.
-     *
-     * @return mixed
      */
     public function getSyncStatus()
     {
@@ -403,11 +423,10 @@ class InventoryV2InventoryTransferResponse
 
     /**
      * Sync status.
-     *
-     * @param mixed $syncStatus
      */
     public function setSyncStatus($syncStatus): self
     {
+        $this->initialized['syncStatus'] = true;
         $this->syncStatus = $syncStatus;
 
         return $this;
@@ -416,7 +435,7 @@ class InventoryV2InventoryTransferResponse
     /**
      * Collection of transfer items.
      *
-     * @return InventoryV2InventoryTransferItemResponse[]
+     * @return list<InventoryV2InventoryTransferItemResponse>
      */
     public function getItems(): array
     {
@@ -426,10 +445,11 @@ class InventoryV2InventoryTransferResponse
     /**
      * Collection of transfer items.
      *
-     * @param InventoryV2InventoryTransferItemResponse[] $items
+     * @param list<InventoryV2InventoryTransferItemResponse> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
@@ -438,7 +458,7 @@ class InventoryV2InventoryTransferResponse
     /**
      * Collection of custom fields.
      *
-     * @return InventoryV2CustomFieldResponse[]
+     * @return list<InventoryV2CustomFieldResponse>
      */
     public function getCustomFields(): array
     {
@@ -448,10 +468,11 @@ class InventoryV2InventoryTransferResponse
     /**
      * Collection of custom fields.
      *
-     * @param InventoryV2CustomFieldResponse[] $customFields
+     * @param list<InventoryV2CustomFieldResponse> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

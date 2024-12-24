@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CallReasonResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Call reason ID.
      *
      * @var int
@@ -50,6 +59,7 @@ class CrmV2CallReasonResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +78,7 @@ class CrmV2CallReasonResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -86,6 +97,7 @@ class CrmV2CallReasonResponse
      */
     public function setIsLead(bool $isLead): self
     {
+        $this->initialized['isLead'] = true;
         $this->isLead = $isLead;
 
         return $this;
@@ -104,6 +116,7 @@ class CrmV2CallReasonResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

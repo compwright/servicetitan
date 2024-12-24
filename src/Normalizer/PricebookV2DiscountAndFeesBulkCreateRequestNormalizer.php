@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,207 +21,441 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2DiscountAndFeesBulkCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2DiscountAndFeesBulkCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2DiscountAndFeesBulkCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2DiscountAndFeesBulkCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (\array_key_exists('limit', $data) && \is_int($data['limit'])) {
+                $data['limit'] = (float) $data['limit'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('bonus', $data) && \is_int($data['bonus'])) {
+                $data['bonus'] = (float) $data['bonus'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('type', $data)) {
+                $object->setType($data['type']);
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
+                $object->setDisplayName($data['displayName']);
+            } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
+                $object->setDisplayName(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('amountType', $data)) {
+                $object->setAmountType($data['amountType']);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('limit', $data) && $data['limit'] !== null) {
+                $object->setLimit($data['limit']);
+            } elseif (\array_key_exists('limit', $data) && $data['limit'] === null) {
+                $object->setLimit(null);
+            }
+            if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
+                $object->setTaxable($data['taxable']);
+            } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
+                $object->setTaxable(null);
+            }
+            if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
+                $values = [];
+                foreach ($data['categories'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setCategories($values);
+            } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
+                $object->setCategories(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+            if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
+                $values_1 = [];
+                foreach ($data['assets'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_1);
+            } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
+                $object->setAssets(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
+                $object->setCrossSaleGroup(null);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('bonus', $data) && $data['bonus'] !== null) {
+                $object->setBonus($data['bonus']);
+            } elseif (\array_key_exists('bonus', $data) && $data['bonus'] === null) {
+                $object->setBonus(null);
+            }
+            if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
+                $object->setCommissionBonus(null);
+            }
+            if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
+                $object->setPaysCommission($data['paysCommission']);
+            } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
+                $object->setPaysCommission(null);
+            }
+            if (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] !== null) {
+                $object->setExcludeFromPayroll($data['excludeFromPayroll']);
+            } elseif (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] === null) {
+                $object->setExcludeFromPayroll(null);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+            if (\array_key_exists('customId', $data) && $data['customId'] !== null) {
+                $object->setCustomId($data['customId']);
+            } elseif (\array_key_exists('customId', $data) && $data['customId'] === null) {
+                $object->setCustomId(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('type', $data)) {
-            $object->setType($data['type']);
-        }
-        if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
-        }
-        if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
-            $object->setDisplayName($data['displayName']);
-        } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
-            $object->setDisplayName(null);
-        }
-        if (\array_key_exists('description', $data)) {
-            $object->setDescription($data['description']);
-        }
-        if (\array_key_exists('amountType', $data)) {
-            $object->setAmountType($data['amountType']);
-        }
-        if (\array_key_exists('amount', $data)) {
-            $object->setAmount($data['amount']);
-        }
-        if (\array_key_exists('limit', $data) && $data['limit'] !== null) {
-            $object->setLimit($data['limit']);
-        } elseif (\array_key_exists('limit', $data) && $data['limit'] === null) {
-            $object->setLimit(null);
-        }
-        if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
-            $object->setTaxable($data['taxable']);
-        } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
-            $object->setTaxable(null);
-        }
-        if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
-            $values = [];
-            foreach ($data['categories'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['type'] = $object->getType();
+            $data['code'] = $object->getCode();
+            if ($object->isInitialized('displayName') && null !== $object->getDisplayName()) {
+                $data['displayName'] = $object->getDisplayName();
             }
-            $object->setCategories($values);
-        } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
-            $object->setCategories(null);
-        }
-        if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
-            $object->setHours($data['hours']);
-        } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
-            $object->setHours(null);
-        }
-        if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
-            $values_1 = [];
-            foreach ($data['assets'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuAssetRequest', 'json', $context);
+            $data['description'] = $object->getDescription();
+            $data['amountType'] = $object->getAmountType();
+            $data['amount'] = $object->getAmount();
+            if ($object->isInitialized('limit') && null !== $object->getLimit()) {
+                $data['limit'] = $object->getLimit();
             }
-            $object->setAssets($values_1);
-        } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
-            $object->setAssets(null);
-        }
-        if (\array_key_exists('account', $data) && $data['account'] !== null) {
-            $object->setAccount($data['account']);
-        } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
-            $object->setAccount(null);
-        }
-        if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
-            $object->setCrossSaleGroup($data['crossSaleGroup']);
-        } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
-            $object->setCrossSaleGroup(null);
-        }
-        if (\array_key_exists('active', $data) && $data['active'] !== null) {
-            $object->setActive($data['active']);
-        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
-            $object->setActive(null);
-        }
-        if (\array_key_exists('bonus', $data) && $data['bonus'] !== null) {
-            $object->setBonus($data['bonus']);
-        } elseif (\array_key_exists('bonus', $data) && $data['bonus'] === null) {
-            $object->setBonus(null);
-        }
-        if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
-            $object->setCommissionBonus($data['commissionBonus']);
-        } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
-            $object->setCommissionBonus(null);
-        }
-        if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
-            $object->setPaysCommission($data['paysCommission']);
-        } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
-            $object->setPaysCommission(null);
-        }
-        if (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] !== null) {
-            $object->setExcludeFromPayroll($data['excludeFromPayroll']);
-        } elseif (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] === null) {
-            $object->setExcludeFromPayroll(null);
-        }
-        if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
-            $object->setExternalData($data['externalData']);
-        } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
-            $object->setExternalData(null);
-        }
-        if (\array_key_exists('customId', $data) && $data['customId'] !== null) {
-            $object->setCustomId($data['customId']);
-        } elseif (\array_key_exists('customId', $data) && $data['customId'] === null) {
-            $object->setCustomId(null);
+            if ($object->isInitialized('taxable') && null !== $object->getTaxable()) {
+                $data['taxable'] = $object->getTaxable();
+            }
+            if ($object->isInitialized('categories') && null !== $object->getCategories()) {
+                $values = [];
+                foreach ($object->getCategories() as $value) {
+                    $values[] = $value;
+                }
+                $data['categories'] = $values;
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+            if ($object->isInitialized('assets') && null !== $object->getAssets()) {
+                $values_1 = [];
+                foreach ($object->getAssets() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['assets'] = $values_1;
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('crossSaleGroup') && null !== $object->getCrossSaleGroup()) {
+                $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            }
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
+            }
+            if ($object->isInitialized('bonus') && null !== $object->getBonus()) {
+                $data['bonus'] = $object->getBonus();
+            }
+            if ($object->isInitialized('commissionBonus') && null !== $object->getCommissionBonus()) {
+                $data['commissionBonus'] = $object->getCommissionBonus();
+            }
+            if ($object->isInitialized('paysCommission') && null !== $object->getPaysCommission()) {
+                $data['paysCommission'] = $object->getPaysCommission();
+            }
+            if ($object->isInitialized('excludeFromPayroll') && null !== $object->getExcludeFromPayroll()) {
+                $data['excludeFromPayroll'] = $object->getExcludeFromPayroll();
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+            if ($object->isInitialized('customId') && null !== $object->getCustomId()) {
+                $data['customId'] = $object->getCustomId();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2DiscountAndFeesBulkCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['type'] = $object->getType();
-        $data['code'] = $object->getCode();
-        if (null !== $object->getDisplayName()) {
-            $data['displayName'] = $object->getDisplayName();
-        }
-        $data['description'] = $object->getDescription();
-        $data['amountType'] = $object->getAmountType();
-        $data['amount'] = $object->getAmount();
-        if (null !== $object->getLimit()) {
-            $data['limit'] = $object->getLimit();
-        }
-        if (null !== $object->getTaxable()) {
-            $data['taxable'] = $object->getTaxable();
-        }
-        if (null !== $object->getCategories()) {
-            $values = [];
-            foreach ($object->getCategories() as $value) {
-                $values[] = $value;
-            }
-            $data['categories'] = $values;
-        }
-        if (null !== $object->getHours()) {
-            $data['hours'] = $object->getHours();
-        }
-        if (null !== $object->getAssets()) {
-            $values_1 = [];
-            foreach ($object->getAssets() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['assets'] = $values_1;
-        }
-        if (null !== $object->getAccount()) {
-            $data['account'] = $object->getAccount();
-        }
-        if (null !== $object->getCrossSaleGroup()) {
-            $data['crossSaleGroup'] = $object->getCrossSaleGroup();
-        }
-        if (null !== $object->getActive()) {
-            $data['active'] = $object->getActive();
-        }
-        if (null !== $object->getBonus()) {
-            $data['bonus'] = $object->getBonus();
-        }
-        if (null !== $object->getCommissionBonus()) {
-            $data['commissionBonus'] = $object->getCommissionBonus();
-        }
-        if (null !== $object->getPaysCommission()) {
-            $data['paysCommission'] = $object->getPaysCommission();
-        }
-        if (null !== $object->getExcludeFromPayroll()) {
-            $data['excludeFromPayroll'] = $object->getExcludeFromPayroll();
-        }
-        if (null !== $object->getExternalData()) {
-            $data['externalData'] = $object->getExternalData();
-        }
-        if (null !== $object->getCustomId()) {
-            $data['customId'] = $object->getCustomId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (\array_key_exists('limit', $data) && \is_int($data['limit'])) {
+                $data['limit'] = (float) $data['limit'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('bonus', $data) && \is_int($data['bonus'])) {
+                $data['bonus'] = (float) $data['bonus'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('type', $data)) {
+                $object->setType($data['type']);
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data) && $data['displayName'] !== null) {
+                $object->setDisplayName($data['displayName']);
+            } elseif (\array_key_exists('displayName', $data) && $data['displayName'] === null) {
+                $object->setDisplayName(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('amountType', $data)) {
+                $object->setAmountType($data['amountType']);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('limit', $data) && $data['limit'] !== null) {
+                $object->setLimit($data['limit']);
+            } elseif (\array_key_exists('limit', $data) && $data['limit'] === null) {
+                $object->setLimit(null);
+            }
+            if (\array_key_exists('taxable', $data) && $data['taxable'] !== null) {
+                $object->setTaxable($data['taxable']);
+            } elseif (\array_key_exists('taxable', $data) && $data['taxable'] === null) {
+                $object->setTaxable(null);
+            }
+            if (\array_key_exists('categories', $data) && $data['categories'] !== null) {
+                $values = [];
+                foreach ($data['categories'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setCategories($values);
+            } elseif (\array_key_exists('categories', $data) && $data['categories'] === null) {
+                $object->setCategories(null);
+            }
+            if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+                $object->setHours($data['hours']);
+            } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
+                $object->setHours(null);
+            }
+            if (\array_key_exists('assets', $data) && $data['assets'] !== null) {
+                $values_1 = [];
+                foreach ($data['assets'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_1);
+            } elseif (\array_key_exists('assets', $data) && $data['assets'] === null) {
+                $object->setAssets(null);
+            }
+            if (\array_key_exists('account', $data) && $data['account'] !== null) {
+                $object->setAccount($data['account']);
+            } elseif (\array_key_exists('account', $data) && $data['account'] === null) {
+                $object->setAccount(null);
+            }
+            if (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] !== null) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            } elseif (\array_key_exists('crossSaleGroup', $data) && $data['crossSaleGroup'] === null) {
+                $object->setCrossSaleGroup(null);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('bonus', $data) && $data['bonus'] !== null) {
+                $object->setBonus($data['bonus']);
+            } elseif (\array_key_exists('bonus', $data) && $data['bonus'] === null) {
+                $object->setBonus(null);
+            }
+            if (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] !== null) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            } elseif (\array_key_exists('commissionBonus', $data) && $data['commissionBonus'] === null) {
+                $object->setCommissionBonus(null);
+            }
+            if (\array_key_exists('paysCommission', $data) && $data['paysCommission'] !== null) {
+                $object->setPaysCommission($data['paysCommission']);
+            } elseif (\array_key_exists('paysCommission', $data) && $data['paysCommission'] === null) {
+                $object->setPaysCommission(null);
+            }
+            if (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] !== null) {
+                $object->setExcludeFromPayroll($data['excludeFromPayroll']);
+            } elseif (\array_key_exists('excludeFromPayroll', $data) && $data['excludeFromPayroll'] === null) {
+                $object->setExcludeFromPayroll(null);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+            if (\array_key_exists('customId', $data) && $data['customId'] !== null) {
+                $object->setCustomId($data['customId']);
+            } elseif (\array_key_exists('customId', $data) && $data['customId'] === null) {
+                $object->setCustomId(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['type'] = $object->getType();
+            $data['code'] = $object->getCode();
+            if ($object->isInitialized('displayName') && null !== $object->getDisplayName()) {
+                $data['displayName'] = $object->getDisplayName();
+            }
+            $data['description'] = $object->getDescription();
+            $data['amountType'] = $object->getAmountType();
+            $data['amount'] = $object->getAmount();
+            if ($object->isInitialized('limit') && null !== $object->getLimit()) {
+                $data['limit'] = $object->getLimit();
+            }
+            if ($object->isInitialized('taxable') && null !== $object->getTaxable()) {
+                $data['taxable'] = $object->getTaxable();
+            }
+            if ($object->isInitialized('categories') && null !== $object->getCategories()) {
+                $values = [];
+                foreach ($object->getCategories() as $value) {
+                    $values[] = $value;
+                }
+                $data['categories'] = $values;
+            }
+            if ($object->isInitialized('hours') && null !== $object->getHours()) {
+                $data['hours'] = $object->getHours();
+            }
+            if ($object->isInitialized('assets') && null !== $object->getAssets()) {
+                $values_1 = [];
+                foreach ($object->getAssets() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['assets'] = $values_1;
+            }
+            if ($object->isInitialized('account') && null !== $object->getAccount()) {
+                $data['account'] = $object->getAccount();
+            }
+            if ($object->isInitialized('crossSaleGroup') && null !== $object->getCrossSaleGroup()) {
+                $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            }
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
+            }
+            if ($object->isInitialized('bonus') && null !== $object->getBonus()) {
+                $data['bonus'] = $object->getBonus();
+            }
+            if ($object->isInitialized('commissionBonus') && null !== $object->getCommissionBonus()) {
+                $data['commissionBonus'] = $object->getCommissionBonus();
+            }
+            if ($object->isInitialized('paysCommission') && null !== $object->getPaysCommission()) {
+                $data['paysCommission'] = $object->getPaysCommission();
+            }
+            if ($object->isInitialized('excludeFromPayroll') && null !== $object->getExcludeFromPayroll()) {
+                $data['excludeFromPayroll'] = $object->getExcludeFromPayroll();
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+            if ($object->isInitialized('customId') && null !== $object->getCustomId()) {
+                $data['customId'] = $object->getCustomId();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkCreateRequest::class => false];
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2InvoiceTemplateCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Invoice template name.
      *
      * @var string|null
@@ -21,7 +30,7 @@ class MembershipsV2InvoiceTemplateCreateRequest
     /**
      * Invoice template items.
      *
-     * @var MembershipsV2InvoiceTemplateItemCreateRequest[]|null
+     * @var list<MembershipsV2InvoiceTemplateItemCreateRequest>|null
      */
     protected $items;
 
@@ -38,6 +47,7 @@ class MembershipsV2InvoiceTemplateCreateRequest
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -46,7 +56,7 @@ class MembershipsV2InvoiceTemplateCreateRequest
     /**
      * Invoice template items.
      *
-     * @return MembershipsV2InvoiceTemplateItemCreateRequest[]|null
+     * @return list<MembershipsV2InvoiceTemplateItemCreateRequest>|null
      */
     public function getItems(): ?array
     {
@@ -56,10 +66,11 @@ class MembershipsV2InvoiceTemplateCreateRequest
     /**
      * Invoice template items.
      *
-     * @param MembershipsV2InvoiceTemplateItemCreateRequest[]|null $items
+     * @param list<MembershipsV2InvoiceTemplateItemCreateRequest>|null $items
      */
     public function setItems(?array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;

@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,75 +21,153 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PayrollV2GrossPayItemsGrossPayItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PayrollV2GrossPayItemsGrossPayItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PayrollV2GrossPayItemsGrossPayItemUpdateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PayrollV2GrossPayItemsGrossPayItemUpdateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('payrollId', $data)) {
+                $object->setPayrollId($data['payrollId']);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('activityCodeId', $data)) {
+                $object->setActivityCodeId($data['activityCodeId']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+                $object->setInvoiceId($data['invoiceId']);
+            } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
+                $object->setInvoiceId(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('payrollId', $data)) {
-            $object->setPayrollId($data['payrollId']);
-        }
-        if (\array_key_exists('amount', $data)) {
-            $object->setAmount($data['amount']);
-        }
-        if (\array_key_exists('activityCodeId', $data)) {
-            $object->setActivityCodeId($data['activityCodeId']);
-        }
-        if (\array_key_exists('date', $data)) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
-        }
-        if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
-            $object->setInvoiceId($data['invoiceId']);
-        } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
-            $object->setInvoiceId(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['payrollId'] = $object->getPayrollId();
+            $data['amount'] = $object->getAmount();
+            $data['activityCodeId'] = $object->getActivityCodeId();
+            $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+                $data['invoiceId'] = $object->getInvoiceId();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PayrollV2GrossPayItemsGrossPayItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['payrollId'] = $object->getPayrollId();
-        $data['amount'] = $object->getAmount();
-        $data['activityCodeId'] = $object->getActivityCodeId();
-        $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
-        if (null !== $object->getInvoiceId()) {
-            $data['invoiceId'] = $object->getInvoiceId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest();
+            if (\array_key_exists('amount', $data) && \is_int($data['amount'])) {
+                $data['amount'] = (float) $data['amount'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('payrollId', $data)) {
+                $object->setPayrollId($data['payrollId']);
+            }
+            if (\array_key_exists('amount', $data)) {
+                $object->setAmount($data['amount']);
+            }
+            if (\array_key_exists('activityCodeId', $data)) {
+                $object->setActivityCodeId($data['activityCodeId']);
+            }
+            if (\array_key_exists('date', $data)) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            }
+            if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+                $object->setInvoiceId($data['invoiceId']);
+            } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
+                $object->setInvoiceId(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['payrollId'] = $object->getPayrollId();
+            $data['amount'] = $object->getAmount();
+            $data['activityCodeId'] = $object->getActivityCodeId();
+            $data['date'] = $object->getDate()?->format('Y-m-d\TH:i:sP');
+            if ($object->isInitialized('invoiceId') && null !== $object->getInvoiceId()) {
+                $data['invoiceId'] = $object->getInvoiceId();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2GrossPayItemsGrossPayItemUpdateRequest::class => false];
+        }
     }
 }

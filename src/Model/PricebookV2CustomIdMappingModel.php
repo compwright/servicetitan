@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2CustomIdMappingModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $customId;
@@ -28,6 +37,7 @@ class PricebookV2CustomIdMappingModel
 
     public function setCustomId(string $customId): self
     {
+        $this->initialized['customId'] = true;
         $this->customId = $customId;
 
         return $this;
@@ -40,6 +50,7 @@ class PricebookV2CustomIdMappingModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;

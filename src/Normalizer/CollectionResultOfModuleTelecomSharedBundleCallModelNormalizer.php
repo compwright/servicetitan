@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,79 +21,155 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CollectionResultOfModuleTelecomSharedBundleCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CollectionResultOfModuleTelecomSharedBundleCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CollectionResultOfModuleTelecomSharedBundleCallModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CollectionResultOfModuleTelecomSharedBundleCallModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('data', $data)) {
+                $values = [];
+                foreach ($data['data'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\ModuleTelecomSharedBundleCallModel::class, 'json', $context);
+                }
+                $object->setData($values);
+            }
+            if (\array_key_exists('page', $data)) {
+                $object->setPage($data['page']);
+            }
+            if (\array_key_exists('pageSize', $data)) {
+                $object->setPageSize($data['pageSize']);
+            }
+            if (\array_key_exists('totalCount', $data)) {
+                $object->setTotalCount($data['totalCount']);
+            }
+            if (\array_key_exists('hasMore', $data)) {
+                $object->setHasMore($data['hasMore']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('data', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
             $values = [];
-            foreach ($data['data'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\ModuleTelecomSharedBundleCallModel', 'json', $context);
+            foreach ($object->getData() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setData($values);
-        }
-        if (\array_key_exists('page', $data)) {
-            $object->setPage($data['page']);
-        }
-        if (\array_key_exists('pageSize', $data)) {
-            $object->setPageSize($data['pageSize']);
-        }
-        if (\array_key_exists('totalCount', $data)) {
-            $object->setTotalCount($data['totalCount']);
-        }
-        if (\array_key_exists('hasMore', $data)) {
-            $object->setHasMore($data['hasMore']);
+            $data['data'] = $values;
+            $data['page'] = $object->getPage();
+            $data['pageSize'] = $object->getPageSize();
+            $data['totalCount'] = $object->getTotalCount();
+            $data['hasMore'] = $object->getHasMore();
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CollectionResultOfModuleTelecomSharedBundleCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $values = [];
-        foreach ($object->getData() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['data'] = $values;
-        $data['page'] = $object->getPage();
-        $data['pageSize'] = $object->getPageSize();
-        $data['totalCount'] = $object->getTotalCount();
-        $data['hasMore'] = $object->getHasMore();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('data', $data)) {
+                $values = [];
+                foreach ($data['data'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\ModuleTelecomSharedBundleCallModel::class, 'json', $context);
+                }
+                $object->setData($values);
+            }
+            if (\array_key_exists('page', $data)) {
+                $object->setPage($data['page']);
+            }
+            if (\array_key_exists('pageSize', $data)) {
+                $object->setPageSize($data['pageSize']);
+            }
+            if (\array_key_exists('totalCount', $data)) {
+                $object->setTotalCount($data['totalCount']);
+            }
+            if (\array_key_exists('hasMore', $data)) {
+                $object->setHasMore($data['hasMore']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $values = [];
+            foreach ($object->getData() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['data'] = $values;
+            $data['page'] = $object->getPage();
+            $data['pageSize'] = $object->getPageSize();
+            $data['totalCount'] = $object->getTotalCount();
+            $data['hasMore'] = $object->getHasMore();
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CollectionResultOfModuleTelecomSharedBundleCallModel::class => false];
+        }
     }
 }

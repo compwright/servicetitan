@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfCrmV2NoteResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfCrmV2NoteResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var CrmV2NoteResponse[]
+     * @var list<CrmV2NoteResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfCrmV2NoteResponse
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfCrmV2NoteResponse
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfCrmV2NoteResponse
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfCrmV2NoteResponse
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfCrmV2NoteResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return CrmV2NoteResponse[]
+     * @return list<CrmV2NoteResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfCrmV2NoteResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param CrmV2NoteResponse[] $data
+     * @param list<CrmV2NoteResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

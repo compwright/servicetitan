@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,171 +21,357 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2InvoiceItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2InvoiceItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2InvoiceItemUpdateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2InvoiceItemUpdateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest();
+            if (\array_key_exists('quantity', $data) && \is_int($data['quantity'])) {
+                $data['quantity'] = (float) $data['quantity'];
+            }
+            if (\array_key_exists('unitPrice', $data) && \is_int($data['unitPrice'])) {
+                $data['unitPrice'] = (float) $data['unitPrice'];
+            }
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('skuId', $data) && $data['skuId'] !== null) {
+                $object->setSkuId($data['skuId']);
+            } elseif (\array_key_exists('skuId', $data) && $data['skuId'] === null) {
+                $object->setSkuId(null);
+            }
+            if (\array_key_exists('skuName', $data) && $data['skuName'] !== null) {
+                $object->setSkuName($data['skuName']);
+            } elseif (\array_key_exists('skuName', $data) && $data['skuName'] === null) {
+                $object->setSkuName(null);
+            }
+            if (\array_key_exists('technicianId', $data) && $data['technicianId'] !== null) {
+                $object->setTechnicianId($data['technicianId']);
+            } elseif (\array_key_exists('technicianId', $data) && $data['technicianId'] === null) {
+                $object->setTechnicianId(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('quantity', $data)) {
+                $object->setQuantity($data['quantity']);
+            }
+            if (\array_key_exists('unitPrice', $data) && $data['unitPrice'] !== null) {
+                $object->setUnitPrice($data['unitPrice']);
+            } elseif (\array_key_exists('unitPrice', $data) && $data['unitPrice'] === null) {
+                $object->setUnitPrice(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('isAddOn', $data) && $data['isAddOn'] !== null) {
+                $object->setIsAddOn($data['isAddOn']);
+            } elseif (\array_key_exists('isAddOn', $data) && $data['isAddOn'] === null) {
+                $object->setIsAddOn(null);
+            }
+            if (\array_key_exists('signature', $data) && $data['signature'] !== null) {
+                $object->setSignature($data['signature']);
+            } elseif (\array_key_exists('signature', $data) && $data['signature'] === null) {
+                $object->setSignature(null);
+            }
+            if (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] !== null) {
+                $object->setTechnicianAcknowledgementSignature($data['technicianAcknowledgementSignature']);
+            } elseif (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] === null) {
+                $object->setTechnicianAcknowledgementSignature(null);
+            }
+            if (\array_key_exists('installedOn', $data) && $data['installedOn'] !== null) {
+                $object->setInstalledOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['installedOn']));
+            } elseif (\array_key_exists('installedOn', $data) && $data['installedOn'] === null) {
+                $object->setInstalledOn(null);
+            }
+            if (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] !== null) {
+                $object->setInventoryWarehouseName($data['inventoryWarehouseName']);
+            } elseif (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] === null) {
+                $object->setInventoryWarehouseName(null);
+            }
+            if (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] !== null) {
+                $object->setSkipUpdatingMembershipPrices($data['skipUpdatingMembershipPrices']);
+            } elseif (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] === null) {
+                $object->setSkipUpdatingMembershipPrices(null);
+            }
+            if (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] !== null) {
+                $object->setItemGroupName($data['itemGroupName']);
+            } elseif (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] === null) {
+                $object->setItemGroupName(null);
+            }
+            if (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] !== null) {
+                $object->setItemGroupRootId($data['itemGroupRootId']);
+            } elseif (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] === null) {
+                $object->setItemGroupRootId(null);
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('skuId', $data) && $data['skuId'] !== null) {
-            $object->setSkuId($data['skuId']);
-        } elseif (\array_key_exists('skuId', $data) && $data['skuId'] === null) {
-            $object->setSkuId(null);
-        }
-        if (\array_key_exists('skuName', $data) && $data['skuName'] !== null) {
-            $object->setSkuName($data['skuName']);
-        } elseif (\array_key_exists('skuName', $data) && $data['skuName'] === null) {
-            $object->setSkuName(null);
-        }
-        if (\array_key_exists('technicianId', $data) && $data['technicianId'] !== null) {
-            $object->setTechnicianId($data['technicianId']);
-        } elseif (\array_key_exists('technicianId', $data) && $data['technicianId'] === null) {
-            $object->setTechnicianId(null);
-        }
-        if (\array_key_exists('description', $data)) {
-            $object->setDescription($data['description']);
-        }
-        if (\array_key_exists('quantity', $data)) {
-            $object->setQuantity($data['quantity']);
-        }
-        if (\array_key_exists('unitPrice', $data) && $data['unitPrice'] !== null) {
-            $object->setUnitPrice($data['unitPrice']);
-        } elseif (\array_key_exists('unitPrice', $data) && $data['unitPrice'] === null) {
-            $object->setUnitPrice(null);
-        }
-        if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
-            $object->setCost($data['cost']);
-        } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
-            $object->setCost(null);
-        }
-        if (\array_key_exists('isAddOn', $data) && $data['isAddOn'] !== null) {
-            $object->setIsAddOn($data['isAddOn']);
-        } elseif (\array_key_exists('isAddOn', $data) && $data['isAddOn'] === null) {
-            $object->setIsAddOn(null);
-        }
-        if (\array_key_exists('signature', $data) && $data['signature'] !== null) {
-            $object->setSignature($data['signature']);
-        } elseif (\array_key_exists('signature', $data) && $data['signature'] === null) {
-            $object->setSignature(null);
-        }
-        if (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] !== null) {
-            $object->setTechnicianAcknowledgementSignature($data['technicianAcknowledgementSignature']);
-        } elseif (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] === null) {
-            $object->setTechnicianAcknowledgementSignature(null);
-        }
-        if (\array_key_exists('installedOn', $data) && $data['installedOn'] !== null) {
-            $object->setInstalledOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['installedOn']));
-        } elseif (\array_key_exists('installedOn', $data) && $data['installedOn'] === null) {
-            $object->setInstalledOn(null);
-        }
-        if (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] !== null) {
-            $object->setInventoryWarehouseName($data['inventoryWarehouseName']);
-        } elseif (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] === null) {
-            $object->setInventoryWarehouseName(null);
-        }
-        if (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] !== null) {
-            $object->setSkipUpdatingMembershipPrices($data['skipUpdatingMembershipPrices']);
-        } elseif (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] === null) {
-            $object->setSkipUpdatingMembershipPrices(null);
-        }
-        if (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] !== null) {
-            $object->setItemGroupName($data['itemGroupName']);
-        } elseif (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] === null) {
-            $object->setItemGroupName(null);
-        }
-        if (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] !== null) {
-            $object->setItemGroupRootId($data['itemGroupRootId']);
-        } elseif (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] === null) {
-            $object->setItemGroupRootId(null);
-        }
-        if (\array_key_exists('id', $data) && $data['id'] !== null) {
-            $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
-            $object->setId(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('skuId') && null !== $object->getSkuId()) {
+                $data['skuId'] = $object->getSkuId();
+            }
+            if ($object->isInitialized('skuName') && null !== $object->getSkuName()) {
+                $data['skuName'] = $object->getSkuName();
+            }
+            if ($object->isInitialized('technicianId') && null !== $object->getTechnicianId()) {
+                $data['technicianId'] = $object->getTechnicianId();
+            }
+            $data['description'] = $object->getDescription();
+            $data['quantity'] = $object->getQuantity();
+            if ($object->isInitialized('unitPrice') && null !== $object->getUnitPrice()) {
+                $data['unitPrice'] = $object->getUnitPrice();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('isAddOn') && null !== $object->getIsAddOn()) {
+                $data['isAddOn'] = $object->getIsAddOn();
+            }
+            if ($object->isInitialized('signature') && null !== $object->getSignature()) {
+                $data['signature'] = $object->getSignature();
+            }
+            if ($object->isInitialized('technicianAcknowledgementSignature') && null !== $object->getTechnicianAcknowledgementSignature()) {
+                $data['technicianAcknowledgementSignature'] = $object->getTechnicianAcknowledgementSignature();
+            }
+            if ($object->isInitialized('installedOn') && null !== $object->getInstalledOn()) {
+                $data['installedOn'] = $object->getInstalledOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('inventoryWarehouseName') && null !== $object->getInventoryWarehouseName()) {
+                $data['inventoryWarehouseName'] = $object->getInventoryWarehouseName();
+            }
+            if ($object->isInitialized('skipUpdatingMembershipPrices') && null !== $object->getSkipUpdatingMembershipPrices()) {
+                $data['skipUpdatingMembershipPrices'] = $object->getSkipUpdatingMembershipPrices();
+            }
+            if ($object->isInitialized('itemGroupName') && null !== $object->getItemGroupName()) {
+                $data['itemGroupName'] = $object->getItemGroupName();
+            }
+            if ($object->isInitialized('itemGroupRootId') && null !== $object->getItemGroupRootId()) {
+                $data['itemGroupRootId'] = $object->getItemGroupRootId();
+            }
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2InvoiceItemUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getSkuId()) {
-            $data['skuId'] = $object->getSkuId();
-        }
-        if (null !== $object->getSkuName()) {
-            $data['skuName'] = $object->getSkuName();
-        }
-        if (null !== $object->getTechnicianId()) {
-            $data['technicianId'] = $object->getTechnicianId();
-        }
-        $data['description'] = $object->getDescription();
-        $data['quantity'] = $object->getQuantity();
-        if (null !== $object->getUnitPrice()) {
-            $data['unitPrice'] = $object->getUnitPrice();
-        }
-        if (null !== $object->getCost()) {
-            $data['cost'] = $object->getCost();
-        }
-        if (null !== $object->getIsAddOn()) {
-            $data['isAddOn'] = $object->getIsAddOn();
-        }
-        if (null !== $object->getSignature()) {
-            $data['signature'] = $object->getSignature();
-        }
-        if (null !== $object->getTechnicianAcknowledgementSignature()) {
-            $data['technicianAcknowledgementSignature'] = $object->getTechnicianAcknowledgementSignature();
-        }
-        if (null !== $object->getInstalledOn()) {
-            $data['installedOn'] = $object->getInstalledOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getInventoryWarehouseName()) {
-            $data['inventoryWarehouseName'] = $object->getInventoryWarehouseName();
-        }
-        if (null !== $object->getSkipUpdatingMembershipPrices()) {
-            $data['skipUpdatingMembershipPrices'] = $object->getSkipUpdatingMembershipPrices();
-        }
-        if (null !== $object->getItemGroupName()) {
-            $data['itemGroupName'] = $object->getItemGroupName();
-        }
-        if (null !== $object->getItemGroupRootId()) {
-            $data['itemGroupRootId'] = $object->getItemGroupRootId();
-        }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest();
+            if (\array_key_exists('quantity', $data) && \is_int($data['quantity'])) {
+                $data['quantity'] = (float) $data['quantity'];
+            }
+            if (\array_key_exists('unitPrice', $data) && \is_int($data['unitPrice'])) {
+                $data['unitPrice'] = (float) $data['unitPrice'];
+            }
+            if (\array_key_exists('cost', $data) && \is_int($data['cost'])) {
+                $data['cost'] = (float) $data['cost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('skuId', $data) && $data['skuId'] !== null) {
+                $object->setSkuId($data['skuId']);
+            } elseif (\array_key_exists('skuId', $data) && $data['skuId'] === null) {
+                $object->setSkuId(null);
+            }
+            if (\array_key_exists('skuName', $data) && $data['skuName'] !== null) {
+                $object->setSkuName($data['skuName']);
+            } elseif (\array_key_exists('skuName', $data) && $data['skuName'] === null) {
+                $object->setSkuName(null);
+            }
+            if (\array_key_exists('technicianId', $data) && $data['technicianId'] !== null) {
+                $object->setTechnicianId($data['technicianId']);
+            } elseif (\array_key_exists('technicianId', $data) && $data['technicianId'] === null) {
+                $object->setTechnicianId(null);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('quantity', $data)) {
+                $object->setQuantity($data['quantity']);
+            }
+            if (\array_key_exists('unitPrice', $data) && $data['unitPrice'] !== null) {
+                $object->setUnitPrice($data['unitPrice']);
+            } elseif (\array_key_exists('unitPrice', $data) && $data['unitPrice'] === null) {
+                $object->setUnitPrice(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('isAddOn', $data) && $data['isAddOn'] !== null) {
+                $object->setIsAddOn($data['isAddOn']);
+            } elseif (\array_key_exists('isAddOn', $data) && $data['isAddOn'] === null) {
+                $object->setIsAddOn(null);
+            }
+            if (\array_key_exists('signature', $data) && $data['signature'] !== null) {
+                $object->setSignature($data['signature']);
+            } elseif (\array_key_exists('signature', $data) && $data['signature'] === null) {
+                $object->setSignature(null);
+            }
+            if (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] !== null) {
+                $object->setTechnicianAcknowledgementSignature($data['technicianAcknowledgementSignature']);
+            } elseif (\array_key_exists('technicianAcknowledgementSignature', $data) && $data['technicianAcknowledgementSignature'] === null) {
+                $object->setTechnicianAcknowledgementSignature(null);
+            }
+            if (\array_key_exists('installedOn', $data) && $data['installedOn'] !== null) {
+                $object->setInstalledOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['installedOn']));
+            } elseif (\array_key_exists('installedOn', $data) && $data['installedOn'] === null) {
+                $object->setInstalledOn(null);
+            }
+            if (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] !== null) {
+                $object->setInventoryWarehouseName($data['inventoryWarehouseName']);
+            } elseif (\array_key_exists('inventoryWarehouseName', $data) && $data['inventoryWarehouseName'] === null) {
+                $object->setInventoryWarehouseName(null);
+            }
+            if (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] !== null) {
+                $object->setSkipUpdatingMembershipPrices($data['skipUpdatingMembershipPrices']);
+            } elseif (\array_key_exists('skipUpdatingMembershipPrices', $data) && $data['skipUpdatingMembershipPrices'] === null) {
+                $object->setSkipUpdatingMembershipPrices(null);
+            }
+            if (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] !== null) {
+                $object->setItemGroupName($data['itemGroupName']);
+            } elseif (\array_key_exists('itemGroupName', $data) && $data['itemGroupName'] === null) {
+                $object->setItemGroupName(null);
+            }
+            if (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] !== null) {
+                $object->setItemGroupRootId($data['itemGroupRootId']);
+            } elseif (\array_key_exists('itemGroupRootId', $data) && $data['itemGroupRootId'] === null) {
+                $object->setItemGroupRootId(null);
+            }
+            if (\array_key_exists('id', $data) && $data['id'] !== null) {
+                $object->setId($data['id']);
+            } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+                $object->setId(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('skuId') && null !== $object->getSkuId()) {
+                $data['skuId'] = $object->getSkuId();
+            }
+            if ($object->isInitialized('skuName') && null !== $object->getSkuName()) {
+                $data['skuName'] = $object->getSkuName();
+            }
+            if ($object->isInitialized('technicianId') && null !== $object->getTechnicianId()) {
+                $data['technicianId'] = $object->getTechnicianId();
+            }
+            $data['description'] = $object->getDescription();
+            $data['quantity'] = $object->getQuantity();
+            if ($object->isInitialized('unitPrice') && null !== $object->getUnitPrice()) {
+                $data['unitPrice'] = $object->getUnitPrice();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('isAddOn') && null !== $object->getIsAddOn()) {
+                $data['isAddOn'] = $object->getIsAddOn();
+            }
+            if ($object->isInitialized('signature') && null !== $object->getSignature()) {
+                $data['signature'] = $object->getSignature();
+            }
+            if ($object->isInitialized('technicianAcknowledgementSignature') && null !== $object->getTechnicianAcknowledgementSignature()) {
+                $data['technicianAcknowledgementSignature'] = $object->getTechnicianAcknowledgementSignature();
+            }
+            if ($object->isInitialized('installedOn') && null !== $object->getInstalledOn()) {
+                $data['installedOn'] = $object->getInstalledOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('inventoryWarehouseName') && null !== $object->getInventoryWarehouseName()) {
+                $data['inventoryWarehouseName'] = $object->getInventoryWarehouseName();
+            }
+            if ($object->isInitialized('skipUpdatingMembershipPrices') && null !== $object->getSkipUpdatingMembershipPrices()) {
+                $data['skipUpdatingMembershipPrices'] = $object->getSkipUpdatingMembershipPrices();
+            }
+            if ($object->isInitialized('itemGroupName') && null !== $object->getItemGroupName()) {
+                $data['itemGroupName'] = $object->getItemGroupName();
+            }
+            if ($object->isInitialized('itemGroupRootId') && null !== $object->getItemGroupRootId()) {
+                $data['itemGroupRootId'] = $object->getItemGroupRootId();
+            }
+            if ($object->isInitialized('id') && null !== $object->getId()) {
+                $data['id'] = $object->getId();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2InvoiceItemUpdateRequest::class => false];
+        }
     }
 }

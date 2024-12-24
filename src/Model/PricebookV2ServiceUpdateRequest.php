@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2ServiceUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Code for the SKU.
      *
      * @var string
@@ -32,14 +41,12 @@ class PricebookV2ServiceUpdateRequest
     protected $description;
     /**
      * Description of the warranty included in this SKU.
-     *
-     * @var mixed
      */
     protected $warranty;
     /**
      * Categories that this SKU belongs to.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $categories;
     /**
@@ -93,31 +100,31 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Recommended other services to include with this SKU.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $recommendations;
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $upgrades;
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetRequest[]
+     * @var list<PricebookV2SkuAssetRequest>
      */
     protected $assets;
     /**
      * Array of materials linked to the service.
      *
-     * @var PricebookV2SkuLinkRequest[]
+     * @var list<PricebookV2SkuLinkRequest>
      */
     protected $serviceMaterials;
     /**
      * Array of equipment linked to the service.
      *
-     * @var PricebookV2SkuLinkRequest[]
+     * @var list<PricebookV2SkuLinkRequest>
      */
     protected $serviceEquipment;
     /**
@@ -164,6 +171,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -182,6 +190,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setDisplayName(string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -200,6 +209,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -207,8 +217,6 @@ class PricebookV2ServiceUpdateRequest
 
     /**
      * Description of the warranty included in this SKU.
-     *
-     * @return mixed
      */
     public function getWarranty()
     {
@@ -217,11 +225,10 @@ class PricebookV2ServiceUpdateRequest
 
     /**
      * Description of the warranty included in this SKU.
-     *
-     * @param mixed $warranty
      */
     public function setWarranty($warranty): self
     {
+        $this->initialized['warranty'] = true;
         $this->warranty = $warranty;
 
         return $this;
@@ -230,7 +237,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getCategories(): array
     {
@@ -240,10 +247,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @param int[] $categories
+     * @param list<int> $categories
      */
     public function setCategories(array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -262,6 +270,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setPrice(float $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -280,6 +289,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setMemberPrice(float $memberPrice): self
     {
+        $this->initialized['memberPrice'] = true;
         $this->memberPrice = $memberPrice;
 
         return $this;
@@ -298,6 +308,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setAddOnPrice(float $addOnPrice): self
     {
+        $this->initialized['addOnPrice'] = true;
         $this->addOnPrice = $addOnPrice;
 
         return $this;
@@ -316,6 +327,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setAddOnMemberPrice(float $addOnMemberPrice): self
     {
+        $this->initialized['addOnMemberPrice'] = true;
         $this->addOnMemberPrice = $addOnMemberPrice;
 
         return $this;
@@ -334,6 +346,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setTaxable(bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -352,6 +365,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setAccount(string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -370,6 +384,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setHours(float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -388,6 +403,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setIsLabor(bool $isLabor): self
     {
+        $this->initialized['isLabor'] = true;
         $this->isLabor = $isLabor;
 
         return $this;
@@ -396,7 +412,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Recommended other services to include with this SKU.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getRecommendations(): array
     {
@@ -406,10 +422,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Recommended other services to include with this SKU.
      *
-     * @param int[] $recommendations
+     * @param list<int> $recommendations
      */
     public function setRecommendations(array $recommendations): self
     {
+        $this->initialized['recommendations'] = true;
         $this->recommendations = $recommendations;
 
         return $this;
@@ -418,7 +435,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getUpgrades(): array
     {
@@ -428,10 +445,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @param int[] $upgrades
+     * @param list<int> $upgrades
      */
     public function setUpgrades(array $upgrades): self
     {
+        $this->initialized['upgrades'] = true;
         $this->upgrades = $upgrades;
 
         return $this;
@@ -440,7 +458,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetRequest[]
+     * @return list<PricebookV2SkuAssetRequest>
      */
     public function getAssets(): array
     {
@@ -450,10 +468,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetRequest[] $assets
+     * @param list<PricebookV2SkuAssetRequest> $assets
      */
     public function setAssets(array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -462,7 +481,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Array of materials linked to the service.
      *
-     * @return PricebookV2SkuLinkRequest[]
+     * @return list<PricebookV2SkuLinkRequest>
      */
     public function getServiceMaterials(): array
     {
@@ -472,10 +491,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Array of materials linked to the service.
      *
-     * @param PricebookV2SkuLinkRequest[] $serviceMaterials
+     * @param list<PricebookV2SkuLinkRequest> $serviceMaterials
      */
     public function setServiceMaterials(array $serviceMaterials): self
     {
+        $this->initialized['serviceMaterials'] = true;
         $this->serviceMaterials = $serviceMaterials;
 
         return $this;
@@ -484,7 +504,7 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Array of equipment linked to the service.
      *
-     * @return PricebookV2SkuLinkRequest[]
+     * @return list<PricebookV2SkuLinkRequest>
      */
     public function getServiceEquipment(): array
     {
@@ -494,10 +514,11 @@ class PricebookV2ServiceUpdateRequest
     /**
      * Array of equipment linked to the service.
      *
-     * @param PricebookV2SkuLinkRequest[] $serviceEquipment
+     * @param list<PricebookV2SkuLinkRequest> $serviceEquipment
      */
     public function setServiceEquipment(array $serviceEquipment): self
     {
+        $this->initialized['serviceEquipment'] = true;
         $this->serviceEquipment = $serviceEquipment;
 
         return $this;
@@ -516,6 +537,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -534,6 +556,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setCrossSaleGroup(string $crossSaleGroup): self
     {
+        $this->initialized['crossSaleGroup'] = true;
         $this->crossSaleGroup = $crossSaleGroup;
 
         return $this;
@@ -552,6 +575,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setPaysCommission(bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -570,6 +594,7 @@ class PricebookV2ServiceUpdateRequest
      */
     public function setCommissionBonus(float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -577,8 +602,6 @@ class PricebookV2ServiceUpdateRequest
 
     /**
      * External data update model.
-     *
-     * @return mixed
      */
     public function getExternalData()
     {
@@ -587,11 +610,10 @@ class PricebookV2ServiceUpdateRequest
 
     /**
      * External data update model.
-     *
-     * @param mixed $externalData
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

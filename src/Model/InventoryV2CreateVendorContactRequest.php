@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2CreateVendorContactRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Name.
      *
      * @var string
@@ -38,6 +47,7 @@ class InventoryV2CreateVendorContactRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -56,6 +66,7 @@ class InventoryV2CreateVendorContactRequest
      */
     public function setEmail(string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;

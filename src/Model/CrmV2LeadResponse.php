@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2LeadResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the lead.
      *
      * @var int
@@ -20,8 +29,6 @@ class CrmV2LeadResponse
     protected $id;
     /**
      * Status of the lead.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -50,8 +57,6 @@ class CrmV2LeadResponse
     protected $jobTypeId;
     /**
      * Priority of the lead.
-     *
-     * @var mixed
      */
     protected $priority;
     /**
@@ -99,7 +104,7 @@ class CrmV2LeadResponse
     /**
      * List of IDs of tags on the lead.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $tagTypeIds;
 
@@ -116,6 +121,7 @@ class CrmV2LeadResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -123,8 +129,6 @@ class CrmV2LeadResponse
 
     /**
      * Status of the lead.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -133,11 +137,10 @@ class CrmV2LeadResponse
 
     /**
      * Status of the lead.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -156,6 +159,7 @@ class CrmV2LeadResponse
      */
     public function setCustomerId(?int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -174,6 +178,7 @@ class CrmV2LeadResponse
      */
     public function setLocationId(?int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -192,6 +197,7 @@ class CrmV2LeadResponse
      */
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -210,6 +216,7 @@ class CrmV2LeadResponse
      */
     public function setJobTypeId(?int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -217,8 +224,6 @@ class CrmV2LeadResponse
 
     /**
      * Priority of the lead.
-     *
-     * @return mixed
      */
     public function getPriority()
     {
@@ -227,11 +232,10 @@ class CrmV2LeadResponse
 
     /**
      * Priority of the lead.
-     *
-     * @param mixed $priority
      */
     public function setPriority($priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -250,6 +254,7 @@ class CrmV2LeadResponse
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -268,6 +273,7 @@ class CrmV2LeadResponse
      */
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -286,6 +292,7 @@ class CrmV2LeadResponse
      */
     public function setCallReasonId(?int $callReasonId): self
     {
+        $this->initialized['callReasonId'] = true;
         $this->callReasonId = $callReasonId;
 
         return $this;
@@ -304,6 +311,7 @@ class CrmV2LeadResponse
      */
     public function setFollowUpDate(?\DateTime $followUpDate): self
     {
+        $this->initialized['followUpDate'] = true;
         $this->followUpDate = $followUpDate;
 
         return $this;
@@ -322,6 +330,7 @@ class CrmV2LeadResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -340,6 +349,7 @@ class CrmV2LeadResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -358,6 +368,7 @@ class CrmV2LeadResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -366,7 +377,7 @@ class CrmV2LeadResponse
     /**
      * List of IDs of tags on the lead.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getTagTypeIds(): ?array
     {
@@ -376,10 +387,11 @@ class CrmV2LeadResponse
     /**
      * List of IDs of tags on the lead.
      *
-     * @param int[]|null $tagTypeIds
+     * @param list<int>|null $tagTypeIds
      */
     public function setTagTypeIds(?array $tagTypeIds): self
     {
+        $this->initialized['tagTypeIds'] = true;
         $this->tagTypeIds = $tagTypeIds;
 
         return $this;

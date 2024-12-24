@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingV2UpdateCampaignCostRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var float
      */
     protected $dailyCost;
@@ -24,6 +33,7 @@ class MarketingV2UpdateCampaignCostRequest
 
     public function setDailyCost(float $dailyCost): self
     {
+        $this->initialized['dailyCost'] = true;
         $this->dailyCost = $dailyCost;
 
         return $this;

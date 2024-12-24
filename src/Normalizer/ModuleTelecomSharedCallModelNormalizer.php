@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,115 +21,227 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class ModuleTelecomSharedCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class ModuleTelecomSharedCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\ModuleTelecomSharedCallModel';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\ModuleTelecomSharedCallModel';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('receivedOn', $data)) {
+                $object->setReceivedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['receivedOn']));
+            }
+            if (\array_key_exists('duration', $data)) {
+                $object->setDuration($data['duration']);
+            }
+            if (\array_key_exists('from', $data)) {
+                $object->setFrom($data['from']);
+            }
+            if (\array_key_exists('to', $data)) {
+                $object->setTo($data['to']);
+            }
+            if (\array_key_exists('direction', $data)) {
+                $object->setDirection($data['direction']);
+            }
+            if (\array_key_exists('callType', $data) && $data['callType'] !== null) {
+                $object->setCallType($data['callType']);
+            } elseif (\array_key_exists('callType', $data) && $data['callType'] === null) {
+                $object->setCallType(null);
+            }
+            if (\array_key_exists('reason', $data)) {
+                $object->setReason($this->denormalizer->denormalize($data['reason'], \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallReasonModel::class, 'json', $context));
+            }
+            if (\array_key_exists('recordingUrl', $data)) {
+                $object->setRecordingUrl($data['recordingUrl']);
+            }
+            if (\array_key_exists('voiceMailUrl', $data)) {
+                $object->setVoiceMailUrl($data['voiceMailUrl']);
+            }
+            if (\array_key_exists('createdBy', $data)) {
+                $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], \CompWright\ServiceTitan\Model\ServicesNamedModel::class, 'json', $context));
+            }
+            if (\array_key_exists('customer', $data)) {
+                $object->setCustomer($this->denormalizer->denormalize($data['customer'], \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class, 'json', $context));
+            }
+            if (\array_key_exists('campaign', $data)) {
+                $object->setCampaign($this->denormalizer->denormalize($data['campaign'], \CompWright\ServiceTitan\Model\MarketingCoreCampaignModel::class, 'json', $context));
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('agent', $data)) {
+                $object->setAgent($this->denormalizer->denormalize($data['agent'], \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallAgentModel::class, 'json', $context));
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('receivedOn', $data)) {
-            $object->setReceivedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['receivedOn']));
-        }
-        if (\array_key_exists('duration', $data)) {
-            $object->setDuration($data['duration']);
-        }
-        if (\array_key_exists('from', $data)) {
-            $object->setFrom($data['from']);
-        }
-        if (\array_key_exists('to', $data)) {
-            $object->setTo($data['to']);
-        }
-        if (\array_key_exists('direction', $data)) {
-            $object->setDirection($data['direction']);
-        }
-        if (\array_key_exists('callType', $data) && $data['callType'] !== null) {
-            $object->setCallType($data['callType']);
-        } elseif (\array_key_exists('callType', $data) && $data['callType'] === null) {
-            $object->setCallType(null);
-        }
-        if (\array_key_exists('reason', $data)) {
-            $object->setReason($this->denormalizer->denormalize($data['reason'], 'CompWright\\ServiceTitan\\Model\\ModuleTelecomSharedCallReasonModel', 'json', $context));
-        }
-        if (\array_key_exists('recordingUrl', $data)) {
-            $object->setRecordingUrl($data['recordingUrl']);
-        }
-        if (\array_key_exists('voiceMailUrl', $data)) {
-            $object->setVoiceMailUrl($data['voiceMailUrl']);
-        }
-        if (\array_key_exists('createdBy', $data)) {
-            $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], 'CompWright\\ServiceTitan\\Model\\ServicesNamedModel', 'json', $context));
-        }
-        if (\array_key_exists('customer', $data)) {
-            $object->setCustomer($this->denormalizer->denormalize($data['customer'], 'CompWright\\ServiceTitan\\Model\\CrmContractsCustomersCustomerModel', 'json', $context));
-        }
-        if (\array_key_exists('campaign', $data)) {
-            $object->setCampaign($this->denormalizer->denormalize($data['campaign'], 'CompWright\\ServiceTitan\\Model\\MarketingCoreCampaignModel', 'json', $context));
-        }
-        if (\array_key_exists('modifiedOn', $data)) {
-            $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['modifiedOn']));
-        }
-        if (\array_key_exists('agent', $data)) {
-            $object->setAgent($this->denormalizer->denormalize($data['agent'], 'CompWright\\ServiceTitan\\Model\\ModuleTelecomSharedCallAgentModel', 'json', $context));
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['receivedOn'] = $object->getReceivedOn()?->format('Y-m-d\TH:i:sP');
+            $data['duration'] = $object->getDuration();
+            $data['from'] = $object->getFrom();
+            $data['to'] = $object->getTo();
+            $data['direction'] = $object->getDirection();
+            if ($object->isInitialized('callType') && null !== $object->getCallType()) {
+                $data['callType'] = $object->getCallType();
+            }
+            $data['reason'] = $this->normalizer->normalize($object->getReason(), 'json', $context);
+            $data['recordingUrl'] = $object->getRecordingUrl();
+            $data['voiceMailUrl'] = $object->getVoiceMailUrl();
+            $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
+            $data['customer'] = $this->normalizer->normalize($object->getCustomer(), 'json', $context);
+            $data['campaign'] = $this->normalizer->normalize($object->getCampaign(), 'json', $context);
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $data['agent'] = $this->normalizer->normalize($object->getAgent(), 'json', $context);
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class ModuleTelecomSharedCallModelNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        $data['receivedOn'] = $object->getReceivedOn()->format('Y-m-d\\TH:i:sP');
-        $data['duration'] = $object->getDuration();
-        $data['from'] = $object->getFrom();
-        $data['to'] = $object->getTo();
-        $data['direction'] = $object->getDirection();
-        if (null !== $object->getCallType()) {
-            $data['callType'] = $object->getCallType();
-        }
-        $data['reason'] = $this->normalizer->normalize($object->getReason(), 'json', $context);
-        $data['recordingUrl'] = $object->getRecordingUrl();
-        $data['voiceMailUrl'] = $object->getVoiceMailUrl();
-        $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
-        $data['customer'] = $this->normalizer->normalize($object->getCustomer(), 'json', $context);
-        $data['campaign'] = $this->normalizer->normalize($object->getCampaign(), 'json', $context);
-        $data['modifiedOn'] = $object->getModifiedOn()->format('Y-m-d\\TH:i:sP');
-        $data['agent'] = $this->normalizer->normalize($object->getAgent(), 'json', $context);
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('receivedOn', $data)) {
+                $object->setReceivedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['receivedOn']));
+            }
+            if (\array_key_exists('duration', $data)) {
+                $object->setDuration($data['duration']);
+            }
+            if (\array_key_exists('from', $data)) {
+                $object->setFrom($data['from']);
+            }
+            if (\array_key_exists('to', $data)) {
+                $object->setTo($data['to']);
+            }
+            if (\array_key_exists('direction', $data)) {
+                $object->setDirection($data['direction']);
+            }
+            if (\array_key_exists('callType', $data) && $data['callType'] !== null) {
+                $object->setCallType($data['callType']);
+            } elseif (\array_key_exists('callType', $data) && $data['callType'] === null) {
+                $object->setCallType(null);
+            }
+            if (\array_key_exists('reason', $data)) {
+                $object->setReason($this->denormalizer->denormalize($data['reason'], \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallReasonModel::class, 'json', $context));
+            }
+            if (\array_key_exists('recordingUrl', $data)) {
+                $object->setRecordingUrl($data['recordingUrl']);
+            }
+            if (\array_key_exists('voiceMailUrl', $data)) {
+                $object->setVoiceMailUrl($data['voiceMailUrl']);
+            }
+            if (\array_key_exists('createdBy', $data)) {
+                $object->setCreatedBy($this->denormalizer->denormalize($data['createdBy'], \CompWright\ServiceTitan\Model\ServicesNamedModel::class, 'json', $context));
+            }
+            if (\array_key_exists('customer', $data)) {
+                $object->setCustomer($this->denormalizer->denormalize($data['customer'], \CompWright\ServiceTitan\Model\CrmContractsCustomersCustomerModel::class, 'json', $context));
+            }
+            if (\array_key_exists('campaign', $data)) {
+                $object->setCampaign($this->denormalizer->denormalize($data['campaign'], \CompWright\ServiceTitan\Model\MarketingCoreCampaignModel::class, 'json', $context));
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('agent', $data)) {
+                $object->setAgent($this->denormalizer->denormalize($data['agent'], \CompWright\ServiceTitan\Model\ModuleTelecomSharedCallAgentModel::class, 'json', $context));
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['receivedOn'] = $object->getReceivedOn()?->format('Y-m-d\TH:i:sP');
+            $data['duration'] = $object->getDuration();
+            $data['from'] = $object->getFrom();
+            $data['to'] = $object->getTo();
+            $data['direction'] = $object->getDirection();
+            if ($object->isInitialized('callType') && null !== $object->getCallType()) {
+                $data['callType'] = $object->getCallType();
+            }
+            $data['reason'] = $this->normalizer->normalize($object->getReason(), 'json', $context);
+            $data['recordingUrl'] = $object->getRecordingUrl();
+            $data['voiceMailUrl'] = $object->getVoiceMailUrl();
+            $data['createdBy'] = $this->normalizer->normalize($object->getCreatedBy(), 'json', $context);
+            $data['customer'] = $this->normalizer->normalize($object->getCustomer(), 'json', $context);
+            $data['campaign'] = $this->normalizer->normalize($object->getCampaign(), 'json', $context);
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $data['agent'] = $this->normalizer->normalize($object->getAgent(), 'json', $context);
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\ModuleTelecomSharedCallModel::class => false];
+        }
     }
 }

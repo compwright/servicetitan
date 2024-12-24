@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2BusinessUnitResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -101,9 +110,11 @@ class TenantSettingsV2BusinessUnitResponse
      */
     protected $modifiedOn;
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
+     * that should be attached to this vendor.
      *
-     * @var TenantSettingsV2ExternalDataModel[]
+     * @var list<TenantSettingsV2ExternalDataModel>
      */
     protected $externalData;
 
@@ -114,6 +125,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -126,6 +138,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -138,6 +151,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -150,6 +164,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setOfficialName(?string $officialName): self
     {
+        $this->initialized['officialName'] = true;
         $this->officialName = $officialName;
 
         return $this;
@@ -162,6 +177,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -174,6 +190,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setCurrency(?string $currency): self
     {
+        $this->initialized['currency'] = true;
         $this->currency = $currency;
 
         return $this;
@@ -186,6 +203,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setPhoneNumber(?string $phoneNumber): self
     {
+        $this->initialized['phoneNumber'] = true;
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -198,6 +216,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setInvoiceHeader(?string $invoiceHeader): self
     {
+        $this->initialized['invoiceHeader'] = true;
         $this->invoiceHeader = $invoiceHeader;
 
         return $this;
@@ -210,6 +229,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setInvoiceMessage(?string $invoiceMessage): self
     {
+        $this->initialized['invoiceMessage'] = true;
         $this->invoiceMessage = $invoiceMessage;
 
         return $this;
@@ -222,6 +242,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setDefaultTaxRate(?float $defaultTaxRate): self
     {
+        $this->initialized['defaultTaxRate'] = true;
         $this->defaultTaxRate = $defaultTaxRate;
 
         return $this;
@@ -234,6 +255,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setAuthorizationParagraph(?string $authorizationParagraph): self
     {
+        $this->initialized['authorizationParagraph'] = true;
         $this->authorizationParagraph = $authorizationParagraph;
 
         return $this;
@@ -246,24 +268,20 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setAcknowledgementParagraph(?string $acknowledgementParagraph): self
     {
+        $this->initialized['acknowledgementParagraph'] = true;
         $this->acknowledgementParagraph = $acknowledgementParagraph;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAddress()
     {
         return $this->address;
     }
 
-    /**
-     * @param mixed $address
-     */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -276,6 +294,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setMaterialSku(?string $materialSku): self
     {
+        $this->initialized['materialSku'] = true;
         $this->materialSku = $materialSku;
 
         return $this;
@@ -288,6 +307,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setQuickbooksClass(?string $quickbooksClass): self
     {
+        $this->initialized['quickbooksClass'] = true;
         $this->quickbooksClass = $quickbooksClass;
 
         return $this;
@@ -300,6 +320,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setAccountCode(?string $accountCode): self
     {
+        $this->initialized['accountCode'] = true;
         $this->accountCode = $accountCode;
 
         return $this;
@@ -312,6 +333,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setFranchiseId(?string $franchiseId): self
     {
+        $this->initialized['franchiseId'] = true;
         $this->franchiseId = $franchiseId;
 
         return $this;
@@ -324,6 +346,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setConceptCode(?string $conceptCode): self
     {
+        $this->initialized['conceptCode'] = true;
         $this->conceptCode = $conceptCode;
 
         return $this;
@@ -336,24 +359,20 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setCorporateContractNumber(?string $corporateContractNumber): self
     {
+        $this->initialized['corporateContractNumber'] = true;
         $this->corporateContractNumber = $corporateContractNumber;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTenant()
     {
         return $this->tenant;
     }
 
-    /**
-     * @param mixed $tenant
-     */
     public function setTenant($tenant): self
     {
+        $this->initialized['tenant'] = true;
         $this->tenant = $tenant;
 
         return $this;
@@ -366,6 +385,7 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -378,15 +398,18 @@ class TenantSettingsV2BusinessUnitResponse
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
     }
 
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
+     * that should be attached to this vendor.
      *
-     * @return TenantSettingsV2ExternalDataModel[]
+     * @return list<TenantSettingsV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -394,12 +417,15 @@ class TenantSettingsV2BusinessUnitResponse
     }
 
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
+     * that should be attached to this vendor.
      *
-     * @param TenantSettingsV2ExternalDataModel[] $externalData
+     * @param list<TenantSettingsV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

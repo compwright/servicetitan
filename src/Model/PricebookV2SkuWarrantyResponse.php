@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuWarrantyResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Warranty duration.
      *
      * @var int
@@ -38,6 +47,7 @@ class PricebookV2SkuWarrantyResponse
      */
     public function setDuration(int $duration): self
     {
+        $this->initialized['duration'] = true;
         $this->duration = $duration;
 
         return $this;
@@ -56,6 +66,7 @@ class PricebookV2SkuWarrantyResponse
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;

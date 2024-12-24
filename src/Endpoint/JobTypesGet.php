@@ -23,9 +23,9 @@ class JobTypesGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint i
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
-    this application guid will be returned.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
+     *             this application guid will be returned.
+     *             }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -60,29 +60,29 @@ class JobTypesGet extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint i
         $optionsResolver->setDefined(['externalDataApplicationGuid']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('externalDataApplicationGuid', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\CrmV2JobTypeResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\JobTypesGetBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\JobTypesGetNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\CrmV2JobTypeResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\CrmV2JobTypeResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\CrmV2JobTypeResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\JobTypesGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\JobTypesGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\JobTypesGetNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\JobTypesGetNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

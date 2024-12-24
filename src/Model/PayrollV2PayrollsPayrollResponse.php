@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2PayrollsPayrollResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the payroll.
      *
      * @var int
@@ -38,14 +47,10 @@ class PayrollV2PayrollsPayrollResponse
     protected $employeeId;
     /**
      * Employee type of the payroll.
-     *
-     * @var mixed
      */
     protected $employeeType;
     /**
      * Status of the payroll.
-     *
-     * @var mixed
      */
     protected $status;
 
@@ -62,6 +67,7 @@ class PayrollV2PayrollsPayrollResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -80,6 +86,7 @@ class PayrollV2PayrollsPayrollResponse
      */
     public function setStartedOn(\DateTime $startedOn): self
     {
+        $this->initialized['startedOn'] = true;
         $this->startedOn = $startedOn;
 
         return $this;
@@ -98,6 +105,7 @@ class PayrollV2PayrollsPayrollResponse
      */
     public function setEndedOn(\DateTime $endedOn): self
     {
+        $this->initialized['endedOn'] = true;
         $this->endedOn = $endedOn;
 
         return $this;
@@ -116,6 +124,7 @@ class PayrollV2PayrollsPayrollResponse
      */
     public function setEmployeeId(int $employeeId): self
     {
+        $this->initialized['employeeId'] = true;
         $this->employeeId = $employeeId;
 
         return $this;
@@ -123,8 +132,6 @@ class PayrollV2PayrollsPayrollResponse
 
     /**
      * Employee type of the payroll.
-     *
-     * @return mixed
      */
     public function getEmployeeType()
     {
@@ -133,11 +140,10 @@ class PayrollV2PayrollsPayrollResponse
 
     /**
      * Employee type of the payroll.
-     *
-     * @param mixed $employeeType
      */
     public function setEmployeeType($employeeType): self
     {
+        $this->initialized['employeeType'] = true;
         $this->employeeType = $employeeType;
 
         return $this;
@@ -145,8 +151,6 @@ class PayrollV2PayrollsPayrollResponse
 
     /**
      * Status of the payroll.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -155,11 +159,10 @@ class PayrollV2PayrollsPayrollResponse
 
     /**
      * Status of the payroll.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;

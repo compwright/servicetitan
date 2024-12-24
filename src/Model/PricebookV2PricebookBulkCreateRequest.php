@@ -13,24 +13,33 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2PricebookBulkCreateRequest
 {
     /**
-     * @var PricebookV2ServiceBulkCreateRequest[]|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var list<PricebookV2ServiceBulkCreateRequest>|null
      */
     protected $services;
     /**
-     * @var PricebookV2EquipmentBulkCreateRequest[]|null
+     * @var list<PricebookV2EquipmentBulkCreateRequest>|null
      */
     protected $equipment;
     /**
-     * @var PricebookV2MaterialBulkCreateRequest[]|null
+     * @var list<PricebookV2MaterialBulkCreateRequest>|null
      */
     protected $materials;
     /**
-     * @var PricebookV2DiscountAndFeesBulkCreateRequest[]|null
+     * @var list<PricebookV2DiscountAndFeesBulkCreateRequest>|null
      */
     protected $discountAndFees;
 
     /**
-     * @return PricebookV2ServiceBulkCreateRequest[]|null
+     * @return list<PricebookV2ServiceBulkCreateRequest>|null
      */
     public function getServices(): ?array
     {
@@ -38,17 +47,18 @@ class PricebookV2PricebookBulkCreateRequest
     }
 
     /**
-     * @param PricebookV2ServiceBulkCreateRequest[]|null $services
+     * @param list<PricebookV2ServiceBulkCreateRequest>|null $services
      */
     public function setServices(?array $services): self
     {
+        $this->initialized['services'] = true;
         $this->services = $services;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2EquipmentBulkCreateRequest[]|null
+     * @return list<PricebookV2EquipmentBulkCreateRequest>|null
      */
     public function getEquipment(): ?array
     {
@@ -56,17 +66,18 @@ class PricebookV2PricebookBulkCreateRequest
     }
 
     /**
-     * @param PricebookV2EquipmentBulkCreateRequest[]|null $equipment
+     * @param list<PricebookV2EquipmentBulkCreateRequest>|null $equipment
      */
     public function setEquipment(?array $equipment): self
     {
+        $this->initialized['equipment'] = true;
         $this->equipment = $equipment;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2MaterialBulkCreateRequest[]|null
+     * @return list<PricebookV2MaterialBulkCreateRequest>|null
      */
     public function getMaterials(): ?array
     {
@@ -74,17 +85,18 @@ class PricebookV2PricebookBulkCreateRequest
     }
 
     /**
-     * @param PricebookV2MaterialBulkCreateRequest[]|null $materials
+     * @param list<PricebookV2MaterialBulkCreateRequest>|null $materials
      */
     public function setMaterials(?array $materials): self
     {
+        $this->initialized['materials'] = true;
         $this->materials = $materials;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2DiscountAndFeesBulkCreateRequest[]|null
+     * @return list<PricebookV2DiscountAndFeesBulkCreateRequest>|null
      */
     public function getDiscountAndFees(): ?array
     {
@@ -92,10 +104,11 @@ class PricebookV2PricebookBulkCreateRequest
     }
 
     /**
-     * @param PricebookV2DiscountAndFeesBulkCreateRequest[]|null $discountAndFees
+     * @param list<PricebookV2DiscountAndFeesBulkCreateRequest>|null $discountAndFees
      */
     public function setDiscountAndFees(?array $discountAndFees): self
     {
+        $this->initialized['discountAndFees'] = true;
         $this->discountAndFees = $discountAndFees;
 
         return $this;

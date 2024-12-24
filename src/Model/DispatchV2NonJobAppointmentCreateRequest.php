@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2NonJobAppointmentCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $technicianId;
@@ -56,6 +65,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setTechnicianId(int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -68,6 +78,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -80,6 +91,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setDuration(string $duration): self
     {
+        $this->initialized['duration'] = true;
         $this->duration = $duration;
 
         return $this;
@@ -92,6 +104,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -104,6 +117,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setTimesheetCodeId(int $timesheetCodeId): self
     {
+        $this->initialized['timesheetCodeId'] = true;
         $this->timesheetCodeId = $timesheetCodeId;
 
         return $this;
@@ -116,6 +130,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -128,6 +143,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setClearDispatchBoard(?bool $clearDispatchBoard): self
     {
+        $this->initialized['clearDispatchBoard'] = true;
         $this->clearDispatchBoard = $clearDispatchBoard;
 
         return $this;
@@ -140,6 +156,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setClearTechnicianView(?bool $clearTechnicianView): self
     {
+        $this->initialized['clearTechnicianView'] = true;
         $this->clearTechnicianView = $clearTechnicianView;
 
         return $this;
@@ -152,6 +169,7 @@ class DispatchV2NonJobAppointmentCreateRequest
 
     public function setRemoveTechnicianFromCapacityPlanning(?bool $removeTechnicianFromCapacityPlanning): self
     {
+        $this->initialized['removeTechnicianFromCapacityPlanning'] = true;
         $this->removeTechnicianFromCapacityPlanning = $removeTechnicianFromCapacityPlanning;
 
         return $this;

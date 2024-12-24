@@ -21,15 +21,18 @@ class RecurringServiceTypesGetList extends \CompWright\ServiceTitan\Runtime\Clie
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $membershipTypeId Format - int64. Filters by membership type ID
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $recurrenceType Filters by recurrence type\
-     *     @var string $durationType Filters by duration type\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $membershipTypeId Format - int64. Filters by membership type ID
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $recurrenceType Filters by recurrence type\
+     *             Values: [Weekly, Monthly, Seasonal, Daily, NthWeekdayOfMonth]
+     * @var string $durationType Filters by duration type\
+     *             Values: [Continuous, NumberOfVisits]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -63,32 +66,32 @@ class RecurringServiceTypesGetList extends \CompWright\ServiceTitan\Runtime\Clie
         $optionsResolver->setDefined(['ids', 'membershipTypeId', 'active', 'recurrenceType', 'durationType', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('membershipTypeId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('active', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('recurrenceType', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('durationType', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('membershipTypeId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('active', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('recurrenceType', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('durationType', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

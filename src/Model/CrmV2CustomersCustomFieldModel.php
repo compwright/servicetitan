@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersCustomFieldModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the custom field.
      *
      * @var int
@@ -44,6 +53,7 @@ class CrmV2CustomersCustomFieldModel
      */
     public function setTypeId(int $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -62,6 +72,7 @@ class CrmV2CustomersCustomFieldModel
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -80,6 +91,7 @@ class CrmV2CustomersCustomFieldModel
      */
     public function setValue(?string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;

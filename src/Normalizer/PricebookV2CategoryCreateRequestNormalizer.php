@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,147 +21,291 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2CategoryCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2CategoryCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2CategoryCreateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2CategoryCreateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('parentId', $data) && $data['parentId'] !== null) {
+                $object->setParentId($data['parentId']);
+            } elseif (\array_key_exists('parentId', $data) && $data['parentId'] === null) {
+                $object->setParentId(null);
+            }
+            if (\array_key_exists('position', $data) && $data['position'] !== null) {
+                $object->setPosition($data['position']);
+            } elseif (\array_key_exists('position', $data) && $data['position'] === null) {
+                $object->setPosition(null);
+            }
+            if (\array_key_exists('image', $data) && $data['image'] !== null) {
+                $object->setImage($data['image']);
+            } elseif (\array_key_exists('image', $data) && $data['image'] === null) {
+                $object->setImage(null);
+            }
+            if (\array_key_exists('categoryType', $data)) {
+                $object->setCategoryType($data['categoryType']);
+            }
+            if (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] !== null) {
+                $values = [];
+                foreach ($data['businessUnitIds'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setBusinessUnitIds($values);
+            } elseif (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] === null) {
+                $object->setBusinessUnitIds(null);
+            }
+            if (\array_key_exists('skuImages', $data) && $data['skuImages'] !== null) {
+                $values_1 = [];
+                foreach ($data['skuImages'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setSkuImages($values_1);
+            } elseif (\array_key_exists('skuImages', $data) && $data['skuImages'] === null) {
+                $object->setSkuImages(null);
+            }
+            if (\array_key_exists('skuVideos', $data) && $data['skuVideos'] !== null) {
+                $values_2 = [];
+                foreach ($data['skuVideos'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setSkuVideos($values_2);
+            } elseif (\array_key_exists('skuVideos', $data) && $data['skuVideos'] === null) {
+                $object->setSkuVideos(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('active', $data) && $data['active'] !== null) {
-            $object->setActive($data['active']);
-        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
-            $object->setActive(null);
-        }
-        if (\array_key_exists('description', $data) && $data['description'] !== null) {
-            $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
-            $object->setDescription(null);
-        }
-        if (\array_key_exists('parentId', $data) && $data['parentId'] !== null) {
-            $object->setParentId($data['parentId']);
-        } elseif (\array_key_exists('parentId', $data) && $data['parentId'] === null) {
-            $object->setParentId(null);
-        }
-        if (\array_key_exists('position', $data) && $data['position'] !== null) {
-            $object->setPosition($data['position']);
-        } elseif (\array_key_exists('position', $data) && $data['position'] === null) {
-            $object->setPosition(null);
-        }
-        if (\array_key_exists('image', $data) && $data['image'] !== null) {
-            $object->setImage($data['image']);
-        } elseif (\array_key_exists('image', $data) && $data['image'] === null) {
-            $object->setImage(null);
-        }
-        if (\array_key_exists('categoryType', $data)) {
-            $object->setCategoryType($data['categoryType']);
-        }
-        if (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] !== null) {
-            $values = [];
-            foreach ($data['businessUnitIds'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['name'] = $object->getName();
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
             }
-            $object->setBusinessUnitIds($values);
-        } elseif (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] === null) {
-            $object->setBusinessUnitIds(null);
-        }
-        if (\array_key_exists('skuImages', $data) && $data['skuImages'] !== null) {
-            $values_1 = [];
-            foreach ($data['skuImages'] as $value_1) {
-                $values_1[] = $value_1;
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
             }
-            $object->setSkuImages($values_1);
-        } elseif (\array_key_exists('skuImages', $data) && $data['skuImages'] === null) {
-            $object->setSkuImages(null);
-        }
-        if (\array_key_exists('skuVideos', $data) && $data['skuVideos'] !== null) {
-            $values_2 = [];
-            foreach ($data['skuVideos'] as $value_2) {
-                $values_2[] = $value_2;
+            if ($object->isInitialized('parentId') && null !== $object->getParentId()) {
+                $data['parentId'] = $object->getParentId();
             }
-            $object->setSkuVideos($values_2);
-        } elseif (\array_key_exists('skuVideos', $data) && $data['skuVideos'] === null) {
-            $object->setSkuVideos(null);
+            if ($object->isInitialized('position') && null !== $object->getPosition()) {
+                $data['position'] = $object->getPosition();
+            }
+            if ($object->isInitialized('image') && null !== $object->getImage()) {
+                $data['image'] = $object->getImage();
+            }
+            $data['categoryType'] = $object->getCategoryType();
+            if ($object->isInitialized('businessUnitIds') && null !== $object->getBusinessUnitIds()) {
+                $values = [];
+                foreach ($object->getBusinessUnitIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['businessUnitIds'] = $values;
+            }
+            if ($object->isInitialized('skuImages') && null !== $object->getSkuImages()) {
+                $values_1 = [];
+                foreach ($object->getSkuImages() as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $data['skuImages'] = $values_1;
+            }
+            if ($object->isInitialized('skuVideos') && null !== $object->getSkuVideos()) {
+                $values_2 = [];
+                foreach ($object->getSkuVideos() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['skuVideos'] = $values_2;
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2CategoryCreateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['name'] = $object->getName();
-        if (null !== $object->getActive()) {
-            $data['active'] = $object->getActive();
-        }
-        if (null !== $object->getDescription()) {
-            $data['description'] = $object->getDescription();
-        }
-        if (null !== $object->getParentId()) {
-            $data['parentId'] = $object->getParentId();
-        }
-        if (null !== $object->getPosition()) {
-            $data['position'] = $object->getPosition();
-        }
-        if (null !== $object->getImage()) {
-            $data['image'] = $object->getImage();
-        }
-        $data['categoryType'] = $object->getCategoryType();
-        if (null !== $object->getBusinessUnitIds()) {
-            $values = [];
-            foreach ($object->getBusinessUnitIds() as $value) {
-                $values[] = $value;
-            }
-            $data['businessUnitIds'] = $values;
-        }
-        if (null !== $object->getSkuImages()) {
-            $values_1 = [];
-            foreach ($object->getSkuImages() as $value_1) {
-                $values_1[] = $value_1;
-            }
-            $data['skuImages'] = $values_1;
-        }
-        if (null !== $object->getSkuVideos()) {
-            $values_2 = [];
-            foreach ($object->getSkuVideos() as $value_2) {
-                $values_2[] = $value_2;
-            }
-            $data['skuVideos'] = $values_2;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('active', $data) && $data['active'] !== null) {
+                $object->setActive($data['active']);
+            } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+                $object->setActive(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('parentId', $data) && $data['parentId'] !== null) {
+                $object->setParentId($data['parentId']);
+            } elseif (\array_key_exists('parentId', $data) && $data['parentId'] === null) {
+                $object->setParentId(null);
+            }
+            if (\array_key_exists('position', $data) && $data['position'] !== null) {
+                $object->setPosition($data['position']);
+            } elseif (\array_key_exists('position', $data) && $data['position'] === null) {
+                $object->setPosition(null);
+            }
+            if (\array_key_exists('image', $data) && $data['image'] !== null) {
+                $object->setImage($data['image']);
+            } elseif (\array_key_exists('image', $data) && $data['image'] === null) {
+                $object->setImage(null);
+            }
+            if (\array_key_exists('categoryType', $data)) {
+                $object->setCategoryType($data['categoryType']);
+            }
+            if (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] !== null) {
+                $values = [];
+                foreach ($data['businessUnitIds'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setBusinessUnitIds($values);
+            } elseif (\array_key_exists('businessUnitIds', $data) && $data['businessUnitIds'] === null) {
+                $object->setBusinessUnitIds(null);
+            }
+            if (\array_key_exists('skuImages', $data) && $data['skuImages'] !== null) {
+                $values_1 = [];
+                foreach ($data['skuImages'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setSkuImages($values_1);
+            } elseif (\array_key_exists('skuImages', $data) && $data['skuImages'] === null) {
+                $object->setSkuImages(null);
+            }
+            if (\array_key_exists('skuVideos', $data) && $data['skuVideos'] !== null) {
+                $values_2 = [];
+                foreach ($data['skuVideos'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setSkuVideos($values_2);
+            } elseif (\array_key_exists('skuVideos', $data) && $data['skuVideos'] === null) {
+                $object->setSkuVideos(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['name'] = $object->getName();
+            if ($object->isInitialized('active') && null !== $object->getActive()) {
+                $data['active'] = $object->getActive();
+            }
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            if ($object->isInitialized('parentId') && null !== $object->getParentId()) {
+                $data['parentId'] = $object->getParentId();
+            }
+            if ($object->isInitialized('position') && null !== $object->getPosition()) {
+                $data['position'] = $object->getPosition();
+            }
+            if ($object->isInitialized('image') && null !== $object->getImage()) {
+                $data['image'] = $object->getImage();
+            }
+            $data['categoryType'] = $object->getCategoryType();
+            if ($object->isInitialized('businessUnitIds') && null !== $object->getBusinessUnitIds()) {
+                $values = [];
+                foreach ($object->getBusinessUnitIds() as $value) {
+                    $values[] = $value;
+                }
+                $data['businessUnitIds'] = $values;
+            }
+            if ($object->isInitialized('skuImages') && null !== $object->getSkuImages()) {
+                $values_1 = [];
+                foreach ($object->getSkuImages() as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $data['skuImages'] = $values_1;
+            }
+            if ($object->isInitialized('skuVideos') && null !== $object->getSkuVideos()) {
+                $values_2 = [];
+                foreach ($object->getSkuVideos() as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $data['skuVideos'] = $values_2;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2CategoryCreateRequest::class => false];
+        }
     }
 }

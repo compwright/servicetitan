@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2ProjectResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the project.
      *
      * @var int
@@ -81,7 +90,7 @@ class CrmV2ProjectResponse
     /**
      * Custom fields on the project.
      *
-     * @var CustomFieldApiModel[]
+     * @var list<CustomFieldApiModel>
      */
     protected $customFields;
 
@@ -98,6 +107,7 @@ class CrmV2ProjectResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -116,6 +126,7 @@ class CrmV2ProjectResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -134,6 +145,7 @@ class CrmV2ProjectResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -152,6 +164,7 @@ class CrmV2ProjectResponse
      */
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -170,6 +183,7 @@ class CrmV2ProjectResponse
      */
     public function setStatus(?string $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -188,6 +202,7 @@ class CrmV2ProjectResponse
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -206,6 +221,7 @@ class CrmV2ProjectResponse
      */
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -224,6 +240,7 @@ class CrmV2ProjectResponse
      */
     public function setStartDate(?\DateTime $startDate): self
     {
+        $this->initialized['startDate'] = true;
         $this->startDate = $startDate;
 
         return $this;
@@ -242,6 +259,7 @@ class CrmV2ProjectResponse
      */
     public function setTargetCompletionDate(?\DateTime $targetCompletionDate): self
     {
+        $this->initialized['targetCompletionDate'] = true;
         $this->targetCompletionDate = $targetCompletionDate;
 
         return $this;
@@ -260,6 +278,7 @@ class CrmV2ProjectResponse
      */
     public function setActualCompletionDate(?\DateTime $actualCompletionDate): self
     {
+        $this->initialized['actualCompletionDate'] = true;
         $this->actualCompletionDate = $actualCompletionDate;
 
         return $this;
@@ -278,6 +297,7 @@ class CrmV2ProjectResponse
      */
     public function setModifiedOn(?\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -286,7 +306,7 @@ class CrmV2ProjectResponse
     /**
      * Custom fields on the project.
      *
-     * @return CustomFieldApiModel[]
+     * @return list<CustomFieldApiModel>
      */
     public function getCustomFields(): array
     {
@@ -296,10 +316,11 @@ class CrmV2ProjectResponse
     /**
      * Custom fields on the project.
      *
-     * @param CustomFieldApiModel[] $customFields
+     * @param list<CustomFieldApiModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

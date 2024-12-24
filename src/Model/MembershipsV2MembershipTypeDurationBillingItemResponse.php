@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipTypeDurationBillingItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the duration/billing option.
      *
      * @var int
@@ -26,8 +35,6 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
     protected $duration;
     /**
      * Billing frequency of the entry.
-     *
-     * @var mixed
      */
     protected $billingFrequency;
     /**
@@ -86,6 +93,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -104,6 +112,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setDuration(?int $duration): self
     {
+        $this->initialized['duration'] = true;
         $this->duration = $duration;
 
         return $this;
@@ -111,8 +120,6 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
 
     /**
      * Billing frequency of the entry.
-     *
-     * @return mixed
      */
     public function getBillingFrequency()
     {
@@ -121,11 +128,10 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
 
     /**
      * Billing frequency of the entry.
-     *
-     * @param mixed $billingFrequency
      */
     public function setBillingFrequency($billingFrequency): self
     {
+        $this->initialized['billingFrequency'] = true;
         $this->billingFrequency = $billingFrequency;
 
         return $this;
@@ -144,6 +150,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setSalePrice(float $salePrice): self
     {
+        $this->initialized['salePrice'] = true;
         $this->salePrice = $salePrice;
 
         return $this;
@@ -162,6 +169,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setBillingPrice(float $billingPrice): self
     {
+        $this->initialized['billingPrice'] = true;
         $this->billingPrice = $billingPrice;
 
         return $this;
@@ -180,6 +188,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setRenewalPrice(float $renewalPrice): self
     {
+        $this->initialized['renewalPrice'] = true;
         $this->renewalPrice = $renewalPrice;
 
         return $this;
@@ -198,6 +207,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -216,6 +226,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -234,6 +245,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -252,6 +264,7 @@ class MembershipsV2MembershipTypeDurationBillingItemResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;

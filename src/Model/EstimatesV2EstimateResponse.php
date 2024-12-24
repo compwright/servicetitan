@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EstimatesV2EstimateResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -57,11 +66,11 @@ class EstimatesV2EstimateResponse
      */
     protected $active;
     /**
-     * @var EstimatesV2EstimateItemResponse[]|null
+     * @var list<EstimatesV2EstimateItemResponse>|null
      */
     protected $items;
     /**
-     * @var EstimatesV2ExternalLinkResponse[]|null
+     * @var list<EstimatesV2ExternalLinkResponse>|null
      */
     protected $externalLinks;
 
@@ -72,6 +81,7 @@ class EstimatesV2EstimateResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -84,6 +94,7 @@ class EstimatesV2EstimateResponse
 
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -96,6 +107,7 @@ class EstimatesV2EstimateResponse
 
     public function setProjectId(?int $projectId): self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
 
         return $this;
@@ -108,6 +120,7 @@ class EstimatesV2EstimateResponse
 
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -120,24 +133,20 @@ class EstimatesV2EstimateResponse
 
     public function setJobNumber(?string $jobNumber): self
     {
+        $this->initialized['jobNumber'] = true;
         $this->jobNumber = $jobNumber;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * @param mixed $status
-     */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -150,6 +159,7 @@ class EstimatesV2EstimateResponse
 
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -162,6 +172,7 @@ class EstimatesV2EstimateResponse
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -174,6 +185,7 @@ class EstimatesV2EstimateResponse
 
     public function setSoldOn(?\DateTime $soldOn): self
     {
+        $this->initialized['soldOn'] = true;
         $this->soldOn = $soldOn;
 
         return $this;
@@ -186,6 +198,7 @@ class EstimatesV2EstimateResponse
 
     public function setSoldBy(?int $soldBy): self
     {
+        $this->initialized['soldBy'] = true;
         $this->soldBy = $soldBy;
 
         return $this;
@@ -198,13 +211,14 @@ class EstimatesV2EstimateResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
     }
 
     /**
-     * @return EstimatesV2EstimateItemResponse[]|null
+     * @return list<EstimatesV2EstimateItemResponse>|null
      */
     public function getItems(): ?array
     {
@@ -212,17 +226,18 @@ class EstimatesV2EstimateResponse
     }
 
     /**
-     * @param EstimatesV2EstimateItemResponse[]|null $items
+     * @param list<EstimatesV2EstimateItemResponse>|null $items
      */
     public function setItems(?array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
     }
 
     /**
-     * @return EstimatesV2ExternalLinkResponse[]|null
+     * @return list<EstimatesV2ExternalLinkResponse>|null
      */
     public function getExternalLinks(): ?array
     {
@@ -230,10 +245,11 @@ class EstimatesV2EstimateResponse
     }
 
     /**
-     * @param EstimatesV2ExternalLinkResponse[]|null $externalLinks
+     * @param list<EstimatesV2ExternalLinkResponse>|null $externalLinks
      */
     public function setExternalLinks(?array $externalLinks): self
     {
+        $this->initialized['externalLinks'] = true;
         $this->externalLinks = $externalLinks;
 
         return $this;

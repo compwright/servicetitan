@@ -13,7 +13,16 @@ namespace CompWright\ServiceTitan\Model;
 class CollectionResultOfModuleTelecomSharedBundleCallModel
 {
     /**
-     * @var ModuleTelecomSharedBundleCallModel[]
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var list<ModuleTelecomSharedBundleCallModel>
      */
     protected $data;
     /**
@@ -34,7 +43,7 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
     protected $hasMore;
 
     /**
-     * @return ModuleTelecomSharedBundleCallModel[]
+     * @return list<ModuleTelecomSharedBundleCallModel>
      */
     public function getData(): array
     {
@@ -42,10 +51,11 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
     }
 
     /**
-     * @param ModuleTelecomSharedBundleCallModel[] $data
+     * @param list<ModuleTelecomSharedBundleCallModel> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;
@@ -58,6 +68,7 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
 
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -70,6 +81,7 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
 
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -82,6 +94,7 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
 
     public function setTotalCount(int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -94,6 +107,7 @@ class CollectionResultOfModuleTelecomSharedBundleCallModel
 
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2TimesheetsJobTimesheetResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The timesheet ID.
      *
      * @var int
@@ -74,6 +83,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -92,6 +102,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -110,6 +121,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setAppointmentId(int $appointmentId): self
     {
+        $this->initialized['appointmentId'] = true;
         $this->appointmentId = $appointmentId;
 
         return $this;
@@ -128,6 +140,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setTechnicianId(int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -146,6 +159,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setDispatchedOn(?\DateTime $dispatchedOn): self
     {
+        $this->initialized['dispatchedOn'] = true;
         $this->dispatchedOn = $dispatchedOn;
 
         return $this;
@@ -164,6 +178,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setArrivedOn(?\DateTime $arrivedOn): self
     {
+        $this->initialized['arrivedOn'] = true;
         $this->arrivedOn = $arrivedOn;
 
         return $this;
@@ -182,6 +197,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setCanceledOn(?\DateTime $canceledOn): self
     {
+        $this->initialized['canceledOn'] = true;
         $this->canceledOn = $canceledOn;
 
         return $this;
@@ -200,6 +216,7 @@ class PayrollV2TimesheetsJobTimesheetResponse
      */
     public function setDoneOn(?\DateTime $doneOn): self
     {
+        $this->initialized['doneOn'] = true;
         $this->doneOn = $doneOn;
 
         return $this;

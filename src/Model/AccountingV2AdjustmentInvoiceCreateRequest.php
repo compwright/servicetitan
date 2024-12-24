@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2AdjustmentInvoiceCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string|null
      */
     protected $number;
@@ -57,11 +66,11 @@ class AccountingV2AdjustmentInvoiceCreateRequest
      */
     protected $exportId;
     /**
-     * @var AccountingV2InvoiceItemUpdateRequest[]|null
+     * @var list<AccountingV2InvoiceItemUpdateRequest>|null
      */
     protected $items;
     /**
-     * @var AccountingV2PaymentSettlementUpdateRequest[]|null
+     * @var list<AccountingV2PaymentSettlementUpdateRequest>|null
      */
     protected $payments;
     /**
@@ -76,6 +85,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setNumber(?string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -88,6 +98,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setTypeId(?int $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -100,6 +111,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setInvoicedOn(?\DateTime $invoicedOn): self
     {
+        $this->initialized['invoicedOn'] = true;
         $this->invoicedOn = $invoicedOn;
 
         return $this;
@@ -112,6 +124,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setSubtotal(?float $subtotal): self
     {
+        $this->initialized['subtotal'] = true;
         $this->subtotal = $subtotal;
 
         return $this;
@@ -124,6 +137,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setTax(?float $tax): self
     {
+        $this->initialized['tax'] = true;
         $this->tax = $tax;
 
         return $this;
@@ -136,24 +150,20 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getRoyaltyStatus()
     {
         return $this->royaltyStatus;
     }
 
-    /**
-     * @param mixed $royaltyStatus
-     */
     public function setRoyaltyStatus($royaltyStatus): self
     {
+        $this->initialized['royaltyStatus'] = true;
         $this->royaltyStatus = $royaltyStatus;
 
         return $this;
@@ -166,6 +176,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setRoyaltyDate(?\DateTime $royaltyDate): self
     {
+        $this->initialized['royaltyDate'] = true;
         $this->royaltyDate = $royaltyDate;
 
         return $this;
@@ -178,6 +189,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setRoyaltySentOn(?\DateTime $royaltySentOn): self
     {
+        $this->initialized['royaltySentOn'] = true;
         $this->royaltySentOn = $royaltySentOn;
 
         return $this;
@@ -190,6 +202,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setRoyaltyMemo(?string $royaltyMemo): self
     {
+        $this->initialized['royaltyMemo'] = true;
         $this->royaltyMemo = $royaltyMemo;
 
         return $this;
@@ -202,13 +215,14 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setExportId(?string $exportId): self
     {
+        $this->initialized['exportId'] = true;
         $this->exportId = $exportId;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2InvoiceItemUpdateRequest[]|null
+     * @return list<AccountingV2InvoiceItemUpdateRequest>|null
      */
     public function getItems(): ?array
     {
@@ -216,17 +230,18 @@ class AccountingV2AdjustmentInvoiceCreateRequest
     }
 
     /**
-     * @param AccountingV2InvoiceItemUpdateRequest[]|null $items
+     * @param list<AccountingV2InvoiceItemUpdateRequest>|null $items
      */
     public function setItems(?array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
     }
 
     /**
-     * @return AccountingV2PaymentSettlementUpdateRequest[]|null
+     * @return list<AccountingV2PaymentSettlementUpdateRequest>|null
      */
     public function getPayments(): ?array
     {
@@ -234,10 +249,11 @@ class AccountingV2AdjustmentInvoiceCreateRequest
     }
 
     /**
-     * @param AccountingV2PaymentSettlementUpdateRequest[]|null $payments
+     * @param list<AccountingV2PaymentSettlementUpdateRequest>|null $payments
      */
     public function setPayments(?array $payments): self
     {
+        $this->initialized['payments'] = true;
         $this->payments = $payments;
 
         return $this;
@@ -250,6 +266,7 @@ class AccountingV2AdjustmentInvoiceCreateRequest
 
     public function setAdjustmentToId(int $adjustmentToId): self
     {
+        $this->initialized['adjustmentToId'] = true;
         $this->adjustmentToId = $adjustmentToId;
 
         return $this;

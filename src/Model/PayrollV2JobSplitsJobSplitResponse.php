@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2JobSplitsJobSplitResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Job ID.
      *
      * @var int
@@ -44,6 +53,7 @@ class PayrollV2JobSplitsJobSplitResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -62,6 +72,7 @@ class PayrollV2JobSplitsJobSplitResponse
      */
     public function setTechnicianId(int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -80,6 +91,7 @@ class PayrollV2JobSplitsJobSplitResponse
      */
     public function setSplit(float $split): self
     {
+        $this->initialized['split'] = true;
         $this->split = $split;
 
         return $this;

@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,115 +21,227 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2PricebookBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2PricebookBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2PricebookBulkUpdateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2PricebookBulkUpdateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('services', $data) && $data['services'] !== null) {
+                $values = [];
+                foreach ($data['services'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setServices($values);
+            } elseif (\array_key_exists('services', $data) && $data['services'] === null) {
+                $object->setServices(null);
+            }
+            if (\array_key_exists('equipment', $data) && $data['equipment'] !== null) {
+                $values_1 = [];
+                foreach ($data['equipment'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2EquipmentBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setEquipment($values_1);
+            } elseif (\array_key_exists('equipment', $data) && $data['equipment'] === null) {
+                $object->setEquipment(null);
+            }
+            if (\array_key_exists('materials', $data) && $data['materials'] !== null) {
+                $values_2 = [];
+                foreach ($data['materials'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\PricebookV2MaterialBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setMaterials($values_2);
+            } elseif (\array_key_exists('materials', $data) && $data['materials'] === null) {
+                $object->setMaterials(null);
+            }
+            if (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] !== null) {
+                $values_3 = [];
+                foreach ($data['discountAndFees'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setDiscountAndFees($values_3);
+            } elseif (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] === null) {
+                $object->setDiscountAndFees(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('services', $data) && $data['services'] !== null) {
-            $values = [];
-            foreach ($data['services'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\PricebookV2ServiceBulkUpdateRequest', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('services') && null !== $object->getServices()) {
+                $values = [];
+                foreach ($object->getServices() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['services'] = $values;
             }
-            $object->setServices($values);
-        } elseif (\array_key_exists('services', $data) && $data['services'] === null) {
-            $object->setServices(null);
-        }
-        if (\array_key_exists('equipment', $data) && $data['equipment'] !== null) {
-            $values_1 = [];
-            foreach ($data['equipment'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\PricebookV2EquipmentBulkUpdateRequest', 'json', $context);
+            if ($object->isInitialized('equipment') && null !== $object->getEquipment()) {
+                $values_1 = [];
+                foreach ($object->getEquipment() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['equipment'] = $values_1;
             }
-            $object->setEquipment($values_1);
-        } elseif (\array_key_exists('equipment', $data) && $data['equipment'] === null) {
-            $object->setEquipment(null);
-        }
-        if (\array_key_exists('materials', $data) && $data['materials'] !== null) {
-            $values_2 = [];
-            foreach ($data['materials'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'CompWright\\ServiceTitan\\Model\\PricebookV2MaterialBulkUpdateRequest', 'json', $context);
+            if ($object->isInitialized('materials') && null !== $object->getMaterials()) {
+                $values_2 = [];
+                foreach ($object->getMaterials() as $value_2) {
+                    $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+                }
+                $data['materials'] = $values_2;
             }
-            $object->setMaterials($values_2);
-        } elseif (\array_key_exists('materials', $data) && $data['materials'] === null) {
-            $object->setMaterials(null);
-        }
-        if (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] !== null) {
-            $values_3 = [];
-            foreach ($data['discountAndFees'] as $value_3) {
-                $values_3[] = $this->denormalizer->denormalize($value_3, 'CompWright\\ServiceTitan\\Model\\PricebookV2DiscountAndFeesBulkUpdateRequest', 'json', $context);
+            if ($object->isInitialized('discountAndFees') && null !== $object->getDiscountAndFees()) {
+                $values_3 = [];
+                foreach ($object->getDiscountAndFees() as $value_3) {
+                    $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+                }
+                $data['discountAndFees'] = $values_3;
             }
-            $object->setDiscountAndFees($values_3);
-        } elseif (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] === null) {
-            $object->setDiscountAndFees(null);
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2PricebookBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getServices()) {
-            $values = [];
-            foreach ($object->getServices() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['services'] = $values;
-        }
-        if (null !== $object->getEquipment()) {
-            $values_1 = [];
-            foreach ($object->getEquipment() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['equipment'] = $values_1;
-        }
-        if (null !== $object->getMaterials()) {
-            $values_2 = [];
-            foreach ($object->getMaterials() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
-            }
-            $data['materials'] = $values_2;
-        }
-        if (null !== $object->getDiscountAndFees()) {
-            $values_3 = [];
-            foreach ($object->getDiscountAndFees() as $value_3) {
-                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
-            }
-            $data['discountAndFees'] = $values_3;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('services', $data) && $data['services'] !== null) {
+                $values = [];
+                foreach ($data['services'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setServices($values);
+            } elseif (\array_key_exists('services', $data) && $data['services'] === null) {
+                $object->setServices(null);
+            }
+            if (\array_key_exists('equipment', $data) && $data['equipment'] !== null) {
+                $values_1 = [];
+                foreach ($data['equipment'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\PricebookV2EquipmentBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setEquipment($values_1);
+            } elseif (\array_key_exists('equipment', $data) && $data['equipment'] === null) {
+                $object->setEquipment(null);
+            }
+            if (\array_key_exists('materials', $data) && $data['materials'] !== null) {
+                $values_2 = [];
+                foreach ($data['materials'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\PricebookV2MaterialBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setMaterials($values_2);
+            } elseif (\array_key_exists('materials', $data) && $data['materials'] === null) {
+                $object->setMaterials(null);
+            }
+            if (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] !== null) {
+                $values_3 = [];
+                foreach ($data['discountAndFees'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\PricebookV2DiscountAndFeesBulkUpdateRequest::class, 'json', $context);
+                }
+                $object->setDiscountAndFees($values_3);
+            } elseif (\array_key_exists('discountAndFees', $data) && $data['discountAndFees'] === null) {
+                $object->setDiscountAndFees(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('services') && null !== $object->getServices()) {
+                $values = [];
+                foreach ($object->getServices() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['services'] = $values;
+            }
+            if ($object->isInitialized('equipment') && null !== $object->getEquipment()) {
+                $values_1 = [];
+                foreach ($object->getEquipment() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['equipment'] = $values_1;
+            }
+            if ($object->isInitialized('materials') && null !== $object->getMaterials()) {
+                $values_2 = [];
+                foreach ($object->getMaterials() as $value_2) {
+                    $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+                }
+                $data['materials'] = $values_2;
+            }
+            if ($object->isInitialized('discountAndFees') && null !== $object->getDiscountAndFees()) {
+                $values_3 = [];
+                foreach ($object->getDiscountAndFees() as $value_3) {
+                    $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+                }
+                $data['discountAndFees'] = $values_3;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2PricebookBulkUpdateRequest::class => false];
+        }
     }
 }

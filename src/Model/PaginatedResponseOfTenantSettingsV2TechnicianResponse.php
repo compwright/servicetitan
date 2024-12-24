@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfTenantSettingsV2TechnicianResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var TenantSettingsV2TechnicianResponse[]
+     * @var list<TenantSettingsV2TechnicianResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return TenantSettingsV2TechnicianResponse[]
+     * @return list<TenantSettingsV2TechnicianResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfTenantSettingsV2TechnicianResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param TenantSettingsV2TechnicianResponse[] $data
+     * @param list<TenantSettingsV2TechnicianResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

@@ -23,12 +23,12 @@ class PayrollsGetEmployeePayrolls extends \CompWright\ServiceTitan\Runtime\Clien
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
-     *     @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $startedOnOrAfter Format - date-time (as date-time in RFC3339). Return items having start date after certain date/time (in UTC)
+     * @var string $endedOnOrBefore Format - date-time (as date-time in RFC3339). Return items having end date before certain date/time (in UTC)
+     *             }
      */
     public function __construct(int $employee, int $tenant, array $queryParameters = [])
     {
@@ -63,33 +63,33 @@ class PayrollsGetEmployeePayrolls extends \CompWright\ServiceTitan\Runtime\Clien
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal', 'startedOnOrAfter', 'endedOnOrBefore']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('startedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('endedOnOrBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('startedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('endedOnOrBefore', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsConflictException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfPayrollV2PayrollsPayrollResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2PayrollsPayrollResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsConflictException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PayrollsGetEmployeePayrollsConflictException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

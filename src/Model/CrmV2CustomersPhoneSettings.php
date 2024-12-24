@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersPhoneSettings
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Phone Number.
      *
      * @var string
@@ -38,6 +47,7 @@ class CrmV2CustomersPhoneSettings
      */
     public function setPhoneNumber(string $phoneNumber): self
     {
+        $this->initialized['phoneNumber'] = true;
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -56,6 +66,7 @@ class CrmV2CustomersPhoneSettings
      */
     public function setDoNotText(bool $doNotText): self
     {
+        $this->initialized['doNotText'] = true;
         $this->doNotText = $doNotText;
 
         return $this;

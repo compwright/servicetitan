@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2InventoryAdjustmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Inventory adjustment Id.
      *
      * @var int
@@ -92,20 +101,18 @@ class InventoryV2InventoryAdjustmentResponse
     protected $batchId;
     /**
      * Sync status.
-     *
-     * @var mixed
      */
     protected $syncStatus;
     /**
      * Collection of adjustment items.
      *
-     * @var InventoryV2InventoryAdjustmentItemResponse[]
+     * @var list<InventoryV2InventoryAdjustmentItemResponse>
      */
     protected $items;
     /**
      * Collection of custom fields.
      *
-     * @var InventoryV2CustomFieldResponse[]
+     * @var list<InventoryV2CustomFieldResponse>
      */
     protected $customFields;
 
@@ -122,6 +129,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -140,6 +148,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -158,6 +167,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -176,6 +186,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setReferenceNumber(string $referenceNumber): self
     {
+        $this->initialized['referenceNumber'] = true;
         $this->referenceNumber = $referenceNumber;
 
         return $this;
@@ -194,6 +205,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -212,6 +224,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setInventoryLocationId(int $inventoryLocationId): self
     {
+        $this->initialized['inventoryLocationId'] = true;
         $this->inventoryLocationId = $inventoryLocationId;
 
         return $this;
@@ -230,6 +243,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -248,6 +262,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -266,6 +281,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -284,6 +300,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -302,6 +319,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -320,6 +338,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -338,6 +357,7 @@ class InventoryV2InventoryAdjustmentResponse
      */
     public function setBatchId(?int $batchId): self
     {
+        $this->initialized['batchId'] = true;
         $this->batchId = $batchId;
 
         return $this;
@@ -345,8 +365,6 @@ class InventoryV2InventoryAdjustmentResponse
 
     /**
      * Sync status.
-     *
-     * @return mixed
      */
     public function getSyncStatus()
     {
@@ -355,11 +373,10 @@ class InventoryV2InventoryAdjustmentResponse
 
     /**
      * Sync status.
-     *
-     * @param mixed $syncStatus
      */
     public function setSyncStatus($syncStatus): self
     {
+        $this->initialized['syncStatus'] = true;
         $this->syncStatus = $syncStatus;
 
         return $this;
@@ -368,7 +385,7 @@ class InventoryV2InventoryAdjustmentResponse
     /**
      * Collection of adjustment items.
      *
-     * @return InventoryV2InventoryAdjustmentItemResponse[]
+     * @return list<InventoryV2InventoryAdjustmentItemResponse>
      */
     public function getItems(): array
     {
@@ -378,10 +395,11 @@ class InventoryV2InventoryAdjustmentResponse
     /**
      * Collection of adjustment items.
      *
-     * @param InventoryV2InventoryAdjustmentItemResponse[] $items
+     * @param list<InventoryV2InventoryAdjustmentItemResponse> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
@@ -390,7 +408,7 @@ class InventoryV2InventoryAdjustmentResponse
     /**
      * Collection of custom fields.
      *
-     * @return InventoryV2CustomFieldResponse[]
+     * @return list<InventoryV2CustomFieldResponse>
      */
     public function getCustomFields(): array
     {
@@ -400,10 +418,11 @@ class InventoryV2InventoryAdjustmentResponse
     /**
      * Collection of custom fields.
      *
-     * @param InventoryV2CustomFieldResponse[] $customFields
+     * @param list<InventoryV2CustomFieldResponse> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

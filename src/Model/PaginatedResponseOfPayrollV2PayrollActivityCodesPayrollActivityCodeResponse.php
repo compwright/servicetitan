@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var PayrollV2PayrollActivityCodesPayrollActivityCodeResponse[]
+     * @var list<PayrollV2PayrollActivityCodesPayrollActivityCodeResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return PayrollV2PayrollActivityCodesPayrollActivityCodeResponse[]
+     * @return list<PayrollV2PayrollActivityCodesPayrollActivityCodeResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfPayrollV2PayrollActivityCodesPayrollActivityCodeRespons
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param PayrollV2PayrollActivityCodesPayrollActivityCodeResponse[] $data
+     * @param list<PayrollV2PayrollActivityCodesPayrollActivityCodeResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

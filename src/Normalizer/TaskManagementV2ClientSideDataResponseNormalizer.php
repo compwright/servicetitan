@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,147 +21,291 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class TaskManagementV2ClientSideDataResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class TaskManagementV2ClientSideDataResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideDataResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideDataResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('employees', $data)) {
+                $values = [];
+                foreach ($data['employees'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideEmployeeResponse::class, 'json', $context);
+                }
+                $object->setEmployees($values);
+            }
+            if (\array_key_exists('businessUnits', $data)) {
+                $values_1 = [];
+                foreach ($data['businessUnits'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideBusinessUnitResponse::class, 'json', $context);
+                }
+                $object->setBusinessUnits($values_1);
+            }
+            if (\array_key_exists('taskPriorities', $data)) {
+                $values_2 = [];
+                foreach ($data['taskPriorities'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskPriorityResponse::class, 'json', $context);
+                }
+                $object->setTaskPriorities($values_2);
+            }
+            if (\array_key_exists('taskResolutionTypes', $data)) {
+                $values_3 = [];
+                foreach ($data['taskResolutionTypes'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskResolutionTypeResponse::class, 'json', $context);
+                }
+                $object->setTaskResolutionTypes($values_3);
+            }
+            if (\array_key_exists('taskStatuses', $data)) {
+                $values_4 = [];
+                foreach ($data['taskStatuses'] as $value_4) {
+                    $values_4[] = $this->denormalizer->denormalize($value_4, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskStatusResponse::class, 'json', $context);
+                }
+                $object->setTaskStatuses($values_4);
+            }
+            if (\array_key_exists('taskTypes', $data)) {
+                $values_5 = [];
+                foreach ($data['taskTypes'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskTypeResponse::class, 'json', $context);
+                }
+                $object->setTaskTypes($values_5);
+            }
+            if (\array_key_exists('taskSources', $data)) {
+                $values_6 = [];
+                foreach ($data['taskSources'] as $value_6) {
+                    $values_6[] = $this->denormalizer->denormalize($value_6, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskSourceResponse::class, 'json', $context);
+                }
+                $object->setTaskSources($values_6);
+            }
+            if (\array_key_exists('taskResolutions', $data)) {
+                $values_7 = [];
+                foreach ($data['taskResolutions'] as $value_7) {
+                    $values_7[] = $this->denormalizer->denormalize($value_7, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskResolutionResponse::class, 'json', $context);
+                }
+                $object->setTaskResolutions($values_7);
+            }
+
             return $object;
         }
-        if (\array_key_exists('employees', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
             $values = [];
-            foreach ($data['employees'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideEmployeeResponse', 'json', $context);
+            foreach ($object->getEmployees() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setEmployees($values);
-        }
-        if (\array_key_exists('businessUnits', $data)) {
+            $data['employees'] = $values;
             $values_1 = [];
-            foreach ($data['businessUnits'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideBusinessUnitResponse', 'json', $context);
+            foreach ($object->getBusinessUnits() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $object->setBusinessUnits($values_1);
-        }
-        if (\array_key_exists('taskPriorities', $data)) {
+            $data['businessUnits'] = $values_1;
             $values_2 = [];
-            foreach ($data['taskPriorities'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskPriorityResponse', 'json', $context);
+            foreach ($object->getTaskPriorities() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $object->setTaskPriorities($values_2);
-        }
-        if (\array_key_exists('taskResolutionTypes', $data)) {
+            $data['taskPriorities'] = $values_2;
             $values_3 = [];
-            foreach ($data['taskResolutionTypes'] as $value_3) {
-                $values_3[] = $this->denormalizer->denormalize($value_3, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskResolutionTypeResponse', 'json', $context);
+            foreach ($object->getTaskResolutionTypes() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
             }
-            $object->setTaskResolutionTypes($values_3);
-        }
-        if (\array_key_exists('taskStatuses', $data)) {
+            $data['taskResolutionTypes'] = $values_3;
             $values_4 = [];
-            foreach ($data['taskStatuses'] as $value_4) {
-                $values_4[] = $this->denormalizer->denormalize($value_4, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskStatusResponse', 'json', $context);
+            foreach ($object->getTaskStatuses() as $value_4) {
+                $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
             }
-            $object->setTaskStatuses($values_4);
-        }
-        if (\array_key_exists('taskTypes', $data)) {
+            $data['taskStatuses'] = $values_4;
             $values_5 = [];
-            foreach ($data['taskTypes'] as $value_5) {
-                $values_5[] = $this->denormalizer->denormalize($value_5, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskTypeResponse', 'json', $context);
+            foreach ($object->getTaskTypes() as $value_5) {
+                $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
             }
-            $object->setTaskTypes($values_5);
-        }
-        if (\array_key_exists('taskSources', $data)) {
+            $data['taskTypes'] = $values_5;
             $values_6 = [];
-            foreach ($data['taskSources'] as $value_6) {
-                $values_6[] = $this->denormalizer->denormalize($value_6, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskSourceResponse', 'json', $context);
+            foreach ($object->getTaskSources() as $value_6) {
+                $values_6[] = $this->normalizer->normalize($value_6, 'json', $context);
             }
-            $object->setTaskSources($values_6);
-        }
-        if (\array_key_exists('taskResolutions', $data)) {
+            $data['taskSources'] = $values_6;
             $values_7 = [];
-            foreach ($data['taskResolutions'] as $value_7) {
-                $values_7[] = $this->denormalizer->denormalize($value_7, 'CompWright\\ServiceTitan\\Model\\TaskManagementV2ClientSideTaskResolutionResponse', 'json', $context);
+            foreach ($object->getTaskResolutions() as $value_7) {
+                $values_7[] = $this->normalizer->normalize($value_7, 'json', $context);
             }
-            $object->setTaskResolutions($values_7);
+            $data['taskResolutions'] = $values_7;
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class TaskManagementV2ClientSideDataResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $values = [];
-        foreach ($object->getEmployees() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['employees'] = $values;
-        $values_1 = [];
-        foreach ($object->getBusinessUnits() as $value_1) {
-            $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-        }
-        $data['businessUnits'] = $values_1;
-        $values_2 = [];
-        foreach ($object->getTaskPriorities() as $value_2) {
-            $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
-        }
-        $data['taskPriorities'] = $values_2;
-        $values_3 = [];
-        foreach ($object->getTaskResolutionTypes() as $value_3) {
-            $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
-        }
-        $data['taskResolutionTypes'] = $values_3;
-        $values_4 = [];
-        foreach ($object->getTaskStatuses() as $value_4) {
-            $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
-        }
-        $data['taskStatuses'] = $values_4;
-        $values_5 = [];
-        foreach ($object->getTaskTypes() as $value_5) {
-            $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
-        }
-        $data['taskTypes'] = $values_5;
-        $values_6 = [];
-        foreach ($object->getTaskSources() as $value_6) {
-            $values_6[] = $this->normalizer->normalize($value_6, 'json', $context);
-        }
-        $data['taskSources'] = $values_6;
-        $values_7 = [];
-        foreach ($object->getTaskResolutions() as $value_7) {
-            $values_7[] = $this->normalizer->normalize($value_7, 'json', $context);
-        }
-        $data['taskResolutions'] = $values_7;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('employees', $data)) {
+                $values = [];
+                foreach ($data['employees'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideEmployeeResponse::class, 'json', $context);
+                }
+                $object->setEmployees($values);
+            }
+            if (\array_key_exists('businessUnits', $data)) {
+                $values_1 = [];
+                foreach ($data['businessUnits'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideBusinessUnitResponse::class, 'json', $context);
+                }
+                $object->setBusinessUnits($values_1);
+            }
+            if (\array_key_exists('taskPriorities', $data)) {
+                $values_2 = [];
+                foreach ($data['taskPriorities'] as $value_2) {
+                    $values_2[] = $this->denormalizer->denormalize($value_2, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskPriorityResponse::class, 'json', $context);
+                }
+                $object->setTaskPriorities($values_2);
+            }
+            if (\array_key_exists('taskResolutionTypes', $data)) {
+                $values_3 = [];
+                foreach ($data['taskResolutionTypes'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskResolutionTypeResponse::class, 'json', $context);
+                }
+                $object->setTaskResolutionTypes($values_3);
+            }
+            if (\array_key_exists('taskStatuses', $data)) {
+                $values_4 = [];
+                foreach ($data['taskStatuses'] as $value_4) {
+                    $values_4[] = $this->denormalizer->denormalize($value_4, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskStatusResponse::class, 'json', $context);
+                }
+                $object->setTaskStatuses($values_4);
+            }
+            if (\array_key_exists('taskTypes', $data)) {
+                $values_5 = [];
+                foreach ($data['taskTypes'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskTypeResponse::class, 'json', $context);
+                }
+                $object->setTaskTypes($values_5);
+            }
+            if (\array_key_exists('taskSources', $data)) {
+                $values_6 = [];
+                foreach ($data['taskSources'] as $value_6) {
+                    $values_6[] = $this->denormalizer->denormalize($value_6, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskSourceResponse::class, 'json', $context);
+                }
+                $object->setTaskSources($values_6);
+            }
+            if (\array_key_exists('taskResolutions', $data)) {
+                $values_7 = [];
+                foreach ($data['taskResolutions'] as $value_7) {
+                    $values_7[] = $this->denormalizer->denormalize($value_7, \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideTaskResolutionResponse::class, 'json', $context);
+                }
+                $object->setTaskResolutions($values_7);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $values = [];
+            foreach ($object->getEmployees() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['employees'] = $values;
+            $values_1 = [];
+            foreach ($object->getBusinessUnits() as $value_1) {
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+            }
+            $data['businessUnits'] = $values_1;
+            $values_2 = [];
+            foreach ($object->getTaskPriorities() as $value_2) {
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+            }
+            $data['taskPriorities'] = $values_2;
+            $values_3 = [];
+            foreach ($object->getTaskResolutionTypes() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+            }
+            $data['taskResolutionTypes'] = $values_3;
+            $values_4 = [];
+            foreach ($object->getTaskStatuses() as $value_4) {
+                $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
+            }
+            $data['taskStatuses'] = $values_4;
+            $values_5 = [];
+            foreach ($object->getTaskTypes() as $value_5) {
+                $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
+            }
+            $data['taskTypes'] = $values_5;
+            $values_6 = [];
+            foreach ($object->getTaskSources() as $value_6) {
+                $values_6[] = $this->normalizer->normalize($value_6, 'json', $context);
+            }
+            $data['taskSources'] = $values_6;
+            $values_7 = [];
+            foreach ($object->getTaskResolutions() as $value_7) {
+                $values_7[] = $this->normalizer->normalize($value_7, 'json', $context);
+            }
+            $data['taskResolutions'] = $values_7;
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse::class => false];
+        }
     }
 }

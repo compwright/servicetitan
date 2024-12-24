@@ -13,21 +13,33 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2ExternalDataUpdateRequest
 {
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      *
      * @var string
      */
     protected $applicationGuid;
     /**
      * External data list. This list must include all of the external data for the business unit.
+     * If business unit A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on business unit A will be removed.
      *
-     * @var TenantSettingsV2ExternalDataModel[]
+     * @var list<TenantSettingsV2ExternalDataModel>
      */
     protected $externalData;
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function getApplicationGuid(): string
     {
@@ -35,11 +47,12 @@ class TenantSettingsV2ExternalDataUpdateRequest
     }
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function setApplicationGuid(string $applicationGuid): self
     {
+        $this->initialized['applicationGuid'] = true;
         $this->applicationGuid = $applicationGuid;
 
         return $this;
@@ -47,8 +60,10 @@ class TenantSettingsV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the business unit.
+     * If business unit A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on business unit A will be removed.
      *
-     * @return TenantSettingsV2ExternalDataModel[]
+     * @return list<TenantSettingsV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -57,11 +72,14 @@ class TenantSettingsV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the business unit.
+     * If business unit A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on business unit A will be removed.
      *
-     * @param TenantSettingsV2ExternalDataModel[] $externalData
+     * @param list<TenantSettingsV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

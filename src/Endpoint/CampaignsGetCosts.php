@@ -23,12 +23,12 @@ class CampaignsGetCosts extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var int $year format - int32
-     *     @var int $month Format - int32.
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     * @var int  $year format - int32
+     * @var int  $month Format - int32.
+     *           }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -63,29 +63,29 @@ class CampaignsGetCosts extends \CompWright\ServiceTitan\Runtime\Client\BaseEndp
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal', 'year', 'month']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('year', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('month', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('year', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('month', ['int', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignCostResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\CampaignsGetCostsBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignCostResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfMarketingV2CampaignCostResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfMarketingV2CampaignCostResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\CampaignsGetCostsBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\CampaignsGetCostsBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

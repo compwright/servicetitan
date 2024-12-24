@@ -10,48 +10,46 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class TaskManagementClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class TaskManagementClient extends Runtime\Client\Client
 {
     /**
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ClientSideDataGetBadRequestException
+     * @return Model\TaskManagementV2ClientSideDataResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TaskManagementV2ClientSideDataResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ClientSideDataGetBadRequestException
      */
     public function clientSideDataGet(int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ClientSideDataGet($tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\ClientSideDataGet($tenant), $fetch);
     }
 
     /**
-     * @param int                                                                   $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateRequest|null $requestBody
-     * @param string                                                                $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TasksCreateBadRequestException
+     * @return Model\TaskManagementV2TaskCreateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TaskManagementV2TaskCreateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TasksCreateBadRequestException
      */
     public function tasksCreate(int $tenant, ?Model\TaskManagementV2TaskCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TasksCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\TasksCreate($tenant, $requestBody), $fetch);
     }
 
     /**
-     * @param int                                                                      $id          format - int64
-     * @param int                                                                      $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\TaskManagementV2SubtaskCreateRequest|null $requestBody
-     * @param string                                                                   $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TasksCreateSubtaskBadRequestException
+     * @return Model\TaskManagementV2SubtaskCreateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\TaskManagementV2SubtaskCreateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TasksCreateSubtaskBadRequestException
      */
     public function tasksCreateSubtask(int $id, int $tenant, ?Model\TaskManagementV2SubtaskCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TasksCreateSubtask($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\TasksCreateSubtask($id, $tenant, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -59,7 +57,7 @@ class TaskManagementClient extends \CompWright\ServiceTitan\Runtime\Client\Clien
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -68,7 +66,7 @@ class TaskManagementClient extends \CompWright\ServiceTitan\Runtime\Client\Clien
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

@@ -13,22 +13,31 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AddBulkTagsRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * List of Customer ID(s).
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $customerIds;
     /**
      * List of TagType ID(s) to add to the customers.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $tagTypeIds;
 
     /**
      * List of Customer ID(s).
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getCustomerIds(): array
     {
@@ -38,10 +47,11 @@ class CrmV2AddBulkTagsRequest
     /**
      * List of Customer ID(s).
      *
-     * @param int[] $customerIds
+     * @param list<int> $customerIds
      */
     public function setCustomerIds(array $customerIds): self
     {
+        $this->initialized['customerIds'] = true;
         $this->customerIds = $customerIds;
 
         return $this;
@@ -50,7 +60,7 @@ class CrmV2AddBulkTagsRequest
     /**
      * List of TagType ID(s) to add to the customers.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getTagTypeIds(): array
     {
@@ -60,10 +70,11 @@ class CrmV2AddBulkTagsRequest
     /**
      * List of TagType ID(s) to add to the customers.
      *
-     * @param int[] $tagTypeIds
+     * @param list<int> $tagTypeIds
      */
     public function setTagTypeIds(array $tagTypeIds): self
     {
+        $this->initialized['tagTypeIds'] = true;
         $this->tagTypeIds = $tagTypeIds;
 
         return $this;

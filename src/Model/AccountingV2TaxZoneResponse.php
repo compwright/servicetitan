@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2TaxZoneResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Tax Zone Id.
      *
      * @var int
@@ -45,7 +54,7 @@ class AccountingV2TaxZoneResponse
     /**
      * Tax Zone rates.
      *
-     * @var AccountingV2TaxRateResponse[]
+     * @var list<AccountingV2TaxRateResponse>
      */
     protected $rates;
     /**
@@ -74,6 +83,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -92,6 +102,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -110,6 +121,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setColor(?int $color): self
     {
+        $this->initialized['color'] = true;
         $this->color = $color;
 
         return $this;
@@ -128,6 +140,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setIsTaxRateSeparated(bool $isTaxRateSeparated): self
     {
+        $this->initialized['isTaxRateSeparated'] = true;
         $this->isTaxRateSeparated = $isTaxRateSeparated;
 
         return $this;
@@ -146,6 +159,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setIsMultipleTaxZone(bool $isMultipleTaxZone): self
     {
+        $this->initialized['isMultipleTaxZone'] = true;
         $this->isMultipleTaxZone = $isMultipleTaxZone;
 
         return $this;
@@ -154,7 +168,7 @@ class AccountingV2TaxZoneResponse
     /**
      * Tax Zone rates.
      *
-     * @return AccountingV2TaxRateResponse[]
+     * @return list<AccountingV2TaxRateResponse>
      */
     public function getRates(): array
     {
@@ -164,10 +178,11 @@ class AccountingV2TaxZoneResponse
     /**
      * Tax Zone rates.
      *
-     * @param AccountingV2TaxRateResponse[] $rates
+     * @param list<AccountingV2TaxRateResponse> $rates
      */
     public function setRates(array $rates): self
     {
+        $this->initialized['rates'] = true;
         $this->rates = $rates;
 
         return $this;
@@ -186,6 +201,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -204,6 +220,7 @@ class AccountingV2TaxZoneResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

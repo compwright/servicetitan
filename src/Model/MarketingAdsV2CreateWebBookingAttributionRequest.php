@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingAdsV2CreateWebBookingAttributionRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The id of the booking entity in ServiceTitan.
      *
      * @var int
@@ -20,8 +29,6 @@ class MarketingAdsV2CreateWebBookingAttributionRequest
     protected $bookingId;
     /**
      * The web session that the booking should be attributed to.
-     *
-     * @var mixed
      */
     protected $webSessionData;
 
@@ -38,6 +45,7 @@ class MarketingAdsV2CreateWebBookingAttributionRequest
      */
     public function setBookingId(int $bookingId): self
     {
+        $this->initialized['bookingId'] = true;
         $this->bookingId = $bookingId;
 
         return $this;
@@ -45,8 +53,6 @@ class MarketingAdsV2CreateWebBookingAttributionRequest
 
     /**
      * The web session that the booking should be attributed to.
-     *
-     * @return mixed
      */
     public function getWebSessionData()
     {
@@ -55,11 +61,10 @@ class MarketingAdsV2CreateWebBookingAttributionRequest
 
     /**
      * The web session that the booking should be attributed to.
-     *
-     * @param mixed $webSessionData
      */
     public function setWebSessionData($webSessionData): self
     {
+        $this->initialized['webSessionData'] = true;
         $this->webSessionData = $webSessionData;
 
         return $this;

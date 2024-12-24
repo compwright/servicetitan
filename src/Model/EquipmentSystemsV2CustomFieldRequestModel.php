@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EquipmentSystemsV2CustomFieldRequestModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -32,6 +41,7 @@ class EquipmentSystemsV2CustomFieldRequestModel
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -44,6 +54,7 @@ class EquipmentSystemsV2CustomFieldRequestModel
 
     public function setTypeId(?int $typeId): self
     {
+        $this->initialized['typeId'] = true;
         $this->typeId = $typeId;
 
         return $this;
@@ -56,6 +67,7 @@ class EquipmentSystemsV2CustomFieldRequestModel
 
     public function setValue(?string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;

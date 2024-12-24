@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2JobCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the job's customer.
      *
      * @var int
@@ -51,7 +60,7 @@ class CrmV2JobCreateRequest
     /**
      * List of appointment information.
      *
-     * @var CrmV2AppointmentInformation[]
+     * @var list<CrmV2AppointmentInformation>
      */
     protected $appointments;
     /**
@@ -63,17 +72,18 @@ class CrmV2JobCreateRequest
     /**
      * Custom fields on the job.
      *
-     * @var CrmV2CustomFieldModel[]|null
+     * @var list<CrmV2CustomFieldModel>|null
      */
     protected $customFields;
     /**
      * List of IDs of tags on the job.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $tagTypeIds;
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
      *
      * @var mixed|null
      */
@@ -92,6 +102,7 @@ class CrmV2JobCreateRequest
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -110,6 +121,7 @@ class CrmV2JobCreateRequest
      */
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -128,6 +140,7 @@ class CrmV2JobCreateRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -146,6 +159,7 @@ class CrmV2JobCreateRequest
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -164,6 +178,7 @@ class CrmV2JobCreateRequest
      */
     public function setPriority(string $priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -182,6 +197,7 @@ class CrmV2JobCreateRequest
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -190,7 +206,7 @@ class CrmV2JobCreateRequest
     /**
      * List of appointment information.
      *
-     * @return CrmV2AppointmentInformation[]
+     * @return list<CrmV2AppointmentInformation>
      */
     public function getAppointments(): array
     {
@@ -200,10 +216,11 @@ class CrmV2JobCreateRequest
     /**
      * List of appointment information.
      *
-     * @param CrmV2AppointmentInformation[] $appointments
+     * @param list<CrmV2AppointmentInformation> $appointments
      */
     public function setAppointments(array $appointments): self
     {
+        $this->initialized['appointments'] = true;
         $this->appointments = $appointments;
 
         return $this;
@@ -222,6 +239,7 @@ class CrmV2JobCreateRequest
      */
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -230,7 +248,7 @@ class CrmV2JobCreateRequest
     /**
      * Custom fields on the job.
      *
-     * @return CrmV2CustomFieldModel[]|null
+     * @return list<CrmV2CustomFieldModel>|null
      */
     public function getCustomFields(): ?array
     {
@@ -240,10 +258,11 @@ class CrmV2JobCreateRequest
     /**
      * Custom fields on the job.
      *
-     * @param CrmV2CustomFieldModel[]|null $customFields
+     * @param list<CrmV2CustomFieldModel>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -252,7 +271,7 @@ class CrmV2JobCreateRequest
     /**
      * List of IDs of tags on the job.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getTagTypeIds(): ?array
     {
@@ -262,19 +281,19 @@ class CrmV2JobCreateRequest
     /**
      * List of IDs of tags on the job.
      *
-     * @param int[]|null $tagTypeIds
+     * @param list<int>|null $tagTypeIds
      */
     public function setTagTypeIds(?array $tagTypeIds): self
     {
+        $this->initialized['tagTypeIds'] = true;
         $this->tagTypeIds = $tagTypeIds;
 
         return $this;
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @return mixed
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
      */
     public function getExternalData()
     {
@@ -282,12 +301,12 @@ class CrmV2JobCreateRequest
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @param mixed $externalData
+     * Optional model that contains a list of external data items
+     * that should be attached to this job.
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

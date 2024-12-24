@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipSaleInvoiceCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the customer you are creating the Membership Sale Invoice for.
      *
      * @var int
@@ -44,8 +53,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
     protected $locationId;
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @var mixed
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     protected $recurringServiceAction;
     /**
@@ -68,6 +76,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -86,6 +95,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -104,6 +114,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setSaleTaskId(int $saleTaskId): self
     {
+        $this->initialized['saleTaskId'] = true;
         $this->saleTaskId = $saleTaskId;
 
         return $this;
@@ -122,6 +133,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setDurationBillingId(int $durationBillingId): self
     {
+        $this->initialized['durationBillingId'] = true;
         $this->durationBillingId = $durationBillingId;
 
         return $this;
@@ -140,6 +152,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setLocationId(?int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -147,8 +160,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
 
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @return mixed
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     public function getRecurringServiceAction()
     {
@@ -157,11 +169,11 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
 
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @param mixed $recurringServiceAction
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     public function setRecurringServiceAction($recurringServiceAction): self
     {
+        $this->initialized['recurringServiceAction'] = true;
         $this->recurringServiceAction = $recurringServiceAction;
 
         return $this;
@@ -180,6 +192,7 @@ class MembershipsV2MembershipSaleInvoiceCreateRequest
      */
     public function setRecurringLocationId(?int $recurringLocationId): self
     {
+        $this->initialized['recurringLocationId'] = true;
         $this->recurringLocationId = $recurringLocationId;
 
         return $this;

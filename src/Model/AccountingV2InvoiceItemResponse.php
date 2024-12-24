@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2InvoiceItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -114,6 +123,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -126,6 +136,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -138,6 +149,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setQuantity(?string $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -150,6 +162,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setCost(?string $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -162,6 +175,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setTotalCost(?string $totalCost): self
     {
+        $this->initialized['totalCost'] = true;
         $this->totalCost = $totalCost;
 
         return $this;
@@ -174,6 +188,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setInventoryLocation(?string $inventoryLocation): self
     {
+        $this->initialized['inventoryLocation'] = true;
         $this->inventoryLocation = $inventoryLocation;
 
         return $this;
@@ -186,6 +201,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setPrice(?string $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -204,6 +220,7 @@ class AccountingV2InvoiceItemResponse
      */
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -216,6 +233,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setSkuName(?string $skuName): self
     {
+        $this->initialized['skuName'] = true;
         $this->skuName = $skuName;
 
         return $this;
@@ -228,6 +246,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -240,6 +259,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setTotal(?string $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
 
         return $this;
@@ -252,6 +272,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setInventory(bool $inventory): self
     {
+        $this->initialized['inventory'] = true;
         $this->inventory = $inventory;
 
         return $this;
@@ -264,60 +285,46 @@ class AccountingV2InvoiceItemResponse
 
     public function setTaxable(bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getGeneralLedgerAccount()
     {
         return $this->generalLedgerAccount;
     }
 
-    /**
-     * @param mixed $generalLedgerAccount
-     */
     public function setGeneralLedgerAccount($generalLedgerAccount): self
     {
+        $this->initialized['generalLedgerAccount'] = true;
         $this->generalLedgerAccount = $generalLedgerAccount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCostOfSaleAccount()
     {
         return $this->costOfSaleAccount;
     }
 
-    /**
-     * @param mixed $costOfSaleAccount
-     */
     public function setCostOfSaleAccount($costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAssetAccount()
     {
         return $this->assetAccount;
     }
 
-    /**
-     * @param mixed $assetAccount
-     */
     public function setAssetAccount($assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;
@@ -330,24 +337,20 @@ class AccountingV2InvoiceItemResponse
 
     public function setMembershipTypeId(int $membershipTypeId): self
     {
+        $this->initialized['membershipTypeId'] = true;
         $this->membershipTypeId = $membershipTypeId;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getItemGroup()
     {
         return $this->itemGroup;
     }
 
-    /**
-     * @param mixed $itemGroup
-     */
     public function setItemGroup($itemGroup): self
     {
+        $this->initialized['itemGroup'] = true;
         $this->itemGroup = $itemGroup;
 
         return $this;
@@ -360,6 +363,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -372,6 +376,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setSoldHours(?float $soldHours): self
     {
+        $this->initialized['soldHours'] = true;
         $this->soldHours = $soldHours;
 
         return $this;
@@ -384,6 +389,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -396,6 +402,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setServiceDate(?\DateTime $serviceDate): self
     {
+        $this->initialized['serviceDate'] = true;
         $this->serviceDate = $serviceDate;
 
         return $this;
@@ -408,6 +415,7 @@ class AccountingV2InvoiceItemResponse
 
     public function setOrder(int $order): self
     {
+        $this->initialized['order'] = true;
         $this->order = $order;
 
         return $this;

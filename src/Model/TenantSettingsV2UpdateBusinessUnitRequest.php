@@ -13,16 +13,23 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2UpdateBusinessUnitRequest
 {
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @var mixed
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * Optional model that contains a list of external data items
+     * that should be attached to this business unit.
      */
     protected $externalData;
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @return mixed
+     * Optional model that contains a list of external data items
+     * that should be attached to this business unit.
      */
     public function getExternalData()
     {
@@ -30,12 +37,12 @@ class TenantSettingsV2UpdateBusinessUnitRequest
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @param mixed $externalData
+     * Optional model that contains a list of external data items
+     * that should be attached to this business unit.
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

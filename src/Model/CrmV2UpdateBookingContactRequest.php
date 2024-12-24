@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2UpdateBookingContactRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $type;
@@ -32,6 +41,7 @@ class CrmV2UpdateBookingContactRequest
 
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -44,6 +54,7 @@ class CrmV2UpdateBookingContactRequest
 
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -56,6 +67,7 @@ class CrmV2UpdateBookingContactRequest
 
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;

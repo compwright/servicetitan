@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2LocationsUpdateLocationRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the location’s customer.
      *
      * @var int
@@ -26,8 +35,6 @@ class CrmV2LocationsUpdateLocationRequest
     protected $name;
     /**
      * Address of the location record.
-     *
-     * @var mixed
      */
     protected $address;
     /**
@@ -44,8 +51,10 @@ class CrmV2LocationsUpdateLocationRequest
     protected $taxZoneId;
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the location.
+     * If location A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on location A will be removed.
      *
-     * @var CrmV2CustomersCustomFieldUpdateModel[]
+     * @var list<CrmV2CustomersCustomFieldUpdateModel>
      */
     protected $customFields;
 
@@ -62,6 +71,7 @@ class CrmV2LocationsUpdateLocationRequest
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -80,6 +90,7 @@ class CrmV2LocationsUpdateLocationRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -87,8 +98,6 @@ class CrmV2LocationsUpdateLocationRequest
 
     /**
      * Address of the location record.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -97,11 +106,10 @@ class CrmV2LocationsUpdateLocationRequest
 
     /**
      * Address of the location record.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -120,6 +128,7 @@ class CrmV2LocationsUpdateLocationRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -138,6 +147,7 @@ class CrmV2LocationsUpdateLocationRequest
      */
     public function setTaxZoneId(int $taxZoneId): self
     {
+        $this->initialized['taxZoneId'] = true;
         $this->taxZoneId = $taxZoneId;
 
         return $this;
@@ -145,8 +155,10 @@ class CrmV2LocationsUpdateLocationRequest
 
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the location.
+     * If location A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on location A will be removed.
      *
-     * @return CrmV2CustomersCustomFieldUpdateModel[]
+     * @return list<CrmV2CustomersCustomFieldUpdateModel>
      */
     public function getCustomFields(): array
     {
@@ -155,11 +167,14 @@ class CrmV2LocationsUpdateLocationRequest
 
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the location.
+     * If location A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on location A will be removed.
      *
-     * @param CrmV2CustomersCustomFieldUpdateModel[] $customFields
+     * @param list<CrmV2CustomersCustomFieldUpdateModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the payroll adjustment.
      *
      * @var int
@@ -20,8 +29,6 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
     protected $id;
     /**
      * Employee type of the payroll adjustment.
-     *
-     * @var mixed
      */
     protected $employeeType;
     /**
@@ -80,6 +87,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -87,8 +95,6 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
 
     /**
      * Employee type of the payroll adjustment.
-     *
-     * @return mixed
      */
     public function getEmployeeType()
     {
@@ -97,11 +103,10 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
 
     /**
      * Employee type of the payroll adjustment.
-     *
-     * @param mixed $employeeType
      */
     public function setEmployeeType($employeeType): self
     {
+        $this->initialized['employeeType'] = true;
         $this->employeeType = $employeeType;
 
         return $this;
@@ -120,6 +125,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setEmployeeId(int $employeeId): self
     {
+        $this->initialized['employeeId'] = true;
         $this->employeeId = $employeeId;
 
         return $this;
@@ -138,6 +144,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setPostedOn(\DateTime $postedOn): self
     {
+        $this->initialized['postedOn'] = true;
         $this->postedOn = $postedOn;
 
         return $this;
@@ -156,6 +163,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setAmount(float $amount): self
     {
+        $this->initialized['amount'] = true;
         $this->amount = $amount;
 
         return $this;
@@ -174,6 +182,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -192,6 +201,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setActivityCodeId(?int $activityCodeId): self
     {
+        $this->initialized['activityCodeId'] = true;
         $this->activityCodeId = $activityCodeId;
 
         return $this;
@@ -210,6 +220,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setHours(?float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -228,6 +239,7 @@ class PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse
      */
     public function setRate(?float $rate): self
     {
+        $this->initialized['rate'] = true;
         $this->rate = $rate;
 
         return $this;

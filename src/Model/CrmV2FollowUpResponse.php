@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2FollowUpResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the lead the follow-up is for.
      *
      * @var int
@@ -50,6 +59,7 @@ class CrmV2FollowUpResponse
      */
     public function setLeadId(int $leadId): self
     {
+        $this->initialized['leadId'] = true;
         $this->leadId = $leadId;
 
         return $this;
@@ -68,6 +78,7 @@ class CrmV2FollowUpResponse
      */
     public function setFollowUpDate(\DateTime $followUpDate): self
     {
+        $this->initialized['followUpDate'] = true;
         $this->followUpDate = $followUpDate;
 
         return $this;
@@ -86,6 +97,7 @@ class CrmV2FollowUpResponse
      */
     public function setText(?string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;
@@ -104,6 +116,7 @@ class CrmV2FollowUpResponse
      */
     public function setPinToTop(bool $pinToTop): self
     {
+        $this->initialized['pinToTop'] = true;
         $this->pinToTop = $pinToTop;
 
         return $this;

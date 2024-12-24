@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2BookingContactResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of contact.
      *
      * @var int
@@ -20,8 +29,6 @@ class CrmV2BookingContactResponse
     protected $id;
     /**
      * Type of contact.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -56,6 +63,7 @@ class CrmV2BookingContactResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -63,8 +71,6 @@ class CrmV2BookingContactResponse
 
     /**
      * Type of contact.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -73,11 +79,10 @@ class CrmV2BookingContactResponse
 
     /**
      * Type of contact.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -96,6 +101,7 @@ class CrmV2BookingContactResponse
      */
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -114,6 +120,7 @@ class CrmV2BookingContactResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -132,6 +139,7 @@ class CrmV2BookingContactResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

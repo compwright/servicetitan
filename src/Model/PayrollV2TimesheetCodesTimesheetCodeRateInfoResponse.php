@@ -13,9 +13,16 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2TimesheetCodesTimesheetCodeRateInfoResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The hourly rate.
-     *
-     * @var mixed
      */
     protected $hourlyRate;
     /**
@@ -33,8 +40,6 @@ class PayrollV2TimesheetCodesTimesheetCodeRateInfoResponse
 
     /**
      * The hourly rate.
-     *
-     * @return mixed
      */
     public function getHourlyRate()
     {
@@ -43,11 +48,10 @@ class PayrollV2TimesheetCodesTimesheetCodeRateInfoResponse
 
     /**
      * The hourly rate.
-     *
-     * @param mixed $hourlyRate
      */
     public function setHourlyRate($hourlyRate): self
     {
+        $this->initialized['hourlyRate'] = true;
         $this->hourlyRate = $hourlyRate;
 
         return $this;
@@ -66,6 +70,7 @@ class PayrollV2TimesheetCodesTimesheetCodeRateInfoResponse
      */
     public function setCustomHourlyRate(?float $customHourlyRate): self
     {
+        $this->initialized['customHourlyRate'] = true;
         $this->customHourlyRate = $customHourlyRate;
 
         return $this;
@@ -84,6 +89,7 @@ class PayrollV2TimesheetCodesTimesheetCodeRateInfoResponse
      */
     public function setRateMultiplier(float $rateMultiplier): self
     {
+        $this->initialized['rateMultiplier'] = true;
         $this->rateMultiplier = $rateMultiplier;
 
         return $this;

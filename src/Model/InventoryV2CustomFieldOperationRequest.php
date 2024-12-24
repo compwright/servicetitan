@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2CustomFieldOperationRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of inventory transaction where custom fields will be updated.
      *
      * @var int
@@ -21,7 +30,7 @@ class InventoryV2CustomFieldOperationRequest
     /**
      * Collection of custom fields to be updated.
      *
-     * @var InventoryV2CustomFieldRequest[]
+     * @var list<InventoryV2CustomFieldRequest>
      */
     protected $customFields;
 
@@ -38,6 +47,7 @@ class InventoryV2CustomFieldOperationRequest
      */
     public function setObjectId(int $objectId): self
     {
+        $this->initialized['objectId'] = true;
         $this->objectId = $objectId;
 
         return $this;
@@ -46,7 +56,7 @@ class InventoryV2CustomFieldOperationRequest
     /**
      * Collection of custom fields to be updated.
      *
-     * @return InventoryV2CustomFieldRequest[]
+     * @return list<InventoryV2CustomFieldRequest>
      */
     public function getCustomFields(): array
     {
@@ -56,10 +66,11 @@ class InventoryV2CustomFieldOperationRequest
     /**
      * Collection of custom fields to be updated.
      *
-     * @param InventoryV2CustomFieldRequest[] $customFields
+     * @param list<InventoryV2CustomFieldRequest> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2UpdateJobRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the job's customer.
      *
      * @var int
@@ -62,20 +71,21 @@ class CrmV2UpdateJobRequest
     protected $shouldUpdateInvoiceItems;
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the job.
+     * If job A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on job A will be removed.
      *
-     * @var CrmV2CustomFieldModel[]
+     * @var list<CrmV2CustomFieldModel>
      */
     protected $customFields;
     /**
-     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and.
+     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and
+     * this field only contains a ID for tag X, then tag Y on job A will be removed.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $tagTypeIds;
     /**
      * External data update model.
-     *
-     * @var mixed
      */
     protected $externalData;
 
@@ -92,6 +102,7 @@ class CrmV2UpdateJobRequest
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -110,6 +121,7 @@ class CrmV2UpdateJobRequest
      */
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -128,6 +140,7 @@ class CrmV2UpdateJobRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -146,6 +159,7 @@ class CrmV2UpdateJobRequest
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -164,6 +178,7 @@ class CrmV2UpdateJobRequest
      */
     public function setPriority(string $priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -182,6 +197,7 @@ class CrmV2UpdateJobRequest
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -200,6 +216,7 @@ class CrmV2UpdateJobRequest
      */
     public function setSummary(string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -218,6 +235,7 @@ class CrmV2UpdateJobRequest
      */
     public function setShouldUpdateInvoiceItems(bool $shouldUpdateInvoiceItems): self
     {
+        $this->initialized['shouldUpdateInvoiceItems'] = true;
         $this->shouldUpdateInvoiceItems = $shouldUpdateInvoiceItems;
 
         return $this;
@@ -225,8 +243,10 @@ class CrmV2UpdateJobRequest
 
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the job.
+     * If job A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on job A will be removed.
      *
-     * @return CrmV2CustomFieldModel[]
+     * @return list<CrmV2CustomFieldModel>
      */
     public function getCustomFields(): array
     {
@@ -235,20 +255,24 @@ class CrmV2UpdateJobRequest
 
     /**
      * List of custom fields and their values. This list must describe the full list of custom fields on the job.
+     * If job A has values for custom fields X and Y and this field only contains a model for custom field X, then
+     * the value for custom field Y on job A will be removed.
      *
-     * @param CrmV2CustomFieldModel[] $customFields
+     * @param list<CrmV2CustomFieldModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
     }
 
     /**
-     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and.
+     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and
+     * this field only contains a ID for tag X, then tag Y on job A will be removed.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getTagTypeIds(): array
     {
@@ -256,12 +280,14 @@ class CrmV2UpdateJobRequest
     }
 
     /**
-     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and.
+     * List of tag types. This list must describe the full list of tags on the job. If job A has tags X and Y and
+     * this field only contains a ID for tag X, then tag Y on job A will be removed.
      *
-     * @param int[] $tagTypeIds
+     * @param list<int> $tagTypeIds
      */
     public function setTagTypeIds(array $tagTypeIds): self
     {
+        $this->initialized['tagTypeIds'] = true;
         $this->tagTypeIds = $tagTypeIds;
 
         return $this;
@@ -269,8 +295,6 @@ class CrmV2UpdateJobRequest
 
     /**
      * External data update model.
-     *
-     * @return mixed
      */
     public function getExternalData()
     {
@@ -279,11 +303,10 @@ class CrmV2UpdateJobRequest
 
     /**
      * External data update model.
-     *
-     * @param mixed $externalData
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

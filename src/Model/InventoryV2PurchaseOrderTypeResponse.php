@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2PurchaseOrderTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Purchase order type Id.
      *
      * @var int
@@ -86,6 +95,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -104,6 +114,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -122,6 +133,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -140,6 +152,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setAutomaticallyReceive(bool $automaticallyReceive): self
     {
+        $this->initialized['automaticallyReceive'] = true;
         $this->automaticallyReceive = $automaticallyReceive;
 
         return $this;
@@ -158,6 +171,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setDisplayToTechnician(bool $displayToTechnician): self
     {
+        $this->initialized['displayToTechnician'] = true;
         $this->displayToTechnician = $displayToTechnician;
 
         return $this;
@@ -176,6 +190,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setImpactToTechnicianPayroll(bool $impactToTechnicianPayroll): self
     {
+        $this->initialized['impactToTechnicianPayroll'] = true;
         $this->impactToTechnicianPayroll = $impactToTechnicianPayroll;
 
         return $this;
@@ -194,6 +209,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setAllowTechniciansToSendPo(bool $allowTechniciansToSendPo): self
     {
+        $this->initialized['allowTechniciansToSendPo'] = true;
         $this->allowTechniciansToSendPo = $allowTechniciansToSendPo;
 
         return $this;
@@ -212,6 +228,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setDefaultRequiredDateDaysOffset(int $defaultRequiredDateDaysOffset): self
     {
+        $this->initialized['defaultRequiredDateDaysOffset'] = true;
         $this->defaultRequiredDateDaysOffset = $defaultRequiredDateDaysOffset;
 
         return $this;
@@ -230,6 +247,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setSkipWeekends(bool $skipWeekends): self
     {
+        $this->initialized['skipWeekends'] = true;
         $this->skipWeekends = $skipWeekends;
 
         return $this;
@@ -248,6 +266,7 @@ class InventoryV2PurchaseOrderTypeResponse
      */
     public function setExcludeTaxFromJobCosting(bool $excludeTaxFromJobCosting): self
     {
+        $this->initialized['excludeTaxFromJobCosting'] = true;
         $this->excludeTaxFromJobCosting = $excludeTaxFromJobCosting;
 
         return $this;

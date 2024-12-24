@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AssignTechniciansRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of the appointment to assign to.
      *
      * @var int
@@ -21,7 +30,7 @@ class CrmV2AssignTechniciansRequest
     /**
      * Assign these technicians to the appointment.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $technicianIds;
 
@@ -38,6 +47,7 @@ class CrmV2AssignTechniciansRequest
      */
     public function setJobAppointmentId(int $jobAppointmentId): self
     {
+        $this->initialized['jobAppointmentId'] = true;
         $this->jobAppointmentId = $jobAppointmentId;
 
         return $this;
@@ -46,7 +56,7 @@ class CrmV2AssignTechniciansRequest
     /**
      * Assign these technicians to the appointment.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getTechnicianIds(): array
     {
@@ -56,10 +66,11 @@ class CrmV2AssignTechniciansRequest
     /**
      * Assign these technicians to the appointment.
      *
-     * @param int[] $technicianIds
+     * @param list<int> $technicianIds
      */
     public function setTechnicianIds(array $technicianIds): self
     {
+        $this->initialized['technicianIds'] = true;
         $this->technicianIds = $technicianIds;
 
         return $this;

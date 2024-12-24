@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2PaymentTermDiscountAPIModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int|null
      */
     protected $id;
@@ -48,24 +57,20 @@ class AccountingV2PaymentTermDiscountAPIModel
 
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDiscountApplyTo()
     {
         return $this->discountApplyTo;
     }
 
-    /**
-     * @param mixed $discountApplyTo
-     */
     public function setDiscountApplyTo($discountApplyTo): self
     {
+        $this->initialized['discountApplyTo'] = true;
         $this->discountApplyTo = $discountApplyTo;
 
         return $this;
@@ -78,24 +83,20 @@ class AccountingV2PaymentTermDiscountAPIModel
 
     public function setDiscount(?float $discount): self
     {
+        $this->initialized['discount'] = true;
         $this->discount = $discount;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDiscountType()
     {
         return $this->discountType;
     }
 
-    /**
-     * @param mixed $discountType
-     */
     public function setDiscountType($discountType): self
     {
+        $this->initialized['discountType'] = true;
         $this->discountType = $discountType;
 
         return $this;
@@ -108,24 +109,20 @@ class AccountingV2PaymentTermDiscountAPIModel
 
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getApplyBy()
     {
         return $this->applyBy;
     }
 
-    /**
-     * @param mixed $applyBy
-     */
     public function setApplyBy($applyBy): self
     {
+        $this->initialized['applyBy'] = true;
         $this->applyBy = $applyBy;
 
         return $this;
@@ -138,6 +135,7 @@ class AccountingV2PaymentTermDiscountAPIModel
 
     public function setApplyByValue(?int $applyByValue): self
     {
+        $this->initialized['applyByValue'] = true;
         $this->applyByValue = $applyByValue;
 
         return $this;

@@ -21,27 +21,39 @@ class LeadsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var int $customerId Format - int64. Filters by associated customer
-     *     @var bool $isProspect Allows to filter leads where the customer doesn't have a job, or there is no customer.
-     *     @var bool $withoutCustomer Allows to filter leads that don't have a customer or location record associated to it.
-     *     @var string $status Filters by status\
-     *     @var string $customerCity Filters by customer city
-     *     @var string $customerState Filters by customer state
-     *     @var string $customerZip Filters by customer zip
-     *     @var string $customerCreatedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were created on or before a certain date/time (in UTC)
-     *     @var string $customerCreatedBefore Format - date-time (as date-time in RFC3339). Returns customers who were created after a certain date/time (in UTC)
-     *     @var string $customerModifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were modified on or before a certain date/time (in UTC)
-     *     @var string $sort Applies sorting by the specified field:\
-    Available fields are: Id, ModifiedOn, CreatedOn.
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var int    $customerId Format - int64. Filters by associated customer
+     * @var bool   $isProspect Allows to filter leads where the customer doesn't have a job, or there is no customer.
+     *             Possible values are:
+     *             null (return all leads);
+     *             true (return leads without customer/jobs);
+     *             false (return leads with customer and job)
+     * @var bool   $withoutCustomer Allows to filter leads that don't have a customer or location record associated to it.
+     *             Possible values are:
+     *             null (return all leads);
+     *             true (return leads without customers or locations only);
+     *             false (return leads with customers and locations only)
+     * @var string $status Filters by status\
+     *             Values: [Open, Dismissed, Converted]
+     * @var string $customerCity Filters by customer city
+     * @var string $customerState Filters by customer state
+     * @var string $customerZip Filters by customer zip
+     * @var string $customerCreatedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were created on or before a certain date/time (in UTC)
+     * @var string $customerCreatedBefore Format - date-time (as date-time in RFC3339). Returns customers who were created after a certain date/time (in UTC)
+     * @var string $customerModifiedOnOrAfter Format - date-time (as date-time in RFC3339). Returns customers who were modified on or before a certain date/time (in UTC)
+     * @var string $sort Applies sorting by the specified field:\
+     *             "?sort=+FieldName" for ascending order,\
+     *             "?sort=-FieldName" for descending order.\
+     *             \
+     *             Available fields are: Id, ModifiedOn, CreatedOn.
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -75,43 +87,43 @@ class LeadsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoint 
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal', 'ids', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter', 'customerId', 'isProspect', 'withoutCustomer', 'status', 'customerCity', 'customerState', 'customerZip', 'customerCreatedOnOrAfter', 'customerCreatedBefore', 'customerModifiedOnOrAfter', 'sort']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customerId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('isProspect', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('withoutCustomer', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('status', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customerCity', ['string']);
-        $optionsResolver->setAllowedTypes('customerState', ['string']);
-        $optionsResolver->setAllowedTypes('customerZip', ['string']);
-        $optionsResolver->setAllowedTypes('customerCreatedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customerCreatedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customerModifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('sort', ['string']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customerId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('isProspect', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('withoutCustomer', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('status', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customerCity', ['string']);
+        $optionsResolver->addAllowedTypes('customerState', ['string']);
+        $optionsResolver->addAllowedTypes('customerZip', ['string']);
+        $optionsResolver->addAllowedTypes('customerCreatedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customerCreatedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customerModifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('sort', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LeadResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\LeadsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LeadResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfCrmV2LeadResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2LeadResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\LeadsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\LeadsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

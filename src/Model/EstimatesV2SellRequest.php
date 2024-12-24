@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class EstimatesV2SellRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $soldBy;
@@ -24,6 +33,7 @@ class EstimatesV2SellRequest
 
     public function setSoldBy(int $soldBy): self
     {
+        $this->initialized['soldBy'] = true;
         $this->soldBy = $soldBy;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2VendorResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Vendor Id.
      *
      * @var int
@@ -62,14 +71,10 @@ class InventoryV2VendorResponse
     protected $defaultTaxRate;
     /**
      * Vendor contact information.
-     *
-     * @var mixed
      */
     protected $contactInfo;
     /**
      * Vendor address.
-     *
-     * @var mixed
      */
     protected $address;
     /**
@@ -85,9 +90,10 @@ class InventoryV2VendorResponse
      */
     protected $modifiedOn;
     /**
-     * List of external data attached to this vendor,.
+     * List of external data attached to this vendor,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var InventoryV2ExternalDataModel[]
+     * @var list<InventoryV2ExternalDataModel>
      */
     protected $externalData;
 
@@ -104,6 +110,7 @@ class InventoryV2VendorResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -122,6 +129,7 @@ class InventoryV2VendorResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -140,6 +148,7 @@ class InventoryV2VendorResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -158,6 +167,7 @@ class InventoryV2VendorResponse
      */
     public function setIsTruckReplenishment(bool $isTruckReplenishment): self
     {
+        $this->initialized['isTruckReplenishment'] = true;
         $this->isTruckReplenishment = $isTruckReplenishment;
 
         return $this;
@@ -176,6 +186,7 @@ class InventoryV2VendorResponse
      */
     public function setIsMobileCreationRestricted(bool $isMobileCreationRestricted): self
     {
+        $this->initialized['isMobileCreationRestricted'] = true;
         $this->isMobileCreationRestricted = $isMobileCreationRestricted;
 
         return $this;
@@ -194,6 +205,7 @@ class InventoryV2VendorResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -212,6 +224,7 @@ class InventoryV2VendorResponse
      */
     public function setDeliveryOption(string $deliveryOption): self
     {
+        $this->initialized['deliveryOption'] = true;
         $this->deliveryOption = $deliveryOption;
 
         return $this;
@@ -230,6 +243,7 @@ class InventoryV2VendorResponse
      */
     public function setDefaultTaxRate(float $defaultTaxRate): self
     {
+        $this->initialized['defaultTaxRate'] = true;
         $this->defaultTaxRate = $defaultTaxRate;
 
         return $this;
@@ -237,8 +251,6 @@ class InventoryV2VendorResponse
 
     /**
      * Vendor contact information.
-     *
-     * @return mixed
      */
     public function getContactInfo()
     {
@@ -247,11 +259,10 @@ class InventoryV2VendorResponse
 
     /**
      * Vendor contact information.
-     *
-     * @param mixed $contactInfo
      */
     public function setContactInfo($contactInfo): self
     {
+        $this->initialized['contactInfo'] = true;
         $this->contactInfo = $contactInfo;
 
         return $this;
@@ -259,8 +270,6 @@ class InventoryV2VendorResponse
 
     /**
      * Vendor address.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -269,11 +278,10 @@ class InventoryV2VendorResponse
 
     /**
      * Vendor address.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -292,6 +300,7 @@ class InventoryV2VendorResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -310,15 +319,17 @@ class InventoryV2VendorResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this vendor,.
+     * List of external data attached to this vendor,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return InventoryV2ExternalDataModel[]
+     * @return list<InventoryV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -326,12 +337,14 @@ class InventoryV2VendorResponse
     }
 
     /**
-     * List of external data attached to this vendor,.
+     * List of external data attached to this vendor,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param InventoryV2ExternalDataModel[] $externalData
+     * @param list<InventoryV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

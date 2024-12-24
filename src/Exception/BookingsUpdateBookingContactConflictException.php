@@ -16,15 +16,25 @@ class BookingsUpdateBookingContactConflictException extends ConflictException
      * @var \CompWright\ServiceTitan\Model\ApiErrorResponse
      */
     private $apiErrorResponse;
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
 
-    public function __construct(\CompWright\ServiceTitan\Model\ApiErrorResponse $apiErrorResponse)
+    public function __construct(\CompWright\ServiceTitan\Model\ApiErrorResponse $apiErrorResponse, \Psr\Http\Message\ResponseInterface $response)
     {
         parent::__construct('Some conflict occurred while executing the request');
         $this->apiErrorResponse = $apiErrorResponse;
+        $this->response = $response;
     }
 
     public function getApiErrorResponse(): \CompWright\ServiceTitan\Model\ApiErrorResponse
     {
         return $this->apiErrorResponse;
+    }
+
+    public function getResponse(): \Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

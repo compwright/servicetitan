@@ -13,24 +13,33 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2PricebookBulkCreateResponse
 {
     /**
-     * @var PricebookV2CustomIdMappingModel[]|null
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var list<PricebookV2CustomIdMappingModel>|null
      */
     protected $services;
     /**
-     * @var PricebookV2CustomIdMappingModel[]|null
+     * @var list<PricebookV2CustomIdMappingModel>|null
      */
     protected $equipment;
     /**
-     * @var PricebookV2CustomIdMappingModel[]|null
+     * @var list<PricebookV2CustomIdMappingModel>|null
      */
     protected $materials;
     /**
-     * @var PricebookV2CustomIdMappingModel[]|null
+     * @var list<PricebookV2CustomIdMappingModel>|null
      */
     protected $discountAndFees;
 
     /**
-     * @return PricebookV2CustomIdMappingModel[]|null
+     * @return list<PricebookV2CustomIdMappingModel>|null
      */
     public function getServices(): ?array
     {
@@ -38,17 +47,18 @@ class PricebookV2PricebookBulkCreateResponse
     }
 
     /**
-     * @param PricebookV2CustomIdMappingModel[]|null $services
+     * @param list<PricebookV2CustomIdMappingModel>|null $services
      */
     public function setServices(?array $services): self
     {
+        $this->initialized['services'] = true;
         $this->services = $services;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2CustomIdMappingModel[]|null
+     * @return list<PricebookV2CustomIdMappingModel>|null
      */
     public function getEquipment(): ?array
     {
@@ -56,17 +66,18 @@ class PricebookV2PricebookBulkCreateResponse
     }
 
     /**
-     * @param PricebookV2CustomIdMappingModel[]|null $equipment
+     * @param list<PricebookV2CustomIdMappingModel>|null $equipment
      */
     public function setEquipment(?array $equipment): self
     {
+        $this->initialized['equipment'] = true;
         $this->equipment = $equipment;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2CustomIdMappingModel[]|null
+     * @return list<PricebookV2CustomIdMappingModel>|null
      */
     public function getMaterials(): ?array
     {
@@ -74,17 +85,18 @@ class PricebookV2PricebookBulkCreateResponse
     }
 
     /**
-     * @param PricebookV2CustomIdMappingModel[]|null $materials
+     * @param list<PricebookV2CustomIdMappingModel>|null $materials
      */
     public function setMaterials(?array $materials): self
     {
+        $this->initialized['materials'] = true;
         $this->materials = $materials;
 
         return $this;
     }
 
     /**
-     * @return PricebookV2CustomIdMappingModel[]|null
+     * @return list<PricebookV2CustomIdMappingModel>|null
      */
     public function getDiscountAndFees(): ?array
     {
@@ -92,10 +104,11 @@ class PricebookV2PricebookBulkCreateResponse
     }
 
     /**
-     * @param PricebookV2CustomIdMappingModel[]|null $discountAndFees
+     * @param list<PricebookV2CustomIdMappingModel>|null $discountAndFees
      */
     public function setDiscountAndFees(?array $discountAndFees): self
     {
+        $this->initialized['discountAndFees'] = true;
         $this->discountAndFees = $discountAndFees;
 
         return $this;

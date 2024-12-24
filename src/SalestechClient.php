@@ -10,127 +10,124 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class SalestechClient extends Runtime\Client\Client
 {
     /**
      * @param int    $id     format - int64
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesGetBadRequestException
+     * @return Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesGetBadRequestException
      */
     public function estimatesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesGet($id, $tenant), $fetch);
     }
 
     /**
-     * @param int                                                                  $id          format - int64
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesUpdateBadRequestException
+     * @return Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesUpdateBadRequestException
      */
     public function estimatesUpdate(int $id, int $tenant, ?Model\EstimatesV2UpdateEstimateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $jobId format - int64
-     *     @var int $projectId format - int64
-     *     @var string $jobNumber
-     *     @var float $totalGreater format - decimal
-     *     @var float $totalLess format - decimal
-     *     @var int $soldById format - int64
-     *     @var int $soldByEmployeeId format - int64
-     *     @var string $ids
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $soldAfter format - date-time (as date-time in RFC3339)
-     *     @var string $soldBefore format - date-time (as date-time in RFC3339)
-     *     @var string $status
-     *     @var string $active Values: [True, Any, False]
-     *     @var string $orderBy
-     *     @var string $orderByDirection
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var int    $jobId format - int64
+     * @var int    $projectId format - int64
+     * @var string $jobNumber
+     * @var float  $totalGreater format - decimal
+     * @var float  $totalLess format - decimal
+     * @var int    $soldById format - int64
+     * @var int    $soldByEmployeeId format - int64
+     * @var string $ids
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $soldAfter format - date-time (as date-time in RFC3339)
+     * @var string $soldBefore format - date-time (as date-time in RFC3339)
+     * @var string $status
+     * @var string $active Values: [True, Any, False]
+     * @var string $orderBy
+     * @var string $orderByDirection
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesGetListBadRequestException
+     * @return Model\PaginatedResponseOfEstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesGetListBadRequestException
      */
     public function estimatesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\EstimatesV2CreateEstimateRequest|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesCreateBadRequestException
+     * @return Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesCreateBadRequestException
      */
     public function estimatesCreate(int $tenant, ?Model\EstimatesV2CreateEstimateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $estimateId format - int64
-     *     @var string $ids
-     *     @var string $active Values: [True, Any, False]
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     * }
+     * @var int    $estimateId format - int64
+     * @var string $ids
+     * @var string $active Values: [True, Any, False]
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesGetItemsBadRequestException
+     * @return Model\PaginatedResponseOfEstimatesV2EstimateItemResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfEstimatesV2EstimateItemResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesGetItemsBadRequestException
      */
     public function estimatesGetItems(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesGetItems($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesGetItems($tenant, $queryParameters), $fetch);
     }
 
     /**
-     * @param int                                                        $id          format - int64
-     * @param int                                                        $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\EstimatesV2SellRequest|null $requestBody
-     * @param string                                                     $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesSellBadRequestException
+     * @return Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesSellBadRequestException
      */
     public function estimatesSell(int $id, int $tenant, ?Model\EstimatesV2SellRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesSell($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesSell($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -138,13 +135,13 @@ class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesUnsellBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\EstimatesUnsellBadRequestException
      */
     public function estimatesUnsell(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesUnsell($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesUnsell($id, $tenant), $fetch);
     }
 
     /**
@@ -152,28 +149,27 @@ class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesDismissBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\EstimatesDismissBadRequestException
      */
     public function estimatesDismiss(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesDismiss($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesDismiss($id, $tenant), $fetch);
     }
 
     /**
-     * @param int                                                                            $id          format - int64
-     * @param int                                                                            $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemCreateUpdateRequest|null $requestBody
-     * @param string                                                                         $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesPutItemBadRequestException
+     * @return Model\EstimatesV2EstimateItemUpdateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemUpdateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\EstimatesPutItemBadRequestException
      */
     public function estimatesPutItem(int $id, int $tenant, ?Model\EstimatesV2EstimateItemCreateUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesPutItem($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesPutItem($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -182,13 +178,13 @@ class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\EstimatesDeleteItemBadRequestException
-     *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\EstimatesDeleteItemBadRequestException
      */
     public function estimatesDeleteItem(int $id, int $itemId, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\EstimatesDeleteItem($id, $itemId, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\EstimatesDeleteItem($id, $itemId, $tenant), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -196,7 +192,7 @@ class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -205,7 +201,7 @@ class SalestechClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

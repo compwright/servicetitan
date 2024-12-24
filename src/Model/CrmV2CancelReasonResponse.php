@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CancelReasonResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Job ID.
      *
      * @var int
@@ -50,6 +59,7 @@ class CrmV2CancelReasonResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -68,6 +78,7 @@ class CrmV2CancelReasonResponse
      */
     public function setReasonId(int $reasonId): self
     {
+        $this->initialized['reasonId'] = true;
         $this->reasonId = $reasonId;
 
         return $this;
@@ -86,6 +97,7 @@ class CrmV2CancelReasonResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -104,6 +116,7 @@ class CrmV2CancelReasonResponse
      */
     public function setText(string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuAssetResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Asset alias.
      *
      * @var string|null
@@ -26,8 +35,6 @@ class PricebookV2SkuAssetResponse
     protected $fileName;
     /**
      * Asset type - image, video or PDF.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -50,6 +57,7 @@ class PricebookV2SkuAssetResponse
      */
     public function setAlias(?string $alias): self
     {
+        $this->initialized['alias'] = true;
         $this->alias = $alias;
 
         return $this;
@@ -68,6 +76,7 @@ class PricebookV2SkuAssetResponse
      */
     public function setFileName(?string $fileName): self
     {
+        $this->initialized['fileName'] = true;
         $this->fileName = $fileName;
 
         return $this;
@@ -75,8 +84,6 @@ class PricebookV2SkuAssetResponse
 
     /**
      * Asset type - image, video or PDF.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -85,11 +92,10 @@ class PricebookV2SkuAssetResponse
 
     /**
      * Asset type - image, video or PDF.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -108,6 +114,7 @@ class PricebookV2SkuAssetResponse
      */
     public function setUrl(string $url): self
     {
+        $this->initialized['url'] = true;
         $this->url = $url;
 
         return $this;

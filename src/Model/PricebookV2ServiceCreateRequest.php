@@ -13,27 +13,36 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2ServiceCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Array of materials linked to the service.
      *
-     * @var PricebookV2SkuLinkRequest[]|null
+     * @var list<PricebookV2SkuLinkRequest>|null
      */
     protected $serviceMaterials;
     /**
      * Array of equipment linked to the service.
      *
-     * @var PricebookV2SkuLinkRequest[]|null
+     * @var list<PricebookV2SkuLinkRequest>|null
      */
     protected $serviceEquipment;
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $recommendations;
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $upgrades;
     /**
@@ -63,7 +72,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $categories;
     /**
@@ -117,7 +126,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetRequest[]|null
+     * @var list<PricebookV2SkuAssetRequest>|null
      */
     protected $assets;
     /**
@@ -145,7 +154,8 @@ class PricebookV2ServiceCreateRequest
      */
     protected $commissionBonus;
     /**
-     * Optional model that contains a list of external data items.
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      *
      * @var mixed|null
      */
@@ -154,7 +164,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Array of materials linked to the service.
      *
-     * @return PricebookV2SkuLinkRequest[]|null
+     * @return list<PricebookV2SkuLinkRequest>|null
      */
     public function getServiceMaterials(): ?array
     {
@@ -164,10 +174,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Array of materials linked to the service.
      *
-     * @param PricebookV2SkuLinkRequest[]|null $serviceMaterials
+     * @param list<PricebookV2SkuLinkRequest>|null $serviceMaterials
      */
     public function setServiceMaterials(?array $serviceMaterials): self
     {
+        $this->initialized['serviceMaterials'] = true;
         $this->serviceMaterials = $serviceMaterials;
 
         return $this;
@@ -176,7 +187,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Array of equipment linked to the service.
      *
-     * @return PricebookV2SkuLinkRequest[]|null
+     * @return list<PricebookV2SkuLinkRequest>|null
      */
     public function getServiceEquipment(): ?array
     {
@@ -186,10 +197,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Array of equipment linked to the service.
      *
-     * @param PricebookV2SkuLinkRequest[]|null $serviceEquipment
+     * @param list<PricebookV2SkuLinkRequest>|null $serviceEquipment
      */
     public function setServiceEquipment(?array $serviceEquipment): self
     {
+        $this->initialized['serviceEquipment'] = true;
         $this->serviceEquipment = $serviceEquipment;
 
         return $this;
@@ -198,7 +210,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getRecommendations(): ?array
     {
@@ -208,10 +220,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Recommended services and materials to include with this SKU.
      *
-     * @param int[]|null $recommendations
+     * @param list<int>|null $recommendations
      */
     public function setRecommendations(?array $recommendations): self
     {
+        $this->initialized['recommendations'] = true;
         $this->recommendations = $recommendations;
 
         return $this;
@@ -220,7 +233,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getUpgrades(): ?array
     {
@@ -230,10 +243,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Upgrades that can be sold for this SKU.
      *
-     * @param int[]|null $upgrades
+     * @param list<int>|null $upgrades
      */
     public function setUpgrades(?array $upgrades): self
     {
+        $this->initialized['upgrades'] = true;
         $this->upgrades = $upgrades;
 
         return $this;
@@ -252,6 +266,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -270,6 +285,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -288,6 +304,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -295,8 +312,6 @@ class PricebookV2ServiceCreateRequest
 
     /**
      * Description of the warranty included in this SKU.
-     *
-     * @return mixed
      */
     public function getWarranty()
     {
@@ -305,11 +320,10 @@ class PricebookV2ServiceCreateRequest
 
     /**
      * Description of the warranty included in this SKU.
-     *
-     * @param mixed $warranty
      */
     public function setWarranty($warranty): self
     {
+        $this->initialized['warranty'] = true;
         $this->warranty = $warranty;
 
         return $this;
@@ -318,7 +332,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getCategories(): ?array
     {
@@ -328,10 +342,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Categories that this SKU belongs to.
      *
-     * @param int[]|null $categories
+     * @param list<int>|null $categories
      */
     public function setCategories(?array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -350,6 +365,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setPrice(?float $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -368,6 +384,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setMemberPrice(?float $memberPrice): self
     {
+        $this->initialized['memberPrice'] = true;
         $this->memberPrice = $memberPrice;
 
         return $this;
@@ -386,6 +403,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setAddOnPrice(?float $addOnPrice): self
     {
+        $this->initialized['addOnPrice'] = true;
         $this->addOnPrice = $addOnPrice;
 
         return $this;
@@ -404,6 +422,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setAddOnMemberPrice(?float $addOnMemberPrice): self
     {
+        $this->initialized['addOnMemberPrice'] = true;
         $this->addOnMemberPrice = $addOnMemberPrice;
 
         return $this;
@@ -422,6 +441,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setTaxable(?bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -440,6 +460,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -458,6 +479,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setHours(?float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -476,6 +498,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setIsLabor(?bool $isLabor): self
     {
+        $this->initialized['isLabor'] = true;
         $this->isLabor = $isLabor;
 
         return $this;
@@ -484,7 +507,7 @@ class PricebookV2ServiceCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetRequest[]|null
+     * @return list<PricebookV2SkuAssetRequest>|null
      */
     public function getAssets(): ?array
     {
@@ -494,10 +517,11 @@ class PricebookV2ServiceCreateRequest
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetRequest[]|null $assets
+     * @param list<PricebookV2SkuAssetRequest>|null $assets
      */
     public function setAssets(?array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -516,6 +540,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setActive(?bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -534,6 +559,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setCrossSaleGroup(?string $crossSaleGroup): self
     {
+        $this->initialized['crossSaleGroup'] = true;
         $this->crossSaleGroup = $crossSaleGroup;
 
         return $this;
@@ -552,6 +578,7 @@ class PricebookV2ServiceCreateRequest
      */
     public function setPaysCommission(?bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -570,15 +597,15 @@ class PricebookV2ServiceCreateRequest
      */
     public function setCommissionBonus(?float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @return mixed
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      */
     public function getExternalData()
     {
@@ -586,12 +613,12 @@ class PricebookV2ServiceCreateRequest
     }
 
     /**
-     * Optional model that contains a list of external data items.
-     *
-     * @param mixed $externalData
+     * Optional model that contains a list of external data items
+     * that should be attached to this entity.
      */
     public function setExternalData($externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

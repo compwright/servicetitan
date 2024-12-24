@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AddressOutput
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $street;
@@ -56,6 +65,7 @@ class AddressOutput
 
     public function setStreet(string $street): self
     {
+        $this->initialized['street'] = true;
         $this->street = $street;
 
         return $this;
@@ -68,6 +78,7 @@ class AddressOutput
 
     public function setUnit(string $unit): self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
 
         return $this;
@@ -80,6 +91,7 @@ class AddressOutput
 
     public function setCountry(string $country): self
     {
+        $this->initialized['country'] = true;
         $this->country = $country;
 
         return $this;
@@ -92,6 +104,7 @@ class AddressOutput
 
     public function setCity(string $city): self
     {
+        $this->initialized['city'] = true;
         $this->city = $city;
 
         return $this;
@@ -104,6 +117,7 @@ class AddressOutput
 
     public function setState(string $state): self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
 
         return $this;
@@ -116,6 +130,7 @@ class AddressOutput
 
     public function setZip(string $zip): self
     {
+        $this->initialized['zip'] = true;
         $this->zip = $zip;
 
         return $this;
@@ -128,6 +143,7 @@ class AddressOutput
 
     public function setStreetAddress(string $streetAddress): self
     {
+        $this->initialized['streetAddress'] = true;
         $this->streetAddress = $streetAddress;
 
         return $this;
@@ -140,6 +156,7 @@ class AddressOutput
 
     public function setLatitude(?float $latitude): self
     {
+        $this->initialized['latitude'] = true;
         $this->latitude = $latitude;
 
         return $this;
@@ -152,6 +169,7 @@ class AddressOutput
 
     public function setLongitude(?float $longitude): self
     {
+        $this->initialized['longitude'] = true;
         $this->longitude = $longitude;
 
         return $this;

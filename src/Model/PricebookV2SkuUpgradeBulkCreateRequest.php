@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2SkuUpgradeBulkCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Linked SKU unique Id.
      *
      * @var int|null
@@ -38,6 +47,7 @@ class PricebookV2SkuUpgradeBulkCreateRequest
      */
     public function setSkuId(?int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -56,6 +66,7 @@ class PricebookV2SkuUpgradeBulkCreateRequest
      */
     public function setCustomId(?string $customId): self
     {
+        $this->initialized['customId'] = true;
         $this->customId = $customId;
 
         return $this;

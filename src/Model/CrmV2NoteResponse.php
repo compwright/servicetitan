@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2NoteResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Text content of a note.
      *
      * @var string
@@ -56,6 +65,7 @@ class CrmV2NoteResponse
      */
     public function setText(string $text): self
     {
+        $this->initialized['text'] = true;
         $this->text = $text;
 
         return $this;
@@ -74,6 +84,7 @@ class CrmV2NoteResponse
      */
     public function setIsPinned(bool $isPinned): self
     {
+        $this->initialized['isPinned'] = true;
         $this->isPinned = $isPinned;
 
         return $this;
@@ -92,6 +103,7 @@ class CrmV2NoteResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -110,6 +122,7 @@ class CrmV2NoteResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -128,6 +141,7 @@ class CrmV2NoteResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

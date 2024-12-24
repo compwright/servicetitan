@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2MaterialResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique id for the SKU.
      *
      * @var int
@@ -137,19 +146,19 @@ class PricebookV2MaterialResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @var PricebookV2SkuVendorResponse[]|null
+     * @var list<PricebookV2SkuVendorResponse>|null
      */
     protected $otherVendors;
     /**
      * Categories that this SKU belongs to.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $categories;
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @var PricebookV2SkuAssetResponse[]
+     * @var list<PricebookV2SkuAssetResponse>
      */
     protected $assets;
     /**
@@ -171,9 +180,10 @@ class PricebookV2MaterialResponse
      */
     protected $externalId;
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var PricebookV2ExternalDataModel[]|null
+     * @var list<PricebookV2ExternalDataModel>|null
      */
     protected $externalData;
 
@@ -190,6 +200,7 @@ class PricebookV2MaterialResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -208,6 +219,7 @@ class PricebookV2MaterialResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -226,6 +238,7 @@ class PricebookV2MaterialResponse
      */
     public function setDisplayName(?string $displayName): self
     {
+        $this->initialized['displayName'] = true;
         $this->displayName = $displayName;
 
         return $this;
@@ -244,6 +257,7 @@ class PricebookV2MaterialResponse
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -262,6 +276,7 @@ class PricebookV2MaterialResponse
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -280,6 +295,7 @@ class PricebookV2MaterialResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -298,6 +314,7 @@ class PricebookV2MaterialResponse
      */
     public function setPrice(float $price): self
     {
+        $this->initialized['price'] = true;
         $this->price = $price;
 
         return $this;
@@ -316,6 +333,7 @@ class PricebookV2MaterialResponse
      */
     public function setMemberPrice(float $memberPrice): self
     {
+        $this->initialized['memberPrice'] = true;
         $this->memberPrice = $memberPrice;
 
         return $this;
@@ -334,6 +352,7 @@ class PricebookV2MaterialResponse
      */
     public function setAddOnPrice(float $addOnPrice): self
     {
+        $this->initialized['addOnPrice'] = true;
         $this->addOnPrice = $addOnPrice;
 
         return $this;
@@ -352,6 +371,7 @@ class PricebookV2MaterialResponse
      */
     public function setAddOnMemberPrice(float $addOnMemberPrice): self
     {
+        $this->initialized['addOnMemberPrice'] = true;
         $this->addOnMemberPrice = $addOnMemberPrice;
 
         return $this;
@@ -370,6 +390,7 @@ class PricebookV2MaterialResponse
      */
     public function setHours(float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;
@@ -388,6 +409,7 @@ class PricebookV2MaterialResponse
      */
     public function setCommissionBonus(float $commissionBonus): self
     {
+        $this->initialized['commissionBonus'] = true;
         $this->commissionBonus = $commissionBonus;
 
         return $this;
@@ -406,6 +428,7 @@ class PricebookV2MaterialResponse
      */
     public function setPaysCommission(bool $paysCommission): self
     {
+        $this->initialized['paysCommission'] = true;
         $this->paysCommission = $paysCommission;
 
         return $this;
@@ -424,6 +447,7 @@ class PricebookV2MaterialResponse
      */
     public function setDeductAsJobCost(bool $deductAsJobCost): self
     {
+        $this->initialized['deductAsJobCost'] = true;
         $this->deductAsJobCost = $deductAsJobCost;
 
         return $this;
@@ -442,6 +466,7 @@ class PricebookV2MaterialResponse
      */
     public function setUnitOfMeasure(?string $unitOfMeasure): self
     {
+        $this->initialized['unitOfMeasure'] = true;
         $this->unitOfMeasure = $unitOfMeasure;
 
         return $this;
@@ -460,6 +485,7 @@ class PricebookV2MaterialResponse
      */
     public function setIsInventory(bool $isInventory): self
     {
+        $this->initialized['isInventory'] = true;
         $this->isInventory = $isInventory;
 
         return $this;
@@ -478,6 +504,7 @@ class PricebookV2MaterialResponse
      */
     public function setAccount(?string $account): self
     {
+        $this->initialized['account'] = true;
         $this->account = $account;
 
         return $this;
@@ -490,6 +517,7 @@ class PricebookV2MaterialResponse
 
     public function setCostOfSaleAccount(?string $costOfSaleAccount): self
     {
+        $this->initialized['costOfSaleAccount'] = true;
         $this->costOfSaleAccount = $costOfSaleAccount;
 
         return $this;
@@ -502,6 +530,7 @@ class PricebookV2MaterialResponse
 
     public function setAssetAccount(?string $assetAccount): self
     {
+        $this->initialized['assetAccount'] = true;
         $this->assetAccount = $assetAccount;
 
         return $this;
@@ -520,6 +549,7 @@ class PricebookV2MaterialResponse
      */
     public function setTaxable(?bool $taxable): self
     {
+        $this->initialized['taxable'] = true;
         $this->taxable = $taxable;
 
         return $this;
@@ -527,8 +557,6 @@ class PricebookV2MaterialResponse
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @return mixed
      */
     public function getPrimaryVendor()
     {
@@ -537,11 +565,10 @@ class PricebookV2MaterialResponse
 
     /**
      * The primary vendor you use to acquire this SKU.
-     *
-     * @param mixed $primaryVendor
      */
     public function setPrimaryVendor($primaryVendor): self
     {
+        $this->initialized['primaryVendor'] = true;
         $this->primaryVendor = $primaryVendor;
 
         return $this;
@@ -550,7 +577,7 @@ class PricebookV2MaterialResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @return PricebookV2SkuVendorResponse[]|null
+     * @return list<PricebookV2SkuVendorResponse>|null
      */
     public function getOtherVendors(): ?array
     {
@@ -560,10 +587,11 @@ class PricebookV2MaterialResponse
     /**
      * Other vendors that you might go to acquire this SKU.
      *
-     * @param PricebookV2SkuVendorResponse[]|null $otherVendors
+     * @param list<PricebookV2SkuVendorResponse>|null $otherVendors
      */
     public function setOtherVendors(?array $otherVendors): self
     {
+        $this->initialized['otherVendors'] = true;
         $this->otherVendors = $otherVendors;
 
         return $this;
@@ -572,7 +600,7 @@ class PricebookV2MaterialResponse
     /**
      * Categories that this SKU belongs to.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getCategories(): array
     {
@@ -582,10 +610,11 @@ class PricebookV2MaterialResponse
     /**
      * Categories that this SKU belongs to.
      *
-     * @param int[] $categories
+     * @param list<int> $categories
      */
     public function setCategories(array $categories): self
     {
+        $this->initialized['categories'] = true;
         $this->categories = $categories;
 
         return $this;
@@ -594,7 +623,7 @@ class PricebookV2MaterialResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @return PricebookV2SkuAssetResponse[]
+     * @return list<PricebookV2SkuAssetResponse>
      */
     public function getAssets(): array
     {
@@ -604,10 +633,11 @@ class PricebookV2MaterialResponse
     /**
      * Images, videos or PDFs attached to SKU.
      *
-     * @param PricebookV2SkuAssetResponse[] $assets
+     * @param list<PricebookV2SkuAssetResponse> $assets
      */
     public function setAssets(array $assets): self
     {
+        $this->initialized['assets'] = true;
         $this->assets = $assets;
 
         return $this;
@@ -626,6 +656,7 @@ class PricebookV2MaterialResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -644,6 +675,7 @@ class PricebookV2MaterialResponse
      */
     public function setSource(?string $source): self
     {
+        $this->initialized['source'] = true;
         $this->source = $source;
 
         return $this;
@@ -662,15 +694,17 @@ class PricebookV2MaterialResponse
      */
     public function setExternalId(?string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return PricebookV2ExternalDataModel[]|null
+     * @return list<PricebookV2ExternalDataModel>|null
      */
     public function getExternalData(): ?array
     {
@@ -678,12 +712,14 @@ class PricebookV2MaterialResponse
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param PricebookV2ExternalDataModel[]|null $externalData
+     * @param list<PricebookV2ExternalDataModel>|null $externalData
      */
     public function setExternalData(?array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

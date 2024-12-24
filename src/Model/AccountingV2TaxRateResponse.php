@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2TaxRateResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Tax Rate Id.
      *
      * @var int|null
@@ -27,7 +36,7 @@ class AccountingV2TaxRateResponse
     /**
      * Indicates how the tax rate is applied (Subtotal, Labor, Material).
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $taxBaseType;
     /**
@@ -56,6 +65,7 @@ class AccountingV2TaxRateResponse
      */
     public function setId(?int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -74,6 +84,7 @@ class AccountingV2TaxRateResponse
      */
     public function setTaxName(?string $taxName): self
     {
+        $this->initialized['taxName'] = true;
         $this->taxName = $taxName;
 
         return $this;
@@ -82,7 +93,7 @@ class AccountingV2TaxRateResponse
     /**
      * Indicates how the tax rate is applied (Subtotal, Labor, Material).
      *
-     * @return string[]
+     * @return list<string>
      */
     public function getTaxBaseType(): array
     {
@@ -92,10 +103,11 @@ class AccountingV2TaxRateResponse
     /**
      * Indicates how the tax rate is applied (Subtotal, Labor, Material).
      *
-     * @param string[] $taxBaseType
+     * @param list<string> $taxBaseType
      */
     public function setTaxBaseType(array $taxBaseType): self
     {
+        $this->initialized['taxBaseType'] = true;
         $this->taxBaseType = $taxBaseType;
 
         return $this;
@@ -114,6 +126,7 @@ class AccountingV2TaxRateResponse
      */
     public function setTaxRate(float $taxRate): self
     {
+        $this->initialized['taxRate'] = true;
         $this->taxRate = $taxRate;
 
         return $this;
@@ -132,6 +145,7 @@ class AccountingV2TaxRateResponse
      */
     public function setSalesTaxItem(?string $salesTaxItem): self
     {
+        $this->initialized['salesTaxItem'] = true;
         $this->salesTaxItem = $salesTaxItem;
 
         return $this;

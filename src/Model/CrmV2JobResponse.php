@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2JobResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the job.
      *
      * @var int
@@ -81,7 +90,7 @@ class CrmV2JobResponse
     /**
      * Custom fields on the job.
      *
-     * @var CustomFieldApiModel[]
+     * @var list<CustomFieldApiModel>
      */
     protected $customFields;
     /**
@@ -115,7 +124,9 @@ class CrmV2JobResponse
      */
     protected $warrantyId;
     /**
-     * Object that contains:.
+     * Object that contains:
+     * JobId: ID of the job from which this job was generated
+     * EmployeeId: ID of the office user or technician
      *
      * @var mixed|null
      */
@@ -153,7 +164,7 @@ class CrmV2JobResponse
     /**
      * Tags on the job.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $tagTypeIds;
     /**
@@ -175,9 +186,10 @@ class CrmV2JobResponse
      */
     protected $soldById;
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @var CrmV2ExternalDataModel[]
+     * @var list<CrmV2ExternalDataModel>
      */
     protected $externalData;
 
@@ -194,6 +206,7 @@ class CrmV2JobResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -212,6 +225,7 @@ class CrmV2JobResponse
      */
     public function setJobNumber(string $jobNumber): self
     {
+        $this->initialized['jobNumber'] = true;
         $this->jobNumber = $jobNumber;
 
         return $this;
@@ -230,6 +244,7 @@ class CrmV2JobResponse
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -248,6 +263,7 @@ class CrmV2JobResponse
      */
     public function setLocationId(int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -266,6 +282,7 @@ class CrmV2JobResponse
      */
     public function setJobStatus(string $jobStatus): self
     {
+        $this->initialized['jobStatus'] = true;
         $this->jobStatus = $jobStatus;
 
         return $this;
@@ -284,6 +301,7 @@ class CrmV2JobResponse
      */
     public function setCompletedOn(?\DateTime $completedOn): self
     {
+        $this->initialized['completedOn'] = true;
         $this->completedOn = $completedOn;
 
         return $this;
@@ -302,6 +320,7 @@ class CrmV2JobResponse
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -320,6 +339,7 @@ class CrmV2JobResponse
      */
     public function setJobTypeId(int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -338,6 +358,7 @@ class CrmV2JobResponse
      */
     public function setPriority(string $priority): self
     {
+        $this->initialized['priority'] = true;
         $this->priority = $priority;
 
         return $this;
@@ -356,6 +377,7 @@ class CrmV2JobResponse
      */
     public function setCampaignId(int $campaignId): self
     {
+        $this->initialized['campaignId'] = true;
         $this->campaignId = $campaignId;
 
         return $this;
@@ -374,6 +396,7 @@ class CrmV2JobResponse
      */
     public function setSummary(?string $summary): self
     {
+        $this->initialized['summary'] = true;
         $this->summary = $summary;
 
         return $this;
@@ -382,7 +405,7 @@ class CrmV2JobResponse
     /**
      * Custom fields on the job.
      *
-     * @return CustomFieldApiModel[]
+     * @return list<CustomFieldApiModel>
      */
     public function getCustomFields(): array
     {
@@ -392,10 +415,11 @@ class CrmV2JobResponse
     /**
      * Custom fields on the job.
      *
-     * @param CustomFieldApiModel[] $customFields
+     * @param list<CustomFieldApiModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -414,6 +438,7 @@ class CrmV2JobResponse
      */
     public function setAppointmentCount(int $appointmentCount): self
     {
+        $this->initialized['appointmentCount'] = true;
         $this->appointmentCount = $appointmentCount;
 
         return $this;
@@ -432,6 +457,7 @@ class CrmV2JobResponse
      */
     public function setFirstAppointmentId(int $firstAppointmentId): self
     {
+        $this->initialized['firstAppointmentId'] = true;
         $this->firstAppointmentId = $firstAppointmentId;
 
         return $this;
@@ -450,6 +476,7 @@ class CrmV2JobResponse
      */
     public function setLastAppointmentId(int $lastAppointmentId): self
     {
+        $this->initialized['lastAppointmentId'] = true;
         $this->lastAppointmentId = $lastAppointmentId;
 
         return $this;
@@ -468,6 +495,7 @@ class CrmV2JobResponse
      */
     public function setRecallForId(?int $recallForId): self
     {
+        $this->initialized['recallForId'] = true;
         $this->recallForId = $recallForId;
 
         return $this;
@@ -486,15 +514,16 @@ class CrmV2JobResponse
      */
     public function setWarrantyId(?int $warrantyId): self
     {
+        $this->initialized['warrantyId'] = true;
         $this->warrantyId = $warrantyId;
 
         return $this;
     }
 
     /**
-     * Object that contains:.
-     *
-     * @return mixed
+     * Object that contains:
+     * JobId: ID of the job from which this job was generated
+     * EmployeeId: ID of the office user or technician
      */
     public function getJobGeneratedLeadSource()
     {
@@ -502,12 +531,13 @@ class CrmV2JobResponse
     }
 
     /**
-     * Object that contains:.
-     *
-     * @param mixed $jobGeneratedLeadSource
+     * Object that contains:
+     * JobId: ID of the job from which this job was generated
+     * EmployeeId: ID of the office user or technician
      */
     public function setJobGeneratedLeadSource($jobGeneratedLeadSource): self
     {
+        $this->initialized['jobGeneratedLeadSource'] = true;
         $this->jobGeneratedLeadSource = $jobGeneratedLeadSource;
 
         return $this;
@@ -526,6 +556,7 @@ class CrmV2JobResponse
      */
     public function setNoCharge(bool $noCharge): self
     {
+        $this->initialized['noCharge'] = true;
         $this->noCharge = $noCharge;
 
         return $this;
@@ -544,6 +575,7 @@ class CrmV2JobResponse
      */
     public function setNotificationsEnabled(bool $notificationsEnabled): self
     {
+        $this->initialized['notificationsEnabled'] = true;
         $this->notificationsEnabled = $notificationsEnabled;
 
         return $this;
@@ -562,6 +594,7 @@ class CrmV2JobResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -580,6 +613,7 @@ class CrmV2JobResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -598,6 +632,7 @@ class CrmV2JobResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -606,7 +641,7 @@ class CrmV2JobResponse
     /**
      * Tags on the job.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getTagTypeIds(): array
     {
@@ -616,10 +651,11 @@ class CrmV2JobResponse
     /**
      * Tags on the job.
      *
-     * @param int[] $tagTypeIds
+     * @param list<int> $tagTypeIds
      */
     public function setTagTypeIds(array $tagTypeIds): self
     {
+        $this->initialized['tagTypeIds'] = true;
         $this->tagTypeIds = $tagTypeIds;
 
         return $this;
@@ -638,6 +674,7 @@ class CrmV2JobResponse
      */
     public function setLeadCallId(?int $leadCallId): self
     {
+        $this->initialized['leadCallId'] = true;
         $this->leadCallId = $leadCallId;
 
         return $this;
@@ -656,6 +693,7 @@ class CrmV2JobResponse
      */
     public function setBookingId(?int $bookingId): self
     {
+        $this->initialized['bookingId'] = true;
         $this->bookingId = $bookingId;
 
         return $this;
@@ -674,15 +712,17 @@ class CrmV2JobResponse
      */
     public function setSoldById(?int $soldById): self
     {
+        $this->initialized['soldById'] = true;
         $this->soldById = $soldById;
 
         return $this;
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @return CrmV2ExternalDataModel[]
+     * @return list<CrmV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -690,12 +730,14 @@ class CrmV2JobResponse
     }
 
     /**
-     * List of external data attached to this job,.
+     * List of external data attached to this job,
+     * that corresponds to the application guid provided in the request.
      *
-     * @param CrmV2ExternalDataModel[] $externalData
+     * @param list<CrmV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

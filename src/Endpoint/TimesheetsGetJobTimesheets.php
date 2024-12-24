@@ -23,10 +23,10 @@ class TimesheetsGetJobTimesheets extends \CompWright\ServiceTitan\Runtime\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $technicianId Format - int64. The technician ID
-     *     @var string $startedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)
-     *     @var string $endedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)
-     * }
+     * @var int    $technicianId Format - int64. The technician ID
+     * @var string $startedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates after certain date/time (in UTC)
+     * @var string $endedOn Format - date-time (as date-time in RFC3339). Return items having dispatch, arrive, cancel or done dates before certain date/time (in UTC)
+     *             }
      */
     public function __construct(int $job, int $tenant, array $queryParameters = [])
     {
@@ -61,27 +61,27 @@ class TimesheetsGetJobTimesheets extends \CompWright\ServiceTitan\Runtime\Client
         $optionsResolver->setDefined(['technicianId', 'startedOn', 'endedOn']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('technicianId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('startedOn', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('endedOn', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('technicianId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('startedOn', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('endedOn', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse[]|null
      *
      * @throws \CompWright\ServiceTitan\Exception\TimesheetsGetJobTimesheetsBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PayrollV2TimesheetsJobTimesheetResponse[]', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse[]', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\TimesheetsGetJobTimesheetsBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\TimesheetsGetJobTimesheetsBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

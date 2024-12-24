@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2VendorContactInfoResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Vendor first name.
      *
      * @var string
@@ -56,6 +65,7 @@ class InventoryV2VendorContactInfoResponse
      */
     public function setFirstName(string $firstName): self
     {
+        $this->initialized['firstName'] = true;
         $this->firstName = $firstName;
 
         return $this;
@@ -74,6 +84,7 @@ class InventoryV2VendorContactInfoResponse
      */
     public function setLastName(string $lastName): self
     {
+        $this->initialized['lastName'] = true;
         $this->lastName = $lastName;
 
         return $this;
@@ -92,6 +103,7 @@ class InventoryV2VendorContactInfoResponse
      */
     public function setPhone(string $phone): self
     {
+        $this->initialized['phone'] = true;
         $this->phone = $phone;
 
         return $this;
@@ -110,6 +122,7 @@ class InventoryV2VendorContactInfoResponse
      */
     public function setEmail(string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -128,6 +141,7 @@ class InventoryV2VendorContactInfoResponse
      */
     public function setFax(string $fax): self
     {
+        $this->initialized['fax'] = true;
         $this->fax = $fax;
 
         return $this;

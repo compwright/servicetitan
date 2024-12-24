@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2InvoiceTemplateUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Invoice template name.
      *
      * @var string
@@ -39,7 +48,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
     /**
      * Invoice template items.
      *
-     * @var MembershipsV2InvoiceTemplateItemUpdateRequest[]
+     * @var list<MembershipsV2InvoiceTemplateItemUpdateRequest>
      */
     protected $items;
 
@@ -56,6 +65,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -74,6 +84,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -92,6 +103,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -110,6 +122,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -118,7 +131,7 @@ class MembershipsV2InvoiceTemplateUpdateRequest
     /**
      * Invoice template items.
      *
-     * @return MembershipsV2InvoiceTemplateItemUpdateRequest[]
+     * @return list<MembershipsV2InvoiceTemplateItemUpdateRequest>
      */
     public function getItems(): array
     {
@@ -128,10 +141,11 @@ class MembershipsV2InvoiceTemplateUpdateRequest
     /**
      * Invoice template items.
      *
-     * @param MembershipsV2InvoiceTemplateItemUpdateRequest[] $items
+     * @param list<MembershipsV2InvoiceTemplateItemUpdateRequest> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;

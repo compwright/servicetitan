@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,127 +21,251 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2InventoryBillItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2InventoryBillItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2InventoryBillItemResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2InventoryBillItemResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('order', $data)) {
+                $object->setOrder($data['order']);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('quantity', $data) && $data['quantity'] !== null) {
+                $object->setQuantity($data['quantity']);
+            } elseif (\array_key_exists('quantity', $data) && $data['quantity'] === null) {
+                $object->setQuantity(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] !== null) {
+                $object->setInventoryLocation($data['inventoryLocation']);
+            } elseif (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] === null) {
+                $object->setInventoryLocation(null);
+            }
+            if (\array_key_exists('serialNumber', $data) && $data['serialNumber'] !== null) {
+                $object->setSerialNumber($data['serialNumber']);
+            } elseif (\array_key_exists('serialNumber', $data) && $data['serialNumber'] === null) {
+                $object->setSerialNumber(null);
+            }
+            if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
+                $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
+            } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
+                $object->setGeneralLedgerAccount(null);
+            }
+            if (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] !== null) {
+                $object->setCostOfSaleAccount($data['costOfSaleAccount']);
+            } elseif (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] === null) {
+                $object->setCostOfSaleAccount(null);
+            }
+            if (\array_key_exists('assetAccount', $data) && $data['assetAccount'] !== null) {
+                $object->setAssetAccount($data['assetAccount']);
+            } elseif (\array_key_exists('assetAccount', $data) && $data['assetAccount'] === null) {
+                $object->setAssetAccount(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('order', $data)) {
-            $object->setOrder($data['order']);
-        }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
-            $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
-            $object->setName(null);
-        }
-        if (\array_key_exists('description', $data) && $data['description'] !== null) {
-            $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
-            $object->setDescription(null);
-        }
-        if (\array_key_exists('quantity', $data) && $data['quantity'] !== null) {
-            $object->setQuantity($data['quantity']);
-        } elseif (\array_key_exists('quantity', $data) && $data['quantity'] === null) {
-            $object->setQuantity(null);
-        }
-        if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
-            $object->setCost($data['cost']);
-        } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
-            $object->setCost(null);
-        }
-        if (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] !== null) {
-            $object->setInventoryLocation($data['inventoryLocation']);
-        } elseif (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] === null) {
-            $object->setInventoryLocation(null);
-        }
-        if (\array_key_exists('serialNumber', $data) && $data['serialNumber'] !== null) {
-            $object->setSerialNumber($data['serialNumber']);
-        } elseif (\array_key_exists('serialNumber', $data) && $data['serialNumber'] === null) {
-            $object->setSerialNumber(null);
-        }
-        if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
-            $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
-        } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
-            $object->setGeneralLedgerAccount(null);
-        }
-        if (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] !== null) {
-            $object->setCostOfSaleAccount($data['costOfSaleAccount']);
-        } elseif (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] === null) {
-            $object->setCostOfSaleAccount(null);
-        }
-        if (\array_key_exists('assetAccount', $data) && $data['assetAccount'] !== null) {
-            $object->setAssetAccount($data['assetAccount']);
-        } elseif (\array_key_exists('assetAccount', $data) && $data['assetAccount'] === null) {
-            $object->setAssetAccount(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['order'] = $object->getOrder();
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            if ($object->isInitialized('quantity') && null !== $object->getQuantity()) {
+                $data['quantity'] = $object->getQuantity();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('inventoryLocation') && null !== $object->getInventoryLocation()) {
+                $data['inventoryLocation'] = $object->getInventoryLocation();
+            }
+            if ($object->isInitialized('serialNumber') && null !== $object->getSerialNumber()) {
+                $data['serialNumber'] = $object->getSerialNumber();
+            }
+            if ($object->isInitialized('generalLedgerAccount') && null !== $object->getGeneralLedgerAccount()) {
+                $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
+            }
+            if ($object->isInitialized('costOfSaleAccount') && null !== $object->getCostOfSaleAccount()) {
+                $data['costOfSaleAccount'] = $object->getCostOfSaleAccount();
+            }
+            if ($object->isInitialized('assetAccount') && null !== $object->getAssetAccount()) {
+                $data['assetAccount'] = $object->getAssetAccount();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2InventoryBillItemResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['order'] = $object->getOrder();
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getDescription()) {
-            $data['description'] = $object->getDescription();
-        }
-        if (null !== $object->getQuantity()) {
-            $data['quantity'] = $object->getQuantity();
-        }
-        if (null !== $object->getCost()) {
-            $data['cost'] = $object->getCost();
-        }
-        if (null !== $object->getInventoryLocation()) {
-            $data['inventoryLocation'] = $object->getInventoryLocation();
-        }
-        if (null !== $object->getSerialNumber()) {
-            $data['serialNumber'] = $object->getSerialNumber();
-        }
-        if (null !== $object->getGeneralLedgerAccount()) {
-            $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
-        }
-        if (null !== $object->getCostOfSaleAccount()) {
-            $data['costOfSaleAccount'] = $object->getCostOfSaleAccount();
-        }
-        if (null !== $object->getAssetAccount()) {
-            $data['assetAccount'] = $object->getAssetAccount();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('order', $data)) {
+                $object->setOrder($data['order']);
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('description', $data) && $data['description'] !== null) {
+                $object->setDescription($data['description']);
+            } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+                $object->setDescription(null);
+            }
+            if (\array_key_exists('quantity', $data) && $data['quantity'] !== null) {
+                $object->setQuantity($data['quantity']);
+            } elseif (\array_key_exists('quantity', $data) && $data['quantity'] === null) {
+                $object->setQuantity(null);
+            }
+            if (\array_key_exists('cost', $data) && $data['cost'] !== null) {
+                $object->setCost($data['cost']);
+            } elseif (\array_key_exists('cost', $data) && $data['cost'] === null) {
+                $object->setCost(null);
+            }
+            if (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] !== null) {
+                $object->setInventoryLocation($data['inventoryLocation']);
+            } elseif (\array_key_exists('inventoryLocation', $data) && $data['inventoryLocation'] === null) {
+                $object->setInventoryLocation(null);
+            }
+            if (\array_key_exists('serialNumber', $data) && $data['serialNumber'] !== null) {
+                $object->setSerialNumber($data['serialNumber']);
+            } elseif (\array_key_exists('serialNumber', $data) && $data['serialNumber'] === null) {
+                $object->setSerialNumber(null);
+            }
+            if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
+                $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
+            } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
+                $object->setGeneralLedgerAccount(null);
+            }
+            if (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] !== null) {
+                $object->setCostOfSaleAccount($data['costOfSaleAccount']);
+            } elseif (\array_key_exists('costOfSaleAccount', $data) && $data['costOfSaleAccount'] === null) {
+                $object->setCostOfSaleAccount(null);
+            }
+            if (\array_key_exists('assetAccount', $data) && $data['assetAccount'] !== null) {
+                $object->setAssetAccount($data['assetAccount']);
+            } elseif (\array_key_exists('assetAccount', $data) && $data['assetAccount'] === null) {
+                $object->setAssetAccount(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['order'] = $object->getOrder();
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('description') && null !== $object->getDescription()) {
+                $data['description'] = $object->getDescription();
+            }
+            if ($object->isInitialized('quantity') && null !== $object->getQuantity()) {
+                $data['quantity'] = $object->getQuantity();
+            }
+            if ($object->isInitialized('cost') && null !== $object->getCost()) {
+                $data['cost'] = $object->getCost();
+            }
+            if ($object->isInitialized('inventoryLocation') && null !== $object->getInventoryLocation()) {
+                $data['inventoryLocation'] = $object->getInventoryLocation();
+            }
+            if ($object->isInitialized('serialNumber') && null !== $object->getSerialNumber()) {
+                $data['serialNumber'] = $object->getSerialNumber();
+            }
+            if ($object->isInitialized('generalLedgerAccount') && null !== $object->getGeneralLedgerAccount()) {
+                $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
+            }
+            if ($object->isInitialized('costOfSaleAccount') && null !== $object->getCostOfSaleAccount()) {
+                $data['costOfSaleAccount'] = $object->getCostOfSaleAccount();
+            }
+            if ($object->isInitialized('assetAccount') && null !== $object->getAssetAccount()) {
+                $data['assetAccount'] = $object->getAssetAccount();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2InventoryBillItemResponse::class => false];
+        }
     }
 }

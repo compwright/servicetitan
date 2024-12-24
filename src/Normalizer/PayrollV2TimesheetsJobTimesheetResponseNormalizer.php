@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,99 +21,195 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PayrollV2TimesheetsJobTimesheetResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PayrollV2TimesheetsJobTimesheetResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PayrollV2TimesheetsJobTimesheetResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PayrollV2TimesheetsJobTimesheetResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('appointmentId', $data)) {
+                $object->setAppointmentId($data['appointmentId']);
+            }
+            if (\array_key_exists('technicianId', $data)) {
+                $object->setTechnicianId($data['technicianId']);
+            }
+            if (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] !== null) {
+                $object->setDispatchedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dispatchedOn']));
+            } elseif (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] === null) {
+                $object->setDispatchedOn(null);
+            }
+            if (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] !== null) {
+                $object->setArrivedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['arrivedOn']));
+            } elseif (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] === null) {
+                $object->setArrivedOn(null);
+            }
+            if (\array_key_exists('canceledOn', $data) && $data['canceledOn'] !== null) {
+                $object->setCanceledOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['canceledOn']));
+            } elseif (\array_key_exists('canceledOn', $data) && $data['canceledOn'] === null) {
+                $object->setCanceledOn(null);
+            }
+            if (\array_key_exists('doneOn', $data) && $data['doneOn'] !== null) {
+                $object->setDoneOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['doneOn']));
+            } elseif (\array_key_exists('doneOn', $data) && $data['doneOn'] === null) {
+                $object->setDoneOn(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('jobId', $data)) {
-            $object->setJobId($data['jobId']);
-        }
-        if (\array_key_exists('appointmentId', $data)) {
-            $object->setAppointmentId($data['appointmentId']);
-        }
-        if (\array_key_exists('technicianId', $data)) {
-            $object->setTechnicianId($data['technicianId']);
-        }
-        if (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] !== null) {
-            $object->setDispatchedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['dispatchedOn']));
-        } elseif (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] === null) {
-            $object->setDispatchedOn(null);
-        }
-        if (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] !== null) {
-            $object->setArrivedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['arrivedOn']));
-        } elseif (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] === null) {
-            $object->setArrivedOn(null);
-        }
-        if (\array_key_exists('canceledOn', $data) && $data['canceledOn'] !== null) {
-            $object->setCanceledOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['canceledOn']));
-        } elseif (\array_key_exists('canceledOn', $data) && $data['canceledOn'] === null) {
-            $object->setCanceledOn(null);
-        }
-        if (\array_key_exists('doneOn', $data) && $data['doneOn'] !== null) {
-            $object->setDoneOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['doneOn']));
-        } elseif (\array_key_exists('doneOn', $data) && $data['doneOn'] === null) {
-            $object->setDoneOn(null);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['jobId'] = $object->getJobId();
+            $data['appointmentId'] = $object->getAppointmentId();
+            $data['technicianId'] = $object->getTechnicianId();
+            if ($object->isInitialized('dispatchedOn') && null !== $object->getDispatchedOn()) {
+                $data['dispatchedOn'] = $object->getDispatchedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('arrivedOn') && null !== $object->getArrivedOn()) {
+                $data['arrivedOn'] = $object->getArrivedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('canceledOn') && null !== $object->getCanceledOn()) {
+                $data['canceledOn'] = $object->getCanceledOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('doneOn') && null !== $object->getDoneOn()) {
+                $data['doneOn'] = $object->getDoneOn()->format('Y-m-d\TH:i:sP');
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PayrollV2TimesheetsJobTimesheetResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        $data['jobId'] = $object->getJobId();
-        $data['appointmentId'] = $object->getAppointmentId();
-        $data['technicianId'] = $object->getTechnicianId();
-        if (null !== $object->getDispatchedOn()) {
-            $data['dispatchedOn'] = $object->getDispatchedOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getArrivedOn()) {
-            $data['arrivedOn'] = $object->getArrivedOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getCanceledOn()) {
-            $data['canceledOn'] = $object->getCanceledOn()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getDoneOn()) {
-            $data['doneOn'] = $object->getDoneOn()->format('Y-m-d\\TH:i:sP');
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('jobId', $data)) {
+                $object->setJobId($data['jobId']);
+            }
+            if (\array_key_exists('appointmentId', $data)) {
+                $object->setAppointmentId($data['appointmentId']);
+            }
+            if (\array_key_exists('technicianId', $data)) {
+                $object->setTechnicianId($data['technicianId']);
+            }
+            if (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] !== null) {
+                $object->setDispatchedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dispatchedOn']));
+            } elseif (\array_key_exists('dispatchedOn', $data) && $data['dispatchedOn'] === null) {
+                $object->setDispatchedOn(null);
+            }
+            if (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] !== null) {
+                $object->setArrivedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['arrivedOn']));
+            } elseif (\array_key_exists('arrivedOn', $data) && $data['arrivedOn'] === null) {
+                $object->setArrivedOn(null);
+            }
+            if (\array_key_exists('canceledOn', $data) && $data['canceledOn'] !== null) {
+                $object->setCanceledOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['canceledOn']));
+            } elseif (\array_key_exists('canceledOn', $data) && $data['canceledOn'] === null) {
+                $object->setCanceledOn(null);
+            }
+            if (\array_key_exists('doneOn', $data) && $data['doneOn'] !== null) {
+                $object->setDoneOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['doneOn']));
+            } elseif (\array_key_exists('doneOn', $data) && $data['doneOn'] === null) {
+                $object->setDoneOn(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['jobId'] = $object->getJobId();
+            $data['appointmentId'] = $object->getAppointmentId();
+            $data['technicianId'] = $object->getTechnicianId();
+            if ($object->isInitialized('dispatchedOn') && null !== $object->getDispatchedOn()) {
+                $data['dispatchedOn'] = $object->getDispatchedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('arrivedOn') && null !== $object->getArrivedOn()) {
+                $data['arrivedOn'] = $object->getArrivedOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('canceledOn') && null !== $object->getCanceledOn()) {
+                $data['canceledOn'] = $object->getCanceledOn()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('doneOn') && null !== $object->getDoneOn()) {
+                $data['doneOn'] = $object->getDoneOn()->format('Y-m-d\TH:i:sP');
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PayrollV2TimesheetsJobTimesheetResponse::class => false];
+        }
     }
 }

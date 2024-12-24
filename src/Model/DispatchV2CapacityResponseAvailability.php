@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2CapacityResponseAvailability
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * When the availability time frame starts.
      *
      * @var \DateTime
@@ -27,7 +36,7 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Business units that the availability applies to.
      *
-     * @var int[]
+     * @var list<int>
      */
     protected $businessUnitIds;
     /**
@@ -45,7 +54,7 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Technician details for this availability time frame.
      *
-     * @var DispatchV2CapacityResponseTechnician[]
+     * @var list<DispatchV2CapacityResponseTechnician>
      */
     protected $technicians;
     /**
@@ -68,6 +77,7 @@ class DispatchV2CapacityResponseAvailability
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -86,6 +96,7 @@ class DispatchV2CapacityResponseAvailability
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;
@@ -94,7 +105,7 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Business units that the availability applies to.
      *
-     * @return int[]
+     * @return list<int>
      */
     public function getBusinessUnitIds(): array
     {
@@ -104,10 +115,11 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Business units that the availability applies to.
      *
-     * @param int[] $businessUnitIds
+     * @param list<int> $businessUnitIds
      */
     public function setBusinessUnitIds(array $businessUnitIds): self
     {
+        $this->initialized['businessUnitIds'] = true;
         $this->businessUnitIds = $businessUnitIds;
 
         return $this;
@@ -126,6 +138,7 @@ class DispatchV2CapacityResponseAvailability
      */
     public function setTotalAvailability(float $totalAvailability): self
     {
+        $this->initialized['totalAvailability'] = true;
         $this->totalAvailability = $totalAvailability;
 
         return $this;
@@ -144,6 +157,7 @@ class DispatchV2CapacityResponseAvailability
      */
     public function setOpenAvailability(float $openAvailability): self
     {
+        $this->initialized['openAvailability'] = true;
         $this->openAvailability = $openAvailability;
 
         return $this;
@@ -152,7 +166,7 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Technician details for this availability time frame.
      *
-     * @return DispatchV2CapacityResponseTechnician[]
+     * @return list<DispatchV2CapacityResponseTechnician>
      */
     public function getTechnicians(): array
     {
@@ -162,10 +176,11 @@ class DispatchV2CapacityResponseAvailability
     /**
      * Technician details for this availability time frame.
      *
-     * @param DispatchV2CapacityResponseTechnician[] $technicians
+     * @param list<DispatchV2CapacityResponseTechnician> $technicians
      */
     public function setTechnicians(array $technicians): self
     {
+        $this->initialized['technicians'] = true;
         $this->technicians = $technicians;
 
         return $this;
@@ -184,6 +199,7 @@ class DispatchV2CapacityResponseAvailability
      */
     public function setIsExceedingIdealBookingPercentage(bool $isExceedingIdealBookingPercentage): self
     {
+        $this->initialized['isExceedingIdealBookingPercentage'] = true;
         $this->isExceedingIdealBookingPercentage = $isExceedingIdealBookingPercentage;
 
         return $this;

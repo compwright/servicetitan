@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2LocationRecurringServiceEventResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Recurring service event ID.
      *
      * @var int
@@ -44,8 +53,6 @@ class MembershipsV2LocationRecurringServiceEventResponse
     protected $membershipName;
     /**
      * Opportunity status.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -61,7 +68,8 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     protected $createdOn;
     /**
-     * ID of the user that created this event (could happen as a result of.
+     * ID of the user that created this event (could happen as a result of
+     * editing recurring service, selling a new membership, etc.).
      *
      * @var int|null
      */
@@ -80,6 +88,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -98,6 +107,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setLocationRecurringServiceId(int $locationRecurringServiceId): self
     {
+        $this->initialized['locationRecurringServiceId'] = true;
         $this->locationRecurringServiceId = $locationRecurringServiceId;
 
         return $this;
@@ -116,6 +126,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setLocationRecurringServiceName(?string $locationRecurringServiceName): self
     {
+        $this->initialized['locationRecurringServiceName'] = true;
         $this->locationRecurringServiceName = $locationRecurringServiceName;
 
         return $this;
@@ -134,6 +145,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setMembershipId(?int $membershipId): self
     {
+        $this->initialized['membershipId'] = true;
         $this->membershipId = $membershipId;
 
         return $this;
@@ -152,6 +164,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setMembershipName(?string $membershipName): self
     {
+        $this->initialized['membershipName'] = true;
         $this->membershipName = $membershipName;
 
         return $this;
@@ -159,8 +172,6 @@ class MembershipsV2LocationRecurringServiceEventResponse
 
     /**
      * Opportunity status.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -169,11 +180,10 @@ class MembershipsV2LocationRecurringServiceEventResponse
 
     /**
      * Opportunity status.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -192,6 +202,7 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -210,14 +221,15 @@ class MembershipsV2LocationRecurringServiceEventResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
     }
 
     /**
-     * ID of the user that created this event (could happen as a result of.
-    editing recurring service, selling a new membership, etc.)
+     * ID of the user that created this event (could happen as a result of
+     * editing recurring service, selling a new membership, etc.).
      */
     public function getCreatedById(): ?int
     {
@@ -225,11 +237,12 @@ class MembershipsV2LocationRecurringServiceEventResponse
     }
 
     /**
-     * ID of the user that created this event (could happen as a result of.
-    editing recurring service, selling a new membership, etc.)
+     * ID of the user that created this event (could happen as a result of
+     * editing recurring service, selling a new membership, etc.).
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;

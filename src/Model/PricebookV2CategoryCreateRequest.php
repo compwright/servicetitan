@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PricebookV2CategoryCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The name of the category.
      *
      * @var string
@@ -50,26 +59,24 @@ class PricebookV2CategoryCreateRequest
     protected $image;
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @var mixed
      */
     protected $categoryType;
     /**
      * The business units that are associated with this category.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $businessUnitIds;
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $skuImages;
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $skuVideos;
 
@@ -86,6 +93,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -104,6 +112,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setActive(?bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -122,6 +131,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -140,6 +150,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setParentId(?int $parentId): self
     {
+        $this->initialized['parentId'] = true;
         $this->parentId = $parentId;
 
         return $this;
@@ -158,6 +169,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setPosition(?int $position): self
     {
+        $this->initialized['position'] = true;
         $this->position = $position;
 
         return $this;
@@ -176,6 +188,7 @@ class PricebookV2CategoryCreateRequest
      */
     public function setImage(?string $image): self
     {
+        $this->initialized['image'] = true;
         $this->image = $image;
 
         return $this;
@@ -183,8 +196,6 @@ class PricebookV2CategoryCreateRequest
 
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @return mixed
      */
     public function getCategoryType()
     {
@@ -193,11 +204,10 @@ class PricebookV2CategoryCreateRequest
 
     /**
      * The category type. This field can be Service or Material.
-     *
-     * @param mixed $categoryType
      */
     public function setCategoryType($categoryType): self
     {
+        $this->initialized['categoryType'] = true;
         $this->categoryType = $categoryType;
 
         return $this;
@@ -206,7 +216,7 @@ class PricebookV2CategoryCreateRequest
     /**
      * The business units that are associated with this category.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getBusinessUnitIds(): ?array
     {
@@ -216,10 +226,11 @@ class PricebookV2CategoryCreateRequest
     /**
      * The business units that are associated with this category.
      *
-     * @param int[]|null $businessUnitIds
+     * @param list<int>|null $businessUnitIds
      */
     public function setBusinessUnitIds(?array $businessUnitIds): self
     {
+        $this->initialized['businessUnitIds'] = true;
         $this->businessUnitIds = $businessUnitIds;
 
         return $this;
@@ -228,7 +239,7 @@ class PricebookV2CategoryCreateRequest
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSkuImages(): ?array
     {
@@ -238,10 +249,11 @@ class PricebookV2CategoryCreateRequest
     /**
      * The images that will be used for the SKUs under this category.
      *
-     * @param string[]|null $skuImages
+     * @param list<string>|null $skuImages
      */
     public function setSkuImages(?array $skuImages): self
     {
+        $this->initialized['skuImages'] = true;
         $this->skuImages = $skuImages;
 
         return $this;
@@ -250,7 +262,7 @@ class PricebookV2CategoryCreateRequest
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getSkuVideos(): ?array
     {
@@ -260,10 +272,11 @@ class PricebookV2CategoryCreateRequest
     /**
      * The videos that will be used for the videos under this category.
      *
-     * @param string[]|null $skuVideos
+     * @param list<string>|null $skuVideos
      */
     public function setSkuVideos(?array $skuVideos): self
     {
+        $this->initialized['skuVideos'] = true;
         $this->skuVideos = $skuVideos;
 
         return $this;

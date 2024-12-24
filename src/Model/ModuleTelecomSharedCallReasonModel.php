@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleTelecomSharedCallReasonModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -36,6 +45,7 @@ class ModuleTelecomSharedCallReasonModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class ModuleTelecomSharedCallReasonModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -60,6 +71,7 @@ class ModuleTelecomSharedCallReasonModel
 
     public function setLead(bool $lead): self
     {
+        $this->initialized['lead'] = true;
         $this->lead = $lead;
 
         return $this;
@@ -72,6 +84,7 @@ class ModuleTelecomSharedCallReasonModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2SerialNumberResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of this serial number.
      *
      * @var int
@@ -38,6 +47,7 @@ class InventoryV2SerialNumberResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class InventoryV2SerialNumberResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;

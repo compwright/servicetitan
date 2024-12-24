@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AddressPatchModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Booking address street.
      *
      * @var string
@@ -62,6 +71,7 @@ class CrmV2AddressPatchModel
      */
     public function setStreet(string $street): self
     {
+        $this->initialized['street'] = true;
         $this->street = $street;
 
         return $this;
@@ -80,6 +90,7 @@ class CrmV2AddressPatchModel
      */
     public function setUnit(string $unit): self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
 
         return $this;
@@ -98,6 +109,7 @@ class CrmV2AddressPatchModel
      */
     public function setCity(string $city): self
     {
+        $this->initialized['city'] = true;
         $this->city = $city;
 
         return $this;
@@ -116,6 +128,7 @@ class CrmV2AddressPatchModel
      */
     public function setState(string $state): self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
 
         return $this;
@@ -134,6 +147,7 @@ class CrmV2AddressPatchModel
      */
     public function setZip(string $zip): self
     {
+        $this->initialized['zip'] = true;
         $this->zip = $zip;
 
         return $this;
@@ -152,6 +166,7 @@ class CrmV2AddressPatchModel
      */
     public function setCountry(string $country): self
     {
+        $this->initialized['country'] = true;
         $this->country = $country;
 
         return $this;

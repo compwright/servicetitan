@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2UpdatePurchaseOrderItemRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Id of purchase order item to update.
      *
      * @var int
@@ -62,6 +71,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -80,6 +90,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -98,6 +109,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -116,6 +128,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setVendorPartNumber(string $vendorPartNumber): self
     {
+        $this->initialized['vendorPartNumber'] = true;
         $this->vendorPartNumber = $vendorPartNumber;
 
         return $this;
@@ -134,6 +147,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -152,6 +166,7 @@ class InventoryV2UpdatePurchaseOrderItemRequest
      */
     public function setCost(float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;

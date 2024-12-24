@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2InventoryReturnResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Return Id.
      *
      * @var int
@@ -122,20 +131,18 @@ class InventoryV2InventoryReturnResponse
     protected $batchId;
     /**
      * Sync status.
-     *
-     * @var mixed
      */
     protected $syncStatus;
     /**
      * Collection of return items.
      *
-     * @var InventoryV2InventoryReturnItemResponse[]
+     * @var list<InventoryV2InventoryReturnItemResponse>
      */
     protected $items;
     /**
      * Collection of custom fields.
      *
-     * @var InventoryV2CustomFieldResponse[]
+     * @var list<InventoryV2CustomFieldResponse>
      */
     protected $customFields;
 
@@ -152,6 +159,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -170,6 +178,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -188,6 +197,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setNumber(string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -206,6 +216,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setReferenceNumber(string $referenceNumber): self
     {
+        $this->initialized['referenceNumber'] = true;
         $this->referenceNumber = $referenceNumber;
 
         return $this;
@@ -224,6 +235,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setVendorId(int $vendorId): self
     {
+        $this->initialized['vendorId'] = true;
         $this->vendorId = $vendorId;
 
         return $this;
@@ -242,6 +254,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setPurchaseOrderId(?int $purchaseOrderId): self
     {
+        $this->initialized['purchaseOrderId'] = true;
         $this->purchaseOrderId = $purchaseOrderId;
 
         return $this;
@@ -260,6 +273,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setJobId(?int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -278,6 +292,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -296,6 +311,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setInventoryLocationId(?int $inventoryLocationId): self
     {
+        $this->initialized['inventoryLocationId'] = true;
         $this->inventoryLocationId = $inventoryLocationId;
 
         return $this;
@@ -314,6 +330,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -332,6 +349,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -350,6 +368,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setReturnAmount(float $returnAmount): self
     {
+        $this->initialized['returnAmount'] = true;
         $this->returnAmount = $returnAmount;
 
         return $this;
@@ -368,6 +387,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setTaxAmount(float $taxAmount): self
     {
+        $this->initialized['taxAmount'] = true;
         $this->taxAmount = $taxAmount;
 
         return $this;
@@ -386,6 +406,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setShippingAmount(float $shippingAmount): self
     {
+        $this->initialized['shippingAmount'] = true;
         $this->shippingAmount = $shippingAmount;
 
         return $this;
@@ -404,6 +425,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setReturnDate(\DateTime $returnDate): self
     {
+        $this->initialized['returnDate'] = true;
         $this->returnDate = $returnDate;
 
         return $this;
@@ -422,6 +444,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -440,6 +463,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -458,6 +482,7 @@ class InventoryV2InventoryReturnResponse
      */
     public function setBatchId(?int $batchId): self
     {
+        $this->initialized['batchId'] = true;
         $this->batchId = $batchId;
 
         return $this;
@@ -465,8 +490,6 @@ class InventoryV2InventoryReturnResponse
 
     /**
      * Sync status.
-     *
-     * @return mixed
      */
     public function getSyncStatus()
     {
@@ -475,11 +498,10 @@ class InventoryV2InventoryReturnResponse
 
     /**
      * Sync status.
-     *
-     * @param mixed $syncStatus
      */
     public function setSyncStatus($syncStatus): self
     {
+        $this->initialized['syncStatus'] = true;
         $this->syncStatus = $syncStatus;
 
         return $this;
@@ -488,7 +510,7 @@ class InventoryV2InventoryReturnResponse
     /**
      * Collection of return items.
      *
-     * @return InventoryV2InventoryReturnItemResponse[]
+     * @return list<InventoryV2InventoryReturnItemResponse>
      */
     public function getItems(): array
     {
@@ -498,10 +520,11 @@ class InventoryV2InventoryReturnResponse
     /**
      * Collection of return items.
      *
-     * @param InventoryV2InventoryReturnItemResponse[] $items
+     * @param list<InventoryV2InventoryReturnItemResponse> $items
      */
     public function setItems(array $items): self
     {
+        $this->initialized['items'] = true;
         $this->items = $items;
 
         return $this;
@@ -510,7 +533,7 @@ class InventoryV2InventoryReturnResponse
     /**
      * Collection of custom fields.
      *
-     * @return InventoryV2CustomFieldResponse[]
+     * @return list<InventoryV2CustomFieldResponse>
      */
     public function getCustomFields(): array
     {
@@ -520,10 +543,11 @@ class InventoryV2InventoryReturnResponse
     /**
      * Collection of custom fields.
      *
-     * @param InventoryV2CustomFieldResponse[] $customFields
+     * @param list<InventoryV2CustomFieldResponse> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;

@@ -49,19 +49,19 @@ class PaymentTermsGetPaymentTermModel extends \CompWright\ServiceTitan\Runtime\C
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel|null
      *
      * @throws \CompWright\ServiceTitan\Exception\PaymentTermsGetPaymentTermModelBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentTermAPIModel', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\AccountingV2PaymentTermAPIModel', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PaymentTermsGetPaymentTermModelBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PaymentTermsGetPaymentTermModelBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

@@ -21,15 +21,16 @@ class GrossPayItemsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseE
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $employeeType The type of employee\
-     *     @var int $employeeId Format - int64. The Employee ID
-     *     @var string $payrollIds The payroll ID
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)
-     *     @var string $dateOnOrBefore Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $employeeType The type of employee\
+     *             Values: [Technician, Employee]
+     * @var int    $employeeId Format - int64. The Employee ID
+     * @var string $payrollIds The payroll ID
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return items having date after certain date/time (in UTC)
+     * @var string $dateOnOrBefore Format - date-time (as date-time in RFC3339). Return items having date before certain date/time (in UTC)
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -63,32 +64,32 @@ class GrossPayItemsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseE
         $optionsResolver->setDefined(['page', 'pageSize', 'includeTotal', 'employeeType', 'employeeId', 'payrollIds', 'dateOnOrAfter', 'dateOnOrBefore']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('employeeType', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('employeeId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('payrollIds', ['string']);
-        $optionsResolver->setAllowedTypes('dateOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateOnOrBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('employeeType', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('employeeId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('payrollIds', ['string']);
+        $optionsResolver->addAllowedTypes('dateOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateOnOrBefore', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\GrossPayItemsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfPayrollV2GrossPayItemsGrossPayItemResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\GrossPayItemsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\GrossPayItemsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

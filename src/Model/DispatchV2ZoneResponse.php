@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2ZoneResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique id of the zone record.
      *
      * @var int
@@ -33,25 +42,25 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned zip codes to the zone.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $zips;
     /**
      * A list of assigned cities to the zone.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $cities;
     /**
      * A list of assigned territory numbers to the zone.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $territoryNumbers;
     /**
      * A list of assigned LOCN numbers to the zone.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $locnNumbers;
     /**
@@ -81,13 +90,13 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned service days.
      *
-     * @var string[]|null
+     * @var list<string>|null
      */
     protected $serviceDays;
     /**
      * A list of assigned business units.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $businessUnits;
 
@@ -104,6 +113,7 @@ class DispatchV2ZoneResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -122,6 +132,7 @@ class DispatchV2ZoneResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -140,6 +151,7 @@ class DispatchV2ZoneResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -148,7 +160,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned zip codes to the zone.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getZips(): ?array
     {
@@ -158,10 +170,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned zip codes to the zone.
      *
-     * @param string[]|null $zips
+     * @param list<string>|null $zips
      */
     public function setZips(?array $zips): self
     {
+        $this->initialized['zips'] = true;
         $this->zips = $zips;
 
         return $this;
@@ -170,7 +183,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned cities to the zone.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getCities(): ?array
     {
@@ -180,10 +193,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned cities to the zone.
      *
-     * @param string[]|null $cities
+     * @param list<string>|null $cities
      */
     public function setCities(?array $cities): self
     {
+        $this->initialized['cities'] = true;
         $this->cities = $cities;
 
         return $this;
@@ -192,7 +206,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned territory numbers to the zone.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getTerritoryNumbers(): ?array
     {
@@ -202,10 +216,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned territory numbers to the zone.
      *
-     * @param string[]|null $territoryNumbers
+     * @param list<string>|null $territoryNumbers
      */
     public function setTerritoryNumbers(?array $territoryNumbers): self
     {
+        $this->initialized['territoryNumbers'] = true;
         $this->territoryNumbers = $territoryNumbers;
 
         return $this;
@@ -214,7 +229,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned LOCN numbers to the zone.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getLocnNumbers(): ?array
     {
@@ -224,10 +239,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned LOCN numbers to the zone.
      *
-     * @param string[]|null $locnNumbers
+     * @param list<string>|null $locnNumbers
      */
     public function setLocnNumbers(?array $locnNumbers): self
     {
+        $this->initialized['locnNumbers'] = true;
         $this->locnNumbers = $locnNumbers;
 
         return $this;
@@ -246,6 +262,7 @@ class DispatchV2ZoneResponse
      */
     public function setCreatedBy(int $createdBy): self
     {
+        $this->initialized['createdBy'] = true;
         $this->createdBy = $createdBy;
 
         return $this;
@@ -264,6 +281,7 @@ class DispatchV2ZoneResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -282,6 +300,7 @@ class DispatchV2ZoneResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -300,6 +319,7 @@ class DispatchV2ZoneResponse
      */
     public function setServiceDaysEnabled(bool $serviceDaysEnabled): self
     {
+        $this->initialized['serviceDaysEnabled'] = true;
         $this->serviceDaysEnabled = $serviceDaysEnabled;
 
         return $this;
@@ -308,7 +328,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned service days.
      *
-     * @return string[]|null
+     * @return list<string>|null
      */
     public function getServiceDays(): ?array
     {
@@ -318,10 +338,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned service days.
      *
-     * @param string[]|null $serviceDays
+     * @param list<string>|null $serviceDays
      */
     public function setServiceDays(?array $serviceDays): self
     {
+        $this->initialized['serviceDays'] = true;
         $this->serviceDays = $serviceDays;
 
         return $this;
@@ -330,7 +351,7 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned business units.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getBusinessUnits(): ?array
     {
@@ -340,10 +361,11 @@ class DispatchV2ZoneResponse
     /**
      * A list of assigned business units.
      *
-     * @param int[]|null $businessUnits
+     * @param list<int>|null $businessUnits
      */
     public function setBusinessUnits(?array $businessUnits): self
     {
+        $this->initialized['businessUnits'] = true;
         $this->businessUnits = $businessUnits;
 
         return $this;

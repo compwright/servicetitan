@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Modified On (UTC) for the record.
      *
      * @var \DateTime
@@ -20,8 +29,6 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
     protected $modifiedOn;
     /**
      * Phone settings of the customer contact.
-     *
-     * @var mixed
      */
     protected $phoneSettings;
     /**
@@ -32,8 +39,6 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
     protected $id;
     /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @var mixed
      */
     protected $type;
     /**
@@ -66,6 +71,7 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -73,8 +79,6 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 
     /**
      * Phone settings of the customer contact.
-     *
-     * @return mixed
      */
     public function getPhoneSettings()
     {
@@ -83,11 +87,10 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 
     /**
      * Phone settings of the customer contact.
-     *
-     * @param mixed $phoneSettings
      */
     public function setPhoneSettings($phoneSettings): self
     {
+        $this->initialized['phoneSettings'] = true;
         $this->phoneSettings = $phoneSettings;
 
         return $this;
@@ -106,6 +109,7 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -113,8 +117,6 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 
     /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -123,11 +125,10 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 
     /**
      * Landline, mobile, e-mail, or fax.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -146,6 +147,7 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
      */
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -164,6 +166,7 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -176,6 +179,7 @@ class CrmV2CustomersCustomerContactWithModifiedOnAndCustomerIdResponse
 
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;

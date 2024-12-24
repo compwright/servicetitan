@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2CreateAddressRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Description of the shipping address, like customer address or technician's truck for example.
      *
      * @var string
@@ -20,8 +29,6 @@ class InventoryV2CreateAddressRequest
     protected $description;
     /**
      * Actual shipping address.
-     *
-     * @var mixed
      */
     protected $address;
 
@@ -38,6 +45,7 @@ class InventoryV2CreateAddressRequest
      */
     public function setDescription(string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -45,8 +53,6 @@ class InventoryV2CreateAddressRequest
 
     /**
      * Actual shipping address.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -55,11 +61,10 @@ class InventoryV2CreateAddressRequest
 
     /**
      * Actual shipping address.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;

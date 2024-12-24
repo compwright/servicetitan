@@ -13,12 +13,21 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2CustomFieldUpdateRequest
 {
     /**
-     * @var AccountingV2CustomFieldOperationRequest[]
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * @var list<AccountingV2CustomFieldOperationRequest>
      */
     protected $operations;
 
     /**
-     * @return AccountingV2CustomFieldOperationRequest[]
+     * @return list<AccountingV2CustomFieldOperationRequest>
      */
     public function getOperations(): array
     {
@@ -26,10 +35,11 @@ class AccountingV2CustomFieldUpdateRequest
     }
 
     /**
-     * @param AccountingV2CustomFieldOperationRequest[] $operations
+     * @param list<AccountingV2CustomFieldOperationRequest> $operations
      */
     public function setOperations(array $operations): self
     {
+        $this->initialized['operations'] = true;
         $this->operations = $operations;
 
         return $this;

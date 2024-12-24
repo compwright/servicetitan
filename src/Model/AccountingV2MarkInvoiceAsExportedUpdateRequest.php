@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AccountingV2MarkInvoiceAsExportedUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $invoiceId;
@@ -32,6 +41,7 @@ class AccountingV2MarkInvoiceAsExportedUpdateRequest
 
     public function setInvoiceId(int $invoiceId): self
     {
+        $this->initialized['invoiceId'] = true;
         $this->invoiceId = $invoiceId;
 
         return $this;
@@ -44,6 +54,7 @@ class AccountingV2MarkInvoiceAsExportedUpdateRequest
 
     public function setExternalId(?string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
@@ -56,6 +67,7 @@ class AccountingV2MarkInvoiceAsExportedUpdateRequest
 
     public function setExternalMessage(?string $externalMessage): self
     {
+        $this->initialized['externalMessage'] = true;
         $this->externalMessage = $externalMessage;
 
         return $this;

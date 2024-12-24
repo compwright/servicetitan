@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2TagRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Tag Type Id.
      *
      * @var int
@@ -32,6 +41,7 @@ class InventoryV2TagRequest
      */
     public function setTagTypeId(int $tagTypeId): self
     {
+        $this->initialized['tagTypeId'] = true;
         $this->tagTypeId = $tagTypeId;
 
         return $this;

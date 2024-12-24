@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,199 +21,395 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class AccountingV2DetailedPaymentResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class AccountingV2DetailedPaymentResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\AccountingV2DetailedPaymentResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\AccountingV2DetailedPaymentResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('syncStatus', $data) && $data['syncStatus'] !== null) {
+                $object->setSyncStatus($data['syncStatus']);
+            } elseif (\array_key_exists('syncStatus', $data) && $data['syncStatus'] === null) {
+                $object->setSyncStatus(null);
+            }
+            if (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] !== null) {
+                $object->setReferenceNumber($data['referenceNumber']);
+            } elseif (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] === null) {
+                $object->setReferenceNumber(null);
+            }
+            if (\array_key_exists('date', $data) && $data['date'] !== null) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
+                $object->setDate(null);
+            }
+            if (\array_key_exists('type', $data) && $data['type'] !== null) {
+                $object->setType($data['type']);
+            } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('typeId', $data) && $data['typeId'] !== null) {
+                $object->setTypeId($data['typeId']);
+            } elseif (\array_key_exists('typeId', $data) && $data['typeId'] === null) {
+                $object->setTypeId(null);
+            }
+            if (\array_key_exists('total', $data) && $data['total'] !== null) {
+                $object->setTotal($data['total']);
+            } elseif (\array_key_exists('total', $data) && $data['total'] === null) {
+                $object->setTotal(null);
+            }
+            if (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] !== null) {
+                $object->setUnappliedAmount($data['unappliedAmount']);
+            } elseif (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] === null) {
+                $object->setUnappliedAmount(null);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('customer', $data) && $data['customer'] !== null) {
+                $object->setCustomer($data['customer']);
+            } elseif (\array_key_exists('customer', $data) && $data['customer'] === null) {
+                $object->setCustomer(null);
+            }
+            if (\array_key_exists('batch', $data) && $data['batch'] !== null) {
+                $object->setBatch($data['batch']);
+            } elseif (\array_key_exists('batch', $data) && $data['batch'] === null) {
+                $object->setBatch(null);
+            }
+            if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
+                $object->setCreatedBy($data['createdBy']);
+            } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
+                $object->setCreatedBy(null);
+            }
+            if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
+                $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
+            } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
+                $object->setGeneralLedgerAccount(null);
+            }
+            if (\array_key_exists('appliedTo', $data) && $data['appliedTo'] !== null) {
+                $values = [];
+                foreach ($data['appliedTo'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\AccountingV2PaymentAppliedResponse::class, 'json', $context);
+                }
+                $object->setAppliedTo($values);
+            } elseif (\array_key_exists('appliedTo', $data) && $data['appliedTo'] === null) {
+                $object->setAppliedTo(null);
+            }
+            if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
+                $values_1 = [];
+                foreach ($data['customFields'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\AccountingCustomFieldModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_1);
+            } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
+                $object->setCustomFields(null);
+            }
+            if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
+                $object->setAuthCode($data['authCode']);
+            } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
+                $object->setAuthCode(null);
+            }
+            if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
+                $object->setCheckNumber($data['checkNumber']);
+            } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
+                $object->setCheckNumber(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('syncStatus', $data) && $data['syncStatus'] !== null) {
-            $object->setSyncStatus($data['syncStatus']);
-        } elseif (\array_key_exists('syncStatus', $data) && $data['syncStatus'] === null) {
-            $object->setSyncStatus(null);
-        }
-        if (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] !== null) {
-            $object->setReferenceNumber($data['referenceNumber']);
-        } elseif (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] === null) {
-            $object->setReferenceNumber(null);
-        }
-        if (\array_key_exists('date', $data) && $data['date'] !== null) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['date']));
-        } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
-            $object->setDate(null);
-        }
-        if (\array_key_exists('type', $data) && $data['type'] !== null) {
-            $object->setType($data['type']);
-        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
-            $object->setType(null);
-        }
-        if (\array_key_exists('typeId', $data) && $data['typeId'] !== null) {
-            $object->setTypeId($data['typeId']);
-        } elseif (\array_key_exists('typeId', $data) && $data['typeId'] === null) {
-            $object->setTypeId(null);
-        }
-        if (\array_key_exists('total', $data) && $data['total'] !== null) {
-            $object->setTotal($data['total']);
-        } elseif (\array_key_exists('total', $data) && $data['total'] === null) {
-            $object->setTotal(null);
-        }
-        if (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] !== null) {
-            $object->setUnappliedAmount($data['unappliedAmount']);
-        } elseif (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] === null) {
-            $object->setUnappliedAmount(null);
-        }
-        if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
-            $object->setMemo($data['memo']);
-        } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
-            $object->setMemo(null);
-        }
-        if (\array_key_exists('customer', $data) && $data['customer'] !== null) {
-            $object->setCustomer($data['customer']);
-        } elseif (\array_key_exists('customer', $data) && $data['customer'] === null) {
-            $object->setCustomer(null);
-        }
-        if (\array_key_exists('batch', $data) && $data['batch'] !== null) {
-            $object->setBatch($data['batch']);
-        } elseif (\array_key_exists('batch', $data) && $data['batch'] === null) {
-            $object->setBatch(null);
-        }
-        if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
-            $object->setCreatedBy($data['createdBy']);
-        } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
-            $object->setCreatedBy(null);
-        }
-        if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
-            $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
-        } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
-            $object->setGeneralLedgerAccount(null);
-        }
-        if (\array_key_exists('appliedTo', $data) && $data['appliedTo'] !== null) {
-            $values = [];
-            foreach ($data['appliedTo'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\AccountingV2PaymentAppliedResponse', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            if ($object->isInitialized('syncStatus') && null !== $object->getSyncStatus()) {
+                $data['syncStatus'] = $object->getSyncStatus();
             }
-            $object->setAppliedTo($values);
-        } elseif (\array_key_exists('appliedTo', $data) && $data['appliedTo'] === null) {
-            $object->setAppliedTo(null);
-        }
-        if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
-            $values_1 = [];
-            foreach ($data['customFields'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\AccountingCustomFieldModel', 'json', $context);
+            if ($object->isInitialized('referenceNumber') && null !== $object->getReferenceNumber()) {
+                $data['referenceNumber'] = $object->getReferenceNumber();
             }
-            $object->setCustomFields($values_1);
-        } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
-            $object->setCustomFields(null);
-        }
-        if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
-            $object->setAuthCode($data['authCode']);
-        } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
-            $object->setAuthCode(null);
-        }
-        if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
-            $object->setCheckNumber($data['checkNumber']);
-        } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
-            $object->setCheckNumber(null);
+            if ($object->isInitialized('date') && null !== $object->getDate()) {
+                $data['date'] = $object->getDate()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('type') && null !== $object->getType()) {
+                $data['type'] = $object->getType();
+            }
+            if ($object->isInitialized('typeId') && null !== $object->getTypeId()) {
+                $data['typeId'] = $object->getTypeId();
+            }
+            if ($object->isInitialized('total') && null !== $object->getTotal()) {
+                $data['total'] = $object->getTotal();
+            }
+            if ($object->isInitialized('unappliedAmount') && null !== $object->getUnappliedAmount()) {
+                $data['unappliedAmount'] = $object->getUnappliedAmount();
+            }
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('customer') && null !== $object->getCustomer()) {
+                $data['customer'] = $object->getCustomer();
+            }
+            if ($object->isInitialized('batch') && null !== $object->getBatch()) {
+                $data['batch'] = $object->getBatch();
+            }
+            if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+                $data['createdBy'] = $object->getCreatedBy();
+            }
+            if ($object->isInitialized('generalLedgerAccount') && null !== $object->getGeneralLedgerAccount()) {
+                $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
+            }
+            if ($object->isInitialized('appliedTo') && null !== $object->getAppliedTo()) {
+                $values = [];
+                foreach ($object->getAppliedTo() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['appliedTo'] = $values;
+            }
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values_1 = [];
+                foreach ($object->getCustomFields() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['customFields'] = $values_1;
+            }
+            if ($object->isInitialized('authCode') && null !== $object->getAuthCode()) {
+                $data['authCode'] = $object->getAuthCode();
+            }
+            if ($object->isInitialized('checkNumber') && null !== $object->getCheckNumber()) {
+                $data['checkNumber'] = $object->getCheckNumber();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class AccountingV2DetailedPaymentResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        if (null !== $object->getSyncStatus()) {
-            $data['syncStatus'] = $object->getSyncStatus();
-        }
-        if (null !== $object->getReferenceNumber()) {
-            $data['referenceNumber'] = $object->getReferenceNumber();
-        }
-        if (null !== $object->getDate()) {
-            $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
-        }
-        if (null !== $object->getTypeId()) {
-            $data['typeId'] = $object->getTypeId();
-        }
-        if (null !== $object->getTotal()) {
-            $data['total'] = $object->getTotal();
-        }
-        if (null !== $object->getUnappliedAmount()) {
-            $data['unappliedAmount'] = $object->getUnappliedAmount();
-        }
-        if (null !== $object->getMemo()) {
-            $data['memo'] = $object->getMemo();
-        }
-        if (null !== $object->getCustomer()) {
-            $data['customer'] = $object->getCustomer();
-        }
-        if (null !== $object->getBatch()) {
-            $data['batch'] = $object->getBatch();
-        }
-        if (null !== $object->getCreatedBy()) {
-            $data['createdBy'] = $object->getCreatedBy();
-        }
-        if (null !== $object->getGeneralLedgerAccount()) {
-            $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
-        }
-        if (null !== $object->getAppliedTo()) {
-            $values = [];
-            foreach ($object->getAppliedTo() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['appliedTo'] = $values;
-        }
-        if (null !== $object->getCustomFields()) {
-            $values_1 = [];
-            foreach ($object->getCustomFields() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['customFields'] = $values_1;
-        }
-        if (null !== $object->getAuthCode()) {
-            $data['authCode'] = $object->getAuthCode();
-        }
-        if (null !== $object->getCheckNumber()) {
-            $data['checkNumber'] = $object->getCheckNumber();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('syncStatus', $data) && $data['syncStatus'] !== null) {
+                $object->setSyncStatus($data['syncStatus']);
+            } elseif (\array_key_exists('syncStatus', $data) && $data['syncStatus'] === null) {
+                $object->setSyncStatus(null);
+            }
+            if (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] !== null) {
+                $object->setReferenceNumber($data['referenceNumber']);
+            } elseif (\array_key_exists('referenceNumber', $data) && $data['referenceNumber'] === null) {
+                $object->setReferenceNumber(null);
+            }
+            if (\array_key_exists('date', $data) && $data['date'] !== null) {
+                $object->setDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['date']));
+            } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
+                $object->setDate(null);
+            }
+            if (\array_key_exists('type', $data) && $data['type'] !== null) {
+                $object->setType($data['type']);
+            } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+                $object->setType(null);
+            }
+            if (\array_key_exists('typeId', $data) && $data['typeId'] !== null) {
+                $object->setTypeId($data['typeId']);
+            } elseif (\array_key_exists('typeId', $data) && $data['typeId'] === null) {
+                $object->setTypeId(null);
+            }
+            if (\array_key_exists('total', $data) && $data['total'] !== null) {
+                $object->setTotal($data['total']);
+            } elseif (\array_key_exists('total', $data) && $data['total'] === null) {
+                $object->setTotal(null);
+            }
+            if (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] !== null) {
+                $object->setUnappliedAmount($data['unappliedAmount']);
+            } elseif (\array_key_exists('unappliedAmount', $data) && $data['unappliedAmount'] === null) {
+                $object->setUnappliedAmount(null);
+            }
+            if (\array_key_exists('memo', $data) && $data['memo'] !== null) {
+                $object->setMemo($data['memo']);
+            } elseif (\array_key_exists('memo', $data) && $data['memo'] === null) {
+                $object->setMemo(null);
+            }
+            if (\array_key_exists('customer', $data) && $data['customer'] !== null) {
+                $object->setCustomer($data['customer']);
+            } elseif (\array_key_exists('customer', $data) && $data['customer'] === null) {
+                $object->setCustomer(null);
+            }
+            if (\array_key_exists('batch', $data) && $data['batch'] !== null) {
+                $object->setBatch($data['batch']);
+            } elseif (\array_key_exists('batch', $data) && $data['batch'] === null) {
+                $object->setBatch(null);
+            }
+            if (\array_key_exists('createdBy', $data) && $data['createdBy'] !== null) {
+                $object->setCreatedBy($data['createdBy']);
+            } elseif (\array_key_exists('createdBy', $data) && $data['createdBy'] === null) {
+                $object->setCreatedBy(null);
+            }
+            if (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] !== null) {
+                $object->setGeneralLedgerAccount($data['generalLedgerAccount']);
+            } elseif (\array_key_exists('generalLedgerAccount', $data) && $data['generalLedgerAccount'] === null) {
+                $object->setGeneralLedgerAccount(null);
+            }
+            if (\array_key_exists('appliedTo', $data) && $data['appliedTo'] !== null) {
+                $values = [];
+                foreach ($data['appliedTo'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\AccountingV2PaymentAppliedResponse::class, 'json', $context);
+                }
+                $object->setAppliedTo($values);
+            } elseif (\array_key_exists('appliedTo', $data) && $data['appliedTo'] === null) {
+                $object->setAppliedTo(null);
+            }
+            if (\array_key_exists('customFields', $data) && $data['customFields'] !== null) {
+                $values_1 = [];
+                foreach ($data['customFields'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\AccountingCustomFieldModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values_1);
+            } elseif (\array_key_exists('customFields', $data) && $data['customFields'] === null) {
+                $object->setCustomFields(null);
+            }
+            if (\array_key_exists('authCode', $data) && $data['authCode'] !== null) {
+                $object->setAuthCode($data['authCode']);
+            } elseif (\array_key_exists('authCode', $data) && $data['authCode'] === null) {
+                $object->setAuthCode(null);
+            }
+            if (\array_key_exists('checkNumber', $data) && $data['checkNumber'] !== null) {
+                $object->setCheckNumber($data['checkNumber']);
+            } elseif (\array_key_exists('checkNumber', $data) && $data['checkNumber'] === null) {
+                $object->setCheckNumber(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            if ($object->isInitialized('syncStatus') && null !== $object->getSyncStatus()) {
+                $data['syncStatus'] = $object->getSyncStatus();
+            }
+            if ($object->isInitialized('referenceNumber') && null !== $object->getReferenceNumber()) {
+                $data['referenceNumber'] = $object->getReferenceNumber();
+            }
+            if ($object->isInitialized('date') && null !== $object->getDate()) {
+                $data['date'] = $object->getDate()->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('type') && null !== $object->getType()) {
+                $data['type'] = $object->getType();
+            }
+            if ($object->isInitialized('typeId') && null !== $object->getTypeId()) {
+                $data['typeId'] = $object->getTypeId();
+            }
+            if ($object->isInitialized('total') && null !== $object->getTotal()) {
+                $data['total'] = $object->getTotal();
+            }
+            if ($object->isInitialized('unappliedAmount') && null !== $object->getUnappliedAmount()) {
+                $data['unappliedAmount'] = $object->getUnappliedAmount();
+            }
+            if ($object->isInitialized('memo') && null !== $object->getMemo()) {
+                $data['memo'] = $object->getMemo();
+            }
+            if ($object->isInitialized('customer') && null !== $object->getCustomer()) {
+                $data['customer'] = $object->getCustomer();
+            }
+            if ($object->isInitialized('batch') && null !== $object->getBatch()) {
+                $data['batch'] = $object->getBatch();
+            }
+            if ($object->isInitialized('createdBy') && null !== $object->getCreatedBy()) {
+                $data['createdBy'] = $object->getCreatedBy();
+            }
+            if ($object->isInitialized('generalLedgerAccount') && null !== $object->getGeneralLedgerAccount()) {
+                $data['generalLedgerAccount'] = $object->getGeneralLedgerAccount();
+            }
+            if ($object->isInitialized('appliedTo') && null !== $object->getAppliedTo()) {
+                $values = [];
+                foreach ($object->getAppliedTo() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['appliedTo'] = $values;
+            }
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values_1 = [];
+                foreach ($object->getCustomFields() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['customFields'] = $values_1;
+            }
+            if ($object->isInitialized('authCode') && null !== $object->getAuthCode()) {
+                $data['authCode'] = $object->getAuthCode();
+            }
+            if ($object->isInitialized('checkNumber') && null !== $object->getCheckNumber()) {
+                $data['checkNumber'] = $object->getCheckNumber();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\AccountingV2DetailedPaymentResponse::class => false];
+        }
     }
 }

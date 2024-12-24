@@ -10,36 +10,35 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class DispatchClient extends Runtime\Client\Client
 {
     /**
      * Creates new gps ping.
      *
-     * @param int                                                                  $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\DispatchV2GpsPingCreateRequest[]|null $requestBody
-     * @param string                                                               $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int                                         $tenant      Tenant ID
+     * @param Model\DispatchV2GpsPingCreateRequest[]|null $requestBody
+     * @param string                                      $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\GpsCreateBadRequestException
+     * @return Model\DispatchV2GpsPingResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2GpsPingResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\GpsCreateBadRequestException
      */
     public function gpsCreate(string $gpsProvider, int $tenant, ?array $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\GpsCreate($gpsProvider, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\GpsCreate($gpsProvider, $tenant, $requestBody), $fetch);
     }
 
     /**
-     * @param int                                                               $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\DispatchV2CapacityQueryFilter|null $requestBody
-     * @param string                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CapacityGetListBadRequestException
+     * @return Model\DispatchV2CapacityResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2CapacityResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CapacityGetListBadRequestException
      */
     public function capacityGetList(int $tenant, ?Model\DispatchV2CapacityQueryFilter $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CapacityGetList($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CapacityGetList($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -47,31 +46,30 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsGetBadRequestException
+     * @return Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\NonJobAppointmentsGetBadRequestException
      */
     public function nonJobAppointmentsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\NonJobAppointmentsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\NonJobAppointmentsGet($id, $tenant), $fetch);
     }
 
     /**
      * Update an existed non-job appointment.
      *
-     * @param int                                                                          $id          format - int64
-     * @param int                                                                          $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\DispatchV2NonJobAppointmentUpdateRequest|null $requestBody
-     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsUpdateConflictException
+     * @return Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\NonJobAppointmentsUpdateBadRequestException
+     * @throws Exception\NonJobAppointmentsUpdateConflictException
      */
     public function nonJobAppointmentsUpdate(int $id, int $tenant, ?Model\DispatchV2NonJobAppointmentUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\NonJobAppointmentsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\NonJobAppointmentsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -80,44 +78,43 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $technicianId Format - int64. Unique id of the technician this non-job appointment applies to
-     *     @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or after
-     *     @var string $startsOnOrBefore Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or before
-     *     @var int $timesheetCodeId Format - int64. Unique Id of timesheet code must apply to
-     *     @var bool $activeOnly Whether the result should contains only active non-job appointments
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int    $technicianId Format - int64. Unique id of the technician this non-job appointment applies to
+     * @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or after
+     * @var string $startsOnOrBefore Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or before
+     * @var int    $timesheetCodeId Format - int64. Unique Id of timesheet code must apply to
+     * @var bool   $activeOnly Whether the result should contains only active non-job appointments
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsGetListBadRequestException
+     * @return Model\PaginatedResponseOfDispatchV2NonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2NonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\NonJobAppointmentsGetListBadRequestException
      */
     public function nonJobAppointmentsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\NonJobAppointmentsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\NonJobAppointmentsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Create a new non-job appointment.
      *
-     * @param int                                                                          $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\DispatchV2NonJobAppointmentCreateRequest|null $requestBody
-     * @param string                                                                       $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsCreateBadRequestException
+     * @return Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2GetNonJobAppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\NonJobAppointmentsCreateBadRequestException
      */
     public function nonJobAppointmentsCreate(int $tenant, ?Model\DispatchV2NonJobAppointmentCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\NonJobAppointmentsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\NonJobAppointmentsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -126,26 +123,27 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of shift should be at or after
-     *     @var string $endsOnOrBefore Format - date-time (as date-time in RFC3339). When the End of shift should be at or before
-     *     @var string $shiftType Value to match ShiftType to\
-     *     @var int $technicianId Format - int64. Unique Id of technician shift must apply to
-     *     @var string $titleContains Text that must appear in the Title
-     *     @var string $noteContains Text that must appear in the Note
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of shift should be at or after
+     * @var string $endsOnOrBefore Format - date-time (as date-time in RFC3339). When the End of shift should be at or before
+     * @var string $shiftType Value to match ShiftType to\
+     *             Values: [Normal, OnCall, TimeOff]
+     * @var int    $technicianId Format - int64. Unique Id of technician shift must apply to
+     * @var string $titleContains Text that must appear in the Title
+     * @var string $noteContains Text that must appear in the Note
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TechnicianShiftsGetListBadRequestException
+     * @return Model\PaginatedResponseOfDispatchV2TechnicianShiftResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2TechnicianShiftResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TechnicianShiftsGetListBadRequestException
      */
     public function technicianShiftsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TechnicianShiftsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TechnicianShiftsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -155,14 +153,14 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TechnicianShiftsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\TechnicianShiftsGetNotFoundException
+     * @return Model\DispatchV2TechnicianShiftResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2TechnicianShiftResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TechnicianShiftsGetBadRequestException
+     * @throws Exception\TechnicianShiftsGetNotFoundException
      */
     public function technicianShiftsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TechnicianShiftsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\TechnicianShiftsGet($id, $tenant), $fetch);
     }
 
     /**
@@ -171,20 +169,20 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ZoneGetListBadRequestException
+     * @return Model\PaginatedResponseOfDispatchV2ZoneResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2ZoneResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ZoneGetListBadRequestException
      */
     public function zoneGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ZoneGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ZoneGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -194,14 +192,14 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ZoneGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\ZoneGetNotFoundException
+     * @return Model\DispatchV2ZoneResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\DispatchV2ZoneResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ZoneGetBadRequestException
+     * @throws Exception\ZoneGetNotFoundException
      */
     public function zoneGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ZoneGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\ZoneGet($id, $tenant), $fetch);
     }
 
     /**
@@ -210,56 +208,54 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $appointmentIds Return appointment assignments for one or more appointments
-     *     @var int $jobId Format - int64. Return appointment assignments for a single job
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $appointmentIds Return appointment assignments for one or more appointments
+     * @var int    $jobId Format - int64. Return appointment assignments for a single job
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\AppointmentAssignmentsGetListBadRequestException
+     * @return Model\PaginatedResponseOfCrmV2AppointmentAssignmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfCrmV2AppointmentAssignmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\AppointmentAssignmentsGetListBadRequestException
      */
     public function appointmentAssignmentsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\AppointmentAssignmentsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppointmentAssignmentsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Assigns the list of technicians to the appointment.
      *
-     * @param int                                                               $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2AssignTechniciansRequest|null $requestBody
-     * @param string                                                            $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\AppointmentAssignmentsAssignTechniciansBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\AppointmentAssignmentsAssignTechniciansConflictException
+     * @return Model\CrmV2AppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2AppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\AppointmentAssignmentsAssignTechniciansBadRequestException
+     * @throws Exception\AppointmentAssignmentsAssignTechniciansConflictException
      */
     public function appointmentAssignmentsAssignTechnicians(int $tenant, ?Model\CrmV2AssignTechniciansRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\AppointmentAssignmentsAssignTechnicians($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppointmentAssignmentsAssignTechnicians($tenant, $requestBody), $fetch);
     }
 
     /**
      * Unassigns the list of technicians from the appointment.
      *
-     * @param int                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\CrmV2UnassignTechniciansRequest|null $requestBody
-     * @param string                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\AppointmentAssignmentsUnassignTechniciansBadRequestException
+     * @return Model\CrmV2AppointmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\CrmV2AppointmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\AppointmentAssignmentsUnassignTechniciansBadRequestException
      */
     public function appointmentAssignmentsUnassignTechnicians(int $tenant, ?Model\CrmV2UnassignTechniciansRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\AppointmentAssignmentsUnassignTechnicians($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\AppointmentAssignmentsUnassignTechnicians($tenant, $requestBody), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -267,7 +263,7 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -276,7 +272,7 @@ class DispatchClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

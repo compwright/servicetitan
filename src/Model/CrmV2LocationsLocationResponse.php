@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2LocationsLocationResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the location.
      *
      * @var int
@@ -38,14 +47,12 @@ class CrmV2LocationsLocationResponse
     protected $name;
     /**
      * Location’s address.
-     *
-     * @var mixed
      */
     protected $address;
     /**
      * Location record’s custom fields.
      *
-     * @var CrmV2CustomersCustomFieldModel[]
+     * @var list<CrmV2CustomersCustomFieldModel>
      */
     protected $customFields;
     /**
@@ -92,6 +99,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -110,6 +118,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -128,6 +137,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -146,6 +156,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -153,8 +164,6 @@ class CrmV2LocationsLocationResponse
 
     /**
      * Location’s address.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -163,11 +172,10 @@ class CrmV2LocationsLocationResponse
 
     /**
      * Location’s address.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -176,7 +184,7 @@ class CrmV2LocationsLocationResponse
     /**
      * Location record’s custom fields.
      *
-     * @return CrmV2CustomersCustomFieldModel[]
+     * @return list<CrmV2CustomersCustomFieldModel>
      */
     public function getCustomFields(): array
     {
@@ -186,10 +194,11 @@ class CrmV2LocationsLocationResponse
     /**
      * Location record’s custom fields.
      *
-     * @param CrmV2CustomersCustomFieldModel[] $customFields
+     * @param list<CrmV2CustomersCustomFieldModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -208,6 +217,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -226,6 +236,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -244,6 +255,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -262,6 +274,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setMergedToId(?int $mergedToId): self
     {
+        $this->initialized['mergedToId'] = true;
         $this->mergedToId = $mergedToId;
 
         return $this;
@@ -280,6 +293,7 @@ class CrmV2LocationsLocationResponse
      */
     public function setTaxZoneId(?int $taxZoneId): self
     {
+        $this->initialized['taxZoneId'] = true;
         $this->taxZoneId = $taxZoneId;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2CustomersCustomerResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the customer.
      *
      * @var int
@@ -32,20 +41,16 @@ class CrmV2CustomersCustomerResponse
     protected $name;
     /**
      * Residential or commercial.
-     *
-     * @var mixed
      */
     protected $type;
     /**
      * Bill-To address of the customer record.
-     *
-     * @var mixed
      */
     protected $address;
     /**
      * Customer record’s custom fields.
      *
-     * @var CrmV2CustomersCustomFieldModel[]
+     * @var list<CrmV2CustomersCustomFieldModel>
      */
     protected $customFields;
     /**
@@ -104,6 +109,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -122,6 +128,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -140,6 +147,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -147,8 +155,6 @@ class CrmV2CustomersCustomerResponse
 
     /**
      * Residential or commercial.
-     *
-     * @return mixed
      */
     public function getType()
     {
@@ -157,11 +163,10 @@ class CrmV2CustomersCustomerResponse
 
     /**
      * Residential or commercial.
-     *
-     * @param mixed $type
      */
     public function setType($type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -169,8 +174,6 @@ class CrmV2CustomersCustomerResponse
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @return mixed
      */
     public function getAddress()
     {
@@ -179,11 +182,10 @@ class CrmV2CustomersCustomerResponse
 
     /**
      * Bill-To address of the customer record.
-     *
-     * @param mixed $address
      */
     public function setAddress($address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -192,7 +194,7 @@ class CrmV2CustomersCustomerResponse
     /**
      * Customer record’s custom fields.
      *
-     * @return CrmV2CustomersCustomFieldModel[]
+     * @return list<CrmV2CustomersCustomFieldModel>
      */
     public function getCustomFields(): array
     {
@@ -202,10 +204,11 @@ class CrmV2CustomersCustomerResponse
     /**
      * Customer record’s custom fields.
      *
-     * @param CrmV2CustomersCustomFieldModel[] $customFields
+     * @param list<CrmV2CustomersCustomFieldModel> $customFields
      */
     public function setCustomFields(array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -224,6 +227,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setBalance(float $balance): self
     {
+        $this->initialized['balance'] = true;
         $this->balance = $balance;
 
         return $this;
@@ -242,6 +246,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setDoNotMail(bool $doNotMail): self
     {
+        $this->initialized['doNotMail'] = true;
         $this->doNotMail = $doNotMail;
 
         return $this;
@@ -260,6 +265,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setDoNotService(bool $doNotService): self
     {
+        $this->initialized['doNotService'] = true;
         $this->doNotService = $doNotService;
 
         return $this;
@@ -278,6 +284,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -296,6 +303,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setCreatedById(int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -314,6 +322,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -332,6 +341,7 @@ class CrmV2CustomersCustomerResponse
      */
     public function setMergedToId(?int $mergedToId): self
     {
+        $this->initialized['mergedToId'] = true;
         $this->mergedToId = $mergedToId;
 
         return $this;

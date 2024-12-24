@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,133 +21,263 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2UpdateJobRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2UpdateJobRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2UpdateJobRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2UpdateJobRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('customerId', $data)) {
+                $object->setCustomerId($data['customerId']);
+            }
+            if (\array_key_exists('locationId', $data)) {
+                $object->setLocationId($data['locationId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('jobTypeId', $data)) {
+                $object->setJobTypeId($data['jobTypeId']);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('shouldUpdateInvoiceItems', $data)) {
+                $object->setShouldUpdateInvoiceItems($data['shouldUpdateInvoiceItems']);
+            }
+            if (\array_key_exists('customFields', $data)) {
+                $values = [];
+                foreach ($data['customFields'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\CrmV2CustomFieldModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values);
+            }
+            if (\array_key_exists('tagTypeIds', $data)) {
+                $values_1 = [];
+                foreach ($data['tagTypeIds'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setTagTypeIds($values_1);
+            }
+            if (\array_key_exists('externalData', $data)) {
+                $object->setExternalData($data['externalData']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('customerId', $data)) {
-            $object->setCustomerId($data['customerId']);
-        }
-        if (\array_key_exists('locationId', $data)) {
-            $object->setLocationId($data['locationId']);
-        }
-        if (\array_key_exists('businessUnitId', $data)) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        }
-        if (\array_key_exists('jobTypeId', $data)) {
-            $object->setJobTypeId($data['jobTypeId']);
-        }
-        if (\array_key_exists('priority', $data)) {
-            $object->setPriority($data['priority']);
-        }
-        if (\array_key_exists('campaignId', $data)) {
-            $object->setCampaignId($data['campaignId']);
-        }
-        if (\array_key_exists('summary', $data)) {
-            $object->setSummary($data['summary']);
-        }
-        if (\array_key_exists('shouldUpdateInvoiceItems', $data)) {
-            $object->setShouldUpdateInvoiceItems($data['shouldUpdateInvoiceItems']);
-        }
-        if (\array_key_exists('customFields', $data)) {
-            $values = [];
-            foreach ($data['customFields'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\CrmV2CustomFieldModel', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
             }
-            $object->setCustomFields($values);
-        }
-        if (\array_key_exists('tagTypeIds', $data)) {
-            $values_1 = [];
-            foreach ($data['tagTypeIds'] as $value_1) {
-                $values_1[] = $value_1;
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
             }
-            $object->setTagTypeIds($values_1);
-        }
-        if (\array_key_exists('externalData', $data)) {
-            $object->setExternalData($data['externalData']);
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
+            }
+            if ($object->isInitialized('shouldUpdateInvoiceItems') && null !== $object->getShouldUpdateInvoiceItems()) {
+                $data['shouldUpdateInvoiceItems'] = $object->getShouldUpdateInvoiceItems();
+            }
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values = [];
+                foreach ($object->getCustomFields() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['customFields'] = $values;
+            }
+            if ($object->isInitialized('tagTypeIds') && null !== $object->getTagTypeIds()) {
+                $values_1 = [];
+                foreach ($object->getTagTypeIds() as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $data['tagTypeIds'] = $values_1;
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2UpdateJobRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getCustomerId()) {
-            $data['customerId'] = $object->getCustomerId();
-        }
-        if (null !== $object->getLocationId()) {
-            $data['locationId'] = $object->getLocationId();
-        }
-        if (null !== $object->getBusinessUnitId()) {
-            $data['businessUnitId'] = $object->getBusinessUnitId();
-        }
-        if (null !== $object->getJobTypeId()) {
-            $data['jobTypeId'] = $object->getJobTypeId();
-        }
-        if (null !== $object->getPriority()) {
-            $data['priority'] = $object->getPriority();
-        }
-        if (null !== $object->getCampaignId()) {
-            $data['campaignId'] = $object->getCampaignId();
-        }
-        if (null !== $object->getSummary()) {
-            $data['summary'] = $object->getSummary();
-        }
-        if (null !== $object->getShouldUpdateInvoiceItems()) {
-            $data['shouldUpdateInvoiceItems'] = $object->getShouldUpdateInvoiceItems();
-        }
-        if (null !== $object->getCustomFields()) {
-            $values = [];
-            foreach ($object->getCustomFields() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['customFields'] = $values;
-        }
-        if (null !== $object->getTagTypeIds()) {
-            $values_1 = [];
-            foreach ($object->getTagTypeIds() as $value_1) {
-                $values_1[] = $value_1;
-            }
-            $data['tagTypeIds'] = $values_1;
-        }
-        if (null !== $object->getExternalData()) {
-            $data['externalData'] = $object->getExternalData();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('customerId', $data)) {
+                $object->setCustomerId($data['customerId']);
+            }
+            if (\array_key_exists('locationId', $data)) {
+                $object->setLocationId($data['locationId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('jobTypeId', $data)) {
+                $object->setJobTypeId($data['jobTypeId']);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('shouldUpdateInvoiceItems', $data)) {
+                $object->setShouldUpdateInvoiceItems($data['shouldUpdateInvoiceItems']);
+            }
+            if (\array_key_exists('customFields', $data)) {
+                $values = [];
+                foreach ($data['customFields'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\CrmV2CustomFieldModel::class, 'json', $context);
+                }
+                $object->setCustomFields($values);
+            }
+            if (\array_key_exists('tagTypeIds', $data)) {
+                $values_1 = [];
+                foreach ($data['tagTypeIds'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setTagTypeIds($values_1);
+            }
+            if (\array_key_exists('externalData', $data)) {
+                $object->setExternalData($data['externalData']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('customerId') && null !== $object->getCustomerId()) {
+                $data['customerId'] = $object->getCustomerId();
+            }
+            if ($object->isInitialized('locationId') && null !== $object->getLocationId()) {
+                $data['locationId'] = $object->getLocationId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
+            }
+            if ($object->isInitialized('shouldUpdateInvoiceItems') && null !== $object->getShouldUpdateInvoiceItems()) {
+                $data['shouldUpdateInvoiceItems'] = $object->getShouldUpdateInvoiceItems();
+            }
+            if ($object->isInitialized('customFields') && null !== $object->getCustomFields()) {
+                $values = [];
+                foreach ($object->getCustomFields() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['customFields'] = $values;
+            }
+            if ($object->isInitialized('tagTypeIds') && null !== $object->getTagTypeIds()) {
+                $values_1 = [];
+                foreach ($object->getTagTypeIds() as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $data['tagTypeIds'] = $values_1;
+            }
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2UpdateJobRequest::class => false];
+        }
     }
 }

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AppointmentAddRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of job for new appointment.
      *
      * @var int
@@ -45,7 +54,7 @@ class CrmV2AppointmentAddRequest
     /**
      * List of IDs of technicians to assign to new appointment.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $technicianIds;
     /**
@@ -68,6 +77,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -86,6 +96,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -104,6 +115,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;
@@ -122,6 +134,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setArrivalWindowStart(?\DateTime $arrivalWindowStart): self
     {
+        $this->initialized['arrivalWindowStart'] = true;
         $this->arrivalWindowStart = $arrivalWindowStart;
 
         return $this;
@@ -140,6 +153,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setArrivalWindowEnd(?\DateTime $arrivalWindowEnd): self
     {
+        $this->initialized['arrivalWindowEnd'] = true;
         $this->arrivalWindowEnd = $arrivalWindowEnd;
 
         return $this;
@@ -148,7 +162,7 @@ class CrmV2AppointmentAddRequest
     /**
      * List of IDs of technicians to assign to new appointment.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getTechnicianIds(): ?array
     {
@@ -158,10 +172,11 @@ class CrmV2AppointmentAddRequest
     /**
      * List of IDs of technicians to assign to new appointment.
      *
-     * @param int[]|null $technicianIds
+     * @param list<int>|null $technicianIds
      */
     public function setTechnicianIds(?array $technicianIds): self
     {
+        $this->initialized['technicianIds'] = true;
         $this->technicianIds = $technicianIds;
 
         return $this;
@@ -180,6 +195,7 @@ class CrmV2AppointmentAddRequest
      */
     public function setSpecialInstructions(?string $specialInstructions): self
     {
+        $this->initialized['specialInstructions'] = true;
         $this->specialInstructions = $specialInstructions;
 
         return $this;

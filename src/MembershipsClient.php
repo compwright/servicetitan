@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class MembershipsClient extends Runtime\Client\Client
 {
     /**
      * Gets a list of customer memberships.
@@ -18,30 +18,33 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $customerIds Filters by customer IDs
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $status Filters by membership status\
-     *     @var int $duration Format - int32. Filters by membership duration (in months); use null for ongoing memberships
-     *     @var string $billingFrequency Filters by membership billing frequency\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $customerIds Filters by customer IDs
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $status Filters by membership status\
+     *             Values: [Active, Suspended, Expired, Canceled, Deleted]
+     * @var int    $duration Format - int32. Filters by membership duration (in months); use null for ongoing memberships
+     * @var string $billingFrequency Filters by membership billing frequency\
+     *             Values: [OneTime, Monthly, EveryOtherMonth, Quarterly, BiAnnual, Annual]
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2CustomerMembershipResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2CustomerMembershipResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomerMembershipsGetListBadRequestException
      */
     public function customerMembershipsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomerMembershipsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomerMembershipsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -51,84 +54,83 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsGetNotFoundException
+     * @return Model\MembershipsV2CustomerMembershipResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2CustomerMembershipResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomerMembershipsGetBadRequestException
+     * @throws Exception\CustomerMembershipsGetNotFoundException
      */
     public function customerMembershipsGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomerMembershipsGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomerMembershipsGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified customer membership in "patch" mode.
      *
-     * @param int                                                                              $id          Format - int64. Customer membership ID
-     * @param int                                                                              $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2CustomerMembershipUpdateRequest|null $requestBody
-     * @param string                                                                           $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Customer membership ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomerMembershipsUpdateBadRequestException
+     * @throws Exception\CustomerMembershipsUpdateNotFoundException
      */
     public function customerMembershipsUpdate(int $id, int $tenant, ?Model\MembershipsV2CustomerMembershipUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomerMembershipsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomerMembershipsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
      * Creates membership sale invoice.
      *
-     * @param int                                                                                 $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2MembershipSaleInvoiceCreateRequest|null $requestBody
-     * @param string                                                                              $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\CustomerMembershipsCreateBadRequestException
+     * @return Model\MembershipsV2MembershipSaleInvoiceCreateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipSaleInvoiceCreateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\CustomerMembershipsCreateBadRequestException
      */
     public function customerMembershipsCreate(int $tenant, ?Model\MembershipsV2MembershipSaleInvoiceCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\CustomerMembershipsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\CustomerMembershipsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
      * Please note this endpoint does not allow to enumerate all invoice templates.
+     * Use the Customer Membership endpoint (for billing template) or
+     * Recurring Service endpoint (for invoice template) to get invoice template IDs.
      *
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2InvoiceTemplateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2InvoiceTemplateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoiceTemplatesGetListBadRequestException
      */
     public function invoiceTemplatesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoiceTemplatesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoiceTemplatesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Creates new invoice template.
      *
-     * @param int                                                                           $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateCreateRequest|null $requestBody
-     * @param string                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesCreateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoiceTemplatesCreateBadRequestException
      */
     public function invoiceTemplatesCreate(int $tenant, ?Model\MembershipsV2InvoiceTemplateCreateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoiceTemplatesCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoiceTemplatesCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -138,32 +140,31 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesGetNotFoundException
+     * @return Model\MembershipsV2InvoiceTemplateResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoiceTemplatesGetBadRequestException
+     * @throws Exception\InvoiceTemplatesGetNotFoundException
      */
     public function invoiceTemplatesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoiceTemplatesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoiceTemplatesGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified invoice template in "patch" mode.
      *
-     * @param int                                                                           $id          Format - int64. Invoice template ID
-     * @param int                                                                           $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2InvoiceTemplateUpdateRequest|null $requestBody
-     * @param string                                                                        $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Invoice template ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\InvoiceTemplatesUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\InvoiceTemplatesUpdateBadRequestException
+     * @throws Exception\InvoiceTemplatesUpdateNotFoundException
      */
     public function invoiceTemplatesUpdate(int $id, int $tenant, ?Model\MembershipsV2InvoiceTemplateUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\InvoiceTemplatesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\InvoiceTemplatesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -172,62 +173,65 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $locationId Format - int64. Location ID
-     *     @var int $jobId Format - int64. Job ID
-     *     @var string $status Follow up status \
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $locationId Format - int64. Location ID
+     * @var int    $jobId Format - int64. Job ID
+     * @var string $status Follow up status \
+     *             Values: [NotAttempted, Unreachable, Contacted, Won, Dismissed]
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2LocationRecurringServiceEventResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2LocationRecurringServiceEventResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServiceEventsGetListBadRequestException
      */
     public function locationRecurringServiceEventsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServiceEventsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServiceEventsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Marking an event as complete links the job with provided JobID to the given Location Recurring Service Event.
+     * It will also copy over invoice items to the Job Invoice corresponding to the Invoice Template of the
+     * Location Recurring Service the Event was generated from.
      *
-     * @param int                                                                                    $id          Format - int64. Recurring service event ID
-     * @param int                                                                                    $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2MarkEventCompletedStatusUpdateRequest|null $requestBody
-     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Recurring service event ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkCompleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkCompleteNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServiceEventsMarkCompleteBadRequestException
+     * @throws Exception\LocationRecurringServiceEventsMarkCompleteNotFoundException
      */
     public function locationRecurringServiceEventsMarkComplete(int $id, int $tenant, ?Model\MembershipsV2MarkEventCompletedStatusUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServiceEventsMarkComplete($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServiceEventsMarkComplete($id, $tenant, $requestBody), $fetch);
     }
 
     /**
-     * Marking an event as incomplete unlinks the job with provided JobID to the given Location Recurring Service.
+     * Marking an event as incomplete unlinks the job with provided JobID to the given Location Recurring Service
+     * Event. It will also delete the invoice items that were copied over when the Location Recurring Service Event
+     * was marked as completed on the Job.
      *
-     * @param int                                                                                    $id          Format - int64. Recurring service event ID
-     * @param int                                                                                    $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2MarkEventCompletedStatusUpdateRequest|null $requestBody
-     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Recurring service event ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServiceEventsMarkIncompleteNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServiceEventsMarkIncompleteBadRequestException
+     * @throws Exception\LocationRecurringServiceEventsMarkIncompleteNotFoundException
      */
     public function locationRecurringServiceEventsMarkIncomplete(int $id, int $tenant, ?Model\MembershipsV2MarkEventCompletedStatusUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServiceEventsMarkIncomplete($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServiceEventsMarkIncomplete($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -236,28 +240,29 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $membershipIds Filters by customer membership IDs
-     *     @var string $locationIds Filters by location IDs
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $membershipIds Filters by customer membership IDs
+     * @var string $locationIds Filters by location IDs
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2LocationRecurringServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2LocationRecurringServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServicesGetListBadRequestException
      */
     public function locationRecurringServicesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServicesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServicesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -267,32 +272,31 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesGetNotFoundException
+     * @return Model\MembershipsV2LocationRecurringServiceResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2LocationRecurringServiceResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServicesGetBadRequestException
+     * @throws Exception\LocationRecurringServicesGetNotFoundException
      */
     public function locationRecurringServicesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServicesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServicesGet($id, $tenant), $fetch);
     }
 
     /**
      * Updates specified recurring service in "patch" mode.
      *
-     * @param int                                                                                    $id          Format - int64. Recurring service ID
-     * @param int                                                                                    $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\MembershipsV2LocationRecurringServiceUpdateRequest|null $requestBody
-     * @param string                                                                                 $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Recurring service ID
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\LocationRecurringServicesUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\LocationRecurringServicesUpdateBadRequestException
+     * @throws Exception\LocationRecurringServicesUpdateNotFoundException
      */
     public function locationRecurringServicesUpdate(int $id, int $tenant, ?Model\MembershipsV2LocationRecurringServiceUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\LocationRecurringServicesUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\LocationRecurringServicesUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -301,28 +305,30 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var int $duration Format - int32. Filters by membership duration (in months); use null for ongoing memberships
-     *     @var string $billingFrequency Filters by membership billing frequency\
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var int    $duration Format - int32. Filters by membership duration (in months); use null for ongoing memberships
+     * @var string $billingFrequency Filters by membership billing frequency\
+     *             Values: [OneTime, Monthly, EveryOtherMonth, Quarterly, BiAnnual, Annual]
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2MembershipTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2MembershipTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MembershipTypesGetListBadRequestException
      */
     public function membershipTypesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MembershipTypesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\MembershipTypesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -332,14 +338,14 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetNotFoundException
+     * @return Model\MembershipsV2MembershipTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MembershipTypesGetBadRequestException
+     * @throws Exception\MembershipTypesGetNotFoundException
      */
     public function membershipTypesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MembershipTypesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\MembershipTypesGet($id, $tenant), $fetch);
     }
 
     /**
@@ -349,14 +355,14 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetRecurringServiceItemsBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetRecurringServiceItemsNotFoundException
+     * @return Model\MembershipsV2MembershipTypeRecurringServiceItemResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeRecurringServiceItemResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MembershipTypesGetRecurringServiceItemsBadRequestException
+     * @throws Exception\MembershipTypesGetRecurringServiceItemsNotFoundException
      */
     public function membershipTypesGetRecurringServiceItems(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MembershipTypesGetRecurringServiceItems($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\MembershipTypesGetRecurringServiceItems($id, $tenant), $fetch);
     }
 
     /**
@@ -366,14 +372,14 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDiscountsListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDiscountsListNotFoundException
+     * @return Model\MembershipsV2MembershipTypeDiscountItemResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDiscountItemResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MembershipTypesGetDiscountsListBadRequestException
+     * @throws Exception\MembershipTypesGetDiscountsListNotFoundException
      */
     public function membershipTypesGetDiscountsList(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MembershipTypesGetDiscountsList($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\MembershipTypesGetDiscountsList($id, $tenant), $fetch);
     }
 
     /**
@@ -383,20 +389,20 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-    Values: [True, Any, False]
-     * }
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\MembershipTypesGetDurationBillingListNotFoundException
+     * @return Model\MembershipsV2MembershipTypeDurationBillingItemResponse[]|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2MembershipTypeDurationBillingItemResponse[]|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\MembershipTypesGetDurationBillingListBadRequestException
+     * @throws Exception\MembershipTypesGetDurationBillingListNotFoundException
      */
     public function membershipTypesGetDurationBillingList(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\MembershipTypesGetDurationBillingList($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\MembershipTypesGetDurationBillingList($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -405,25 +411,28 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $membershipTypeId Format - int64. Filters by membership type ID
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $recurrenceType Filters by recurrence type\
-     *     @var string $durationType Filters by duration type\
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $membershipTypeId Format - int64. Filters by membership type ID
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $recurrenceType Filters by recurrence type\
+     *             Values: [Weekly, Monthly, Seasonal, Daily, NthWeekdayOfMonth]
+     * @var string $durationType Filters by duration type\
+     *             Values: [Continuous, NumberOfVisits]
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetListBadRequestException
+     * @return Model\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfMembershipsV2RecurringServiceTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\RecurringServiceTypesGetListBadRequestException
      */
     public function recurringServiceTypesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\RecurringServiceTypesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\RecurringServiceTypesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -433,14 +442,14 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\RecurringServiceTypesGetNotFoundException
+     * @return Model\MembershipsV2RecurringServiceTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\MembershipsV2RecurringServiceTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\RecurringServiceTypesGetBadRequestException
+     * @throws Exception\RecurringServiceTypesGetNotFoundException
      */
     public function recurringServiceTypesGet(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\RecurringServiceTypesGet($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\RecurringServiceTypesGet($id, $tenant), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -448,7 +457,7 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -457,7 +466,7 @@ class MembershipsClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

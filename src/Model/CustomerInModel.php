@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CustomerInModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -25,7 +34,7 @@ class CustomerInModel
      */
     protected $address;
     /**
-     * @var ContactsContractsContactInputModel[]
+     * @var list<ContactsContractsContactInputModel>
      */
     protected $contacts;
 
@@ -36,6 +45,7 @@ class CustomerInModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -48,6 +58,7 @@ class CustomerInModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -60,13 +71,14 @@ class CustomerInModel
 
     public function setAddress(AddressInput $address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
     }
 
     /**
-     * @return ContactsContractsContactInputModel[]
+     * @return list<ContactsContractsContactInputModel>
      */
     public function getContacts(): array
     {
@@ -74,10 +86,11 @@ class CustomerInModel
     }
 
     /**
-     * @param ContactsContractsContactInputModel[] $contacts
+     * @param list<ContactsContractsContactInputModel> $contacts
      */
     public function setContacts(array $contacts): self
     {
+        $this->initialized['contacts'] = true;
         $this->contacts = $contacts;
 
         return $this;

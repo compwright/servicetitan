@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2CapacityResponseTechnician
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique Id of technician.
      *
      * @var int
@@ -26,8 +35,6 @@ class DispatchV2CapacityResponseTechnician
     protected $name;
     /**
      * Whether the technician is available to work during the associated time frame.
-     *
-     * @var mixed
      */
     protected $status;
 
@@ -44,6 +51,7 @@ class DispatchV2CapacityResponseTechnician
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -62,6 +70,7 @@ class DispatchV2CapacityResponseTechnician
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -69,8 +78,6 @@ class DispatchV2CapacityResponseTechnician
 
     /**
      * Whether the technician is available to work during the associated time frame.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -79,11 +86,10 @@ class DispatchV2CapacityResponseTechnician
 
     /**
      * Whether the technician is available to work during the associated time frame.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;

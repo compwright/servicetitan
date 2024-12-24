@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2GpsPingResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique External ID for data point.
      *
      * @var string
@@ -20,8 +29,6 @@ class DispatchV2GpsPingResponse
     protected $externalId;
     /**
      * Request status.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -44,6 +51,7 @@ class DispatchV2GpsPingResponse
      */
     public function setExternalId(string $externalId): self
     {
+        $this->initialized['externalId'] = true;
         $this->externalId = $externalId;
 
         return $this;
@@ -51,8 +59,6 @@ class DispatchV2GpsPingResponse
 
     /**
      * Request status.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -61,11 +67,10 @@ class DispatchV2GpsPingResponse
 
     /**
      * Request status.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -84,6 +89,7 @@ class DispatchV2GpsPingResponse
      */
     public function setMessage(string $message): self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
 
         return $this;

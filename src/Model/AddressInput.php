@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class AddressInput
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $street;
@@ -52,6 +61,7 @@ class AddressInput
 
     public function setStreet(string $street): self
     {
+        $this->initialized['street'] = true;
         $this->street = $street;
 
         return $this;
@@ -64,6 +74,7 @@ class AddressInput
 
     public function setUnit(string $unit): self
     {
+        $this->initialized['unit'] = true;
         $this->unit = $unit;
 
         return $this;
@@ -76,6 +87,7 @@ class AddressInput
 
     public function setCountry(string $country): self
     {
+        $this->initialized['country'] = true;
         $this->country = $country;
 
         return $this;
@@ -88,6 +100,7 @@ class AddressInput
 
     public function setCity(string $city): self
     {
+        $this->initialized['city'] = true;
         $this->city = $city;
 
         return $this;
@@ -100,6 +113,7 @@ class AddressInput
 
     public function setState(string $state): self
     {
+        $this->initialized['state'] = true;
         $this->state = $state;
 
         return $this;
@@ -112,6 +126,7 @@ class AddressInput
 
     public function setZip(string $zip): self
     {
+        $this->initialized['zip'] = true;
         $this->zip = $zip;
 
         return $this;
@@ -124,6 +139,7 @@ class AddressInput
 
     public function setLatitude(?float $latitude): self
     {
+        $this->initialized['latitude'] = true;
         $this->latitude = $latitude;
 
         return $this;
@@ -136,6 +152,7 @@ class AddressInput
 
     public function setLongitude(?float $longitude): self
     {
+        $this->initialized['longitude'] = true;
         $this->longitude = $longitude;
 
         return $this;

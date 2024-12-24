@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2CapacityQueryFilter
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * When the time frame should start at or after.
      *
      * @var \DateTime
@@ -27,7 +36,7 @@ class DispatchV2CapacityQueryFilter
     /**
      * Business units to calculate availability for.
      *
-     * @var int[]|null
+     * @var list<int>|null
      */
     protected $businessUnitIds;
     /**
@@ -56,6 +65,7 @@ class DispatchV2CapacityQueryFilter
      */
     public function setStartsOnOrAfter(\DateTime $startsOnOrAfter): self
     {
+        $this->initialized['startsOnOrAfter'] = true;
         $this->startsOnOrAfter = $startsOnOrAfter;
 
         return $this;
@@ -74,6 +84,7 @@ class DispatchV2CapacityQueryFilter
      */
     public function setEndsOnOrBefore(\DateTime $endsOnOrBefore): self
     {
+        $this->initialized['endsOnOrBefore'] = true;
         $this->endsOnOrBefore = $endsOnOrBefore;
 
         return $this;
@@ -82,7 +93,7 @@ class DispatchV2CapacityQueryFilter
     /**
      * Business units to calculate availability for.
      *
-     * @return int[]|null
+     * @return list<int>|null
      */
     public function getBusinessUnitIds(): ?array
     {
@@ -92,10 +103,11 @@ class DispatchV2CapacityQueryFilter
     /**
      * Business units to calculate availability for.
      *
-     * @param int[]|null $businessUnitIds
+     * @param list<int>|null $businessUnitIds
      */
     public function setBusinessUnitIds(?array $businessUnitIds): self
     {
+        $this->initialized['businessUnitIds'] = true;
         $this->businessUnitIds = $businessUnitIds;
 
         return $this;
@@ -114,6 +126,7 @@ class DispatchV2CapacityQueryFilter
      */
     public function setJobTypeId(?int $jobTypeId): self
     {
+        $this->initialized['jobTypeId'] = true;
         $this->jobTypeId = $jobTypeId;
 
         return $this;
@@ -132,6 +145,7 @@ class DispatchV2CapacityQueryFilter
      */
     public function setSkillBasedAvailability(bool $skillBasedAvailability): self
     {
+        $this->initialized['skillBasedAvailability'] = true;
         $this->skillBasedAvailability = $skillBasedAvailability;
 
         return $this;

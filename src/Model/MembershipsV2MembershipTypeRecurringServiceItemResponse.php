@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipTypeRecurringServiceItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the recurring service item.
      *
      * @var int
@@ -38,8 +47,6 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
     protected $offset;
     /**
      * Offset type of the recurring service type associated to this item, can be weeks (0) or months (1).
-     *
-     * @var mixed
      */
     protected $offsetType;
     /**
@@ -80,6 +87,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -98,6 +106,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setMembershipTypeId(int $membershipTypeId): self
     {
+        $this->initialized['membershipTypeId'] = true;
         $this->membershipTypeId = $membershipTypeId;
 
         return $this;
@@ -116,6 +125,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setRecurringServiceTypeId(int $recurringServiceTypeId): self
     {
+        $this->initialized['recurringServiceTypeId'] = true;
         $this->recurringServiceTypeId = $recurringServiceTypeId;
 
         return $this;
@@ -134,6 +144,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setOffset(int $offset): self
     {
+        $this->initialized['offset'] = true;
         $this->offset = $offset;
 
         return $this;
@@ -141,8 +152,6 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
 
     /**
      * Offset type of the recurring service type associated to this item, can be weeks (0) or months (1).
-     *
-     * @return mixed
      */
     public function getOffsetType()
     {
@@ -151,11 +160,10 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
 
     /**
      * Offset type of the recurring service type associated to this item, can be weeks (0) or months (1).
-     *
-     * @param mixed $offsetType
      */
     public function setOffsetType($offsetType): self
     {
+        $this->initialized['offsetType'] = true;
         $this->offsetType = $offsetType;
 
         return $this;
@@ -174,6 +182,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setAllocation(float $allocation): self
     {
+        $this->initialized['allocation'] = true;
         $this->allocation = $allocation;
 
         return $this;
@@ -192,6 +201,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -210,6 +220,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -228,6 +239,7 @@ class MembershipsV2MembershipTypeRecurringServiceItemResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class DispatchV2TechnicianShiftResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Unique id of the shift record.
      *
      * @var int
@@ -20,8 +29,6 @@ class DispatchV2TechnicianShiftResponse
     protected $id;
     /**
      * How the shift is displayed and contributes to availability calculations.
-     *
-     * @var mixed
      */
     protected $shiftType;
     /**
@@ -74,6 +81,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -81,8 +89,6 @@ class DispatchV2TechnicianShiftResponse
 
     /**
      * How the shift is displayed and contributes to availability calculations.
-     *
-     * @return mixed
      */
     public function getShiftType()
     {
@@ -91,11 +97,10 @@ class DispatchV2TechnicianShiftResponse
 
     /**
      * How the shift is displayed and contributes to availability calculations.
-     *
-     * @param mixed $shiftType
      */
     public function setShiftType($shiftType): self
     {
+        $this->initialized['shiftType'] = true;
         $this->shiftType = $shiftType;
 
         return $this;
@@ -114,6 +119,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setTitle(string $title): self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
 
         return $this;
@@ -132,6 +138,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setNote(?string $note): self
     {
+        $this->initialized['note'] = true;
         $this->note = $note;
 
         return $this;
@@ -150,6 +157,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -168,6 +176,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setTechnicianId(int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -186,6 +195,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setStart(\DateTime $start): self
     {
+        $this->initialized['start'] = true;
         $this->start = $start;
 
         return $this;
@@ -204,6 +214,7 @@ class DispatchV2TechnicianShiftResponse
      */
     public function setEnd(\DateTime $end): self
     {
+        $this->initialized['end'] = true;
         $this->end = $end;
 
         return $this;

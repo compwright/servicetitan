@@ -21,18 +21,18 @@ class NonJobAppointmentsGetList extends \CompWright\ServiceTitan\Runtime\Client\
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $technicianId Format - int64. Unique id of the technician this non-job appointment applies to
-     *     @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or after
-     *     @var string $startsOnOrBefore Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or before
-     *     @var int $timesheetCodeId Format - int64. Unique Id of timesheet code must apply to
-     *     @var bool $activeOnly Whether the result should contains only active non-job appointments
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int    $technicianId Format - int64. Unique id of the technician this non-job appointment applies to
+     * @var string $startsOnOrAfter Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or after
+     * @var string $startsOnOrBefore Format - date-time (as date-time in RFC3339). When the Start of non-job appointment should be at or before
+     * @var int    $timesheetCodeId Format - int64. Unique Id of timesheet code must apply to
+     * @var bool   $activeOnly Whether the result should contains only active non-job appointments
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -66,35 +66,35 @@ class NonJobAppointmentsGetList extends \CompWright\ServiceTitan\Runtime\Client\
         $optionsResolver->setDefined(['technicianId', 'startsOnOrAfter', 'startsOnOrBefore', 'timesheetCodeId', 'activeOnly', 'createdOnOrAfter', 'createdBefore', 'ids', 'page', 'pageSize', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('technicianId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('startsOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('startsOnOrBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('timesheetCodeId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('activeOnly', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('technicianId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('startsOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('startsOnOrBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('timesheetCodeId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('activeOnly', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2NonJobAppointmentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\NonJobAppointmentsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2NonJobAppointmentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfDispatchV2NonJobAppointmentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfDispatchV2NonJobAppointmentResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\NonJobAppointmentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\NonJobAppointmentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

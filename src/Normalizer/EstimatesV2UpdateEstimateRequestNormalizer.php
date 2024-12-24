@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,107 +21,217 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class EstimatesV2UpdateEstimateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class EstimatesV2UpdateEstimateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\EstimatesV2UpdateEstimateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\EstimatesV2UpdateEstimateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest();
+            if (\array_key_exists('tax', $data) && \is_int($data['tax'])) {
+                $data['tax'] = (float) $data['tax'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('summary', $data) && $data['summary'] !== null) {
+                $object->setSummary($data['summary']);
+            } elseif (\array_key_exists('summary', $data) && $data['summary'] === null) {
+                $object->setSummary(null);
+            }
+            if (\array_key_exists('tax', $data) && $data['tax'] !== null) {
+                $object->setTax($data['tax']);
+            } elseif (\array_key_exists('tax', $data) && $data['tax'] === null) {
+                $object->setTax(null);
+            }
+            if (\array_key_exists('items', $data) && $data['items'] !== null) {
+                $values = [];
+                foreach ($data['items'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemCreateUpdateRequest::class, 'json', $context);
+                }
+                $object->setItems($values);
+            } elseif (\array_key_exists('items', $data) && $data['items'] === null) {
+                $object->setItems(null);
+            }
+            if (\array_key_exists('externalLinks', $data) && $data['externalLinks'] !== null) {
+                $values_1 = [];
+                foreach ($data['externalLinks'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\EstimatesV2ExternalLinkInModel::class, 'json', $context);
+                }
+                $object->setExternalLinks($values_1);
+            } elseif (\array_key_exists('externalLinks', $data) && $data['externalLinks'] === null) {
+                $object->setExternalLinks(null);
+            }
+
             return $object;
         }
-        if (\array_key_exists('name', $data) && $data['name'] !== null) {
-            $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
-            $object->setName(null);
-        }
-        if (\array_key_exists('summary', $data) && $data['summary'] !== null) {
-            $object->setSummary($data['summary']);
-        } elseif (\array_key_exists('summary', $data) && $data['summary'] === null) {
-            $object->setSummary(null);
-        }
-        if (\array_key_exists('tax', $data) && $data['tax'] !== null) {
-            $object->setTax($data['tax']);
-        } elseif (\array_key_exists('tax', $data) && $data['tax'] === null) {
-            $object->setTax(null);
-        }
-        if (\array_key_exists('items', $data) && $data['items'] !== null) {
-            $values = [];
-            foreach ($data['items'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\EstimatesV2EstimateItemCreateUpdateRequest', 'json', $context);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
             }
-            $object->setItems($values);
-        } elseif (\array_key_exists('items', $data) && $data['items'] === null) {
-            $object->setItems(null);
-        }
-        if (\array_key_exists('externalLinks', $data) && $data['externalLinks'] !== null) {
-            $values_1 = [];
-            foreach ($data['externalLinks'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'CompWright\\ServiceTitan\\Model\\EstimatesV2ExternalLinkInModel', 'json', $context);
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
             }
-            $object->setExternalLinks($values_1);
-        } elseif (\array_key_exists('externalLinks', $data) && $data['externalLinks'] === null) {
-            $object->setExternalLinks(null);
+            if ($object->isInitialized('tax') && null !== $object->getTax()) {
+                $data['tax'] = $object->getTax();
+            }
+            if ($object->isInitialized('items') && null !== $object->getItems()) {
+                $values = [];
+                foreach ($object->getItems() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['items'] = $values;
+            }
+            if ($object->isInitialized('externalLinks') && null !== $object->getExternalLinks()) {
+                $values_1 = [];
+                foreach ($object->getExternalLinks() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['externalLinks'] = $values_1;
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class EstimatesV2UpdateEstimateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getSummary()) {
-            $data['summary'] = $object->getSummary();
-        }
-        if (null !== $object->getTax()) {
-            $data['tax'] = $object->getTax();
-        }
-        if (null !== $object->getItems()) {
-            $values = [];
-            foreach ($object->getItems() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
-            }
-            $data['items'] = $values;
-        }
-        if (null !== $object->getExternalLinks()) {
-            $values_1 = [];
-            foreach ($object->getExternalLinks() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
-            }
-            $data['externalLinks'] = $values_1;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest();
+            if (\array_key_exists('tax', $data) && \is_int($data['tax'])) {
+                $data['tax'] = (float) $data['tax'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('name', $data) && $data['name'] !== null) {
+                $object->setName($data['name']);
+            } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+                $object->setName(null);
+            }
+            if (\array_key_exists('summary', $data) && $data['summary'] !== null) {
+                $object->setSummary($data['summary']);
+            } elseif (\array_key_exists('summary', $data) && $data['summary'] === null) {
+                $object->setSummary(null);
+            }
+            if (\array_key_exists('tax', $data) && $data['tax'] !== null) {
+                $object->setTax($data['tax']);
+            } elseif (\array_key_exists('tax', $data) && $data['tax'] === null) {
+                $object->setTax(null);
+            }
+            if (\array_key_exists('items', $data) && $data['items'] !== null) {
+                $values = [];
+                foreach ($data['items'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\EstimatesV2EstimateItemCreateUpdateRequest::class, 'json', $context);
+                }
+                $object->setItems($values);
+            } elseif (\array_key_exists('items', $data) && $data['items'] === null) {
+                $object->setItems(null);
+            }
+            if (\array_key_exists('externalLinks', $data) && $data['externalLinks'] !== null) {
+                $values_1 = [];
+                foreach ($data['externalLinks'] as $value_1) {
+                    $values_1[] = $this->denormalizer->denormalize($value_1, \CompWright\ServiceTitan\Model\EstimatesV2ExternalLinkInModel::class, 'json', $context);
+                }
+                $object->setExternalLinks($values_1);
+            } elseif (\array_key_exists('externalLinks', $data) && $data['externalLinks'] === null) {
+                $object->setExternalLinks(null);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
+            }
+            if ($object->isInitialized('tax') && null !== $object->getTax()) {
+                $data['tax'] = $object->getTax();
+            }
+            if ($object->isInitialized('items') && null !== $object->getItems()) {
+                $values = [];
+                foreach ($object->getItems() as $value) {
+                    $values[] = $this->normalizer->normalize($value, 'json', $context);
+                }
+                $data['items'] = $values;
+            }
+            if ($object->isInitialized('externalLinks') && null !== $object->getExternalLinks()) {
+                $values_1 = [];
+                foreach ($object->getExternalLinks() as $value_1) {
+                    $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+                }
+                $data['externalLinks'] = $values_1;
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\EstimatesV2UpdateEstimateRequest::class => false];
+        }
     }
 }

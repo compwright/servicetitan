@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ApiErrorResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * A URI reference that identifies the problem type.
      *
      * @var string
@@ -39,13 +48,13 @@ class ApiErrorResponse
     /**
      * Provides more details about errors occurred, which can potentially be used for visual display.
      *
-     * @var string[][]
+     * @var array<string, list<string>>
      */
     protected $errors;
     /**
      * Provides additional data, intended for programmatical usage.
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     protected $data;
 
@@ -62,6 +71,7 @@ class ApiErrorResponse
      */
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -80,6 +90,7 @@ class ApiErrorResponse
      */
     public function setTitle(string $title): self
     {
+        $this->initialized['title'] = true;
         $this->title = $title;
 
         return $this;
@@ -98,6 +109,7 @@ class ApiErrorResponse
      */
     public function setStatus(int $status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -116,6 +128,7 @@ class ApiErrorResponse
      */
     public function setTraceId(string $traceId): self
     {
+        $this->initialized['traceId'] = true;
         $this->traceId = $traceId;
 
         return $this;
@@ -124,7 +137,7 @@ class ApiErrorResponse
     /**
      * Provides more details about errors occurred, which can potentially be used for visual display.
      *
-     * @return string[][]
+     * @return array<string, list<string>>
      */
     public function getErrors(): iterable
     {
@@ -134,10 +147,11 @@ class ApiErrorResponse
     /**
      * Provides more details about errors occurred, which can potentially be used for visual display.
      *
-     * @param string[][] $errors
+     * @param array<string, list<string>> $errors
      */
     public function setErrors(iterable $errors): self
     {
+        $this->initialized['errors'] = true;
         $this->errors = $errors;
 
         return $this;
@@ -146,7 +160,7 @@ class ApiErrorResponse
     /**
      * Provides additional data, intended for programmatical usage.
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     public function getData(): iterable
     {
@@ -156,10 +170,11 @@ class ApiErrorResponse
     /**
      * Provides additional data, intended for programmatical usage.
      *
-     * @param mixed[] $data
+     * @param array<string, mixed> $data
      */
     public function setData(iterable $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

@@ -19,29 +19,30 @@ class InventoryBillsGetList extends \CompWright\ServiceTitan\Runtime\Client\Base
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var int $batchId format - int64
-     *     @var int $batchNumber format - int32
-     *     @var string $billNumber
-     *     @var string $businessUnitIds
-     *     @var string $customField.Fields Name, value
-     *     @var string $customField.Operator Can be "or" or "null" or "and"\
-     *     @var string $dateFrom format - date-time (as date-time in RFC3339)
-     *     @var string $dateTo format - date-time (as date-time in RFC3339)
-     *     @var string $jobNumber
-     *     @var string $purchaseOrderNumber
-     *     @var string $purchaseOrderTypes
-     *     @var array $syncStatuses
-     *     @var float $minCost format - decimal
-     *     @var float $maxCost format - decimal
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var bool $includeTotal
-     * }
+     * @var string $ids
+     * @var int    $batchId format - int64
+     * @var int    $batchNumber format - int32
+     * @var string $billNumber
+     * @var string $businessUnitIds
+     * @var string $customField.Fields Name, value
+     * @var string $customField.Operator Can be "or" or "null" or "and"\
+     *             Values: [And, Or]
+     * @var string $dateFrom format - date-time (as date-time in RFC3339)
+     * @var string $dateTo format - date-time (as date-time in RFC3339)
+     * @var string $jobNumber
+     * @var string $purchaseOrderNumber
+     * @var string $purchaseOrderTypes
+     * @var array  $syncStatuses
+     * @var float  $minCost format - decimal
+     * @var float  $maxCost format - decimal
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var bool   $includeTotal
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -75,46 +76,46 @@ class InventoryBillsGetList extends \CompWright\ServiceTitan\Runtime\Client\Base
         $optionsResolver->setDefined(['ids', 'batchId', 'batchNumber', 'billNumber', 'businessUnitIds', 'customField.Fields', 'customField.Operator', 'dateFrom', 'dateTo', 'jobNumber', 'purchaseOrderNumber', 'purchaseOrderTypes', 'syncStatuses', 'minCost', 'maxCost', 'page', 'pageSize', 'createdBefore', 'createdOnOrAfter', 'modifiedBefore', 'modifiedOnOrAfter', 'includeTotal']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('batchId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('batchNumber', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('billNumber', ['string']);
-        $optionsResolver->setAllowedTypes('businessUnitIds', ['string']);
-        $optionsResolver->setAllowedTypes('customField.Fields', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customField.Operator', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateFrom', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('dateTo', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('jobNumber', ['string']);
-        $optionsResolver->setAllowedTypes('purchaseOrderNumber', ['string']);
-        $optionsResolver->setAllowedTypes('purchaseOrderTypes', ['string']);
-        $optionsResolver->setAllowedTypes('syncStatuses', ['array']);
-        $optionsResolver->setAllowedTypes('minCost', ['float', 'null']);
-        $optionsResolver->setAllowedTypes('maxCost', ['float', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('batchId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('batchNumber', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('billNumber', ['string']);
+        $optionsResolver->addAllowedTypes('businessUnitIds', ['string']);
+        $optionsResolver->addAllowedTypes('customField.Fields', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customField.Operator', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateFrom', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('dateTo', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('jobNumber', ['string']);
+        $optionsResolver->addAllowedTypes('purchaseOrderNumber', ['string']);
+        $optionsResolver->addAllowedTypes('purchaseOrderTypes', ['string']);
+        $optionsResolver->addAllowedTypes('syncStatuses', ['array']);
+        $optionsResolver->addAllowedTypes('minCost', ['float', 'null']);
+        $optionsResolver->addAllowedTypes('maxCost', ['float', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\AccountingV2InventoryBillResponse[]|null
      *
      * @throws \CompWright\ServiceTitan\Exception\InventoryBillsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\AccountingV2InventoryBillResponse[]|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\AccountingV2InventoryBillResponse[]', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\AccountingV2InventoryBillResponse[]', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\InventoryBillsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\InventoryBillsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

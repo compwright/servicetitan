@@ -13,21 +13,33 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2ExternalDataUpdateRequest
 {
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      *
      * @var string
      */
     protected $applicationGuid;
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @var CrmV2ExternalDataModel[]
+     * @var list<CrmV2ExternalDataModel>
      */
     protected $externalData;
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function getApplicationGuid(): string
     {
@@ -35,11 +47,12 @@ class CrmV2ExternalDataUpdateRequest
     }
 
     /**
-     * Items that are created with a specific guid, could be fetched/updated/removed.
-    only when the same application guid is provided.
+     * Items that are created with a specific guid, could be fetched/updated/removed
+     * only when the same application guid is provided.
      */
     public function setApplicationGuid(string $applicationGuid): self
     {
+        $this->initialized['applicationGuid'] = true;
         $this->applicationGuid = $applicationGuid;
 
         return $this;
@@ -47,8 +60,10 @@ class CrmV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @return CrmV2ExternalDataModel[]
+     * @return list<CrmV2ExternalDataModel>
      */
     public function getExternalData(): array
     {
@@ -57,11 +72,14 @@ class CrmV2ExternalDataUpdateRequest
 
     /**
      * External data list. This list must include all of the external data for the job.
+     * If job A has custom data with keys X and Y and this field only contains an item
+     * with a key X, then custom data with a key Y on job A will be removed.
      *
-     * @param CrmV2ExternalDataModel[] $externalData
+     * @param list<CrmV2ExternalDataModel> $externalData
      */
     public function setExternalData(array $externalData): self
     {
+        $this->initialized['externalData'] = true;
         $this->externalData = $externalData;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PaginatedResponseOfMembershipsV2MembershipTypeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * From which page this output has started.
      *
      * @var int
@@ -39,7 +48,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @var MembershipsV2MembershipTypeResponse[]
+     * @var list<MembershipsV2MembershipTypeResponse>
      */
     protected $data;
 
@@ -56,6 +65,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
      */
     public function setPage(int $page): self
     {
+        $this->initialized['page'] = true;
         $this->page = $page;
 
         return $this;
@@ -74,6 +84,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
      */
     public function setPageSize(int $pageSize): self
     {
+        $this->initialized['pageSize'] = true;
         $this->pageSize = $pageSize;
 
         return $this;
@@ -92,6 +103,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
      */
     public function setHasMore(bool $hasMore): self
     {
+        $this->initialized['hasMore'] = true;
         $this->hasMore = $hasMore;
 
         return $this;
@@ -110,6 +122,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
      */
     public function setTotalCount(?int $totalCount): self
     {
+        $this->initialized['totalCount'] = true;
         $this->totalCount = $totalCount;
 
         return $this;
@@ -118,7 +131,7 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @return MembershipsV2MembershipTypeResponse[]
+     * @return list<MembershipsV2MembershipTypeResponse>
      */
     public function getData(): array
     {
@@ -128,10 +141,11 @@ class PaginatedResponseOfMembershipsV2MembershipTypeResponse
     /**
      * The collection of result items, will never have more than PageSize items.
      *
-     * @param MembershipsV2MembershipTypeResponse[] $data
+     * @param list<MembershipsV2MembershipTypeResponse> $data
      */
     public function setData(array $data): self
     {
+        $this->initialized['data'] = true;
         $this->data = $data;
 
         return $this;

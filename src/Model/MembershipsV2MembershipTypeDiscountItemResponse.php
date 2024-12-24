@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2MembershipTypeDiscountItemResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the discount item.
      *
      * @var int
@@ -56,6 +65,7 @@ class MembershipsV2MembershipTypeDiscountItemResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -74,6 +84,7 @@ class MembershipsV2MembershipTypeDiscountItemResponse
      */
     public function setTargetId(int $targetId): self
     {
+        $this->initialized['targetId'] = true;
         $this->targetId = $targetId;
 
         return $this;
@@ -92,6 +103,7 @@ class MembershipsV2MembershipTypeDiscountItemResponse
      */
     public function setDiscount(float $discount): self
     {
+        $this->initialized['discount'] = true;
         $this->discount = $discount;
 
         return $this;
@@ -110,6 +122,7 @@ class MembershipsV2MembershipTypeDiscountItemResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -128,6 +141,7 @@ class MembershipsV2MembershipTypeDiscountItemResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;

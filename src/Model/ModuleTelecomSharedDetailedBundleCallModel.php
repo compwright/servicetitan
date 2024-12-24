@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleTelecomSharedDetailedBundleCallModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -44,6 +53,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -56,6 +66,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setJobNumber(string $jobNumber): self
     {
+        $this->initialized['jobNumber'] = true;
         $this->jobNumber = $jobNumber;
 
         return $this;
@@ -68,6 +79,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setProjectId(int $projectId): self
     {
+        $this->initialized['projectId'] = true;
         $this->projectId = $projectId;
 
         return $this;
@@ -80,6 +92,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setBusinessUnit(ModuleAdminSharedBusinessUnitModel $businessUnit): self
     {
+        $this->initialized['businessUnit'] = true;
         $this->businessUnit = $businessUnit;
 
         return $this;
@@ -92,6 +105,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setType(JobTypeModel $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -104,6 +118,7 @@ class ModuleTelecomSharedDetailedBundleCallModel
 
     public function setLeadCall(ModuleTelecomSharedDetailedCallModel $leadCall): self
     {
+        $this->initialized['leadCall'] = true;
         $this->leadCall = $leadCall;
 
         return $this;

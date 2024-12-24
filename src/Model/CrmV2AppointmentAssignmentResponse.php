@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2AppointmentAssignmentResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the appointment assignment.
      *
      * @var int
@@ -44,8 +53,6 @@ class CrmV2AppointmentAssignmentResponse
     protected $assignedOn;
     /**
      * Status of the appointment assignment.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -80,6 +87,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -98,6 +106,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setTechnicianId(int $technicianId): self
     {
+        $this->initialized['technicianId'] = true;
         $this->technicianId = $technicianId;
 
         return $this;
@@ -116,6 +125,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setTechnicianName(string $technicianName): self
     {
+        $this->initialized['technicianName'] = true;
         $this->technicianName = $technicianName;
 
         return $this;
@@ -134,6 +144,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setAssignedById(int $assignedById): self
     {
+        $this->initialized['assignedById'] = true;
         $this->assignedById = $assignedById;
 
         return $this;
@@ -152,6 +163,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setAssignedOn(\DateTime $assignedOn): self
     {
+        $this->initialized['assignedOn'] = true;
         $this->assignedOn = $assignedOn;
 
         return $this;
@@ -159,8 +171,6 @@ class CrmV2AppointmentAssignmentResponse
 
     /**
      * Status of the appointment assignment.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -169,11 +179,10 @@ class CrmV2AppointmentAssignmentResponse
 
     /**
      * Status of the appointment assignment.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -192,6 +201,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setIsPaused(bool $isPaused): self
     {
+        $this->initialized['isPaused'] = true;
         $this->isPaused = $isPaused;
 
         return $this;
@@ -210,6 +220,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setJobId(int $jobId): self
     {
+        $this->initialized['jobId'] = true;
         $this->jobId = $jobId;
 
         return $this;
@@ -228,6 +239,7 @@ class CrmV2AppointmentAssignmentResponse
      */
     public function setAppointmentId(int $appointmentId): self
     {
+        $this->initialized['appointmentId'] = true;
         $this->appointmentId = $appointmentId;
 
         return $this;

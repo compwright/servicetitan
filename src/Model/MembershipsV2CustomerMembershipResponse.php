@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2CustomerMembershipResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Customer membership ID.
      *
      * @var int
@@ -68,8 +77,6 @@ class MembershipsV2CustomerMembershipResponse
     protected $to;
     /**
      * How often the customer membership is billed.
-     *
-     * @var mixed
      */
     protected $billingFrequency;
     /**
@@ -80,14 +87,10 @@ class MembershipsV2CustomerMembershipResponse
     protected $renewalBillingFrequency;
     /**
      * Current status of the customer membership.
-     *
-     * @var mixed
      */
     protected $status;
     /**
      * Follow-up status of the customer membership.
-     *
-     * @var mixed
      */
     protected $followUpStatus;
     /**
@@ -242,6 +245,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -260,6 +264,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -278,6 +283,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCreatedById(?int $createdById): self
     {
+        $this->initialized['createdById'] = true;
         $this->createdById = $createdById;
 
         return $this;
@@ -296,6 +302,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -314,6 +321,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setFollowUpOn(\DateTime $followUpOn): self
     {
+        $this->initialized['followUpOn'] = true;
         $this->followUpOn = $followUpOn;
 
         return $this;
@@ -332,6 +340,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCancellationDate(?\DateTime $cancellationDate): self
     {
+        $this->initialized['cancellationDate'] = true;
         $this->cancellationDate = $cancellationDate;
 
         return $this;
@@ -350,6 +359,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setFrom(?\DateTime $from): self
     {
+        $this->initialized['from'] = true;
         $this->from = $from;
 
         return $this;
@@ -368,6 +378,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setNextScheduledBillDate(?\DateTime $nextScheduledBillDate): self
     {
+        $this->initialized['nextScheduledBillDate'] = true;
         $this->nextScheduledBillDate = $nextScheduledBillDate;
 
         return $this;
@@ -386,6 +397,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setTo(?\DateTime $to): self
     {
+        $this->initialized['to'] = true;
         $this->to = $to;
 
         return $this;
@@ -393,8 +405,6 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * How often the customer membership is billed.
-     *
-     * @return mixed
      */
     public function getBillingFrequency()
     {
@@ -403,11 +413,10 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * How often the customer membership is billed.
-     *
-     * @param mixed $billingFrequency
      */
     public function setBillingFrequency($billingFrequency): self
     {
+        $this->initialized['billingFrequency'] = true;
         $this->billingFrequency = $billingFrequency;
 
         return $this;
@@ -415,8 +424,6 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Renewal billing frequency.
-     *
-     * @return mixed
      */
     public function getRenewalBillingFrequency()
     {
@@ -425,11 +432,10 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Renewal billing frequency.
-     *
-     * @param mixed $renewalBillingFrequency
      */
     public function setRenewalBillingFrequency($renewalBillingFrequency): self
     {
+        $this->initialized['renewalBillingFrequency'] = true;
         $this->renewalBillingFrequency = $renewalBillingFrequency;
 
         return $this;
@@ -437,8 +443,6 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Current status of the customer membership.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -447,11 +451,10 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Current status of the customer membership.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -459,8 +462,6 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Follow-up status of the customer membership.
-     *
-     * @return mixed
      */
     public function getFollowUpStatus()
     {
@@ -469,11 +470,10 @@ class MembershipsV2CustomerMembershipResponse
 
     /**
      * Follow-up status of the customer membership.
-     *
-     * @param mixed $followUpStatus
      */
     public function setFollowUpStatus($followUpStatus): self
     {
+        $this->initialized['followUpStatus'] = true;
         $this->followUpStatus = $followUpStatus;
 
         return $this;
@@ -492,6 +492,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -510,6 +511,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setInitialDeferredRevenue(float $initialDeferredRevenue): self
     {
+        $this->initialized['initialDeferredRevenue'] = true;
         $this->initialDeferredRevenue = $initialDeferredRevenue;
 
         return $this;
@@ -528,6 +530,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setDuration(?int $duration): self
     {
+        $this->initialized['duration'] = true;
         $this->duration = $duration;
 
         return $this;
@@ -546,6 +549,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setRenewalDuration(?int $renewalDuration): self
     {
+        $this->initialized['renewalDuration'] = true;
         $this->renewalDuration = $renewalDuration;
 
         return $this;
@@ -564,6 +568,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -582,6 +587,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCustomerId(int $customerId): self
     {
+        $this->initialized['customerId'] = true;
         $this->customerId = $customerId;
 
         return $this;
@@ -600,6 +606,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setMembershipTypeId(int $membershipTypeId): self
     {
+        $this->initialized['membershipTypeId'] = true;
         $this->membershipTypeId = $membershipTypeId;
 
         return $this;
@@ -618,6 +625,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setActivatedById(?int $activatedById): self
     {
+        $this->initialized['activatedById'] = true;
         $this->activatedById = $activatedById;
 
         return $this;
@@ -636,6 +644,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setActivatedFromId(?int $activatedFromId): self
     {
+        $this->initialized['activatedFromId'] = true;
         $this->activatedFromId = $activatedFromId;
 
         return $this;
@@ -654,6 +663,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setBillingTemplateId(?int $billingTemplateId): self
     {
+        $this->initialized['billingTemplateId'] = true;
         $this->billingTemplateId = $billingTemplateId;
 
         return $this;
@@ -672,6 +682,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCancellationBalanceInvoiceId(?int $cancellationBalanceInvoiceId): self
     {
+        $this->initialized['cancellationBalanceInvoiceId'] = true;
         $this->cancellationBalanceInvoiceId = $cancellationBalanceInvoiceId;
 
         return $this;
@@ -690,6 +701,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCancellationInvoiceId(?int $cancellationInvoiceId): self
     {
+        $this->initialized['cancellationInvoiceId'] = true;
         $this->cancellationInvoiceId = $cancellationInvoiceId;
 
         return $this;
@@ -708,6 +720,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setFollowUpCustomStatusId(?int $followUpCustomStatusId): self
     {
+        $this->initialized['followUpCustomStatusId'] = true;
         $this->followUpCustomStatusId = $followUpCustomStatusId;
 
         return $this;
@@ -726,6 +739,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setLocationId(?int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -744,6 +758,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setPaymentMethodId(?int $paymentMethodId): self
     {
+        $this->initialized['paymentMethodId'] = true;
         $this->paymentMethodId = $paymentMethodId;
 
         return $this;
@@ -762,6 +777,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setPaymentTypeId(?int $paymentTypeId): self
     {
+        $this->initialized['paymentTypeId'] = true;
         $this->paymentTypeId = $paymentTypeId;
 
         return $this;
@@ -780,6 +796,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setRecurringLocationId(?int $recurringLocationId): self
     {
+        $this->initialized['recurringLocationId'] = true;
         $this->recurringLocationId = $recurringLocationId;
 
         return $this;
@@ -798,6 +815,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setRenewalMembershipTaskId(?int $renewalMembershipTaskId): self
     {
+        $this->initialized['renewalMembershipTaskId'] = true;
         $this->renewalMembershipTaskId = $renewalMembershipTaskId;
 
         return $this;
@@ -816,6 +834,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setRenewedById(?int $renewedById): self
     {
+        $this->initialized['renewedById'] = true;
         $this->renewedById = $renewedById;
 
         return $this;
@@ -834,6 +853,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setSoldById(?int $soldById): self
     {
+        $this->initialized['soldById'] = true;
         $this->soldById = $soldById;
 
         return $this;
@@ -852,6 +872,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setCustomerPo(?string $customerPo): self
     {
+        $this->initialized['customerPo'] = true;
         $this->customerPo = $customerPo;
 
         return $this;
@@ -870,6 +891,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setImportId(?string $importId): self
     {
+        $this->initialized['importId'] = true;
         $this->importId = $importId;
 
         return $this;
@@ -888,6 +910,7 @@ class MembershipsV2CustomerMembershipResponse
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class TenantSettingsV2EmployeeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -49,7 +58,7 @@ class TenantSettingsV2EmployeeResponse
      */
     protected $loginName;
     /**
-     * @var TenantSettingsV2EmployeeCustomFieldResponse[]|null
+     * @var list<TenantSettingsV2EmployeeCustomFieldResponse>|null
      */
     protected $customFields;
     /**
@@ -64,6 +73,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -76,6 +86,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -88,6 +99,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setRole(string $role): self
     {
+        $this->initialized['role'] = true;
         $this->role = $role;
 
         return $this;
@@ -100,6 +112,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setBusinessUnitId(?int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -112,6 +125,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setCreatedOn(\DateTime $createdOn): self
     {
+        $this->initialized['createdOn'] = true;
         $this->createdOn = $createdOn;
 
         return $this;
@@ -124,6 +138,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;
@@ -136,6 +151,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setEmail(?string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -148,6 +164,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setPhoneNumber(?string $phoneNumber): self
     {
+        $this->initialized['phoneNumber'] = true;
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -160,13 +177,14 @@ class TenantSettingsV2EmployeeResponse
 
     public function setLoginName(?string $loginName): self
     {
+        $this->initialized['loginName'] = true;
         $this->loginName = $loginName;
 
         return $this;
     }
 
     /**
-     * @return TenantSettingsV2EmployeeCustomFieldResponse[]|null
+     * @return list<TenantSettingsV2EmployeeCustomFieldResponse>|null
      */
     public function getCustomFields(): ?array
     {
@@ -174,10 +192,11 @@ class TenantSettingsV2EmployeeResponse
     }
 
     /**
-     * @param TenantSettingsV2EmployeeCustomFieldResponse[]|null $customFields
+     * @param list<TenantSettingsV2EmployeeCustomFieldResponse>|null $customFields
      */
     public function setCustomFields(?array $customFields): self
     {
+        $this->initialized['customFields'] = true;
         $this->customFields = $customFields;
 
         return $this;
@@ -190,6 +209,7 @@ class TenantSettingsV2EmployeeResponse
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;

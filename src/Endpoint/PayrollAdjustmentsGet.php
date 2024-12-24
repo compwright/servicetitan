@@ -23,9 +23,9 @@ class PayrollAdjustmentsGet extends \CompWright\ServiceTitan\Runtime\Client\Base
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $employeeType The employee type\
-    Values: [Technician, Employee]
-     * }
+     * @var string $employeeType The employee type\
+     *             Values: [Technician, Employee]
+     *             }
      */
     public function __construct(int $id, int $tenant, array $queryParameters = [])
     {
@@ -60,29 +60,29 @@ class PayrollAdjustmentsGet extends \CompWright\ServiceTitan\Runtime\Client\Base
         $optionsResolver->setDefined(['employeeType']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('employeeType', ['string']);
+        $optionsResolver->addAllowedTypes('employeeType', ['string']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetBadRequestException
      * @throws \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetNotFoundException
-     *
-     * @return \CompWright\ServiceTitan\Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PayrollV2PayrollAdjustmentsPayrollAdjustmentResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetNotFoundException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PayrollAdjustmentsGetNotFoundException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModuleAdminSharedBusinessUnitModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -104,6 +113,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -116,6 +126,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setActive(bool $active): self
     {
+        $this->initialized['active'] = true;
         $this->active = $active;
 
         return $this;
@@ -128,6 +139,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -140,6 +152,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setOfficialName(string $officialName): self
     {
+        $this->initialized['officialName'] = true;
         $this->officialName = $officialName;
 
         return $this;
@@ -152,6 +165,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setEmail(string $email): self
     {
+        $this->initialized['email'] = true;
         $this->email = $email;
 
         return $this;
@@ -164,6 +178,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setCurrency(string $currency): self
     {
+        $this->initialized['currency'] = true;
         $this->currency = $currency;
 
         return $this;
@@ -176,6 +191,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setPhoneNumber(string $phoneNumber): self
     {
+        $this->initialized['phoneNumber'] = true;
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -188,6 +204,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setInvoiceHeader(string $invoiceHeader): self
     {
+        $this->initialized['invoiceHeader'] = true;
         $this->invoiceHeader = $invoiceHeader;
 
         return $this;
@@ -200,6 +217,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setInvoiceMessage(string $invoiceMessage): self
     {
+        $this->initialized['invoiceMessage'] = true;
         $this->invoiceMessage = $invoiceMessage;
 
         return $this;
@@ -212,6 +230,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setDefaultTaxRate(float $defaultTaxRate): self
     {
+        $this->initialized['defaultTaxRate'] = true;
         $this->defaultTaxRate = $defaultTaxRate;
 
         return $this;
@@ -224,6 +243,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setAuthorizationParagraph(string $authorizationParagraph): self
     {
+        $this->initialized['authorizationParagraph'] = true;
         $this->authorizationParagraph = $authorizationParagraph;
 
         return $this;
@@ -236,6 +256,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setAcknowledgementParagraph(string $acknowledgementParagraph): self
     {
+        $this->initialized['acknowledgementParagraph'] = true;
         $this->acknowledgementParagraph = $acknowledgementParagraph;
 
         return $this;
@@ -248,6 +269,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setAddress(ModuleAdminSharedBusinessUnitAddressModel $address): self
     {
+        $this->initialized['address'] = true;
         $this->address = $address;
 
         return $this;
@@ -260,6 +282,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setMaterialSku(string $materialSku): self
     {
+        $this->initialized['materialSku'] = true;
         $this->materialSku = $materialSku;
 
         return $this;
@@ -272,6 +295,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setQuickbooksClass(string $quickbooksClass): self
     {
+        $this->initialized['quickbooksClass'] = true;
         $this->quickbooksClass = $quickbooksClass;
 
         return $this;
@@ -284,6 +308,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setAccountCode(string $accountCode): self
     {
+        $this->initialized['accountCode'] = true;
         $this->accountCode = $accountCode;
 
         return $this;
@@ -296,6 +321,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setFranchiseId(string $franchiseId): self
     {
+        $this->initialized['franchiseId'] = true;
         $this->franchiseId = $franchiseId;
 
         return $this;
@@ -308,6 +334,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setConceptCode(string $conceptCode): self
     {
+        $this->initialized['conceptCode'] = true;
         $this->conceptCode = $conceptCode;
 
         return $this;
@@ -320,6 +347,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setCorporateContractNumber(string $corporateContractNumber): self
     {
+        $this->initialized['corporateContractNumber'] = true;
         $this->corporateContractNumber = $corporateContractNumber;
 
         return $this;
@@ -332,6 +360,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setTenant(ModuleAdminSharedBusinessUnitTenantModel $tenant): self
     {
+        $this->initialized['tenant'] = true;
         $this->tenant = $tenant;
 
         return $this;
@@ -344,6 +373,7 @@ class ModuleAdminSharedBusinessUnitModel
 
     public function setModifiedOn(\DateTime $modifiedOn): self
     {
+        $this->initialized['modifiedOn'] = true;
         $this->modifiedOn = $modifiedOn;
 
         return $this;

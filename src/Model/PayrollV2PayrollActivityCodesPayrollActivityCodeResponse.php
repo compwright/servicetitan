@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the payroll activity code.
      *
      * @var int
@@ -32,8 +41,6 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
     protected $code;
     /**
      * Earning category of the payroll activity code.
-     *
-     * @var mixed
      */
     protected $earningCategory;
 
@@ -50,6 +57,7 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -68,6 +76,7 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
      */
     public function setName(string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -86,6 +95,7 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
      */
     public function setCode(string $code): self
     {
+        $this->initialized['code'] = true;
         $this->code = $code;
 
         return $this;
@@ -93,8 +103,6 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
 
     /**
      * Earning category of the payroll activity code.
-     *
-     * @return mixed
      */
     public function getEarningCategory()
     {
@@ -103,11 +111,10 @@ class PayrollV2PayrollActivityCodesPayrollActivityCodeResponse
 
     /**
      * Earning category of the payroll activity code.
-     *
-     * @param mixed $earningCategory
      */
     public function setEarningCategory($earningCategory): self
     {
+        $this->initialized['earningCategory'] = true;
         $this->earningCategory = $earningCategory;
 
         return $this;

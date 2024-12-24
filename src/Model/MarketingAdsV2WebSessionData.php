@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MarketingAdsV2WebSessionData
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The url of the web page that the user first landed on.
      *
      * @var string
@@ -98,6 +107,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setLandingPageUrl(string $landingPageUrl): self
     {
+        $this->initialized['landingPageUrl'] = true;
         $this->landingPageUrl = $landingPageUrl;
 
         return $this;
@@ -116,6 +126,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setReferrerUrl(string $referrerUrl): self
     {
+        $this->initialized['referrerUrl'] = true;
         $this->referrerUrl = $referrerUrl;
 
         return $this;
@@ -134,6 +145,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setGclid(?string $gclid): self
     {
+        $this->initialized['gclid'] = true;
         $this->gclid = $gclid;
 
         return $this;
@@ -152,6 +164,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setFbclid(?string $fbclid): self
     {
+        $this->initialized['fbclid'] = true;
         $this->fbclid = $fbclid;
 
         return $this;
@@ -170,6 +183,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setMsclkid(?string $msclkid): self
     {
+        $this->initialized['msclkid'] = true;
         $this->msclkid = $msclkid;
 
         return $this;
@@ -188,6 +202,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmSource(?string $utmSource): self
     {
+        $this->initialized['utmSource'] = true;
         $this->utmSource = $utmSource;
 
         return $this;
@@ -206,6 +221,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmMedium(?string $utmMedium): self
     {
+        $this->initialized['utmMedium'] = true;
         $this->utmMedium = $utmMedium;
 
         return $this;
@@ -224,6 +240,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmCampaign(?string $utmCampaign): self
     {
+        $this->initialized['utmCampaign'] = true;
         $this->utmCampaign = $utmCampaign;
 
         return $this;
@@ -242,6 +259,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmAdgroup(?string $utmAdgroup): self
     {
+        $this->initialized['utmAdgroup'] = true;
         $this->utmAdgroup = $utmAdgroup;
 
         return $this;
@@ -260,6 +278,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmTerm(?string $utmTerm): self
     {
+        $this->initialized['utmTerm'] = true;
         $this->utmTerm = $utmTerm;
 
         return $this;
@@ -278,6 +297,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setUtmContent(?string $utmContent): self
     {
+        $this->initialized['utmContent'] = true;
         $this->utmContent = $utmContent;
 
         return $this;
@@ -296,6 +316,7 @@ class MarketingAdsV2WebSessionData
      */
     public function setGoogleAnalyticsClientId(?string $googleAnalyticsClientId): self
     {
+        $this->initialized['googleAnalyticsClientId'] = true;
         $this->googleAnalyticsClientId = $googleAnalyticsClientId;
 
         return $this;

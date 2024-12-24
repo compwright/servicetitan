@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace CompWright\ServiceTitan;
 
-class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
+class InventoryClient extends Runtime\Client\Client
 {
     /**
      * Get a list of inventory adjustments.
@@ -18,53 +18,54 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $number Number filter
-     *     @var string $referenceNumber Reference number filter
-     *     @var int $batchId Format - int64. BatchId filter
-     *     @var string $inventoryLocationIds Filter by a collection of inventory location Ids
-     *     @var string $adjustmentTypes Filter by a collection of adjustment types
-     *     @var string $businessUnitIds Filter by a collection of business unit Ids
-     *     @var string $syncStatuses Filter by a collection of sync statues
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return adjustments with date on or after certain date/time
-     *     @var string $dateBefore Format - date-time (as date-time in RFC3339). Return adjustments with date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $number Number filter
+     * @var string $referenceNumber Reference number filter
+     * @var int    $batchId Format - int64. BatchId filter
+     * @var string $inventoryLocationIds Filter by a collection of inventory location Ids
+     * @var string $adjustmentTypes Filter by a collection of adjustment types
+     * @var string $businessUnitIds Filter by a collection of business unit Ids
+     * @var string $syncStatuses Filter by a collection of sync statues
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return adjustments with date on or after certain date/time
+     * @var string $dateBefore Format - date-time (as date-time in RFC3339). Return adjustments with date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\AdjustmentsGetBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2InventoryAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryAdjustmentResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\AdjustmentsGetBadRequestException
      */
     public function adjustmentsGet(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\AdjustmentsGet($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdjustmentsGet($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update custom fields on adjustments.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\AdjustmentsUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\AdjustmentsUpdateCustomFieldsBadRequestException
      */
     public function adjustmentsUpdateCustomFields(int $tenant, ?Model\InventoryV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\AdjustmentsUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\AdjustmentsUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -73,50 +74,49 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $status Filters by PO status
-     *     @var string $number Filters by PO number
-     *     @var int $jobId Format - int64. Filters by JobId associated with PO
-     *     @var int $technicianId Format - int64. Filter by TechnicianId associated with PO
-     *     @var int $projectId Format - int64. Filter by ProjectId associated with PO
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return POs with date on or after certain date/time
-     *     @var string $dateBefore Format - date-time (as date-time in RFC3339). Return POs with date before certain date/time
-     *     @var string $sentOnOrAfter Format - date-time (as date-time in RFC3339). Return POs sent on or after certain date/time
-     *     @var string $sentBefore Format - date-time (as date-time in RFC3339). Return POs sent before certain date/time
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $status Filters by PO status
+     * @var string $number Filters by PO number
+     * @var int    $jobId Format - int64. Filters by JobId associated with PO
+     * @var int    $technicianId Format - int64. Filter by TechnicianId associated with PO
+     * @var int    $projectId Format - int64. Filter by ProjectId associated with PO
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return POs with date on or after certain date/time
+     * @var string $dateBefore Format - date-time (as date-time in RFC3339). Return POs with date before certain date/time
+     * @var string $sentOnOrAfter Format - date-time (as date-time in RFC3339). Return POs sent on or after certain date/time
+     * @var string $sentBefore Format - date-time (as date-time in RFC3339). Return POs sent before certain date/time
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersGetListBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2PurchaseOrderResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2PurchaseOrderResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PurchaseOrdersGetListBadRequestException
      */
     public function purchaseOrdersGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PurchaseOrdersGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PurchaseOrdersGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Create a new purchase order.
      *
-     * @param int                                                                       $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CreatePurchaseOrderRequest|null $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersCreateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PurchaseOrdersCreateBadRequestException
      */
     public function purchaseOrdersCreate(int $tenant, ?Model\InventoryV2CreatePurchaseOrderRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PurchaseOrdersCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PurchaseOrdersCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -126,32 +126,31 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int    $tenant Tenant ID
      * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersGetByIdBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersGetByIdNotFoundException
+     * @return Model\InventoryV2PurchaseOrderResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\InventoryV2PurchaseOrderResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PurchaseOrdersGetByIdBadRequestException
+     * @throws Exception\PurchaseOrdersGetByIdNotFoundException
      */
     public function purchaseOrdersGetById(int $id, int $tenant, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PurchaseOrdersGetById($id, $tenant), $fetch);
+        return $this->executeEndpoint(new Endpoint\PurchaseOrdersGetById($id, $tenant), $fetch);
     }
 
     /**
      * Update an existing purchase order.
      *
-     * @param int                                                                       $id          format - int64
-     * @param int                                                                       $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2UpdatePurchaseOrderRequest|null $requestBody
-     * @param string                                                                    $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     format - int64
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrdersUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PurchaseOrdersUpdateBadRequestException
+     * @throws Exception\PurchaseOrdersUpdateNotFoundException
      */
     public function purchaseOrdersUpdate(int $id, int $tenant, ?Model\InventoryV2UpdatePurchaseOrderRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PurchaseOrdersUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\PurchaseOrdersUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -160,20 +159,20 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\PurchaseOrderTypesGetListBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2PurchaseOrderTypeResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2PurchaseOrderTypeResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\PurchaseOrderTypesGetListBadRequestException
      */
     public function purchaseOrderTypesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\PurchaseOrderTypesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\PurchaseOrderTypesGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -182,55 +181,56 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $number Number filter
-     *     @var string $vendorInvoiceNumber Vendor invoice number filter
-     *     @var int $billId Format - int64. BillId filter
-     *     @var int $batchId Format - int64. BatchId filter
-     *     @var string $vendorIds Filter by a collection of vendors
-     *     @var string $businessUnitIds Filter by a collection of business units
-     *     @var string $inventoryLocationIds Filter by a collection of inventory locations
-     *     @var string $purchaseOrderIds Filter by a collection of purchase orders
-     *     @var string $syncStatuses Filter by a collection of sync statuses
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $receivedOnOrAfter Format - date-time (as date-time in RFC3339). Return receipts with received date on or after certain date/time
-     *     @var string $receivedBefore Format - date-time (as date-time in RFC3339). Return receipts with received date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $number Number filter
+     * @var string $vendorInvoiceNumber Vendor invoice number filter
+     * @var int    $billId Format - int64. BillId filter
+     * @var int    $batchId Format - int64. BatchId filter
+     * @var string $vendorIds Filter by a collection of vendors
+     * @var string $businessUnitIds Filter by a collection of business units
+     * @var string $inventoryLocationIds Filter by a collection of inventory locations
+     * @var string $purchaseOrderIds Filter by a collection of purchase orders
+     * @var string $syncStatuses Filter by a collection of sync statuses
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $receivedOnOrAfter Format - date-time (as date-time in RFC3339). Return receipts with received date on or after certain date/time
+     * @var string $receivedBefore Format - date-time (as date-time in RFC3339). Return receipts with received date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ReceiptsGetBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2InventoryReceiptResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryReceiptResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ReceiptsGetBadRequestException
      */
     public function receiptsGet(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ReceiptsGet($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReceiptsGet($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update custom fields on receipts.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\ReceiptsUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\ReceiptsUpdateCustomFieldsBadRequestException
      */
     public function receiptsUpdateCustomFields(int $tenant, ?Model\InventoryV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ReceiptsUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReceiptsUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -239,55 +239,56 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $active What kind of items should be returned (only active items will be returned by default)\
-     *     @var string $number Number filter
-     *     @var string $referenceNumber Reference number filter
-     *     @var int $jobId Format - int64. Job filter
-     *     @var int $purchaseOrderId Format - int64. Purchase order filter
-     *     @var int $batchId Format - int64. Batch filter
-     *     @var string $vendorIds Filter by a collection of vendors
-     *     @var string $businessUnitIds Filter by a collection of business units
-     *     @var string $inventoryLocationIds Filter by a collection of inventory locations
-     *     @var string $syncStatuses Filter by a collection of sync statuses
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $returnDateOnOrAfter Format - date-time (as date-time in RFC3339). Filters by returns with return date on or after certain date/time
-     *     @var string $returnDateBefore Format - date-time (as date-time in RFC3339). Filters by returns with return date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $active What kind of items should be returned (only active items will be returned by default)\
+     *             Values: [True, Any, False]
+     * @var string $number Number filter
+     * @var string $referenceNumber Reference number filter
+     * @var int    $jobId Format - int64. Job filter
+     * @var int    $purchaseOrderId Format - int64. Purchase order filter
+     * @var int    $batchId Format - int64. Batch filter
+     * @var string $vendorIds Filter by a collection of vendors
+     * @var string $businessUnitIds Filter by a collection of business units
+     * @var string $inventoryLocationIds Filter by a collection of inventory locations
+     * @var string $syncStatuses Filter by a collection of sync statuses
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $returnDateOnOrAfter Format - date-time (as date-time in RFC3339). Filters by returns with return date on or after certain date/time
+     * @var string $returnDateBefore Format - date-time (as date-time in RFC3339). Filters by returns with return date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\ReturnsGetBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2InventoryReturnResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryReturnResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\ReturnsGetBadRequestException
      */
     public function returnsGet(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ReturnsGet($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReturnsGet($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update custom fields on returns.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\ReturnsUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\ReturnsUpdateCustomFieldsBadRequestException
      */
     public function returnsUpdateCustomFields(int $tenant, ?Model\InventoryV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\ReturnsUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\ReturnsUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -296,53 +297,53 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids Perform lookup by multiple IDs (maximum 50)
-     *     @var string $statuses Filter by a collection of statuses
-     *     @var string $number Number filter
-     *     @var string $referenceNumber Reference number filter
-     *     @var int $batchId Format - int64. Batch filter
-     *     @var string $transferTypeIds Filter by a collection of transfer types
-     *     @var string $fromLocationIds Filter by a collection of From field locations
-     *     @var string $toLocationIds Filter by a collection of To field locations
-     *     @var string $syncStatuses Filter by a collection of sync statuses
-     *     @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
-     *     @var string $customFields.Operator Can be "Or" or "And"\
-     *     @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return transfers with date on or after certain date/time
-     *     @var string $dateBefore Format - date-time (as date-time in RFC3339). Return transfers with date before certain date/time
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var string $ids Perform lookup by multiple IDs (maximum 50)
+     * @var string $statuses Filter by a collection of statuses
+     * @var string $number Number filter
+     * @var string $referenceNumber Reference number filter
+     * @var int    $batchId Format - int64. Batch filter
+     * @var string $transferTypeIds Filter by a collection of transfer types
+     * @var string $fromLocationIds Filter by a collection of From field locations
+     * @var string $toLocationIds Filter by a collection of To field locations
+     * @var string $syncStatuses Filter by a collection of sync statuses
+     * @var string $customFields.Fields Collection of custom field pairs (name, value) to filter by
+     * @var string $customFields.Operator Can be "Or" or "And"\
+     *             Values: [And, Or]
+     * @var string $dateOnOrAfter Format - date-time (as date-time in RFC3339). Return transfers with date on or after certain date/time
+     * @var string $dateBefore Format - date-time (as date-time in RFC3339). Return transfers with date before certain date/time
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TransfersGetBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2InventoryTransferResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2InventoryTransferResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TransfersGetBadRequestException
      */
     public function transfersGet(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TransfersGet($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TransfersGet($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update custom fields on transfers.
      *
-     * @param int                                                                     $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CustomFieldUpdateRequest|null $requestBody
-     * @param string                                                                  $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
-     *
-     * @throws \CompWright\ServiceTitan\Exception\TransfersUpdateCustomFieldsBadRequestException
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
      * @return \Psr\Http\Message\ResponseInterface|null
+     *
+     * @throws Exception\TransfersUpdateCustomFieldsBadRequestException
      */
     public function transfersUpdateCustomFields(int $tenant, ?Model\InventoryV2CustomFieldUpdateRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TransfersUpdateCustomFields($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\TransfersUpdateCustomFields($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -351,20 +352,20 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\TrucksGetListBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2TruckResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2TruckResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\TrucksGetListBadRequestException
      */
     public function trucksGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\TrucksGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\TrucksGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
@@ -373,42 +374,42 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     *     @var int $id Format - int64. Id to filter by
-     *     @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
-     *     @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
-     *     @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
-     *     @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
-     * }
+     * @var int    $page Format - int32. The logical number of page to return, starting from 1
+     * @var int    $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool   $includeTotal Whether total count should be returned
+     * @var int    $id Format - int64. Id to filter by
+     * @var string $externalDataApplicationGuid Format - guid. If this guid is provided, external data corresponding to
+     *             this application guid will be returned.
+     * @var string $createdBefore Format - date-time (as date-time in RFC3339). Return items created before certain date/time (in UTC)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339). Return items created on or after certain date/time (in UTC)
+     * @var string $modifiedBefore Format - date-time (as date-time in RFC3339). Return items modified before certain date/time (in UTC)
+     * @var string $modifiedOnOrAfter Format - date-time (as date-time in RFC3339). Return items modified on or after certain date/time (in UTC)
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\VendorsGetListBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2VendorResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2VendorResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\VendorsGetListBadRequestException
      */
     public function vendorsGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\VendorsGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\VendorsGetList($tenant, $queryParameters), $fetch);
     }
 
     /**
      * Create a new vendor.
      *
-     * @param int                                                                $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2CreateVendorRequest|null $requestBody
-     * @param string                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\VendorsCreateBadRequestException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\VendorsCreateBadRequestException
      */
     public function vendorsCreate(int $tenant, ?Model\InventoryV2CreateVendorRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\VendorsCreate($tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\VendorsCreate($tenant, $requestBody), $fetch);
     }
 
     /**
@@ -418,37 +419,36 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $externalDataApplicationGuid Format - guid.
-     * }
+     * @var string $externalDataApplicationGuid Format - guid.
+     *             }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\VendorsGetByIdBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\VendorsGetByIdNotFoundException
+     * @return Model\InventoryV2VendorResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\InventoryV2VendorResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\VendorsGetByIdBadRequestException
+     * @throws Exception\VendorsGetByIdNotFoundException
      */
     public function vendorsGetById(int $id, int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\VendorsGetById($id, $tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\VendorsGetById($id, $tenant, $queryParameters), $fetch);
     }
 
     /**
      * Update an existing vendor.
      *
-     * @param int                                                                $id          Format - int64. Vendor Id
-     * @param int                                                                $tenant      Tenant ID
-     * @param \CompWright\ServiceTitan\Model\InventoryV2UpdateVendorRequest|null $requestBody
-     * @param string                                                             $fetch       Fetch mode to use (can be OBJECT or RESPONSE)
+     * @param int    $id     Format - int64. Vendor Id
+     * @param int    $tenant Tenant ID
+     * @param string $fetch  Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\VendorsUpdateBadRequestException
-     * @throws \CompWright\ServiceTitan\Exception\VendorsUpdateNotFoundException
+     * @return Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\ModificationResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\VendorsUpdateBadRequestException
+     * @throws Exception\VendorsUpdateNotFoundException
      */
     public function vendorsUpdate(int $id, int $tenant, ?Model\InventoryV2UpdateVendorRequest $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\VendorsUpdate($id, $tenant, $requestBody), $fetch);
+        return $this->executeEndpoint(new Endpoint\VendorsUpdate($id, $tenant, $requestBody), $fetch);
     }
 
     /**
@@ -457,20 +457,20 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var int $page Format - int32. The logical number of page to return, starting from 1
-     *     @var int $pageSize Format - int32. How many records to return (50 by default)
-     *     @var bool $includeTotal Whether total count should be returned
-     * }
+     * @var int  $page Format - int32. The logical number of page to return, starting from 1
+     * @var int  $pageSize Format - int32. How many records to return (50 by default)
+     * @var bool $includeTotal Whether total count should be returned
+     *           }
      *
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      *
-     * @throws \CompWright\ServiceTitan\Exception\WarehousesGetListBadRequestException
+     * @return Model\PaginatedResponseOfInventoryV2WarehouseResponse|\Psr\Http\Message\ResponseInterface|null
      *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfInventoryV2WarehouseResponse|\Psr\Http\Message\ResponseInterface|null
+     * @throws Exception\WarehousesGetListBadRequestException
      */
     public function warehousesGetList(int $tenant, array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \CompWright\ServiceTitan\Endpoint\WarehousesGetList($tenant, $queryParameters), $fetch);
+        return $this->executeEndpoint(new Endpoint\WarehousesGetList($tenant, $queryParameters), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [])
@@ -478,7 +478,7 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = [];
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.servicetitan.io');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.servicetitan.io');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             if (count($additionalPlugins) > 0) {
                 $plugins = array_merge($plugins, $additionalPlugins);
@@ -487,7 +487,7 @@ class InventoryClient extends \CompWright\ServiceTitan\Runtime\Client\Client
         }
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \CompWright\ServiceTitan\Normalizer\JaneObjectNormalizer()];
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new Normalizer\JaneObjectNormalizer()];
         if (count($additionalNormalizers) > 0) {
             $normalizers = array_merge($normalizers, $additionalNormalizers);
         }

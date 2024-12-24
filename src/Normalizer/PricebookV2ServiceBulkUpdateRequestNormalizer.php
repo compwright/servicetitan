@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,199 +21,431 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PricebookV2ServiceBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class PricebookV2ServiceBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\PricebookV2ServiceBulkUpdateRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\PricebookV2ServiceBulkUpdateRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest();
+            if (\array_key_exists('price', $data) && \is_int($data['price'])) {
+                $data['price'] = (float) $data['price'];
+            }
+            if (\array_key_exists('memberPrice', $data) && \is_int($data['memberPrice'])) {
+                $data['memberPrice'] = (float) $data['memberPrice'];
+            }
+            if (\array_key_exists('addOnPrice', $data) && \is_int($data['addOnPrice'])) {
+                $data['addOnPrice'] = (float) $data['addOnPrice'];
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && \is_int($data['addOnMemberPrice'])) {
+                $data['addOnMemberPrice'] = (float) $data['addOnMemberPrice'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data)) {
+                $object->setDisplayName($data['displayName']);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('warranty', $data)) {
+                $object->setWarranty($data['warranty']);
+            }
+            if (\array_key_exists('categories', $data)) {
+                $values = [];
+                foreach ($data['categories'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setCategories($values);
+            }
+            if (\array_key_exists('price', $data)) {
+                $object->setPrice($data['price']);
+            }
+            if (\array_key_exists('memberPrice', $data)) {
+                $object->setMemberPrice($data['memberPrice']);
+            }
+            if (\array_key_exists('addOnPrice', $data)) {
+                $object->setAddOnPrice($data['addOnPrice']);
+            }
+            if (\array_key_exists('addOnMemberPrice', $data)) {
+                $object->setAddOnMemberPrice($data['addOnMemberPrice']);
+            }
+            if (\array_key_exists('taxable', $data)) {
+                $object->setTaxable($data['taxable']);
+            }
+            if (\array_key_exists('account', $data)) {
+                $object->setAccount($data['account']);
+            }
+            if (\array_key_exists('hours', $data)) {
+                $object->setHours($data['hours']);
+            }
+            if (\array_key_exists('isLabor', $data)) {
+                $object->setIsLabor($data['isLabor']);
+            }
+            if (\array_key_exists('recommendations', $data)) {
+                $values_1 = [];
+                foreach ($data['recommendations'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setRecommendations($values_1);
+            }
+            if (\array_key_exists('upgrades', $data)) {
+                $values_2 = [];
+                foreach ($data['upgrades'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setUpgrades($values_2);
+            }
+            if (\array_key_exists('assets', $data)) {
+                $values_3 = [];
+                foreach ($data['assets'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_3);
+            }
+            if (\array_key_exists('serviceMaterials', $data)) {
+                $values_4 = [];
+                foreach ($data['serviceMaterials'] as $value_4) {
+                    $values_4[] = $this->denormalizer->denormalize($value_4, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceMaterials($values_4);
+            }
+            if (\array_key_exists('serviceEquipment', $data)) {
+                $values_5 = [];
+                foreach ($data['serviceEquipment'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceEquipment($values_5);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('crossSaleGroup', $data)) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            }
+            if (\array_key_exists('paysCommission', $data)) {
+                $object->setPaysCommission($data['paysCommission']);
+            }
+            if (\array_key_exists('commissionBonus', $data)) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('code', $data)) {
-            $object->setCode($data['code']);
-        }
-        if (\array_key_exists('displayName', $data)) {
-            $object->setDisplayName($data['displayName']);
-        }
-        if (\array_key_exists('description', $data)) {
-            $object->setDescription($data['description']);
-        }
-        if (\array_key_exists('warranty', $data)) {
-            $object->setWarranty($data['warranty']);
-        }
-        if (\array_key_exists('categories', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['code'] = $object->getCode();
+            $data['displayName'] = $object->getDisplayName();
+            $data['description'] = $object->getDescription();
+            $data['warranty'] = $object->getWarranty();
             $values = [];
-            foreach ($data['categories'] as $value) {
+            foreach ($object->getCategories() as $value) {
                 $values[] = $value;
             }
-            $object->setCategories($values);
-        }
-        if (\array_key_exists('price', $data)) {
-            $object->setPrice($data['price']);
-        }
-        if (\array_key_exists('memberPrice', $data)) {
-            $object->setMemberPrice($data['memberPrice']);
-        }
-        if (\array_key_exists('addOnPrice', $data)) {
-            $object->setAddOnPrice($data['addOnPrice']);
-        }
-        if (\array_key_exists('addOnMemberPrice', $data)) {
-            $object->setAddOnMemberPrice($data['addOnMemberPrice']);
-        }
-        if (\array_key_exists('taxable', $data)) {
-            $object->setTaxable($data['taxable']);
-        }
-        if (\array_key_exists('account', $data)) {
-            $object->setAccount($data['account']);
-        }
-        if (\array_key_exists('hours', $data)) {
-            $object->setHours($data['hours']);
-        }
-        if (\array_key_exists('isLabor', $data)) {
-            $object->setIsLabor($data['isLabor']);
-        }
-        if (\array_key_exists('recommendations', $data)) {
+            $data['categories'] = $values;
+            $data['price'] = $object->getPrice();
+            $data['memberPrice'] = $object->getMemberPrice();
+            $data['addOnPrice'] = $object->getAddOnPrice();
+            $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
+            $data['taxable'] = $object->getTaxable();
+            $data['account'] = $object->getAccount();
+            $data['hours'] = $object->getHours();
+            $data['isLabor'] = $object->getIsLabor();
             $values_1 = [];
-            foreach ($data['recommendations'] as $value_1) {
+            foreach ($object->getRecommendations() as $value_1) {
                 $values_1[] = $value_1;
             }
-            $object->setRecommendations($values_1);
-        }
-        if (\array_key_exists('upgrades', $data)) {
+            $data['recommendations'] = $values_1;
             $values_2 = [];
-            foreach ($data['upgrades'] as $value_2) {
+            foreach ($object->getUpgrades() as $value_2) {
                 $values_2[] = $value_2;
             }
-            $object->setUpgrades($values_2);
-        }
-        if (\array_key_exists('assets', $data)) {
+            $data['upgrades'] = $values_2;
             $values_3 = [];
-            foreach ($data['assets'] as $value_3) {
-                $values_3[] = $this->denormalizer->denormalize($value_3, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuAssetRequest', 'json', $context);
+            foreach ($object->getAssets() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
             }
-            $object->setAssets($values_3);
-        }
-        if (\array_key_exists('serviceMaterials', $data)) {
+            $data['assets'] = $values_3;
             $values_4 = [];
-            foreach ($data['serviceMaterials'] as $value_4) {
-                $values_4[] = $this->denormalizer->denormalize($value_4, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuLinkRequest', 'json', $context);
+            foreach ($object->getServiceMaterials() as $value_4) {
+                $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
             }
-            $object->setServiceMaterials($values_4);
-        }
-        if (\array_key_exists('serviceEquipment', $data)) {
+            $data['serviceMaterials'] = $values_4;
             $values_5 = [];
-            foreach ($data['serviceEquipment'] as $value_5) {
-                $values_5[] = $this->denormalizer->denormalize($value_5, 'CompWright\\ServiceTitan\\Model\\PricebookV2SkuLinkRequest', 'json', $context);
+            foreach ($object->getServiceEquipment() as $value_5) {
+                $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
             }
-            $object->setServiceEquipment($values_5);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('crossSaleGroup', $data)) {
-            $object->setCrossSaleGroup($data['crossSaleGroup']);
-        }
-        if (\array_key_exists('paysCommission', $data)) {
-            $object->setPaysCommission($data['paysCommission']);
-        }
-        if (\array_key_exists('commissionBonus', $data)) {
-            $object->setCommissionBonus($data['commissionBonus']);
-        }
-        if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
-            $object->setExternalData($data['externalData']);
-        } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
-            $object->setExternalData(null);
-        }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
+            $data['serviceEquipment'] = $values_5;
+            $data['active'] = $object->getActive();
+            $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            $data['paysCommission'] = $object->getPaysCommission();
+            $data['commissionBonus'] = $object->getCommissionBonus();
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+            $data['id'] = $object->getId();
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class PricebookV2ServiceBulkUpdateRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['code'] = $object->getCode();
-        $data['displayName'] = $object->getDisplayName();
-        $data['description'] = $object->getDescription();
-        $data['warranty'] = $object->getWarranty();
-        $values = [];
-        foreach ($object->getCategories() as $value) {
-            $values[] = $value;
-        }
-        $data['categories'] = $values;
-        $data['price'] = $object->getPrice();
-        $data['memberPrice'] = $object->getMemberPrice();
-        $data['addOnPrice'] = $object->getAddOnPrice();
-        $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
-        $data['taxable'] = $object->getTaxable();
-        $data['account'] = $object->getAccount();
-        $data['hours'] = $object->getHours();
-        $data['isLabor'] = $object->getIsLabor();
-        $values_1 = [];
-        foreach ($object->getRecommendations() as $value_1) {
-            $values_1[] = $value_1;
-        }
-        $data['recommendations'] = $values_1;
-        $values_2 = [];
-        foreach ($object->getUpgrades() as $value_2) {
-            $values_2[] = $value_2;
-        }
-        $data['upgrades'] = $values_2;
-        $values_3 = [];
-        foreach ($object->getAssets() as $value_3) {
-            $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
-        }
-        $data['assets'] = $values_3;
-        $values_4 = [];
-        foreach ($object->getServiceMaterials() as $value_4) {
-            $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
-        }
-        $data['serviceMaterials'] = $values_4;
-        $values_5 = [];
-        foreach ($object->getServiceEquipment() as $value_5) {
-            $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
-        }
-        $data['serviceEquipment'] = $values_5;
-        $data['active'] = $object->getActive();
-        $data['crossSaleGroup'] = $object->getCrossSaleGroup();
-        $data['paysCommission'] = $object->getPaysCommission();
-        $data['commissionBonus'] = $object->getCommissionBonus();
-        if (null !== $object->getExternalData()) {
-            $data['externalData'] = $object->getExternalData();
-        }
-        $data['id'] = $object->getId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest();
+            if (\array_key_exists('price', $data) && \is_int($data['price'])) {
+                $data['price'] = (float) $data['price'];
+            }
+            if (\array_key_exists('memberPrice', $data) && \is_int($data['memberPrice'])) {
+                $data['memberPrice'] = (float) $data['memberPrice'];
+            }
+            if (\array_key_exists('addOnPrice', $data) && \is_int($data['addOnPrice'])) {
+                $data['addOnPrice'] = (float) $data['addOnPrice'];
+            }
+            if (\array_key_exists('addOnMemberPrice', $data) && \is_int($data['addOnMemberPrice'])) {
+                $data['addOnMemberPrice'] = (float) $data['addOnMemberPrice'];
+            }
+            if (\array_key_exists('hours', $data) && \is_int($data['hours'])) {
+                $data['hours'] = (float) $data['hours'];
+            }
+            if (\array_key_exists('commissionBonus', $data) && \is_int($data['commissionBonus'])) {
+                $data['commissionBonus'] = (float) $data['commissionBonus'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('code', $data)) {
+                $object->setCode($data['code']);
+            }
+            if (\array_key_exists('displayName', $data)) {
+                $object->setDisplayName($data['displayName']);
+            }
+            if (\array_key_exists('description', $data)) {
+                $object->setDescription($data['description']);
+            }
+            if (\array_key_exists('warranty', $data)) {
+                $object->setWarranty($data['warranty']);
+            }
+            if (\array_key_exists('categories', $data)) {
+                $values = [];
+                foreach ($data['categories'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setCategories($values);
+            }
+            if (\array_key_exists('price', $data)) {
+                $object->setPrice($data['price']);
+            }
+            if (\array_key_exists('memberPrice', $data)) {
+                $object->setMemberPrice($data['memberPrice']);
+            }
+            if (\array_key_exists('addOnPrice', $data)) {
+                $object->setAddOnPrice($data['addOnPrice']);
+            }
+            if (\array_key_exists('addOnMemberPrice', $data)) {
+                $object->setAddOnMemberPrice($data['addOnMemberPrice']);
+            }
+            if (\array_key_exists('taxable', $data)) {
+                $object->setTaxable($data['taxable']);
+            }
+            if (\array_key_exists('account', $data)) {
+                $object->setAccount($data['account']);
+            }
+            if (\array_key_exists('hours', $data)) {
+                $object->setHours($data['hours']);
+            }
+            if (\array_key_exists('isLabor', $data)) {
+                $object->setIsLabor($data['isLabor']);
+            }
+            if (\array_key_exists('recommendations', $data)) {
+                $values_1 = [];
+                foreach ($data['recommendations'] as $value_1) {
+                    $values_1[] = $value_1;
+                }
+                $object->setRecommendations($values_1);
+            }
+            if (\array_key_exists('upgrades', $data)) {
+                $values_2 = [];
+                foreach ($data['upgrades'] as $value_2) {
+                    $values_2[] = $value_2;
+                }
+                $object->setUpgrades($values_2);
+            }
+            if (\array_key_exists('assets', $data)) {
+                $values_3 = [];
+                foreach ($data['assets'] as $value_3) {
+                    $values_3[] = $this->denormalizer->denormalize($value_3, \CompWright\ServiceTitan\Model\PricebookV2SkuAssetRequest::class, 'json', $context);
+                }
+                $object->setAssets($values_3);
+            }
+            if (\array_key_exists('serviceMaterials', $data)) {
+                $values_4 = [];
+                foreach ($data['serviceMaterials'] as $value_4) {
+                    $values_4[] = $this->denormalizer->denormalize($value_4, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceMaterials($values_4);
+            }
+            if (\array_key_exists('serviceEquipment', $data)) {
+                $values_5 = [];
+                foreach ($data['serviceEquipment'] as $value_5) {
+                    $values_5[] = $this->denormalizer->denormalize($value_5, \CompWright\ServiceTitan\Model\PricebookV2SkuLinkRequest::class, 'json', $context);
+                }
+                $object->setServiceEquipment($values_5);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('crossSaleGroup', $data)) {
+                $object->setCrossSaleGroup($data['crossSaleGroup']);
+            }
+            if (\array_key_exists('paysCommission', $data)) {
+                $object->setPaysCommission($data['paysCommission']);
+            }
+            if (\array_key_exists('commissionBonus', $data)) {
+                $object->setCommissionBonus($data['commissionBonus']);
+            }
+            if (\array_key_exists('externalData', $data) && $data['externalData'] !== null) {
+                $object->setExternalData($data['externalData']);
+            } elseif (\array_key_exists('externalData', $data) && $data['externalData'] === null) {
+                $object->setExternalData(null);
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['code'] = $object->getCode();
+            $data['displayName'] = $object->getDisplayName();
+            $data['description'] = $object->getDescription();
+            $data['warranty'] = $object->getWarranty();
+            $values = [];
+            foreach ($object->getCategories() as $value) {
+                $values[] = $value;
+            }
+            $data['categories'] = $values;
+            $data['price'] = $object->getPrice();
+            $data['memberPrice'] = $object->getMemberPrice();
+            $data['addOnPrice'] = $object->getAddOnPrice();
+            $data['addOnMemberPrice'] = $object->getAddOnMemberPrice();
+            $data['taxable'] = $object->getTaxable();
+            $data['account'] = $object->getAccount();
+            $data['hours'] = $object->getHours();
+            $data['isLabor'] = $object->getIsLabor();
+            $values_1 = [];
+            foreach ($object->getRecommendations() as $value_1) {
+                $values_1[] = $value_1;
+            }
+            $data['recommendations'] = $values_1;
+            $values_2 = [];
+            foreach ($object->getUpgrades() as $value_2) {
+                $values_2[] = $value_2;
+            }
+            $data['upgrades'] = $values_2;
+            $values_3 = [];
+            foreach ($object->getAssets() as $value_3) {
+                $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
+            }
+            $data['assets'] = $values_3;
+            $values_4 = [];
+            foreach ($object->getServiceMaterials() as $value_4) {
+                $values_4[] = $this->normalizer->normalize($value_4, 'json', $context);
+            }
+            $data['serviceMaterials'] = $values_4;
+            $values_5 = [];
+            foreach ($object->getServiceEquipment() as $value_5) {
+                $values_5[] = $this->normalizer->normalize($value_5, 'json', $context);
+            }
+            $data['serviceEquipment'] = $values_5;
+            $data['active'] = $object->getActive();
+            $data['crossSaleGroup'] = $object->getCrossSaleGroup();
+            $data['paysCommission'] = $object->getPaysCommission();
+            $data['commissionBonus'] = $object->getCommissionBonus();
+            if ($object->isInitialized('externalData') && null !== $object->getExternalData()) {
+                $data['externalData'] = $object->getExternalData();
+            }
+            $data['id'] = $object->getId();
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\PricebookV2ServiceBulkUpdateRequest::class => false];
+        }
     }
 }

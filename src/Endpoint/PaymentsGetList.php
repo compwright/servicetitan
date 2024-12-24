@@ -21,25 +21,26 @@ class PaymentsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoi
      * @param int   $tenant          Tenant ID
      * @param array $queryParameters {
      *
-     *     @var string $ids
-     *     @var string $statuses
-     *     @var string $paidOnAfter format - date-time (as date-time in RFC3339)
-     *     @var string $paidOnBefore format - date-time (as date-time in RFC3339)
-     *     @var string $businessUnitIds
-     *     @var int $batchNumber format - int32
-     *     @var int $batchId format - int64
-     *     @var string $transactionType Values: [Undefined, JournalEntry, ReceivePayment]
-     *     @var int $customerId format - int64
-     *     @var int $page format - int32
-     *     @var int $pageSize format - int32
-     *     @var bool $includeTotal
-     *     @var string $customField.Fields Name, value
-     *     @var string $customField.Operator Can be "or" or "null" or "and"\
-     *     @var string $modifiedBefore format - date-time (as date-time in RFC3339)
-     *     @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
-     *     @var string $createdBefore format - date-time (as date-time in RFC3339)
-     *     @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339).
-     * }
+     * @var string $ids
+     * @var string $statuses
+     * @var string $paidOnAfter format - date-time (as date-time in RFC3339)
+     * @var string $paidOnBefore format - date-time (as date-time in RFC3339)
+     * @var string $businessUnitIds
+     * @var int    $batchNumber format - int32
+     * @var int    $batchId format - int64
+     * @var string $transactionType Values: [Undefined, JournalEntry, ReceivePayment]
+     * @var int    $customerId format - int64
+     * @var int    $page format - int32
+     * @var int    $pageSize format - int32
+     * @var bool   $includeTotal
+     * @var string $customField.Fields Name, value
+     * @var string $customField.Operator Can be "or" or "null" or "and"\
+     *             Values: [And, Or]
+     * @var string $modifiedBefore format - date-time (as date-time in RFC3339)
+     * @var string $modifiedOnOrAfter format - date-time (as date-time in RFC3339)
+     * @var string $createdBefore format - date-time (as date-time in RFC3339)
+     * @var string $createdOnOrAfter Format - date-time (as date-time in RFC3339).
+     *             }
      */
     public function __construct(int $tenant, array $queryParameters = [])
     {
@@ -73,42 +74,42 @@ class PaymentsGetList extends \CompWright\ServiceTitan\Runtime\Client\BaseEndpoi
         $optionsResolver->setDefined(['ids', 'statuses', 'paidOnAfter', 'paidOnBefore', 'businessUnitIds', 'batchNumber', 'batchId', 'transactionType', 'customerId', 'page', 'pageSize', 'includeTotal', 'customField.Fields', 'customField.Operator', 'modifiedBefore', 'modifiedOnOrAfter', 'createdBefore', 'createdOnOrAfter']);
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
-        $optionsResolver->setAllowedTypes('ids', ['string']);
-        $optionsResolver->setAllowedTypes('statuses', ['string']);
-        $optionsResolver->setAllowedTypes('paidOnAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('paidOnBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('businessUnitIds', ['string']);
-        $optionsResolver->setAllowedTypes('batchNumber', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('batchId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('transactionType', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customerId', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('page', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('pageSize', ['int', 'null']);
-        $optionsResolver->setAllowedTypes('includeTotal', ['bool', 'null']);
-        $optionsResolver->setAllowedTypes('customField.Fields', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('customField.Operator', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdBefore', ['string', 'null']);
-        $optionsResolver->setAllowedTypes('createdOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('ids', ['string']);
+        $optionsResolver->addAllowedTypes('statuses', ['string']);
+        $optionsResolver->addAllowedTypes('paidOnAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('paidOnBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('businessUnitIds', ['string']);
+        $optionsResolver->addAllowedTypes('batchNumber', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('batchId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('transactionType', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customerId', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('page', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('pageSize', ['int', 'null']);
+        $optionsResolver->addAllowedTypes('includeTotal', ['bool', 'null']);
+        $optionsResolver->addAllowedTypes('customField.Fields', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('customField.Operator', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('modifiedOnOrAfter', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdBefore', ['string', 'null']);
+        $optionsResolver->addAllowedTypes('createdOnOrAfter', ['string', 'null']);
 
         return $optionsResolver;
     }
 
     /**
-     * {@inheritdoc}
+     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2DetailedPaymentResponse|null
      *
      * @throws \CompWright\ServiceTitan\Exception\PaymentsGetListBadRequestException
-     *
-     * @return \CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2DetailedPaymentResponse|null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\PaginatedResponseOfAccountingV2DetailedPaymentResponse', 'json');
+            return $serializer->deserialize($body, 'CompWright\ServiceTitan\Model\PaginatedResponseOfAccountingV2DetailedPaymentResponse', 'json');
         }
         if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \CompWright\ServiceTitan\Exception\PaymentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\\ServiceTitan\\Model\\ApiErrorResponse', 'json'));
+            throw new \CompWright\ServiceTitan\Exception\PaymentsGetListBadRequestException($serializer->deserialize($body, 'CompWright\ServiceTitan\Model\ApiErrorResponse', 'json'), $response);
         }
     }
 

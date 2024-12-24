@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2CustomerMembershipUpdateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * ID of the Business Unit associated to this membership.
      *
      * @var int
@@ -26,8 +35,6 @@ class MembershipsV2CustomerMembershipUpdateRequest
     protected $nextScheduledBillDate;
     /**
      * Status of the membership.
-     *
-     * @var mixed
      */
     protected $status;
     /**
@@ -56,6 +63,8 @@ class MembershipsV2CustomerMembershipUpdateRequest
     protected $soldById;
     /**
      * The ID of the invoice template used to bill this membership.
+     * Can either be a "settings template" (when invoice template is shared – in this case new invoice template will be created),
+     * or be a new invoice template created specifically for this customer membership.
      *
      * @var int|null
      */
@@ -68,8 +77,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
     protected $locationId;
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @var mixed
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     protected $recurringServiceAction;
     /**
@@ -79,13 +87,16 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     protected $recurringLocationId;
     /**
-     * The ID of the payment method (credit card or bank account) that should be used for this membership. This.
+     * The ID of the payment method (credit card or bank account) that should be used for this membership. This
+     * field is mutually exclusive with payment type. Only one or the other can be set at a time.
      *
      * @var int|null
      */
     protected $paymentMethodId;
     /**
-     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually.
+     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually
+     * exclusive with payment type. Only one or the other can be set at a time. Setting payment type means we will
+     * not automatically use a payment method to bill the membership and payment will have to be collected manually.
      *
      * @var int|null
      */
@@ -97,7 +108,8 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     protected $renewalMembershipTaskId;
     /**
-     * The amount of deferred revenue that this membership should start with that is not accounted for.
+     * The amount of deferred revenue that this membership should start with that is not accounted for
+     * in the sale task.
      *
      * @var float
      */
@@ -109,7 +121,8 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     protected $cancellationBalanceInvoiceId;
     /**
-     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the.
+     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the
+     * customer if deferred revenue balance is not 0.
      *
      * @var int|null
      */
@@ -128,6 +141,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setBusinessUnitId(int $businessUnitId): self
     {
+        $this->initialized['businessUnitId'] = true;
         $this->businessUnitId = $businessUnitId;
 
         return $this;
@@ -146,6 +160,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setNextScheduledBillDate(?\DateTime $nextScheduledBillDate): self
     {
+        $this->initialized['nextScheduledBillDate'] = true;
         $this->nextScheduledBillDate = $nextScheduledBillDate;
 
         return $this;
@@ -153,8 +168,6 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * Status of the membership.
-     *
-     * @return mixed
      */
     public function getStatus()
     {
@@ -163,11 +176,10 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * Status of the membership.
-     *
-     * @param mixed $status
      */
     public function setStatus($status): self
     {
+        $this->initialized['status'] = true;
         $this->status = $status;
 
         return $this;
@@ -186,6 +198,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setMemo(string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;
@@ -204,6 +217,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setFrom(\DateTime $from): self
     {
+        $this->initialized['from'] = true;
         $this->from = $from;
 
         return $this;
@@ -222,6 +236,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setTo(?\DateTime $to): self
     {
+        $this->initialized['to'] = true;
         $this->to = $to;
 
         return $this;
@@ -240,6 +255,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setSoldById(?int $soldById): self
     {
+        $this->initialized['soldById'] = true;
         $this->soldById = $soldById;
 
         return $this;
@@ -247,7 +263,8 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * The ID of the invoice template used to bill this membership.
-    or be a new invoice template created specifically for this customer membership.
+     * Can either be a "settings template" (when invoice template is shared – in this case new invoice template will be created),
+     * or be a new invoice template created specifically for this customer membership.
      */
     public function getBillingTemplateId(): ?int
     {
@@ -256,10 +273,12 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * The ID of the invoice template used to bill this membership.
-    or be a new invoice template created specifically for this customer membership.
+     * Can either be a "settings template" (when invoice template is shared – in this case new invoice template will be created),
+     * or be a new invoice template created specifically for this customer membership.
      */
     public function setBillingTemplateId(?int $billingTemplateId): self
     {
+        $this->initialized['billingTemplateId'] = true;
         $this->billingTemplateId = $billingTemplateId;
 
         return $this;
@@ -278,6 +297,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setLocationId(?int $locationId): self
     {
+        $this->initialized['locationId'] = true;
         $this->locationId = $locationId;
 
         return $this;
@@ -285,8 +305,7 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @return mixed
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     public function getRecurringServiceAction()
     {
@@ -295,11 +314,11 @@ class MembershipsV2CustomerMembershipUpdateRequest
 
     /**
      * Required if RecurringLocationId is set.
-     *
-     * @param mixed $recurringServiceAction
+     * Determines how many of the customer's locations that recurring services should be added to: all, single, or none (which deletes existing recurring services).
      */
     public function setRecurringServiceAction($recurringServiceAction): self
     {
+        $this->initialized['recurringServiceAction'] = true;
         $this->recurringServiceAction = $recurringServiceAction;
 
         return $this;
@@ -318,14 +337,15 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setRecurringLocationId(?int $recurringLocationId): self
     {
+        $this->initialized['recurringLocationId'] = true;
         $this->recurringLocationId = $recurringLocationId;
 
         return $this;
     }
 
     /**
-     * The ID of the payment method (credit card or bank account) that should be used for this membership. This.
-    field is mutually exclusive with payment type. Only one or the other can be set at a time.
+     * The ID of the payment method (credit card or bank account) that should be used for this membership. This
+     * field is mutually exclusive with payment type. Only one or the other can be set at a time.
      */
     public function getPaymentMethodId(): ?int
     {
@@ -333,19 +353,21 @@ class MembershipsV2CustomerMembershipUpdateRequest
     }
 
     /**
-     * The ID of the payment method (credit card or bank account) that should be used for this membership. This.
-    field is mutually exclusive with payment type. Only one or the other can be set at a time.
+     * The ID of the payment method (credit card or bank account) that should be used for this membership. This
+     * field is mutually exclusive with payment type. Only one or the other can be set at a time.
      */
     public function setPaymentMethodId(?int $paymentMethodId): self
     {
+        $this->initialized['paymentMethodId'] = true;
         $this->paymentMethodId = $paymentMethodId;
 
         return $this;
     }
 
     /**
-     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually.
-    not automatically use a payment method to bill the membership and payment will have to be collected manually.
+     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually
+     * exclusive with payment type. Only one or the other can be set at a time. Setting payment type means we will
+     * not automatically use a payment method to bill the membership and payment will have to be collected manually.
      */
     public function getPaymentTypeId(): ?int
     {
@@ -353,11 +375,13 @@ class MembershipsV2CustomerMembershipUpdateRequest
     }
 
     /**
-     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually.
-    not automatically use a payment method to bill the membership and payment will have to be collected manually.
+     * The payment type (cash, check, etc) that should be used for this membership. This field is mutually
+     * exclusive with payment type. Only one or the other can be set at a time. Setting payment type means we will
+     * not automatically use a payment method to bill the membership and payment will have to be collected manually.
      */
     public function setPaymentTypeId(?int $paymentTypeId): self
     {
+        $this->initialized['paymentTypeId'] = true;
         $this->paymentTypeId = $paymentTypeId;
 
         return $this;
@@ -376,14 +400,15 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setRenewalMembershipTaskId(int $renewalMembershipTaskId): self
     {
+        $this->initialized['renewalMembershipTaskId'] = true;
         $this->renewalMembershipTaskId = $renewalMembershipTaskId;
 
         return $this;
     }
 
     /**
-     * The amount of deferred revenue that this membership should start with that is not accounted for.
-    in the sale task.
+     * The amount of deferred revenue that this membership should start with that is not accounted for
+     * in the sale task.
      */
     public function getInitialDeferredRevenue(): float
     {
@@ -391,11 +416,12 @@ class MembershipsV2CustomerMembershipUpdateRequest
     }
 
     /**
-     * The amount of deferred revenue that this membership should start with that is not accounted for.
-    in the sale task.
+     * The amount of deferred revenue that this membership should start with that is not accounted for
+     * in the sale task.
      */
     public function setInitialDeferredRevenue(float $initialDeferredRevenue): self
     {
+        $this->initialized['initialDeferredRevenue'] = true;
         $this->initialDeferredRevenue = $initialDeferredRevenue;
 
         return $this;
@@ -414,14 +440,15 @@ class MembershipsV2CustomerMembershipUpdateRequest
      */
     public function setCancellationBalanceInvoiceId(?int $cancellationBalanceInvoiceId): self
     {
+        $this->initialized['cancellationBalanceInvoiceId'] = true;
         $this->cancellationBalanceInvoiceId = $cancellationBalanceInvoiceId;
 
         return $this;
     }
 
     /**
-     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the.
-    customer if deferred revenue balance is not 0.
+     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the
+     * customer if deferred revenue balance is not 0.
      */
     public function getCancellationInvoiceId(): ?int
     {
@@ -429,11 +456,12 @@ class MembershipsV2CustomerMembershipUpdateRequest
     }
 
     /**
-     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the.
-    customer if deferred revenue balance is not 0.
+     * The ID of the invoice optionally created upon membership cancellation in order to charge (or refund) the
+     * customer if deferred revenue balance is not 0.
      */
     public function setCancellationInvoiceId(?int $cancellationInvoiceId): self
     {
+        $this->initialized['cancellationInvoiceId'] = true;
         $this->cancellationInvoiceId = $cancellationInvoiceId;
 
         return $this;

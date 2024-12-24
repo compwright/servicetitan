@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class InventoryV2GLAccountResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * GL Account name.
      *
      * @var string|null
@@ -50,6 +59,7 @@ class InventoryV2GLAccountResponse
      */
     public function setName(?string $name): self
     {
+        $this->initialized['name'] = true;
         $this->name = $name;
 
         return $this;
@@ -68,6 +78,7 @@ class InventoryV2GLAccountResponse
      */
     public function setNumber(?string $number): self
     {
+        $this->initialized['number'] = true;
         $this->number = $number;
 
         return $this;
@@ -86,6 +97,7 @@ class InventoryV2GLAccountResponse
      */
     public function setType(?string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -104,6 +116,7 @@ class InventoryV2GLAccountResponse
      */
     public function setDetailType(?string $detailType): self
     {
+        $this->initialized['detailType'] = true;
         $this->detailType = $detailType;
 
         return $this;

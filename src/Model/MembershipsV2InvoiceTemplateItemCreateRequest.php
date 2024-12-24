@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class MembershipsV2InvoiceTemplateItemCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Linked SKU ID.
      *
      * @var int
@@ -74,6 +83,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setSkuId(int $skuId): self
     {
+        $this->initialized['skuId'] = true;
         $this->skuId = $skuId;
 
         return $this;
@@ -92,6 +102,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setQuantity(float $quantity): self
     {
+        $this->initialized['quantity'] = true;
         $this->quantity = $quantity;
 
         return $this;
@@ -110,6 +121,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setUnitPrice(float $unitPrice): self
     {
+        $this->initialized['unitPrice'] = true;
         $this->unitPrice = $unitPrice;
 
         return $this;
@@ -128,6 +140,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setIsAddOn(bool $isAddOn): self
     {
+        $this->initialized['isAddOn'] = true;
         $this->isAddOn = $isAddOn;
 
         return $this;
@@ -146,6 +159,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setWorkflowActionItemId(?int $workflowActionItemId): self
     {
+        $this->initialized['workflowActionItemId'] = true;
         $this->workflowActionItemId = $workflowActionItemId;
 
         return $this;
@@ -164,6 +178,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setDescription(?string $description): self
     {
+        $this->initialized['description'] = true;
         $this->description = $description;
 
         return $this;
@@ -182,6 +197,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setCost(?float $cost): self
     {
+        $this->initialized['cost'] = true;
         $this->cost = $cost;
 
         return $this;
@@ -200,6 +216,7 @@ class MembershipsV2InvoiceTemplateItemCreateRequest
      */
     public function setHours(?float $hours): self
     {
+        $this->initialized['hours'] = true;
         $this->hours = $hours;
 
         return $this;

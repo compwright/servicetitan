@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class ModificationResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * The ID of created/updated object.
      *
      * @var int
@@ -32,6 +41,7 @@ class ModificationResponse
      */
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;

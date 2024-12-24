@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,137 +21,271 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class CrmV2UpdateBookingRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class CrmV2UpdateBookingRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\CrmV2UpdateBookingRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\CrmV2UpdateBookingRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('source', $data)) {
+                $object->setSource($data['source']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($this->denormalizer->denormalize($data['address'], \CompWright\ServiceTitan\Model\CrmV2AddressPatchModel::class, 'json', $context));
+            }
+            if (\array_key_exists('customerType', $data)) {
+                $object->setCustomerType($data['customerType']);
+            }
+            if (\array_key_exists('start', $data)) {
+                $object->setStart(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['start']));
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('jobTypeId', $data)) {
+                $object->setJobTypeId($data['jobTypeId']);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('isFirstTimeClient', $data)) {
+                $object->setIsFirstTimeClient($data['isFirstTimeClient']);
+            }
+            if (\array_key_exists('uploadedImages', $data)) {
+                $values = [];
+                foreach ($data['uploadedImages'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setUploadedImages($values);
+            }
+            if (\array_key_exists('externalId', $data)) {
+                $object->setExternalId($data['externalId']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('source', $data)) {
-            $object->setSource($data['source']);
-        }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('address', $data)) {
-            $object->setAddress($this->denormalizer->denormalize($data['address'], 'CompWright\\ServiceTitan\\Model\\CrmV2AddressPatchModel', 'json', $context));
-        }
-        if (\array_key_exists('customerType', $data)) {
-            $object->setCustomerType($data['customerType']);
-        }
-        if (\array_key_exists('start', $data)) {
-            $object->setStart(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['start']));
-        }
-        if (\array_key_exists('summary', $data)) {
-            $object->setSummary($data['summary']);
-        }
-        if (\array_key_exists('campaignId', $data)) {
-            $object->setCampaignId($data['campaignId']);
-        }
-        if (\array_key_exists('businessUnitId', $data)) {
-            $object->setBusinessUnitId($data['businessUnitId']);
-        }
-        if (\array_key_exists('jobTypeId', $data)) {
-            $object->setJobTypeId($data['jobTypeId']);
-        }
-        if (\array_key_exists('priority', $data)) {
-            $object->setPriority($data['priority']);
-        }
-        if (\array_key_exists('isFirstTimeClient', $data)) {
-            $object->setIsFirstTimeClient($data['isFirstTimeClient']);
-        }
-        if (\array_key_exists('uploadedImages', $data)) {
-            $values = [];
-            foreach ($data['uploadedImages'] as $value) {
-                $values[] = $value;
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            if ($object->isInitialized('source') && null !== $object->getSource()) {
+                $data['source'] = $object->getSource();
             }
-            $object->setUploadedImages($values);
-        }
-        if (\array_key_exists('externalId', $data)) {
-            $object->setExternalId($data['externalId']);
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('address') && null !== $object->getAddress()) {
+                $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
+            }
+            if ($object->isInitialized('customerType') && null !== $object->getCustomerType()) {
+                $data['customerType'] = $object->getCustomerType();
+            }
+            if ($object->isInitialized('start') && null !== $object->getStart()) {
+                $data['start'] = $object->getStart()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
+            }
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('isFirstTimeClient') && null !== $object->getIsFirstTimeClient()) {
+                $data['isFirstTimeClient'] = $object->getIsFirstTimeClient();
+            }
+            if ($object->isInitialized('uploadedImages') && null !== $object->getUploadedImages()) {
+                $values = [];
+                foreach ($object->getUploadedImages() as $value) {
+                    $values[] = $value;
+                }
+                $data['uploadedImages'] = $values;
+            }
+            if ($object->isInitialized('externalId') && null !== $object->getExternalId()) {
+                $data['externalId'] = $object->getExternalId();
+            }
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class CrmV2UpdateBookingRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        if (null !== $object->getSource()) {
-            $data['source'] = $object->getSource();
-        }
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getAddress()) {
-            $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
-        }
-        if (null !== $object->getCustomerType()) {
-            $data['customerType'] = $object->getCustomerType();
-        }
-        if (null !== $object->getStart()) {
-            $data['start'] = $object->getStart()->format('Y-m-d\\TH:i:sP');
-        }
-        if (null !== $object->getSummary()) {
-            $data['summary'] = $object->getSummary();
-        }
-        if (null !== $object->getCampaignId()) {
-            $data['campaignId'] = $object->getCampaignId();
-        }
-        if (null !== $object->getBusinessUnitId()) {
-            $data['businessUnitId'] = $object->getBusinessUnitId();
-        }
-        if (null !== $object->getJobTypeId()) {
-            $data['jobTypeId'] = $object->getJobTypeId();
-        }
-        if (null !== $object->getPriority()) {
-            $data['priority'] = $object->getPriority();
-        }
-        if (null !== $object->getIsFirstTimeClient()) {
-            $data['isFirstTimeClient'] = $object->getIsFirstTimeClient();
-        }
-        if (null !== $object->getUploadedImages()) {
-            $values = [];
-            foreach ($object->getUploadedImages() as $value) {
-                $values[] = $value;
-            }
-            $data['uploadedImages'] = $values;
-        }
-        if (null !== $object->getExternalId()) {
-            $data['externalId'] = $object->getExternalId();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
+
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class;
         }
 
-        return $data;
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest();
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('source', $data)) {
+                $object->setSource($data['source']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($this->denormalizer->denormalize($data['address'], \CompWright\ServiceTitan\Model\CrmV2AddressPatchModel::class, 'json', $context));
+            }
+            if (\array_key_exists('customerType', $data)) {
+                $object->setCustomerType($data['customerType']);
+            }
+            if (\array_key_exists('start', $data)) {
+                $object->setStart(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['start']));
+            }
+            if (\array_key_exists('summary', $data)) {
+                $object->setSummary($data['summary']);
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('businessUnitId', $data)) {
+                $object->setBusinessUnitId($data['businessUnitId']);
+            }
+            if (\array_key_exists('jobTypeId', $data)) {
+                $object->setJobTypeId($data['jobTypeId']);
+            }
+            if (\array_key_exists('priority', $data)) {
+                $object->setPriority($data['priority']);
+            }
+            if (\array_key_exists('isFirstTimeClient', $data)) {
+                $object->setIsFirstTimeClient($data['isFirstTimeClient']);
+            }
+            if (\array_key_exists('uploadedImages', $data)) {
+                $values = [];
+                foreach ($data['uploadedImages'] as $value) {
+                    $values[] = $value;
+                }
+                $object->setUploadedImages($values);
+            }
+            if (\array_key_exists('externalId', $data)) {
+                $object->setExternalId($data['externalId']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            if ($object->isInitialized('source') && null !== $object->getSource()) {
+                $data['source'] = $object->getSource();
+            }
+            if ($object->isInitialized('name') && null !== $object->getName()) {
+                $data['name'] = $object->getName();
+            }
+            if ($object->isInitialized('address') && null !== $object->getAddress()) {
+                $data['address'] = $this->normalizer->normalize($object->getAddress(), 'json', $context);
+            }
+            if ($object->isInitialized('customerType') && null !== $object->getCustomerType()) {
+                $data['customerType'] = $object->getCustomerType();
+            }
+            if ($object->isInitialized('start') && null !== $object->getStart()) {
+                $data['start'] = $object->getStart()?->format('Y-m-d\TH:i:sP');
+            }
+            if ($object->isInitialized('summary') && null !== $object->getSummary()) {
+                $data['summary'] = $object->getSummary();
+            }
+            if ($object->isInitialized('campaignId') && null !== $object->getCampaignId()) {
+                $data['campaignId'] = $object->getCampaignId();
+            }
+            if ($object->isInitialized('businessUnitId') && null !== $object->getBusinessUnitId()) {
+                $data['businessUnitId'] = $object->getBusinessUnitId();
+            }
+            if ($object->isInitialized('jobTypeId') && null !== $object->getJobTypeId()) {
+                $data['jobTypeId'] = $object->getJobTypeId();
+            }
+            if ($object->isInitialized('priority') && null !== $object->getPriority()) {
+                $data['priority'] = $object->getPriority();
+            }
+            if ($object->isInitialized('isFirstTimeClient') && null !== $object->getIsFirstTimeClient()) {
+                $data['isFirstTimeClient'] = $object->getIsFirstTimeClient();
+            }
+            if ($object->isInitialized('uploadedImages') && null !== $object->getUploadedImages()) {
+                $values = [];
+                foreach ($object->getUploadedImages() as $value) {
+                    $values[] = $value;
+                }
+                $data['uploadedImages'] = $values;
+            }
+            if ($object->isInitialized('externalId') && null !== $object->getExternalId()) {
+                $data['externalId'] = $object->getExternalId();
+            }
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\CrmV2UpdateBookingRequest::class => false];
+        }
     }
 }

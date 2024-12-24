@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,67 +21,137 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class MarketingV2CreateCampaignCostRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class MarketingV2CreateCampaignCostRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\MarketingV2CreateCampaignCostRequest';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\MarketingV2CreateCampaignCostRequest';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest();
+            if (\array_key_exists('dailyCost', $data) && \is_int($data['dailyCost'])) {
+                $data['dailyCost'] = (float) $data['dailyCost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('year', $data)) {
+                $object->setYear($data['year']);
+            }
+            if (\array_key_exists('month', $data)) {
+                $object->setMonth($data['month']);
+            }
+            if (\array_key_exists('dailyCost', $data)) {
+                $object->setDailyCost($data['dailyCost']);
+            }
+
             return $object;
         }
-        if (\array_key_exists('campaignId', $data)) {
-            $object->setCampaignId($data['campaignId']);
-        }
-        if (\array_key_exists('year', $data)) {
-            $object->setYear($data['year']);
-        }
-        if (\array_key_exists('month', $data)) {
-            $object->setMonth($data['month']);
-        }
-        if (\array_key_exists('dailyCost', $data)) {
-            $object->setDailyCost($data['dailyCost']);
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['campaignId'] = $object->getCampaignId();
+            $data['year'] = $object->getYear();
+            $data['month'] = $object->getMonth();
+            $data['dailyCost'] = $object->getDailyCost();
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class MarketingV2CreateCampaignCostRequestNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['campaignId'] = $object->getCampaignId();
-        $data['year'] = $object->getYear();
-        $data['month'] = $object->getMonth();
-        $data['dailyCost'] = $object->getDailyCost();
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest();
+            if (\array_key_exists('dailyCost', $data) && \is_int($data['dailyCost'])) {
+                $data['dailyCost'] = (float) $data['dailyCost'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('campaignId', $data)) {
+                $object->setCampaignId($data['campaignId']);
+            }
+            if (\array_key_exists('year', $data)) {
+                $object->setYear($data['year']);
+            }
+            if (\array_key_exists('month', $data)) {
+                $object->setMonth($data['month']);
+            }
+            if (\array_key_exists('dailyCost', $data)) {
+                $object->setDailyCost($data['dailyCost']);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['campaignId'] = $object->getCampaignId();
+            $data['year'] = $object->getYear();
+            $data['month'] = $object->getMonth();
+            $data['dailyCost'] = $object->getDailyCost();
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\MarketingV2CreateCampaignCostRequest::class => false];
+        }
     }
 }

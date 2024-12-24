@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace CompWright\ServiceTitan\Normalizer;
 
 use CompWright\ServiceTitan\Runtime\Normalizer\CheckArray;
+use CompWright\ServiceTitan\Runtime\Normalizer\ValidatorTrait;
 use Jane\Component\JsonSchemaRuntime\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -19,111 +21,225 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class InventoryV2VendorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
-{
-    use DenormalizerAwareTrait;
-    use NormalizerAwareTrait;
-    use CheckArray;
-
-    /**
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
+if (!class_exists(Kernel::class) or (Kernel::MAJOR_VERSION >= 7 or Kernel::MAJOR_VERSION === 6 and Kernel::MINOR_VERSION === 4)) {
+    class InventoryV2VendorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        return $type === 'CompWright\\ServiceTitan\\Model\\InventoryV2VendorResponse';
-    }
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-    public function supportsNormalization($data, $format = null)
-    {
-        return is_object($data) && get_class($data) === 'CompWright\\ServiceTitan\\Model\\InventoryV2VendorResponse';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = [])
-    {
-        if (isset($data['$ref'])) {
-            return new Reference($data['$ref'], $context['document-origin']);
+        public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class;
         }
-        if (isset($data['$recursiveRef'])) {
-            return new Reference($data['$recursiveRef'], $context['document-origin']);
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class;
         }
-        $object = new \CompWright\ServiceTitan\Model\InventoryV2VendorResponse();
-        if (null === $data || false === \is_array($data)) {
+
+        public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\InventoryV2VendorResponse();
+            if (\array_key_exists('defaultTaxRate', $data) && \is_int($data['defaultTaxRate'])) {
+                $data['defaultTaxRate'] = (float) $data['defaultTaxRate'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('isTruckReplenishment', $data)) {
+                $object->setIsTruckReplenishment($data['isTruckReplenishment']);
+            }
+            if (\array_key_exists('isMobileCreationRestricted', $data)) {
+                $object->setIsMobileCreationRestricted($data['isMobileCreationRestricted']);
+            }
+            if (\array_key_exists('memo', $data)) {
+                $object->setMemo($data['memo']);
+            }
+            if (\array_key_exists('deliveryOption', $data)) {
+                $object->setDeliveryOption($data['deliveryOption']);
+            }
+            if (\array_key_exists('defaultTaxRate', $data)) {
+                $object->setDefaultTaxRate($data['defaultTaxRate']);
+            }
+            if (\array_key_exists('contactInfo', $data)) {
+                $object->setContactInfo($data['contactInfo']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($data['address']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('externalData', $data)) {
+                $values = [];
+                foreach ($data['externalData'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\InventoryV2ExternalDataModel::class, 'json', $context);
+                }
+                $object->setExternalData($values);
+            }
+
             return $object;
         }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
-        }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('active', $data)) {
-            $object->setActive($data['active']);
-        }
-        if (\array_key_exists('isTruckReplenishment', $data)) {
-            $object->setIsTruckReplenishment($data['isTruckReplenishment']);
-        }
-        if (\array_key_exists('isMobileCreationRestricted', $data)) {
-            $object->setIsMobileCreationRestricted($data['isMobileCreationRestricted']);
-        }
-        if (\array_key_exists('memo', $data)) {
-            $object->setMemo($data['memo']);
-        }
-        if (\array_key_exists('deliveryOption', $data)) {
-            $object->setDeliveryOption($data['deliveryOption']);
-        }
-        if (\array_key_exists('defaultTaxRate', $data)) {
-            $object->setDefaultTaxRate($data['defaultTaxRate']);
-        }
-        if (\array_key_exists('contactInfo', $data)) {
-            $object->setContactInfo($data['contactInfo']);
-        }
-        if (\array_key_exists('address', $data)) {
-            $object->setAddress($data['address']);
-        }
-        if (\array_key_exists('createdOn', $data)) {
-            $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['createdOn']));
-        }
-        if (\array_key_exists('modifiedOn', $data)) {
-            $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\\TH:i:sP', $data['modifiedOn']));
-        }
-        if (\array_key_exists('externalData', $data)) {
+
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['name'] = $object->getName();
+            $data['active'] = $object->getActive();
+            $data['isTruckReplenishment'] = $object->getIsTruckReplenishment();
+            $data['isMobileCreationRestricted'] = $object->getIsMobileCreationRestricted();
+            $data['memo'] = $object->getMemo();
+            $data['deliveryOption'] = $object->getDeliveryOption();
+            $data['defaultTaxRate'] = $object->getDefaultTaxRate();
+            $data['contactInfo'] = $object->getContactInfo();
+            $data['address'] = $object->getAddress();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
             $values = [];
-            foreach ($data['externalData'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'CompWright\\ServiceTitan\\Model\\InventoryV2ExternalDataModel', 'json', $context);
+            foreach ($object->getExternalData() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $object->setExternalData($values);
+            $data['externalData'] = $values;
+
+            return $data;
         }
 
-        return $object;
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class => false];
+        }
     }
-
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = [])
+} else {
+    class InventoryV2VendorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
     {
-        $data = [];
-        $data['id'] = $object->getId();
-        $data['name'] = $object->getName();
-        $data['active'] = $object->getActive();
-        $data['isTruckReplenishment'] = $object->getIsTruckReplenishment();
-        $data['isMobileCreationRestricted'] = $object->getIsMobileCreationRestricted();
-        $data['memo'] = $object->getMemo();
-        $data['deliveryOption'] = $object->getDeliveryOption();
-        $data['defaultTaxRate'] = $object->getDefaultTaxRate();
-        $data['contactInfo'] = $object->getContactInfo();
-        $data['address'] = $object->getAddress();
-        $data['createdOn'] = $object->getCreatedOn()->format('Y-m-d\\TH:i:sP');
-        $data['modifiedOn'] = $object->getModifiedOn()->format('Y-m-d\\TH:i:sP');
-        $values = [];
-        foreach ($object->getExternalData() as $value) {
-            $values[] = $this->normalizer->normalize($value, 'json', $context);
-        }
-        $data['externalData'] = $values;
+        use DenormalizerAwareTrait;
+        use NormalizerAwareTrait;
+        use CheckArray;
+        use ValidatorTrait;
 
-        return $data;
+        public function supportsDenormalization($data, $type, ?string $format = null, array $context = []): bool
+        {
+            return $type === \CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class;
+        }
+
+        public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
+        {
+            return is_object($data) && get_class($data) === \CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class;
+        }
+
+        public function denormalize($data, $type, $format = null, array $context = [])
+        {
+            if (isset($data['$ref'])) {
+                return new Reference($data['$ref'], $context['document-origin']);
+            }
+            if (isset($data['$recursiveRef'])) {
+                return new Reference($data['$recursiveRef'], $context['document-origin']);
+            }
+            $object = new \CompWright\ServiceTitan\Model\InventoryV2VendorResponse();
+            if (\array_key_exists('defaultTaxRate', $data) && \is_int($data['defaultTaxRate'])) {
+                $data['defaultTaxRate'] = (float) $data['defaultTaxRate'];
+            }
+            if (null === $data || false === \is_array($data)) {
+                return $object;
+            }
+            if (\array_key_exists('id', $data)) {
+                $object->setId($data['id']);
+            }
+            if (\array_key_exists('name', $data)) {
+                $object->setName($data['name']);
+            }
+            if (\array_key_exists('active', $data)) {
+                $object->setActive($data['active']);
+            }
+            if (\array_key_exists('isTruckReplenishment', $data)) {
+                $object->setIsTruckReplenishment($data['isTruckReplenishment']);
+            }
+            if (\array_key_exists('isMobileCreationRestricted', $data)) {
+                $object->setIsMobileCreationRestricted($data['isMobileCreationRestricted']);
+            }
+            if (\array_key_exists('memo', $data)) {
+                $object->setMemo($data['memo']);
+            }
+            if (\array_key_exists('deliveryOption', $data)) {
+                $object->setDeliveryOption($data['deliveryOption']);
+            }
+            if (\array_key_exists('defaultTaxRate', $data)) {
+                $object->setDefaultTaxRate($data['defaultTaxRate']);
+            }
+            if (\array_key_exists('contactInfo', $data)) {
+                $object->setContactInfo($data['contactInfo']);
+            }
+            if (\array_key_exists('address', $data)) {
+                $object->setAddress($data['address']);
+            }
+            if (\array_key_exists('createdOn', $data)) {
+                $object->setCreatedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdOn']));
+            }
+            if (\array_key_exists('modifiedOn', $data)) {
+                $object->setModifiedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modifiedOn']));
+            }
+            if (\array_key_exists('externalData', $data)) {
+                $values = [];
+                foreach ($data['externalData'] as $value) {
+                    $values[] = $this->denormalizer->denormalize($value, \CompWright\ServiceTitan\Model\InventoryV2ExternalDataModel::class, 'json', $context);
+                }
+                $object->setExternalData($values);
+            }
+
+            return $object;
+        }
+
+        /**
+         * @return array|string|int|float|bool|\ArrayObject|null
+         */
+        public function normalize($object, $format = null, array $context = [])
+        {
+            $data = [];
+            $data['id'] = $object->getId();
+            $data['name'] = $object->getName();
+            $data['active'] = $object->getActive();
+            $data['isTruckReplenishment'] = $object->getIsTruckReplenishment();
+            $data['isMobileCreationRestricted'] = $object->getIsMobileCreationRestricted();
+            $data['memo'] = $object->getMemo();
+            $data['deliveryOption'] = $object->getDeliveryOption();
+            $data['defaultTaxRate'] = $object->getDefaultTaxRate();
+            $data['contactInfo'] = $object->getContactInfo();
+            $data['address'] = $object->getAddress();
+            $data['createdOn'] = $object->getCreatedOn()?->format('Y-m-d\TH:i:sP');
+            $data['modifiedOn'] = $object->getModifiedOn()?->format('Y-m-d\TH:i:sP');
+            $values = [];
+            foreach ($object->getExternalData() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['externalData'] = $values;
+
+            return $data;
+        }
+
+        public function getSupportedTypes(?string $format = null): array
+        {
+            return [\CompWright\ServiceTitan\Model\InventoryV2VendorResponse::class => false];
+        }
     }
 }

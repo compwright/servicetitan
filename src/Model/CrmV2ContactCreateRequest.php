@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2ContactCreateRequest
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * Type of contact.
      *
      * @var string
@@ -44,6 +53,7 @@ class CrmV2ContactCreateRequest
      */
     public function setType(string $type): self
     {
+        $this->initialized['type'] = true;
         $this->type = $type;
 
         return $this;
@@ -62,6 +72,7 @@ class CrmV2ContactCreateRequest
      */
     public function setValue(string $value): self
     {
+        $this->initialized['value'] = true;
         $this->value = $value;
 
         return $this;
@@ -80,6 +91,7 @@ class CrmV2ContactCreateRequest
      */
     public function setMemo(?string $memo): self
     {
+        $this->initialized['memo'] = true;
         $this->memo = $memo;
 
         return $this;

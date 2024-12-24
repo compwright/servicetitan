@@ -13,6 +13,15 @@ namespace CompWright\ServiceTitan\Model;
 class CrmContractsJobsJobHistoryItemModel
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var int
      */
     protected $id;
@@ -40,6 +49,7 @@ class CrmContractsJobsJobHistoryItemModel
 
     public function setId(int $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
 
         return $this;
@@ -52,6 +62,7 @@ class CrmContractsJobsJobHistoryItemModel
 
     public function setEmployeeId(?int $employeeId): self
     {
+        $this->initialized['employeeId'] = true;
         $this->employeeId = $employeeId;
 
         return $this;
@@ -64,6 +75,7 @@ class CrmContractsJobsJobHistoryItemModel
 
     public function setEventType(string $eventType): self
     {
+        $this->initialized['eventType'] = true;
         $this->eventType = $eventType;
 
         return $this;
@@ -76,6 +88,7 @@ class CrmContractsJobsJobHistoryItemModel
 
     public function setDate(\DateTime $date): self
     {
+        $this->initialized['date'] = true;
         $this->date = $date;
 
         return $this;
@@ -88,6 +101,7 @@ class CrmContractsJobsJobHistoryItemModel
 
     public function setUsedSchedulingTool(string $usedSchedulingTool): self
     {
+        $this->initialized['usedSchedulingTool'] = true;
         $this->usedSchedulingTool = $usedSchedulingTool;
 
         return $this;

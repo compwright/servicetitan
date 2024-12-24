@@ -13,16 +13,25 @@ namespace CompWright\ServiceTitan\Model;
 class CrmV2JobHistoryResponse
 {
     /**
+     * @var array
+     */
+    protected $initialized = [];
+
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * List of logs for the job.
      *
-     * @var CrmContractsJobsJobHistoryItemModel[]|null
+     * @var list<CrmContractsJobsJobHistoryItemModel>|null
      */
     protected $history;
 
     /**
      * List of logs for the job.
      *
-     * @return CrmContractsJobsJobHistoryItemModel[]|null
+     * @return list<CrmContractsJobsJobHistoryItemModel>|null
      */
     public function getHistory(): ?array
     {
@@ -32,10 +41,11 @@ class CrmV2JobHistoryResponse
     /**
      * List of logs for the job.
      *
-     * @param CrmContractsJobsJobHistoryItemModel[]|null $history
+     * @param list<CrmContractsJobsJobHistoryItemModel>|null $history
      */
     public function setHistory(?array $history): self
     {
+        $this->initialized['history'] = true;
         $this->history = $history;
 
         return $this;
